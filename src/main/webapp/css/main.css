@@ -1,0 +1,69 @@
+@charset "UTF8";
+@import url("/css/commons/header.css");
+@import url("/css/commons/font.css");
+@import url("/css/commons//footer.css");
+@import url("/css/commons//upPage.css");
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  list-style: none;
+  font-family: "NotoSansKR", sans-serif;
+}
+
+.fontEnglish {
+  font-family: "Jost";
+}
+
+.fontLogo {
+  font-family: "Giants-Inline";
+}
+
+.colorBlack {
+  color: #111111;
+}
+
+.colorPink {
+  color: #f393ff;
+}
+
+.colorBlue {
+  color: #5d6ce1;
+}
+
+.colorGreen {
+  color: #ccf423;
+}
+
+.colorWhite {
+  color: #ffffff;
+}
+
+.colorDarkgray{
+	color:#7d7d7d;
+}
+
+.bColorBlack {
+  background-color: #131217;
+}
+
+.bColorPink {
+  background-color: #f393ff;
+}
+
+.bColorBlue {
+  background-color: #5d6ce1;
+}
+
+.bColorGreen {
+  background-color: #ccf423;
+}
+
+.bColorWhite {
+  background-color: #ffffff;
+}
+
+.bColorBoard{
+	background-color: #f9f9f9;
+}
