@@ -12,19 +12,18 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-	 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	 <link rel="stylesheet" href="/css/main.css">
 <style>
-*{box-sizing:border-box; font-family:Noto Sans KR, Jost;}
+*{box-sizing:border-box;}
 body{width:1920px;}
 .container {
 	width: 1155px;
-	height: 720px;
 	margin: auto;
 	padding:none;
 }
 
 .qna {
-	margin-bottom: 40px;
+	margin:40px 0px;
 	font:bold;
 }
 
@@ -67,13 +66,13 @@ ul li {
 	width: 100%;
 }
 #pages{width:100%; text-align:center; margin:40px 0px;}
-.bottom{width:100%;}
-.search{text-align:center; height:50%;}
+.bottom{width:100%; padding-bottom:100px;}
+.search{text-align:center;}
 .h50{height:50px; margin-right:15px;}
 .btn{background-color:#CCF423; border-radius:10px;}
 .sideTap{
 	border:1px solid black; border-radius:10px;
-	position:fixed; width:120px; height:80px; top:408px; left:213px;
+	position:fixed; width:120px; height:80px; top:30%; left:10%;
 }
 .side{display: flex;align-items: center;justify-content: center; height:50%; }
 </style>
@@ -83,11 +82,70 @@ ul li {
 		<div class="side"><a>자유게시판</a></div>
 		<div class="side" style="border-top:1px solid black;"><a>Q&A</a></div>
 	</div>
+	
+	<div class="header bColorBlack">
+            <div class="header_guide">
+                <a href="#">
+                    <div class="logo fontLogo colorWhite">RUSH</div>
+                </a>
+                <nav class="navbar navbar-expand navbar-light colorWhite">
+                    <div class="container-fluid p-0">
+                        <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
+                            <ul class="navbar-nav row g-0 w-100">
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        GAME
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        AWARDS
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        BOARD
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        LOGIN
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
 
-	<nav>RUSH nav</nav>
 	<div class="container row g-0">
 		<div class="qna col-12">
-			<h2>Q&A</h2>
+			<h2 class="fontEnglish">Q&A</h2>
 		</div>
 		<div class="qnaBox col-12 g-0">
 			<div class="qnaNav row m-0">
@@ -141,6 +199,43 @@ ul li {
 		</div>
 		
 	</div>
+	<div class="footer bColorBlack">
+            <div class="footer_guide">
+                <div class="footer_logo fontLogo colorWhite">RUSH</div>
+                <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
+                <div class="footer_contents">
+                    <div class="about conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">ABOUT US</div>
+                        <div class="footer_con ">
+                            <div class="con">팀명 :
+                            </div>
+                            <div class="encon"> SKY</div>
+                        </div>
+                    </div>
+                    <div class="office conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">OFFICE</div>
+                        <div class="footer_con">
+                            <div class="con">충청남도 천안시 서북구<br> 천안대로 1223-24</div>
+                        </div>
+                    </div>
+                    <div class="contact conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">CONTACT US</div>
+                        <div class="footer_con fontEnglish">
+                            <div class="con fontEnglish">a@naver.com</div>
+                            <div class="con fontEnglish">01012345678</div>
+                        </div>
+                    </div>
+                    <div class="provision conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">PROVISION</div>
+                        <div class="footer_con">
+                            <div class="con">개인정보 처리방침</div>
+                            <div class="con">서비스 이용약관</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 </body>
 
 <script>
