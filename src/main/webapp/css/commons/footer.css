@@ -2,7 +2,6 @@
 .footer {
   max-width: 1920px;
   width: 100%;
-  background-color: #131217;
 }
 
 .footer_guide {
@@ -14,16 +13,12 @@
   flex-direction: column;
 }
 .footer_logo {
-  font-family: "Giants-Inline";
-  color: white;
   font-size: 60px;
   font-weight: 900;
   margin-top: 120px;
 }
 .copy {
-  font-family: "Jost";
   font-size: 15px;
-  color: white;
   font-weight: 300;
 }
 .footer_contents {
@@ -33,13 +28,14 @@
   margin-bottom: 120px;
 }
 
+.text {
+  height: 800px;
+}
+
 .footer_contents > .conDiv {
   display: flex;
   flex-direction: column;
-  /* width: 200px; */
-  font-family: "Jost";
   font-size: 20px;
-  color: white;
 }
 
 .footer_contents > .conDiv:not(:first-child) {
@@ -52,7 +48,6 @@
 .footer_con {
   display: flex;
   flex-direction: column;
-  font-family: "NotoSansKR";
   font-weight: 500;
   font-size: 15px;
 }
@@ -89,7 +84,6 @@
   .footer_contents > .conDiv {
     font-family: "Jost";
     font-size: 15px;
-    color: white;
   }
 
   .footer_con {

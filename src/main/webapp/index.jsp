@@ -40,58 +40,58 @@ a {
 </style>
 </head>
 <body>
-<div class="container-fluid p-0">
-        <div class="header">
+ <div class="container-fluid p-0">
+        <div class="header bColorBlack">
             <div class="header_guide">
                 <a href="#">
-                    <div class="logo">RUSH</div>
+                    <div class="logo fontLogo colorWhite">RUSH</div>
                 </a>
-                <nav class="navbar navbar-expand navbar-light">
+                <nav class="navbar navbar-expand navbar-light colorWhite">
                     <div class="container-fluid p-0">
                         <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
                             <ul class="navbar-nav row g-0 w-100">
                                 <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white" href="#" id="navbarDropdownMenuLink" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         GAME
                                     </a>
                                     <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white" href="#" id="navbarDropdownMenuLink" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         AWARDS
                                     </a>
                                     <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white" href="#" id="navbarDropdownMenuLink" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         BOARD
                                     </a>
                                     <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white" href="#" id="navbarDropdownMenuLink" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         LOGIN
                                     </a>
                                     <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -100,40 +100,41 @@ a {
                 </nav>
             </div>
         </div>
+        <div class="text"></div>
         <a href="#">
-            <div class="upArrow">
+            <div class="upArrow bColorPink colorWhite">
                 <i class="fa-solid fa-arrow-up-long"></i>
             </div>
         </a>
 
-        <div class="footer">
+        <div class="footer bColorBlack">
             <div class="footer_guide">
-                <div class="footer_logo">RUSH</div>
-                <div class="copy">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
+                <div class="footer_logo fontLogo colorWhite">RUSH</div>
+                <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
                 <div class="footer_contents">
-                    <div class="about conDiv">
-                        <div class="footer_title">ABOUT US</div>
-                        <div class="footer_con">
+                    <div class="about conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">ABOUT US</div>
+                        <div class="footer_con ">
                             <div class="con">팀명 :
                             </div>
                             <div class="encon"> SKY</div>
                         </div>
                     </div>
-                    <div class="office conDiv">
-                        <div class="footer_title">OFFICE</div>
+                    <div class="office conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">OFFICE</div>
                         <div class="footer_con">
                             <div class="con">충청남도 천안시 서북구<br> 천안대로 1223-24</div>
                         </div>
                     </div>
-                    <div class="contact conDiv">
-                        <div class="footer_title">CONTACT US</div>
-                        <div class="footer_con">
-                            <div class="con">a@naver.com</div>
-                            <div class="con">01012345678</div>
+                    <div class="contact conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">CONTACT US</div>
+                        <div class="footer_con fontEnglish">
+                            <div class="con fontEnglish">a@naver.com</div>
+                            <div class="con fontEnglish">01012345678</div>
                         </div>
                     </div>
-                    <div class="provision conDiv">
-                        <div class="footer_title">PROVISION</div>
+                    <div class="provision conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">PROVISION</div>
                         <div class="footer_con">
                             <div class="con">개인정보 처리방침</div>
                             <div class="con">서비스 이용약관</div>

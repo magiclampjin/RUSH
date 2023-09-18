@@ -3,14 +3,12 @@
   position: fixed;
   right: 100px;
   bottom: 100px;
-  background-color: #f393ff;
   width: 60px;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 25px;
-  color: white;
   border-radius: 50%;
 }
 
