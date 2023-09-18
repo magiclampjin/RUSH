@@ -11,8 +11,6 @@
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+KR&family=Jost:wght@300;400&display=swap');
 	
-	
-
 	* {
 		box-sizing: border-box;
 		margin: 0;
