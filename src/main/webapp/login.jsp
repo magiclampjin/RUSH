@@ -140,7 +140,6 @@
 	<div id="container g-0" class="container">
 		<div class="row g-0">
 			<div class="loginImage col-6 d-none d-xl-block g-0">
-				<!-- <img id="image" class="img-fluid" src="/assets/bg_img2.jpg"> -->
 			</div>
 		
 			<div class="loginBox col-6">
