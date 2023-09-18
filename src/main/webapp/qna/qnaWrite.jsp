@@ -74,7 +74,7 @@ label{
 </style>
 </head>
 <body>
- <div class="container-fluid p-0">
+<div class="container-fluid p-0">
 <div class="header bColorBlack">
             <div class="header_guide">
                 <a href="#">
