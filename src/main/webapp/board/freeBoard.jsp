@@ -107,7 +107,7 @@ a {
                 <div class="boardNav">
                     <div class="boardNav_body">
                         <div class="boardNav_li bColorGreen">자유게시판</div>
-                        <div class="boardNav_li">Q&A</div>
+                        <div class="boardNav_li fontEnglish">Q&A</div>
                     </div>
                 </div>
                 <div class="boardCont">
@@ -120,44 +120,80 @@ a {
 
                     <div id="tab-1" class="tab-content current">
                         <div class="boardHeader">
-                            <div class="col-1">번호</div>
-                            <div class="col-5">제목</div>
-                            <div class="col-2">작성자</div>
-                            <div class="col-2">작성일</div>
-                            <div class="col-1">조회</div>
-                            <div class="col-1">파일</div>
+                            <div class="num">번호</div>
+                            <div class="title">제목</div>
+                            <div class="writer">작성자</div>
+                            <div class="date">작성일</div>
+                            <div class="view">조회</div>
+                            <div class="file">파일</div>
                         </div>
                         <div class="boardMain">
-                            <div class="post notice bColorBoard">
-                                <div class="bNum col-1">번호</div>
-                                <div class="bTitle col-5">
-                                    <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
-                                    <div class="mainTitle">관리자만 작성할 수 있는
-                                        공지글 영역입니다.</div>
-                                    <div class="replyCnt colorBlue fontEnglish">2</div>
+                            <div class="post bColorBoard">
+                                <div class="maxBoard">
+                                    <div class="num"></div>
+                                    <div class="title">
+                                        <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                        <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                        <div class="replyCnt colorPink fontEnglish">3</div>
+                                    </div>
+                                    <div class="writer">작성자</div>
+                                    <div class="date fontEnglish">2023-09-16</div>
+                                    <div class="view fontEnglish">조회</div>
+                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
                                 </div>
-                                <div class="bWriter col-2">작성자</div>
-                                <div class="bDate col-2">2023-09-16</div>
-                                <div class="bView col-1">조회</div>
-                                <div class="bFile col-1"><i class="fa-solid fa-paperclip"></i></div>
+                                <div class="minBoard">
+                                    <div class="num"></div>
+                                    <div class="minCon">
+                                        <div class="title">
+                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                            <div class="replyCnt colorPink fontEnglish">3</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="minWriter">작성자</div>
+                                            <div class="minDate fontEnglish">2023-09-16</div>
+                                            <div class="minView fontEnglish">조회</div>
+                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="post general">
-                                <div class="bNum col-1">1</div>
-                                <div class="bTitle col-5">
-                                    <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
-                                    <div class="replyCnt colorBlue fontEnglish">2</div>
+                            <div class="post">
+                                <div class="maxBoard">
+                                    <div class="num fontEnglish">1</div>
+                                    <div class="title">
+                                        <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
+                                        <div class="replyCnt colorPink fontEnglish">3</div>
+                                    </div>
+                                    <div class="writer">작성자</div>
+                                    <div class="date fontEnglish">2023-09-16</div>
+                                    <div class="view fontEnglish">조회</div>
+                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
                                 </div>
-                                <div class="bWriter col-2">작성자</div>
-                                <div class="bDate col-2">2023-09-16</div>
-                                <div class="bView col-1">조회</div>
-                                <div class="bFile col-1"><i class="fa-solid fa-paperclip"></i></div>
+                                <div class="minBoard">
+                                    <div class="num fontEnglish">1</div>
+                                    <div class="minCon">
+                                        <div class="title">
+                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                            <div class="replyCnt colorPink fontEnglish">3</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="minWriter">작성자</div>
+                                            <div class="minDate fontEnglish">2023-09-16</div>
+                                            <div class="minView fontEnglish">조회</div>
+                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="pagination">
                             123456789>>>
                         </div>
                         <div class="search_write">
-                            <div class="search col-11">
+                            <div class="write"></div>
+                            <div class="search">
                                 <form action="">
                                     <div class="category">
                                         <select class="form-select" aria-label="Default select example">
@@ -170,56 +206,92 @@ a {
                                         <input type="text">
                                     </div>
                                     <div class="sertchBtn">
-                                        <input type="submit" class="boardBtn">
+                                        <input type="submit" class="boardBtn" value="검색">
                                     </div>
                                 </form>
 
                             </div>
-                            <div class="write col-1">
+                            <div class="write">
                                 <input type="button" value="글쓰기" class="boardBtn">
                             </div>
                         </div>
                     </div>
                     <div id="tab-2" class="tab-content">
                         <div class="boardHeader">
-                            <div class="col-1">번호</div>
-                            <div class="col-5">제목</div>
-                            <div class="col-2">작성자</div>
-                            <div class="col-2">작성일</div>
-                            <div class="col-1">조회</div>
-                            <div class="col-1">파일</div>
+                            <div class="num">번호</div>
+                            <div class="title">제목</div>
+                            <div class="writer">작성자</div>
+                            <div class="date">작성일</div>
+                            <div class="view">조회</div>
+                            <div class="file">파일</div>
                         </div>
                         <div class="boardMain">
-                            <div class="post notice bColorBoard">
-                                <div class="bNum col-1">번호</div>
-                                <div class="bTitle col-5">
-                                    <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
-                                    <div class="mainTitle">관리자만 작성할 수 있는
-                                        공지글 영역입니다.</div>
-                                    <div class="replyCnt colorBlue fontEnglish">2</div>
+                            <div class="post bColorBoard">
+                                <div class="maxBoard">
+                                    <div class="num"></div>
+                                    <div class="title">
+                                        <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                        <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                        <div class="replyCnt colorPink fontEnglish">3</div>
+                                    </div>
+                                    <div class="writer">작성자</div>
+                                    <div class="date fontEnglish">2023-09-16</div>
+                                    <div class="view fontEnglish">조회</div>
+                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
                                 </div>
-                                <div class="bWriter col-2">작성자</div>
-                                <div class="bDate col-2">2023-09-16</div>
-                                <div class="bView col-1">조회</div>
-                                <div class="bFile col-1"><i class="fa-solid fa-paperclip"></i></div>
+                                <div class="minBoard">
+                                    <div class="num"></div>
+                                    <div class="minCon">
+                                        <div class="title">
+                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                            <div class="replyCnt colorPink fontEnglish">3</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="minWriter">작성자</div>
+                                            <div class="minDate fontEnglish">2023-09-16</div>
+                                            <div class="minView fontEnglish">조회</div>
+                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="post general">
-                                <div class="bNum col-1">1</div>
-                                <div class="bTitle col-5">
-                                    <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
-                                    <div class="replyCnt colorBlue fontEnglish">2</div>
+                            <div class="post">
+                                <div class="maxBoard">
+                                    <div class="num fontEnglish">1</div>
+                                    <div class="title">
+                                        <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
+                                        <div class="replyCnt colorPink fontEnglish">3</div>
+                                    </div>
+                                    <div class="writer">작성자</div>
+                                    <div class="date fontEnglish">2023-09-16</div>
+                                    <div class="view fontEnglish">조회</div>
+                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
                                 </div>
-                                <div class="bWriter col-2">작성자</div>
-                                <div class="bDate col-2">2023-09-16</div>
-                                <div class="bView col-1">조회</div>
-                                <div class="bFile col-1"><i class="fa-solid fa-paperclip"></i></div>
+                                <div class="minBoard">
+                                    <div class="num fontEnglish">1</div>
+                                    <div class="minCon">
+                                        <div class="title">
+                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                            <div class="replyCnt colorPink fontEnglish">3</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="minWriter">작성자</div>
+                                            <div class="minDate fontEnglish">2023-09-16</div>
+                                            <div class="minView fontEnglish">조회</div>
+                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="pagination">
                             123456789>>>
                         </div>
                         <div class="search_write">
-                            <div class="search col-11">
+                            <div class="write"></div>
+                            <div class="search">
                                 <form action="">
                                     <div class="category">
                                         <select class="form-select" aria-label="Default select example">
@@ -232,56 +304,92 @@ a {
                                         <input type="text">
                                     </div>
                                     <div class="sertchBtn">
-                                        <input type="submit" class="boardBtn">
+                                        <input type="submit" class="boardBtn" value="검색">
                                     </div>
                                 </form>
 
                             </div>
-                            <div class="write col-1">
+                            <div class="write">
                                 <input type="button" value="글쓰기" class="boardBtn">
                             </div>
                         </div>
                     </div>
                     <div id="tab-3" class="tab-content">
                         <div class="boardHeader">
-                            <div class="col-1">번호</div>
-                            <div class="col-5">제목</div>
-                            <div class="col-2">작성자</div>
-                            <div class="col-2">작성일</div>
-                            <div class="col-1">조회</div>
-                            <div class="col-1">파일</div>
+                            <div class="num">번호</div>
+                            <div class="title">제목</div>
+                            <div class="writer">작성자</div>
+                            <div class="date">작성일</div>
+                            <div class="view">조회</div>
+                            <div class="file">파일</div>
                         </div>
                         <div class="boardMain">
-                            <div class="post notice bColorBoard">
-                                <div class="bNum col-1">번호</div>
-                                <div class="bTitle col-5">
-                                    <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
-                                    <div class="mainTitle">관리자만 작성할 수 있는
-                                        공지글 영역입니다.</div>
-                                    <div class="replyCnt colorBlue fontEnglish">2</div>
+                            <div class="post bColorBoard">
+                                <div class="maxBoard">
+                                    <div class="num"></div>
+                                    <div class="title">
+                                        <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                        <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                        <div class="replyCnt colorPink fontEnglish">3</div>
+                                    </div>
+                                    <div class="writer">작성자</div>
+                                    <div class="date fontEnglish">2023-09-16</div>
+                                    <div class="view fontEnglish">조회</div>
+                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
                                 </div>
-                                <div class="bWriter col-2">작성자</div>
-                                <div class="bDate col-2">2023-09-16</div>
-                                <div class="bView col-1">조회</div>
-                                <div class="bFile col-1"><i class="fa-solid fa-paperclip"></i></div>
+                                <div class="minBoard">
+                                    <div class="num"></div>
+                                    <div class="minCon">
+                                        <div class="title">
+                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                            <div class="replyCnt colorPink fontEnglish">3</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="minWriter">작성자</div>
+                                            <div class="minDate fontEnglish">2023-09-16</div>
+                                            <div class="minView fontEnglish">조회</div>
+                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="post general">
-                                <div class="bNum col-1">1</div>
-                                <div class="bTitle col-5">
-                                    <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
-                                    <div class="replyCnt colorBlue fontEnglish">2</div>
+                            <div class="post">
+                                <div class="maxBoard">
+                                    <div class="num fontEnglish">1</div>
+                                    <div class="title">
+                                        <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
+                                        <div class="replyCnt colorPink fontEnglish">3</div>
+                                    </div>
+                                    <div class="writer">작성자</div>
+                                    <div class="date fontEnglish">2023-09-16</div>
+                                    <div class="view fontEnglish">조회</div>
+                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
                                 </div>
-                                <div class="bWriter col-2">작성자</div>
-                                <div class="bDate col-2">2023-09-16</div>
-                                <div class="bView col-1">조회</div>
-                                <div class="bFile col-1"><i class="fa-solid fa-paperclip"></i></div>
+                                <div class="minBoard">
+                                    <div class="num fontEnglish">1</div>
+                                    <div class="minCon">
+                                        <div class="title">
+                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
+                                            <div class="replyCnt colorPink fontEnglish">3</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="minWriter">작성자</div>
+                                            <div class="minDate fontEnglish">2023-09-16</div>
+                                            <div class="minView fontEnglish">조회</div>
+                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="pagination">
                             123456789>>>
                         </div>
                         <div class="search_write">
-                            <div class="search col-11">
+                            <div class="write"></div>
+                            <div class="search">
                                 <form action="">
                                     <div class="category">
                                         <select class="form-select" aria-label="Default select example">
@@ -294,18 +402,16 @@ a {
                                         <input type="text">
                                     </div>
                                     <div class="sertchBtn">
-                                        <input type="submit" class="boardBtn">
+                                        <input type="submit" class="boardBtn" value="검색">
                                     </div>
                                 </form>
 
                             </div>
-                            <div class="write col-1">
+                            <div class="write">
                                 <input type="button" value="글쓰기" class="boardBtn">
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -322,32 +428,32 @@ a {
                 <div class="footer_logo fontLogo colorWhite">RUSH</div>
                 <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
                 <div class="footer_contents">
-                    <div class="about conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">ABOUT US</div>
+                    <div class="about conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">ABOUT US</div>
                         <div class="footer_con ">
-                            <div class="con">팀명 :
+                            <div class="con colorWhite">팀명 :
                             </div>
-                            <div class="encon"> SKY</div>
+                            <div class="encon colorWhite"> SKY</div>
                         </div>
                     </div>
-                    <div class="office conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">OFFICE</div>
+                    <div class="office conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">OFFICE</div>
                         <div class="footer_con">
-                            <div class="con">충청남도 천안시 서북구 천안대로 1223-24</div>
+                            <div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
                         </div>
                     </div>
-                    <div class="contact conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">CONTACT US</div>
+                    <div class="contact conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">CONTACT US</div>
                         <div class="footer_con fontEnglish">
-                            <div class="con fontEnglish">a@naver.com</div>
-                            <div class="con fontEnglish">01012345678</div>
+                            <div class="con fontEnglish colorWhite">a@naver.com</div>
+                            <div class="con fontEnglish colorWhite">01012345678</div>
                         </div>
                     </div>
-                    <div class="provision conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">PROVISION</div>
+                    <div class="provision conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">PROVISION</div>
                         <div class="footer_con">
-                            <div class="con">개인정보 처리방침</div>
-                            <div class="con">서비스 이용약관</div>
+                            <div class="con colorWhite">개인정보 처리방침</div>
+                            <div class="con colorWhite">서비스 이용약관</div>
                         </div>
                     </div>
                 </div>
