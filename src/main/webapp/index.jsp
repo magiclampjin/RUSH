@@ -115,6 +115,10 @@ a {
 .w49 {
 	width: 49%;
 }
+
+.gameDesc{
+	padding:0px 50px;
+}
 </style>
 </head>
 
@@ -226,7 +230,7 @@ a {
 						</div>
 						<div class="d-none col-sm-6 d-md-block">
 							<div
-								class="colorWhite fw500 fs30 d-flex align-items-center justify-content-center text-center h80">
+								class="colorWhite fw500 fs15 d-flex align-items-center justify-content-center text-center h80 gameDesc">
 								여기에 게임 설명 넣으면 됩니다 이 게임 재밌고 흥미롭고 안 하면 아쉽고 등등... 하면 아쉬워서 잠자기 전에
 								생각난다 어쩌구 이 게임은 영국에서부터 시작되어 저쩌구</div>
 							<div class="d-flex align-items-center justify-content-center h20">
@@ -256,7 +260,7 @@ a {
 
 						<div class="d-none col-sm-6 d-md-block">
 							<div
-								class="colorWhite fw500 fs30 d-flex align-items-center justify-content-center text-center h80">
+								class="colorWhite fw500 fs15 d-flex align-items-center justify-content-center text-center h80 gameDesc">
 								여기에 게임 설명 넣으면 됩니다 이 게임 재밌고 흥미롭고 안 하면 아쉽고 등등... 하면 아쉬워서 잠자기 전에
 								생각난다 어쩌구 이 게임은 영국에서부터 시작되어 저쩌구</div>
 							<div class="d-flex align-items-center justify-content-center h20">
@@ -292,8 +296,7 @@ a {
 						Bookmarks</div>
 					<div class="col-12 col-md-4 mb80">
 						<div class="row g-0 mlr20">
-							<div class="col-12 d-none d-md-block colorWhite fw900 mb20">게임1</div>
-							<div class="col-12 d-md-none colorWhite fw900 mb20">게임1</div>
+							<div class="col-12 colorWhite fw900 fs30px mb20">게임1</div>
 							<div class="col-12 colorWhite mb20">
 								<img class="bookmarkImg" src="/img/img.jpg">
 							</div>
@@ -321,7 +324,7 @@ a {
 					</div>
 					<div class="col-12 col-md-4 mb80">
 						<div class="row g-0 mlr20">
-							<div class="col-12 colorWhite fw900 mb20">게임2</div>
+							<div class="col-12 colorWhite fw900 fs30px mb20">게임2</div>
 							<div class="col-12 colorWhite mb20">
 								<img class="bookmarkImg" src="/img/img.jpg">
 							</div>
@@ -349,7 +352,7 @@ a {
 					</div>
 					<div class="col-12 col-md-4 mb80">
 						<div class="row g-0 mlr20">
-							<div class="col-12 colorWhite fw900 mb20">게임3</div>
+							<div class="col-12 colorWhite fw900 fs30px mb20">게임3</div>
 							<div class="col-12 colorWhite mb20">
 								<img class="bookmarkImg" src="/img/img.jpg">
 							</div>
