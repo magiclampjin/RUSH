@@ -1,0 +1,13 @@
+@charset "UTF8";
+@import url("/css/commons/header.css");
+@import url("/css/commons/font.css");
+@import url("/css/commons//footer.css");
+@import url("/css/commons//upPage.css");
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  list-style: none;
+  font-family: "NotoSansKR", sans-serif;
+}
