@@ -40,6 +40,10 @@
   color: #ffffff;
 }
 
+.colorDarkgray{
+	color:#7d7d7d;
+}
+
 .bColorBlack {
   background-color: #131217;
 }
@@ -58,4 +62,8 @@
 
 .bColorWhite {
   background-color: #ffffff;
+}
+
+.bColorBoard{
+	background-color: #f9f9f9;
 }
