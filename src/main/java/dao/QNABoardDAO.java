@@ -22,4 +22,6 @@ public class QNABoardDAO {
 	}
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
+	
+	
 }
