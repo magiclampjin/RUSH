@@ -1,0 +1,9 @@
+@charset "UTF8";
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+@font-face {
+  font-family: "Giants-Inline";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
