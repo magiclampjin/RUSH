@@ -41,164 +41,205 @@
 	width: 1300px;
 	margin: auto;
 }
-.titleBox{margin:10px 0px;}
-.inputTitle {width: 100%;}
+
+.titleBox {
+	margin: 10px 0px;
+}
+
+.inputTitle {
+	width: 100%;
+}
+
 .qna {
 	height: 50px;
-	margin:40px 0px;
-	border-bottom:1px solid #7D7D7D;
+	margin: 40px 0px;
+	border-bottom: 1px solid #7D7D7D;
 	font: bold;
 }
-.titleBox{width:100%; height:50px;}
-.fileBox{width:100%; padding:10px;margin-bottom:10px; border:1px solid #7D7D7D;}
-.inputTitle{height:100%;}
-.bottom{margin:50px 0 100px 0; position:relative;}
-#btnAdd{
-	border:none;
-	background-color:#CCF423; border-radius:10px;
-	width:30px; height:30px;
+
+.titleBox {
+	width: 100%;
+	height: 50px;
 }
-.submitBtn{
-	border:none;
-	background-color:#CCF423; border-radius:10px;
-	width:100px; height: 50px;
+
+.fileBox {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #7D7D7D;
 }
-.screteChk{
-	width:20px; height:20px;
+
+.inputTitle {
+	height: 100%;
 }
-label{
-	margin:0 10px;
+
+.bottom {
+	margin: 50px 0 100px 0;
+	position: relative;
+}
+
+#btnAdd {
+	border: none;
+	background-color: #CCF423;
+	border-radius: 10px;
+	width: 30px;
+	height: 30px;
+}
+
+.submitBtn {
+	border: none;
+	background-color: #CCF423;
+	border-radius: 10px;
+	width: 100px;
+	height: 50px;
+}
+
+.screteChk {
+	width: 20px;
+	height: 20px;
+}
+
+label {
+	margin: 0 10px;
 	position: absolute;
-	top:3px;
+	top: 3px;
 }
 </style>
 </head>
 <body>
-<div class="container-fluid p-0">
-<div class="header bColorBlack">
-            <div class="header_guide">
-                <a href="#">
-                    <div class="logo fontLogo colorWhite">RUSH</div>
-                </a>
-                <nav class="navbar navbar-expand navbar-light colorWhite">
-                    <div class="container-fluid p-0">
-                        <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
-                            <ul class="navbar-nav row g-0 w-100">
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        GAME
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        AWARDS
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        BOARD
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        LOGIN
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-	<div class="container row g-0 p-0">
-		<form action="" method="post" enctype="multipart/form-data">
+	<div class="container-fluid p-0">
+		<div class="header bColorBlack">
+			<div class="header_guide">
+				<a href="#">
+					<div class="logo fontLogo colorWhite">RUSH</div>
+				</a>
+				<nav class="navbar navbar-expand navbar-light colorWhite">
+					<div class="container-fluid p-0">
+						<div class="collapse navbar-collapse w-100 g-0 m-0"
+							id="navbarNavDropdown">
+							<ul class="navbar-nav row g-0 w-100">
+								<li class="nav-item dropdown col-3 text-end"><a
+									class="nav-link text-white fontEnglish" href="#"
+									id="navbarDropdownMenuLink" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
+									<ul class="dropdown-menu p-0"
+										aria-labelledby="navbarDropdownMenuLink">
+										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Another
+												action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Something
+												else here</a></li>
+									</ul></li>
+								<li class="nav-item dropdown col-3 text-end"><a
+									class="nav-link text-white fontEnglish" href="#"
+									id="navbarDropdownMenuLink" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> AWARDS </a>
+									<ul class="dropdown-menu p-0"
+										aria-labelledby="navbarDropdownMenuLink">
+										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Another
+												action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Something
+												else here</a></li>
+									</ul></li>
+								<li class="nav-item dropdown col-3 text-end"><a
+									class="nav-link text-white fontEnglish" href="#"
+									id="navbarDropdownMenuLink" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
+									<ul class="dropdown-menu p-0"
+										aria-labelledby="navbarDropdownMenuLink">
+										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Another
+												action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Something
+												else here</a></li>
+									</ul></li>
+								<li class="nav-item dropdown col-3 text-end"><a
+									class="nav-link text-white fontEnglish" href="#"
+									id="navbarDropdownMenuLink" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> LOGIN </a>
+									<ul class="dropdown-menu p-0"
+										aria-labelledby="navbarDropdownMenuLink">
+										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Another
+												action</a></li>
+										<li><a class="dropdown-item fontEnglish" href="#">Something
+												else here</a></li>
+									</ul></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="container row g-0 p-0">
+			<form action="" method="post" enctype="multipart/form-data">
 
-			<div class="qna col-12">
-				<h2 class="fontEnglish">Q&A - 게시글 작성</h2>
-			</div>
-			<div class="titleBox col-12">
-				<input class="inputTitle" type="text" name="title" placeholder="제목을 입력하세요">
-			</div>
-			<div class="col-12 fileBox">
-				<button type="button" id="btnAdd">+</button>
-				<span>파일첨부</span>
-				<div id="fileContainer"></div>
-			</div>
-			<div class="col-12">
-				<textarea id="summernote" class="content" rows="35" cols="100"
-					placeholder="내용을 입력하세요." name="contents"></textarea>
-			</div>
-			<div class="row bottom">
-				<div class="col-11">
-					<input class="screteChk" type="checkbox" name="screte" value="screteChk"><label class="colorDarkgray">비밀글 설정하기</label>
+				<div class="qna col-12">
+					<h2 class="fontEnglish">Q&A - 게시글 작성</h2>
 				</div>
-				
-				<input class="submitBtn col-1" type="submit" value="작성">
-			</div>
-		</form>
-	</div>
-	<div class="footer bColorBlack">
-            <div class="footer_guide">
-                <div class="footer_logo fontLogo colorWhite">RUSH</div>
-                <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
-                <div class="footer_contents">
-                    <div class="about conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">ABOUT US</div>
-                        <div class="footer_con ">
-                            <div class="con">팀명 :
-                            </div>
-                            <div class="encon"> SKY</div>
-                        </div>
-                    </div>
-                    <div class="office conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">OFFICE</div>
-                        <div class="footer_con">
-                            <div class="con">충청남도 천안시 서북구<br> 천안대로 1223-24</div>
-                        </div>
-                    </div>
-                    <div class="contact conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">CONTACT US</div>
-                        <div class="footer_con fontEnglish">
-                            <div class="con fontEnglish">a@naver.com</div>
-                            <div class="con fontEnglish">01012345678</div>
-                        </div>
-                    </div>
-                    <div class="provision conDiv fontEnglish colorWhite">
-                        <div class="footer_title fontEnglish">PROVISION</div>
-                        <div class="footer_con">
-                            <div class="con">개인정보 처리방침</div>
-                            <div class="con">서비스 이용약관</div>
-                        </div>
-                    </div>
-                </div>
+				<div class="titleBox col-12">
+					<input class="inputTitle" type="text" name="title"
+						placeholder="제목을 입력하세요">
+				</div>
+				<div class="col-12 fileBox">
+					<button type="button" id="btnAdd">+</button>
+					<span>파일첨부</span>
+					<div id="fileContainer"></div>
+				</div>
+				<div class="col-12">
+					<textarea id="summernote" class="content" rows="35" cols="100"
+						placeholder="내용을 입력하세요." name="contents"></textarea>
+				</div>
+				<div class="row bottom">
+					<div class="col-11">
+						<input class="screteChk" type="checkbox" name="screte"
+							value="screteChk"><label class="colorDarkgray">비밀글
+							설정하기</label>
+					</div>
 
-            </div>
-        </div>
- </div>
+					<input class="submitBtn col-1" type="submit" value="작성">
+				</div>
+			</form>
+		</div>
+		<div class="footer bColorBlack">
+			<div class="footer_guide">
+				<div class="footer_logo fontLogo colorWhite">RUSH</div>
+				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+					RIGHT RESERVED</div>
+				<div class="footer_contents">
+					<div class="about conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+						<div class="footer_con ">
+							<div class="con colorWhite">팀명 :</div>
+							<div class="encon colorWhite">SKY</div>
+						</div>
+					</div>
+					<div class="office conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
+						<div class="footer_con">
+							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
+						</div>
+					</div>
+					<div class="contact conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+						<div class="footer_con fontEnglish">
+							<div class="con fontEnglish colorWhite">a@naver.com</div>
+							<div class="con fontEnglish colorWhite">01012345678</div>
+						</div>
+					</div>
+					<div class="provision conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
+						<div class="footer_con">
+							<div class="con colorWhite">개인정보 처리방침</div>
+							<div class="con colorWhite">서비스 이용약관</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 
 <script>
