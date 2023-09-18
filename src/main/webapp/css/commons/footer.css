@@ -1,6 +1,5 @@
 @charset "UTF8";
 .footer {
-  max-width: 1920px;
   width: 100%;
 }
 
@@ -28,18 +27,17 @@
   margin-bottom: 120px;
 }
 
-.text {
-  height: 800px;
-}
 
 .footer_contents > .conDiv {
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  min-width: 110px;
+  max-width: 180px;
 }
 
 .footer_contents > .conDiv:not(:first-child) {
-  margin-left: 50px;
+  /* margin-left: 30px; */
 }
 .footer_title {
   font-weight: 700;
@@ -60,8 +58,11 @@
   flex-direction: row;
 }
 
+.about > .footer_con > .con:first-child {
+  width: 40px;
+}
+
 .encon {
-  font-family: "Jost";
   margin-left: 10px;
 
   margin-top: 20px;
@@ -82,12 +83,14 @@
   }
 
   .footer_contents > .conDiv {
-    font-family: "Jost";
     font-size: 15px;
   }
 
   .footer_con {
     font-weight: 500;
     font-size: 13px;
+  }
+  .office > .footer_con > .con {
+    padding-right: 20px;
   }
 }
