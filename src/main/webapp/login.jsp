@@ -142,7 +142,7 @@
 	<div id="container g-0" class="container">
 		<div class="row g-0">
 			<div class="loginImage col-6 d-none d-xl-block g-0">
-				<img id="image" class="img-fluid" src="/assets/bg_img2.jpg">
+				<!-- <img id="image" class="img-fluid" src="/assets/bg_img2.jpg"> -->
 			</div>
 		
 			<div class="loginBox col-6">
@@ -177,6 +177,14 @@
 	</div>
 	
 	<script>
+	
+	// 사진 랜덤
+	let images = ["/assets/bg_img1.jpg", "/assets/bg_img2.jpg", "/assets/bg_img3.jpg", "/assets/bg_img4.jpg"];
+	let image = images[Math.floor(Math.random() * images.length)];
+	let finalImage = $("<img>");
+	finalImage.attr("src", image);
+	finalImage.addClass("img-fluid"); 
+	$(".loginImage").append(finalImage);
 	
 	// 아이디 기억하기
 /* 	let userID = Cookies.get("remid");
