@@ -4,25 +4,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+KR&family=Jost:wght@300;400&display=swap');
 	
 	* {
 		box-sizing: border-box;
-		margin: 0;
+		margin: 0px;
+		padding: 0px;
+		text-decoration: none;
+		list-style: none;
 	}
 	
 	p {
 		margin-bottom: 0;
 	}
 	
+	a {
+		text-decoration: none;
+	}
+	
+	.dropdown-menu[data-bs-popper] {
+		right: 0;
+		left: auto;
+	}
+	
 	.container {
 		width: 100%;
-		margin-top: 30px;
 	}
 
 	#container {
@@ -36,17 +54,12 @@
 		margin-top: 100px;
 	}
 	
-	.loginTitle {
-		font-family: 'Jost', sans-serif;
-	}
-	
 	#title {
 		font-size: 70px;
 	}
 	
 	#subTitle {
 		font-size: 30px;
-		color: #616161;
 	}
 	
 	.idBox {
@@ -58,14 +71,12 @@
 	}
 	
 	#id, #pw {
-		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 		font-size: 30px;
 		margin-bottom: 10px;
 	}
 	
 	#inputId, #inputPw {
-		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 		font-size: 20px;
 		border: 1px solid;
@@ -97,11 +108,9 @@
 	
 	#find {
 		text-decoration-line: none;
-		color: #5D6CE1;
 	}
 	
 	#login {
-		font-family: 'Jost', sans-serif;
 		font-weight: 300;
 		border: none;
 		border-radius: 10px;
@@ -109,8 +118,6 @@
 		height: 60px;
 		margin-top: 50px;
 		font-size: 30px;
-		color: #FFF;
-		background-color: #5D6CE1;
 	}
 	
 	.signupBox {
@@ -121,24 +128,71 @@
 	}
 	
 	#signupText {
-		font-family: 'Jost', sans-serif;
 		font-size: 20px;
 		margin-right: 5px;
 	}
 	
 	#signup {
-		font-family: 'Jost', sans-serif;
 		font-size: 20px;
 		text-decoration-line: none;
-		color: #5D6CE1;
 	}
 	
 </style>
 </head>
 
-<body>
+<body class="bColorBlack">
+	<div class="container-fluid p-0">
+        <div class="header bColorBlack">
+            <div class="header_guide">
+                <a href="#">
+                    <div class="logo fontLogo colorWhite">RUSH</div>
+                </a>
+                <nav class="navbar navbar-expand navbar-light colorWhite">
+                    <div class="container-fluid p-0">
+                        <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
+                            <ul class="navbar-nav row g-0 w-100">
+                                <li class="nav-item dropdown col-4 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        GAME
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-4 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        AWARDS
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-4 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        BOARD
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
 	<div id="container g-0" class="container">
-		<div class="row g-0">
+		<div class="row g-0 bColorWhite">
 			<div class="loginImage col-6 d-none d-xl-block g-0">
 				<!-- <img id="image" class="img-fluid" src="/assets/bg_img2.jpg"> -->
 			</div>
@@ -146,33 +200,72 @@
 			<div class="loginBox col-6">
 				<div class="loginTitle">
 					<div>
-						<p id="title">welcome back</p>
-						<p id="subTitle">Please enter your details.</p>
+						<p id="title" class="fontEnglish">welcome back</p>
+						<p id="subTitle" class="fontEnglish colorDarkgray">Please enter your details.</p>
 					</div>
 					<div class="idBox">
-						<p id="id">ID</p>
-						<input type="text" id="inputId" name="id" placeholder="Enter your ID">
+						<p id="id" class="fontEnglish">ID</p>
+						<input type="text" id="inputId" class="fontEnglish" name="id" placeholder="Enter your ID">
 					</div>
 					<div class="pwBox">
-						<p id="pw">Password</p>
-						<input type="password" id="inputPw" name="pw" placeholder="********">
+						<p id="pw" class="fontEnglish">Password</p>
+						<input type="password" id="inputPw" class="fontEnglish" name="pw" placeholder="********">
 					</div>
 					<div class="rem_fg">
 						<div class="rememberId">
 							<input type="checkbox" id="remID">
 							<p>Remember me</p>
 						</div>
-						<a href="#" id="find">Forgot ID or Password?</a>
+						<a href="#" id="find" class="fontEnglish colorBlue">Forgot ID or Password?</a>
 					</div>
-					<button id="login">Login</button>
+					<button id="login" class="fontEnglish colorWhite bColorBlue">Login</button>
 					<div class="signupBox">
-						<p id="signupText">Don't have an account?</p>
-						<a href="#" id="signup">Signup</a>
+						<p id="signupText" class="fontEnglish">Don't have an account?</p>
+						<a href="#" id="signup" class="fontEnglish colorBlue">Signup</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div class="footer bColorBlack">
+            <div class="footer_guide">
+                <div class="footer_logo fontLogo colorWhite">RUSH</div>
+                <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
+                <div class="footer_contents">
+                    <div class="about conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">ABOUT US</div>
+                        <div class="footer_con ">
+                            <div class="con">팀명 :
+                            </div>
+                            <div class="encon"> SKY</div>
+                        </div>
+                    </div>
+                    <div class="office conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">OFFICE</div>
+                        <div class="footer_con">
+                            <div class="con">충청남도 천안시 서북구<br> 천안대로 1223-24</div>
+                        </div>
+                    </div>
+                    <div class="contact conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">CONTACT US</div>
+                        <div class="footer_con fontEnglish">
+                            <div class="con fontEnglish">a@naver.com</div>
+                            <div class="con fontEnglish">01012345678</div>
+                        </div>
+                    </div>
+                    <div class="provision conDiv fontEnglish colorWhite">
+                        <div class="footer_title fontEnglish">PROVISION</div>
+                        <div class="footer_con">
+                            <div class="con">개인정보 처리방침</div>
+                            <div class="con">서비스 이용약관</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 	
 	<script>
 	
