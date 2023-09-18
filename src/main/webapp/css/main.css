@@ -1,8 +1,8 @@
 @charset "UTF8";
 @import url("/css/commons/header.css");
 @import url("/css/commons/font.css");
-@import url("/css/commons//footer.css");
-@import url("/css/commons//upPage.css");
+@import url("/css/commons/footer.css");
+@import url("/css/commons/upPage.css");
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -40,8 +40,8 @@
   color: #ffffff;
 }
 
-.colorDarkgray{
-	color:#7d7d7d;
+.colorDarkgray {
+  color: #7d7d7d;
 }
 
 .bColorBlack {
@@ -64,6 +64,12 @@
   background-color: #ffffff;
 }
 
-.bColorBoard{
-	background-color: #f9f9f9;
+.bColorBoard {
+  background-color: #ebebeb;
+}
+.bcolorDarkgray {
+  background-color: #7d7d7d;
+}
+.bcolorDarkgray30 {
+  background-color: #7d7d7d30;
 }
