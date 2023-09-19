@@ -18,6 +18,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="/js/board/post.js"></script>
 
 <style>
 * {
@@ -250,12 +251,12 @@ a {
 					<div class="col-2 fw400 fs20 mt10">첨부 파일</div>
 					<div class="col-4 fw400 fs20 colorBlue mt10">test.txt</div>
 					<div class="col-6 d-flex justify-content-end fw400 fs20">
-						<button class="postBtns bColorGreen">수정</button>
-						<button class="postBtns bColorGreen">삭제</button>
-						<button class="postBtns bColorBlue colorWhite">목록</button>
+						<button class="postBtns bColorGreen" id="update">수정</button>
+						<button class="postBtns bColorGreen" id="delete">삭제</button>
+						<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
 					</div>
 				</div>
-
+				
 				<div class="row g-0">
 					<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
 					<div class="col-12 mb30">

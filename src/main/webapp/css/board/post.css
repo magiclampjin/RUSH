@@ -87,6 +87,10 @@
     max-height: 150px;
 }
 
+#replyInsertTxt:focus{
+	outline:none;
+}
+
 #replyTxt {
     display: none;
 }
