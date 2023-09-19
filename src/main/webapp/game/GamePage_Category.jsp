@@ -101,11 +101,11 @@
                         <div class="col-12 mt-5">
                             <div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">인기게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">리듬게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="fav"><span class="fontKorean text-white">인기게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 							</div>
                         </div>
                     </div>

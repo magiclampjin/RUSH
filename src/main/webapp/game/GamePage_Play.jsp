@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RUSH</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -27,14 +27,15 @@
 }
 
 .game {
-	max-width: 1023px;
-	width: 1030px;
+	min-width : 579px;
+	max-width: 1030px;
+	width: 100%;
 	height: 579px;
 	background-color: white;
 	margin: auto;
 }
 
-.gameContainer {
+.gameContainer { 
 	max-width: 1300px;
 	margin: auto;
 }
@@ -124,7 +125,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-10">
+					<div class="col-10 pr45">
 						<div class="row g-0">
 							<div class="col-12">
 								<p class="gameCategory fs-5 mb-0 text-white fontKorean">카테고리</p>
@@ -161,6 +162,7 @@
 										class="btn btn-outline-light" for="btnradio2">게임 정보</label>
 								</div>
 							</div>
+							
 							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 						</div>
 					</div>

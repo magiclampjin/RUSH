@@ -121,11 +121,11 @@ div {
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">인기게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">리듬게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="fav"><span class="fontKorean text-white">인기게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 								</div>
 							</div>
 						</div>
@@ -135,8 +135,8 @@ div {
 							<p class="fs-2 text-white fontKorean">최신게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임1</p>
+								<a href="/moveToGamePage.game"><div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임1</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
 								<div class="test ml45 mr45"></div>
@@ -288,5 +288,14 @@ div {
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	$("#new").on("click",function(){
+		let category = $("#new").children()
+		console.log(category);
+		/* location.href = "/moveToCategory?category="; */
+	})
+	
+	</script>
 </body>
 </html>
