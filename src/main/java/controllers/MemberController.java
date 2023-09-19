@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
+		response.setContentType("text/html;charset=utf8");
+		
 		String cmd = request.getRequestURI();
 		System.out.println("member cmd: "+cmd);
 		

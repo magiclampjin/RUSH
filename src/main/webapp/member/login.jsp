@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+KR&family=Jost:wght@300;400&display=swap');
 	
@@ -148,25 +148,27 @@
 						<p id="title">welcome back</p>
 						<p id="subTitle">Please enter your details.</p>
 					</div>
-					<div class="idBox">
-						<p id="id">ID</p>
-						<input type="text" id="inputId" name="id" placeholder="Enter your ID">
-					</div>
-					<div class="pwBox">
-						<p id="pw">Password</p>
-						<input type="password" id="inputPw" name="pw" placeholder="********">
-					</div>
-					<div class="rem_fg">
-						<div class="rememberId">
-							<input type="checkbox" id="remID">
-							<p>Remember me</p>
+					<form action="/login.member" onsubmit="return checkNull()" method="post">
+						<div class="idBox">
+							<p id="id">ID</p>
+							<input type="text" id="inputId" name="id" placeholder="Enter your ID">
 						</div>
-						<a href="#" id="find">Forgot ID or Password?</a>
-					</div>
-					<button id="login">Login</button>
+						<div class="pwBox">
+							<p id="pw">Password</p>
+							<input type="password" id="inputPw" name="pw" placeholder="********">
+						</div>
+						<div class="rem_fg">
+							<div class="rememberId">
+								<input type="checkbox" id="remID">
+								<p>Remember me</p>
+							</div>
+							<a href="#" id="find">Forgot ID or Password?</a>
+						</div>
+						<button id="login">Login</button>
+					</form>
 					<div class="signupBox">
 						<p id="signupText">Don't have an account?</p>
-						<a href="#" id="signup">Signup</a>
+						<a href="/member/signup.jsp" id="signup">Signup</a>
 					</div>
 				</div>
 			</div>
@@ -184,7 +186,7 @@
 	$(".loginImage").append(finalImage);
 	
 	// 아이디 기억하기
-/* 	let userID = Cookies.get("remid");
+ 	let userID = Cookies.get("remid");
 	if(userID) {
 		$("#inputId").val(userID);
 		$("#remID").prop("checked", true);
@@ -197,7 +199,7 @@
 		} else {
 			Cookies.remove("remid");
 		}
-	}); */
+	}); 
 	
 	// 아이디 & 비밀번호 찾기
 	$("#find").on("click", function() {
@@ -209,6 +211,20 @@
 		location.href = "/signup.jsp";
 	});
 	
+	// 아이디 & 비밀번호 null값 확인
+	function checkNull() {
+		if($("#inputId").val() == "") {
+			alert("아이디를 입력하세요.");
+			$("#inputId").focus();
+			return false;
+		}
+		
+		if($("#inputPw").val() == "") {
+			alert("비밀번호를 입력하세요.");
+			$("#inputPw").focus();
+			return false;
+		}
+	}
 	
 	</script>
 </body>
