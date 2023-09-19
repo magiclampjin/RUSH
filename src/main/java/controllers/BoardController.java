@@ -31,11 +31,11 @@ public class BoardController extends HttpServlet {
 				// 게시글 번호를 가져와야함.
 				// 그리고 게시판 위치 (자유게시판인지 qna인지) -> 이거는 여기서 보내주는 것
 
-//				int cpage = Integer.parseInt(request.getParameter("cpage"));
-//				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
-
-				int cpage = 1;
-				int postSeq = 18;
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int postSeq = Integer.parseInt(request.getParameter("seq"));
+//
+//				int cpage = 1;
+//				int seq = 18;
 				BoardDTO post = dao.selectPost(postSeq);
 				request.setAttribute("post", post);
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);

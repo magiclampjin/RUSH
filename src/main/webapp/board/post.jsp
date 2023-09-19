@@ -282,7 +282,7 @@ a {
 								<div class="d-md-none">
 									<button class="postBtnsMini bColorGreen" id="update"><i class="fa-solid fa-pen-to-square"></i></button>
 									<button class="postBtnsMini bColorGreen" id="delete"><i class="fa-solid fa-trash-can"></i></button>
-									<button class="postBtnsMini bColorBlue colorWhite" id="goList">목록</button>
+									<button class="postBtnsMini bColorBlue colorWhite" id="goList"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
 								</div>
 							</div>
 						
