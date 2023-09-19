@@ -24,6 +24,10 @@
 	box-sizing: border-box;
 }
 
+a{
+	text-decoration: none;
+}
+
 div {
 	border: 0px solid black;
 }
