@@ -17,7 +17,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/game/game.css"/>
 <style>
-<style>
         *{
             box-sizing: border-box;
         }
@@ -174,52 +173,47 @@
             <i class="fa-solid fa-arrow-up-long"></i>
         </div>
     </a>
-    <div class="footer bColorBlack">
-        <div class="footer bColorBlack">
-			<div class="footer_guide">
-				<div class="footer_logo fontLogo colorWhite">RUSH</div>
-				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-					RIGHT RESERVED</div>
-				<div class="footer_contents">
-					<div class="about conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">ABOUT US</div>
-						<div class="footer_con ">
-							<div class="con">팀명 :</div>
-							<div class="encon">SKY</div>
-						</div>
+	<div class="footer bColorBlack">
+		<div class="footer_guide">
+			<div class="footer_logo fontLogo colorWhite">RUSH</div>
+			<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+				RIGHT RESERVED</div>
+			<div class="footer_contents">
+				<div class="about conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+					<div class="footer_con ">
+						<div class="con colorWhite">팀명 :</div>
+						<div class="encon colorWhite">SKY</div>
 					</div>
-					<div class="office conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">OFFICE</div>
-						<div class="footer_con">
-							<div class="con">
-								충청남도 천안시 서북구<br> 천안대로 1223-24
-							</div>
-						</div>
+				</div>
+				<div class="office conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">OFFICE</div>
+					<div class="footer_con">
+						<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
 					</div>
-					<div class="contact conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">CONTACT US</div>
-						<div class="footer_con fontEnglish">
-							<div class="con fontEnglish">a@naver.com</div>
-							<div class="con fontEnglish">01012345678</div>
-						</div>
+				</div>
+				<div class="contact conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+					<div class="footer_con fontEnglish">
+						<div class="con fontEnglish colorWhite">a@naver.com</div>
+						<div class="con fontEnglish colorWhite">01012345678</div>
 					</div>
-					<div class="provision conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">PROVISION</div>
-						<div class="footer_con">
-							<div class="con">개인정보 처리방침</div>
-							<div class="con">서비스 이용약관</div>
-						</div>
+				</div>
+				<div class="provision conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">PROVISION</div>
+					<div class="footer_con">
+						<div class="con colorWhite">개인정보 처리방침</div>
+						<div class="con colorWhite">서비스 이용약관</div>
 					</div>
 				</div>
 			</div>
 		</div>
-    </div>
-    <button id="going_up">화살표</button>
-    <script>
-        $(".btn").on("click",function(){
-            // $(".categories").text();
-            console.log("");
-        });
-    </script>
+	</div>
+	<script>
+		$(".btn").on("click", function() {
+			// $(".categories").text();
+			console.log("");
+		});
+	</script>
 </body>
 </html>

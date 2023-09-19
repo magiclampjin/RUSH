@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>RUSH</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="/css/game/game.css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/game/game.css"/>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -141,7 +147,9 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary"><span class="fontKorean"><span class="fontKorean">더보기</span></span></button>
+								<button type="button" class="btn btn-primary">
+									<span class="fontKorean"><span class="fontKorean">더보기</span></span>
+								</button>
 							</div>
 						</div>
 
@@ -161,7 +169,9 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary"><span class="fontKorean">더보기</span></button>
+								<button type="button" class="btn btn-primary">
+									<span class="fontKorean">더보기</span>
+								</button>
 							</div>
 						</div>
 
@@ -181,7 +191,9 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary"><span class="fontKorean">더보기</span></button>
+								<button type="button" class="btn btn-primary">
+									<span class="fontKorean">더보기</span>
+								</button>
 							</div>
 						</div>
 
@@ -201,7 +213,9 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary"><span class="fontKorean">더보기</span></button>
+								<button type="button" class="btn btn-primary">
+									<span class="fontKorean">더보기</span>
+								</button>
 							</div>
 						</div>
 
@@ -221,7 +235,9 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary"><span class="fontKorean">더보기</span></button>
+								<button type="button" class="btn btn-primary">
+									<span class="fontKorean">더보기</span>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -241,39 +257,36 @@ div {
 				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
 					RIGHT RESERVED</div>
 				<div class="footer_contents">
-					<div class="about conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">ABOUT US</div>
+					<div class="about conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
 						<div class="footer_con ">
-							<div class="con">팀명 :</div>
-							<div class="encon">SKY</div>
+							<div class="con colorWhite">팀명 :</div>
+							<div class="encon colorWhite">SKY</div>
 						</div>
 					</div>
-					<div class="office conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">OFFICE</div>
+					<div class="office conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
 						<div class="footer_con">
-							<div class="con">
-								충청남도 천안시 서북구<br> 천안대로 1223-24
-							</div>
+							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
 						</div>
 					</div>
-					<div class="contact conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">CONTACT US</div>
+					<div class="contact conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
 						<div class="footer_con fontEnglish">
-							<div class="con fontEnglish">a@naver.com</div>
-							<div class="con fontEnglish">01012345678</div>
+							<div class="con fontEnglish colorWhite">a@naver.com</div>
+							<div class="con fontEnglish colorWhite">01012345678</div>
 						</div>
 					</div>
-					<div class="provision conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">PROVISION</div>
+					<div class="provision conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
 						<div class="footer_con">
-							<div class="con">개인정보 처리방침</div>
-							<div class="con">서비스 이용약관</div>
+							<div class="con colorWhite">개인정보 처리방침</div>
+							<div class="con colorWhite">서비스 이용약관</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

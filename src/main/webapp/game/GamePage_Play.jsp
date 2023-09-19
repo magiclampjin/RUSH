@@ -28,7 +28,7 @@
 
 .game {
 	max-width: 1023px;
-	width: 1023px;
+	width: 1030px;
 	height: 579px;
 	background-color: white;
 	margin: auto;
@@ -114,11 +114,11 @@
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-primary">최신게임</button>
-									<button type="button" class="btn btn-primary active">인기게임</button>
-									<button type="button" class="btn btn-primary">리듬게임</button>
-									<button type="button" class="btn btn-primary">아케이드게임</button>
-									<button type="button" class="btn btn-primary">퍼즐게임</button>
+									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">인기게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
 									<!-- js로 넘어가기 -->
 								</div>
 							</div>
@@ -127,17 +127,20 @@
 					<div class="col-10">
 						<div class="row g-0">
 							<div class="col-12">
-								<p class="gameCategory fs-5 mb-0">카테고리</p>
+								<p class="gameCategory fs-5 mb-0 text-white fontKorean">카테고리</p>
 							</div>
 						</div>
 						<div class="row g-0">
 							<div class="col-10">
-								<p class="gameName fs-2 mt-0">게임 이름</p>
+								<p class="gameName fs-2 mt-0 text-white fontKorean">게임 이름</p>
 							</div>
 							<div
 								class="col-2 d-flex justify-content-center align-content-bottom">
 								<div>
-									<button>즐겨찾기</button>
+									<button type="button" class="btn btn-outline-light">
+										<i class="fa-regular fa-star colorWhite"></i>
+										즐겨찾기
+									</button>
 								</div>
 							</div>
 							<hr class="border border-primary border-3 opacity-75">
@@ -147,15 +150,15 @@
 						</div>
 						<div class="row g-0">
 							<div class="col-12 d-flex justify-content-center mt150">
-								<div class="btn-group" role="group"
+								<div class="btn-group w100p mxWidth1030" role="group"
 									aria-label="Basic radio toggle button group">
 									<input type="radio" class="btn-check" name="btnradio"
 										id="btnradio1" autocomplete="off" checked> <label
-										class="btn btn-outline-primary" for="btnradio1">게임 순위</label>
+										class="btn btn-outline-light" for="btnradio1">게임 순위</label>
 
 									<input type="radio" class="btn-check" name="btnradio"
 										id="btnradio2" autocomplete="off"> <label
-										class="btn btn-outline-primary" for="btnradio2">게임 정보</label>
+										class="btn btn-outline-light" for="btnradio2">게임 정보</label>
 								</div>
 							</div>
 							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
@@ -168,39 +171,36 @@
 		</div>
 		<div class="container-fluid g-0">
 			<div class="footer bColorBlack">
-			<div class="footer_guide">
-				<div class="footer_logo fontLogo colorWhite">RUSH</div>
-				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-					RIGHT RESERVED</div>
-				<div class="footer_contents">
-					<div class="about conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">ABOUT US</div>
-						<div class="footer_con ">
-							<div class="con">팀명 :</div>
-							<div class="encon">SKY</div>
-						</div>
+		<div class="footer_guide">
+			<div class="footer_logo fontLogo colorWhite">RUSH</div>
+			<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+				RIGHT RESERVED</div>
+			<div class="footer_contents">
+				<div class="about conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+					<div class="footer_con ">
+						<div class="con colorWhite">팀명 :</div>
+						<div class="encon colorWhite">SKY</div>
 					</div>
-					<div class="office conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">OFFICE</div>
-						<div class="footer_con">
-							<div class="con">
-								충청남도 천안시 서북구<br> 천안대로 1223-24
-							</div>
-						</div>
+				</div>
+				<div class="office conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">OFFICE</div>
+					<div class="footer_con">
+						<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
 					</div>
-					<div class="contact conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">CONTACT US</div>
-						<div class="footer_con fontEnglish">
-							<div class="con fontEnglish">a@naver.com</div>
-							<div class="con fontEnglish">01012345678</div>
-						</div>
+				</div>
+				<div class="contact conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+					<div class="footer_con fontEnglish">
+						<div class="con fontEnglish colorWhite">a@naver.com</div>
+						<div class="con fontEnglish colorWhite">01012345678</div>
 					</div>
-					<div class="provision conDiv fontEnglish colorWhite">
-						<div class="footer_title fontEnglish">PROVISION</div>
-						<div class="footer_con">
-							<div class="con">개인정보 처리방침</div>
-							<div class="con">서비스 이용약관</div>
-						</div>
+				</div>
+				<div class="provision conDiv fontEnglish">
+					<div class="footer_title fontEnglish colorWhite">PROVISION</div>
+					<div class="footer_con">
+						<div class="con colorWhite">개인정보 처리방침</div>
+						<div class="con colorWhite">서비스 이용약관</div>
 					</div>
 				</div>
 			</div>

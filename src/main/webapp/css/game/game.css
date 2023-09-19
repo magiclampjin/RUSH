@@ -26,4 +26,14 @@
 .mxConWidth{
 	max-width: 1300px;
 }
+.mt150{
+	margin-top : 150px;
+}
+
+.w100p{
+	width : 100%;
+}
+.mxWidth1030{
+	max-width : 1030px;
+}
 /* GamePage css  */
