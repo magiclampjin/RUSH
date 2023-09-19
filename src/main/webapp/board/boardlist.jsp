@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/freeboard.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
+<script type="text/javascript" src="/js/board/boardMainPagination.js"></script>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -119,14 +120,14 @@ a {
 				<div class="boardCont">
 					<div class="boardTitle">자유게시판</div>
 					<ul class="tabs boardTabs">
-						<a href="/listing.board?category=rhythm" class="rhythm current"><li
+						<a href="/listing.board?category=rhythm&cpage=1" class="rhythm current"><li
 							class="tab-link">리듬게임</li></a>
-						<a href="/listing.board?category=arcade" class="arcade"><li
+						<a href="/listing.board?category=arcade&cpage=1" class="arcade"><li
 							class="tab-link">아케이드게임</li></a>
-						<a href="/listing.board?category=puzzle" class="puzzle"><li
+						<a href="/listing.board?category=puzzle&cpage=1" class="puzzle"><li
 							class="tab-link">퍼즐게임</li></a>
 					</ul>
-					<input type="hidden" value="${category }" id="category">
+					
 
 					<div class="boardHeader">
 						<div class="num">번호</div>
@@ -191,8 +192,8 @@ a {
 									</div>
 									<div class="writer">${post.nickName }</div>
 									<div class="date fontEnglish">${post.stringFormat }</div>
-									<div class="view fontEnglish">${noti.view }</div>
-									<div class="recommend fontEnglish">${noti.recommend }</div>
+									<div class="view fontEnglish">${post.view }</div>
+									<div class="recommend fontEnglish">${post.recommend }</div>
 									<div class="file">
 										<i class="fa-solid fa-paperclip"></i>
 									</div>
@@ -223,16 +224,16 @@ a {
 						</c:forEach>
 
 					</div>
-					<div class="pagination">123456789>>></div>
+					<div id="pagination"></div>
 					<div class="search_write">
 						<div class="write"></div>
 						<div class="search">
 							<form action="">
 								<div class="category">
 									<select class="form-select" aria-label="Default select example">
-										<option selected>제목</option>
-										<option value="1">작성자</option>
-										<option value="2">내용</option>
+										<option value="title" selected>제목</option>
+										<option value="writer">작성자</option>
+										<option value="content">내용</option>
 									</select>
 								</div>
 								<div class="keyword">
@@ -250,9 +251,14 @@ a {
 					</div>
 				</div>
 			</div>
-
-
 		</div>
+		
+		<input type="hidden" value="${category }" id="category">
+		<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
+		<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
+		<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
+		<input type="hidden" id="lastPageNum" value="${lastPageNum }">
+		
 		<a href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>
