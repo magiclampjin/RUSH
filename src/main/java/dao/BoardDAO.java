@@ -29,8 +29,33 @@ public class BoardDAO {
 	}
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
+	// 공지 게시글 불러오기
+	public List<BoardDTO> selectByNoti() throws Exception{
+		String sql ="select * from board_reply_count where cbCategory = \"notice\" order by cbSeq desc;";
+		List<BoardDTO> list = new ArrayList<>();
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();){
+			while (rs.next()) {
+				int cbSeq = rs.getInt("cbSeq");
+				String cbID = rs.getString("cbID");
+				String cbNickname = rs.getString("cbNickname");
+				String cbTitle = rs.getString("cbTitle");
+				String cbContent = rs.getString("cbContent");
+				Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
+				int cbView = rs.getInt("cbView");
+				String cbCategory = rs.getString("cbCategory");
+				int cbRecommend = rs.getInt("cbRecommend");
+				int replyCount = rs.getInt("replyCount");
+				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView, cbRecommend, replyCount));
+			}
+			return list;
+		}
+	}
+	
+	// 카테고리에 해당하는 모든 게시물 불러오기
 	public List<BoardDTO> selectByCategory(String category, int start, int count) throws Exception{
-		String sql = "select row_number() over (order by cbSeq) rn, common_board.*  from common_board where cbCategory = ? order by cbSeq desc limit ?, ?;";
+		String sql = "select *  from board_reply_count where cbCategory = ? order by cbSeq desc limit ?, ?;";
 		List<BoardDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, category);
@@ -47,7 +72,8 @@ public class BoardDAO {
 					int cbView = rs.getInt("cbView");
 					String cbCategory = rs.getString("cbCategory");
 					int cbRecommend = rs.getInt("cbRecommend");
-					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView, cbRecommend));
+					int replyCount = rs.getInt("replyCount");
+					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView, cbRecommend, replyCount));
 				}
 				return list;
 			}

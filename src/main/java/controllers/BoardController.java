@@ -38,7 +38,8 @@ public class BoardController extends HttpServlet {
 			} else if(cmd.equals("/listing.board")) {
 				// 게시판 출력 
 				String category = request.getParameter("category");
-				category = (category==null)?"arcade":category;
+				category = (category==null)?"rhythm":category;
+				System.out.println(category);
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null)?1:Integer.parseInt(cpage);
 				request.getSession().setAttribute("lastPageNum", currentPage);
@@ -51,16 +52,21 @@ public class BoardController extends HttpServlet {
 				
 				if(keyword == null || keyword.equals("")) {
 					// 검색 키워드가 넘어오지 않은 경우
-					if(category.equals("arcade")) {
-						list = dao.selectByCategory(category ,currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE, Constants.RECORD_COUNT_PER_PAGE);
-						request.setAttribute("recordTotalCount", dao.getRecordCount());
-					}
+					list = dao.selectByCategory(category ,currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE, Constants.RECORD_COUNT_PER_PAGE);
+					request.setAttribute("recordTotalCount", dao.getRecordCount());
+					
 					
 				}else {
 					// 검색 키워드가 넘어온 경우
 				}
 				
+				List<BoardDTO> notiList = new ArrayList<>();
+				notiList = dao.selectByNoti();
+				System.out.println(notiList.size());
+				
+				request.setAttribute("category", category);
 				request.setAttribute("type", "freeBoard");
+				request.setAttribute("notiList", notiList);
 				request.setAttribute("boardList", list);
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
@@ -73,8 +79,8 @@ public class BoardController extends HttpServlet {
 		}
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
