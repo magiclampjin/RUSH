@@ -212,24 +212,24 @@
 						<p id="title" class="fontEnglish">welcome back</p>
 						<p id="subTitle" class="fontEnglish colorDarkgray">Please enter your details.</p>
 					</div>
-					<form action="/login.member" onsubmit="return checkNull()" method="post">
-						<div class="idBox">
-							<p id="id" class="fontEnglish">ID</p>
-							<input type="text" id="inputId" class="fontEnglish" name="id" placeholder="Enter your ID">
-						</div>
-						<div class="pwBox">
-							<p id="pw" class="fontEnglish">Password</p>
-							<input type="password" id="inputPw" class="fontEnglish" name="pw" placeholder="********">
-						</div>
-						<div class="rem_fg">
-							<div class="rememberId">
-								<input type="checkbox" id="remID">
-								<p class="fontEnglish">Remember me</p>
-							</div>
-							<a href="#" id="find" class="fontEnglish colorBlue">Forgot ID or Password?</a>
-						</div>
-						<button id="login" class="fontEnglish colorWhite bColorBlue">Login</button>
-					</form>
+
+	                  <div class="idBox">
+	                     <p id="id" class="fontEnglish">ID</p>
+	                     <input type="text" id="inputId" class="fontEnglish" name="id" placeholder="Enter your ID">
+	                  </div>
+	                  <div class="pwBox">
+	                     <p id="pw" class="fontEnglish">Password</p>
+	                     <input type="password" id="inputPw" class="fontEnglish" name="pw" placeholder="********">
+	                  </div>
+	                  <div class="rem_fg">
+	                     <div class="rememberId">
+	                        <input type="checkbox" id="remID">
+	                        <p class="fontEnglish">Remember me</p>
+	                     </div>
+	                     <a href="#" id="find" class="fontEnglish colorBlue">Forgot ID or Password?</a>
+	                  </div>
+	                  <button id="login" class="fontEnglish colorWhite bColorBlue">Login</button>
+
 					<div class="signupBox">
 						<p id="signupText" class="fontEnglish">Don't have an account?</p>
 						<a href="/member/signup.jsp" id="signup" class="fontEnglish colorBlue">Signup</a>
@@ -315,7 +315,8 @@
 	});
 	
 	// 아이디 & 비밀번호 null값 확인
-	function checkNull() {
+	
+	$("#login").on("click", function(){
 		if($("#inputId").val() == "") {
 			alert("아이디를 입력하세요.");
 			$("#inputId").focus();
@@ -327,7 +328,26 @@
 			$("#inputPw").focus();
 			return false;
 		}
-	};
+		
+        let mId = $("#inputId").val();
+        let mPw = $("#inputPw").val();
+        
+        $.ajax({
+           type:"post",
+           url:"/login.member",
+           data: {
+              id: mId,
+              pw: mPw
+           },
+        }).done(function(login){
+           if(login =="failed"){
+              alert("아이디 또는 비밀번호가 틀렸습니다.");
+           }
+           else{
+              location.href="/index.jsp";
+           }
+       });
+	});
 	
 	
 	</script>

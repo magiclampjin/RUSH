@@ -81,11 +81,10 @@ public class MemberController extends HttpServlet {
 				boolean isAuthenticated = dao.selectByIdPw(id, pw);
 
 				if(isAuthenticated) { // 로그인에 성공하는 순간
-					request.getSession().setAttribute("loginID", id);
-					response.sendRedirect("/index.jsp");
-				} else {
-					response.sendRedirect("/member/login.jsp?login=failed");
-				}
+	               request.getSession().setAttribute("loginID", id);
+	            } else {
+	               response.getWriter().append("failed");
+	            }
 				
 			}
 			
