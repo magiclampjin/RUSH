@@ -26,22 +26,14 @@
             width: 300px;
             height: 200px;
         }
-        /* body{
-            background-color: #131217;
-        } */
-        #going_up{
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .gameContainer{
+            max-width: 1300px;
+            margin: auto;
         }
 </style>
 </head>
 <body>
-	<!-- 위에 메뉴는 나중에 붙히기 -->
-    <div class="container-fluid p-0 g-0">
+	<div class="container-fluid p-0 g-0">
         <div class="header bColorBlack">
             <div class="header_guide">
                 <a href="#">
@@ -101,157 +93,160 @@
                 </nav>
             </div>
         </div>
-    </div>
-    <div class="container bColorBlack">
-        <div class="row g-0">
-            <div class="col-2 d-flex justify-content-center">
-                <div class="row g-0">
-                    <div class="col-12 mt-5">
-                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                            <button type="button" class="btn btn-primary active">최신게임</button>
-                            <button type="button" class="btn btn-primary">인기게임</button>
-                            <button type="button" class="btn btn-primary">리듬게임</button>
-                            <button type="button" class="btn btn-primary">아케이드게임</button>
-                            <button type="button" class="btn btn-primary">퍼즐게임</button>
+    
+    <div class="container-fluid bColorBlack">
+        <div class="gameContainer">
+            <div class="row g-0">
+                <div class="col-2 d-flex justify-content-center">
+                    <div class="row g-0">
+                        <div class="col-12 mt-5">
+                            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                <button type="button" class="btn btn-primary active">최신게임</button>
+                                <button type="button" class="btn btn-primary">인기게임</button>
+                                <button type="button" class="btn btn-primary">리듬게임</button>
+                                <button type="button" class="btn btn-primary">아케이드게임</button>
+                                <button type="button" class="btn btn-primary">퍼즐게임</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-10">
-                <div class="row g-0 mt-4 mb-5">
-                    <p class="fs-2 text-white">최신게임</p>
-                    <!-- 나중에 jstl 적용? -->
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                <div class="col-10">
+                    <div class="row g-0 mt-4 mb-5">
+                        <p class="fs-2 text-white">최신게임</p>
+                        <!-- 나중에 jstl 적용? -->
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임1</p>
                         </div>
-                        <p>게임1</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임2</p>
                         </div>
-                        <p>게임2</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임3</p>
                         </div>
-                        <p>게임3</p>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center m-">
-                        <button type="button" class="btn btn-primary">더보기</button>
-                    </div>
-                </div>
-
-                <div class="row g-0 mb-5">
-                    <p class="fs-2 text-white">인기게임</p>
-                    <!-- 나중에 jstl 적용? -->
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-12 d-flex justify-content-center m-">
+                            <button type="button" class="btn btn-primary">더보기</button>
                         </div>
-                        <p>게임1</p>
                     </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+    
+                    <div class="row g-0 mb-5">
+                        <p class="fs-2 text-white">인기게임</p>
+                        <!-- 나중에 jstl 적용? -->
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임1</p>
                         </div>
-                        <p>게임2</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임2</p>
                         </div>
-                        <p>게임3</p>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center m-">
-                        <button type="button" class="btn btn-primary">더보기</button>
-                    </div>
-                </div>
-
-                <div class="row g-0 mb-5">
-                    <p class="fs-2 text-white">리듬게임</p>
-                    <!-- 나중에 jstl 적용? -->
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임3</p>
                         </div>
-                        <p>게임1</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-12 d-flex justify-content-center m-">
+                            <button type="button" class="btn btn-primary">더보기</button>
                         </div>
-                        <p>게임2</p>
                     </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+    
+                    <div class="row g-0 mb-5">
+                        <p class="fs-2 text-white">리듬게임</p>
+                        <!-- 나중에 jstl 적용? -->
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임1</p>
                         </div>
-                        <p>게임3</p>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center m-">
-                        <button type="button" class="btn btn-primary">더보기</button>
-                    </div>
-                </div>
-
-                <div class="row g-0 mb-5">
-                    <p class="fs-2 text-white">아케이드 게임</p>
-                    <!-- 나중에 jstl 적용? -->
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임2</p>
                         </div>
-                        <p>게임1</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임3</p>
                         </div>
-                        <p>게임2</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-12 d-flex justify-content-center m-">
+                            <button type="button" class="btn btn-primary">더보기</button>
                         </div>
-                        <p>게임3</p>
                     </div>
-                    <div class="col-12 d-flex justify-content-center m-">
-                        <button type="button" class="btn btn-primary">더보기</button>
-                    </div>
-                </div>
-
-                <div class="row g-0 mb-5">
-                    <p class="fs-2 text-white">퍼즐게임</p>
-                    <!-- 나중에 jstl 적용? -->
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+    
+                    <div class="row g-0 mb-5">
+                        <p class="fs-2 text-white">아케이드 게임</p>
+                        <!-- 나중에 jstl 적용? -->
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임1</p>
                         </div>
-                        <p>게임1</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임2</p>
                         </div>
-                        <p>게임2</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-6 col-xl-4">
-                        <div class="test">
-
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임3</p>
                         </div>
-                        <p>게임3</p>
+                        <div class="col-12 d-flex justify-content-center m-">
+                            <button type="button" class="btn btn-primary">더보기</button>
+                        </div>
                     </div>
-                    <div class="col-12 d-flex justify-content-center m-">
-                        <button type="button" class="btn btn-primary">더보기</button>
+    
+                    <div class="row g-0 mb-5">
+                        <p class="fs-2 text-white">퍼즐게임</p>
+                        <!-- 나중에 jstl 적용? -->
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임1</p>
+                        </div>
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임2</p>
+                        </div>
+                        <div class="col-xs-12 col-lg-6 col-xl-4">
+                            <div class="test">
+    
+                            </div>
+                            <p class="text-white">게임3</p>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center m-">
+                            <button type="button" class="btn btn-primary">더보기</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <button id="going_up">화살표</button>
     </div>
-    <div class="container-fluid">
+    
         <div class="footer bColorBlack">
             <div class="footer_guide">
                 <div class="footer_logo fontLogo colorWhite">RUSH</div>
