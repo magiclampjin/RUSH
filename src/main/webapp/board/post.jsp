@@ -284,8 +284,12 @@ a {
 									<button class="postBtnsMini bColorGreen" id="delete"><i class="fa-solid fa-trash-can"></i></button>
 									<button class="postBtnsMini bColorBlue colorWhite" id="goList"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
 								</div>
+								
+								<input type="hidden" id="cpage" value="${cpage}">
+								<input type="hidden" id="category" value="${category}">
+								
 							</div>
-						
+							
 						</div>
 					</div>
 					<div class="row g-0">
