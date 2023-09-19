@@ -172,36 +172,95 @@ label {
 				</nav>
 			</div>
 		</div>
-		<div class="container row g-0 p-0">
-			<form action="" method="post" enctype="multipart/form-data">
-
-				<div class="qna col-12">
-					<h2 class="fontEnglish">Q&A - 게시글 작성</h2>
+		
+		
+		<c:choose>
+			<c:when test="${menu == 'qna'}">
+				<div class="container row g-0 p-0">
+					<form action="/insert.qna" method="post" enctype="multipart/form-data">
+						<!-- 카테고리 숨겨놓음 -->
+						<input type="hidden" value="${category }" name="category">
+						<div class="qna col-12">
+							<h2 class="fontEnglish">Q&A - 게시글 작성</h2>
+						</div>
+						<div class="titleBox col-12">
+							<input class="inputTitle" type="text" name="title"
+								placeholder="제목을 입력하세요">
+						</div>
+						<div class="col-12 fileBox">
+							<button type="button" id="btnAdd">+</button>
+							<span>파일첨부</span>
+							<div id="fileContainer"></div>
+						</div>
+						<div class="col-12">
+							<textarea id="summernote" class="content" rows="35" cols="100"
+								placeholder="내용을 입력하세요." name="contents"></textarea>
+						</div>
+						<div class="row bottom">
+							<div class="col-11">
+								<input id="secret" class="screteChk" type="checkbox">
+								<input id="secret_hidden" class="screteChk" type="hidden" name="secret" value="false">
+								
+								<label for="secret" class="colorDarkgray">비밀글 설정하기</label>
+								
+							</div>
+							<script>
+								document.getElementById("secret").onchange = function(){
+									if($("#secret").is(":checked")){
+							        	$("#secret_hidden").val("true");
+							        	console.log($("#secret_hidden").val());
+							        }
+							        else{
+							        	$("#secret_hidden").val("false");
+							        	console.log($("#secret_hidden").val());
+							        }
+								};
+								/* $("#secret").("change",function(){
+							        if($("#secret").is(":checked")){
+							        	$("#secret").val("true");
+							        	console.log($("#secret").val());
+							        }
+							        else{
+							        	$("#secret").val("false");
+							        	console.log($("#secret").val());
+							        }
+							    }); */
+							</script>
+		
+							<input class="submitBtn col-1" type="submit" value="작성">
+						</div>
+					</form>
 				</div>
-				<div class="titleBox col-12">
-					<input class="inputTitle" type="text" name="title"
-						placeholder="제목을 입력하세요">
+			</c:when>
+			<c:otherwise>
+				<div class="container row g-0 p-0">
+					<form action="" method="post" enctype="multipart/form-data">
+		
+						<div class="qna col-12">
+							<h2 class="fontEnglish">자유게시글 작성</h2>
+						</div>
+						<div class="titleBox col-12">
+							<input class="inputTitle" type="text" name="title"
+								placeholder="제목을 입력하세요">
+						</div>
+						<div class="col-12 fileBox">
+							<button type="button" id="btnAdd">+</button>
+							<span>파일첨부</span>
+							<div id="fileContainer"></div>
+						</div>
+						<div class="col-12">
+							<textarea id="summernote" class="content" rows="35" cols="100"
+								placeholder="내용을 입력하세요." name="contents"></textarea>
+						</div>
+						<div class="row bottom">
+						<div class="col-11">
+						</div>
+							<input class="submitBtn col-1" type="submit" value="작성">
+						</div>
+					</form>
 				</div>
-				<div class="col-12 fileBox">
-					<button type="button" id="btnAdd">+</button>
-					<span>파일첨부</span>
-					<div id="fileContainer"></div>
-				</div>
-				<div class="col-12">
-					<textarea id="summernote" class="content" rows="35" cols="100"
-						placeholder="내용을 입력하세요." name="contents"></textarea>
-				</div>
-				<div class="row bottom">
-					<div class="col-11">
-						<input class="screteChk" type="checkbox" name="screte"
-							value="screteChk"><label class="colorDarkgray">비밀글
-							설정하기</label>
-					</div>
-
-					<input class="submitBtn col-1" type="submit" value="작성">
-				</div>
-			</form>
-		</div>
+			</c:otherwise>
+		</c:choose>
 		<div class="footer bColorBlack">
 			<div class="footer_guide">
 				<div class="footer_logo fontLogo colorWhite">RUSH</div>
