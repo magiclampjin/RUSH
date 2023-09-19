@@ -21,6 +21,12 @@ public class GameController extends HttpServlet {
 				String category = request.getParameter("category");
 				request.setAttribute("category", category);
 				request.getRequestDispatcher("/game/GamePage_Category.jsp").forward(request, response);
+			}else if(cmd.equals("/favorite.game")) {
+				String mID = request.getParameter("user"); //넘어오는 파라미터 이름은 추후 수정 가능.
+				String gameName = request.getParameter("gName");
+				//GameFavoriteDAO, GameFavoriteDTO 작성 해야함.
+				//ajax로 할듯?
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

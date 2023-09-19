@@ -169,7 +169,7 @@
 						<p class="text-white fontKorean">플레이 정보</p>
 					</div>
 					<div class="col-3">
-						<button type="button" class="btn btn-success fontEnglish">PLAY GAME</button>
+						<button type="button" class="btn btn-success fontEnglish fw900">PLAY GAME</button>
 					</div>
 				</div>
 			</div>
