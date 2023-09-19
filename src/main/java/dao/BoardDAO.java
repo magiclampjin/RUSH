@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +34,25 @@ public class BoardDAO {
 
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 
-	public BoardDTO selectPost(int postSeq) throws Exception { // post.jsp에서 게시글 출력할 떄 사용
-		String sql = "selete * from common_board where cbSeq = ?";
+	public void upViewCount(int postSeq) throws Exception {
+		String sql = "update common_board set cbview = cbview+1 where cbseq=?;";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(postSeq, 1);
+			pstat.setInt(1, postSeq);
+			pstat.executeUpdate();
+		}
+	}
+	
+	public BoardDTO selectPost(int postSeq) throws Exception { // post.jsp에서 게시글 출력할 떄 사용
+		this.upViewCount(postSeq);
+		
+		String sql = "select * from common_board where cbSeq = ?;";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, postSeq);
 			try (ResultSet rs = pstat.executeQuery();) {
 				rs.next();
 				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbNickname"),
-						rs.getString("Cetegory"), rs.getString("cbTitle"), rs.getString("cbContent"),
-						rs.getTimestamp("writeDate"), rs.getInt("view"), rs.getInt("recommend"));
+						rs.getString("cbCategory"), rs.getString("cbTitle"), rs.getString("cbContent"),
+						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"), rs.getInt("cbRecommend"));
 			}
 		}
 	}
