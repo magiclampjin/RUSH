@@ -1,0 +1,237 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;400;500;700;900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+.fontKorean {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:100vw;
+}
+
+
+.fsmdvw{
+    font-size:6vw;
+}
+
+.fsvw{
+    font-size:12vw;
+}
+
+.md-fontEnglish {
+    font-family: 'Jost', sans-serif;
+
+}
+
+.fw400 {
+    font-weight: 400;
+}
+
+.fw500 {
+    font-weight: 500;
+}
+
+.fw700 {
+    font-weight: 700;
+}
+
+.fw900 {
+    font-weight: 900;
+}
+
+.fs120 {
+    font-size: 115px;
+}
+
+.fs65{
+    font-size: 6vw;
+}
+
+.fs50{
+    font-size: 4.5vw;
+}
+
+.fs3{
+    font-size: 3vw;
+}
+
+.fs30{
+    font-size: 2vw;
+}
+
+.fs15{
+	font-size: 1.5vw;
+}
+
+.fs17{
+    font-size: 1.5vw;
+}
+
+.fs30px{
+	font-size: 30px;
+}
+
+
+
+.w700 {
+    width: 700px;
+}
+
+.w1300 {
+    width: 1300px;
+}
+
+.mt200{
+    margin-top: 200px;
+}
+
+.h80{
+    height: 80%;
+}
+.h20{
+    height: 20%;
+}
+
+.ptb50{
+    padding:30px 0px;
+}
+
+.ptb50{
+    padding:50px 0px;
+}
+
+.pb180{
+    padding-bottom: 180px;
+}
+
+
+.md-title{
+    padding:50px 20px 20px 40px;
+    margin-bottom: 200px;
+}
+
+.title{
+    padding:100px 40px 50px 40px;
+    margin-bottom: 200px;
+}
+
+
+
+.md-titleBtns{
+    padding: 15px 0px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 100px;
+    border: 0px;
+    width: 15vw;
+    height: 5vw;
+    margin-right: 20px;
+    font-size: 1.5vw;
+ 
+}
+
+.titleBtns{
+    padding: 15px 0px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 100px;
+    border: 0px;
+    width: 30vw;
+    height: 10vw;
+    margin-right: 20px;
+    font-size: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameBtns{
+    padding: 15px 0px;
+    border-radius: 10px;
+    border: 0px;
+    width: 18vw;
+    height: 4vw;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameBtnsmini{
+    padding: 15px 0px;
+    border-radius: 10px;
+    border: 0px;
+    width: 30vw;
+    height: 7vw;
+    font-size: 2.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameImg{
+    border: 20px solid #CCF42300;
+    width:100%;
+    height: 100%;
+}
+.gameImg:hover{
+    border: 20px solid #CCF423;
+}
+
+.gameImgmini{
+    border: 10px solid #CCF42300;
+    width:100%;
+    height: 100%;
+}
+
+.gameImgmini:hover{
+    border: 10px solid #CCF423;
+}
+
+.bookmarkImg{
+    height: 100%;
+    width: 100%;
+}
+
+.sexRatios{
+	justify-content:space-between;
+}
+
+.sexRatio{
+    border-radius: 10px;
+    padding: 19px 27px;
+}
+
+.bookmarkBtns{
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 0px;
+    width: 15vw;
+    height: 4vw;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookmarkBtnsmini{
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 0px;
+    width: 15vw;
+    height: 8vw;
+    font-size: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.borderLeft1{
+    border-left:2px solid #111111;
+}
+
+.borderRight1{
+    border-right:2px solid #111111;
+}
