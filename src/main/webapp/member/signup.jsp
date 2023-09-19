@@ -7,119 +7,195 @@
 <title>SignUp</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link href="/css/main.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+     * {
+        box-sizing: border-box;
+		margin: 0px;
+		padding: 0px;
+		text-decoration: none;
+		list-style: none;
+     }
 
-        p {
-            margin-bottom: 0;
-        }
+     p {
+         margin-bottom: 0;
+     }
+     
+     a {
+		text-decoration: none;
+	}
 
-        #container {
-            width: 522px;
-            margin: auto;
-        }
+     #container {
+         width: 522px;
+         margin: auto;
+     }
 
-        #title {
-            font-size: 60px;
-            text-align: center;
-        }
+     #title {
+     	margin-top: 50px;
+         font-size: 55px;
+         text-align: center;
+     }
 
-        #account, #info, #agreement {
-            margin-top: 50px;
-        }
+     #account, #info, #agreement {
+         margin-top: 50px;
+     }
 
-        .subTitle {
-            margin-bottom: 10px;
-            font-size: 20px;
-            font-weight: 300;
-        }
+     .subTitle {
+         margin-bottom: 10px;
+         font-size: 20px;
+         font-weight: 300;
+     }
 
-        .box {
-            display: flex;
-            border: 1px solid;
-            border-radius: 10px;
-            height: 40px;
-            margin-bottom: 10px;
-        }
+     .box {
+         display: flex;
+         border: 1px solid;
+         border-radius: 10px;
+         height: 40px;
+         margin-bottom: 10px;
+     }
 
-        .agreeBox {
-            border: 1px solid;
-            border-radius: 10px;
-            width: 100%;
-            height: 200px;
-            margin-bottom: 10px;
-            outline: none;
-        }
+     .agreeBox {
+         border: 1px solid;
+         border-radius: 10px;
+         width: 100%;
+         height: 200px;
+         margin-bottom: 10px;
+         outline: none;
+     }
 
-        .birth {
-            display: flex;
-        }
+     .birth {
+         display: flex;
+     }
 
-        .birthBox {
-            width: 48%;
-            display: flex;
-            border: 1px solid;
-            border-radius: 10px;
-            height: 40px;
-            margin-bottom: 10px;
-        }
+     .birthBox {
+         width: 48%;
+         display: flex;
+         border: 1px solid;
+         border-radius: 10px;
+         height: 40px;
+         margin-bottom: 10px;
+     }
 
-        #hyphen {
-            min-width: 4%;
-            margin-top: 7px;
-            text-align: center;
-        }
+     #hyphen {
+         min-width: 4%;
+         margin-top: 7px;
+         text-align: center;
+     }
 
-        #sex::placeholder {
-            padding: 0 10px;
-        }
+     #sex::placeholder {
+         padding: 0 10px;
+     }
 
-        .icon {
-            display: flex;
-            align-items: center;
-            font-size: 20px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
+     .icon {
+         display: flex;
+         align-items: center;
+         font-size: 20px;
+         margin-left: 10px;
+         margin-right: 10px;
+     }
 
-        .input {
-            width: 100%;
-            border: none;
-            border-radius: 10px;
-            outline: none;
-        }
+     .input {
+         width: 100%;
+         border: none;
+         border-radius: 10px;
+         outline: none;
+     }
 
-        .check {
-            display: flex;
-        }
+     .check {
+         display: flex;
+     }
 
-        #checkbox {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
+     #checkbox {
+         width: 20px;
+         height: 20px;
+         margin-right: 10px;
+     }
 
-        #agreeText {
-            font-size: 15px;
-        }
+     #agreeText {
+         font-size: 15px;
+     }
 
-        #signup {
-            border: none;
-            border-radius: 10px;
-            width: 100%;
-            height: 40px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
+     #signup {
+         border: none;
+         border-radius: 10px;
+         width: 100%;
+         height: 40px;
+         margin-top: 40px;
+         margin-bottom: 50px;
+     }
 
-    </style>
+</style>
 </head>
 <body>
+	<div class="container-fluid p-0">
+        <div class="header bColorBlack">
+            <div class="header_guide">
+                <a href="#">
+                    <div class="logo fontLogo colorWhite">RUSH</div>
+                </a>
+                <nav class="navbar navbar-expand navbar-light colorWhite">
+                    <div class="container-fluid p-0">
+                        <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
+                            <ul class="navbar-nav row g-0 w-100">
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        GAME
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        AWARDS
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        BOARD
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown col-3 text-end">
+                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        LOGIN
+                                    </a>
+                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
     <div id="container">
         <div id="signupBox">
             <div id="title" class="fontEnglish">
@@ -182,6 +258,45 @@
 	            <button id="signup" class="fontEnglish colorWhite bColorBlue">Signup</button>
 	        </div>
         </form>
+    </div>
+    
+    <div class="footer bColorBlack">
+            <div class="footer_guide">
+                <div class="footer_logo fontLogo colorWhite">RUSH</div>
+                <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
+                <div class="footer_contents">
+                    <div class="about conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+                        <div class="footer_con ">
+                            <div class="con colorWhite">팀명 :
+                            </div>
+                            <div class="encon colorWhite"> SKY</div>
+                        </div>
+                    </div>
+                    <div class="office conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">OFFICE</div>
+                        <div class="footer_con">
+                            <div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
+                        </div>
+                    </div>
+                    <div class="contact conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+                        <div class="footer_con fontEnglish">
+                            <div class="con fontEnglish colorWhite">a@naver.com</div>
+                            <div class="con fontEnglish colorWhite">01012345678</div>
+                        </div>
+                    </div>
+                    <div class="provision conDiv fontEnglish">
+                        <div class="footer_title fontEnglish colorWhite">PROVISION</div>
+                        <div class="footer_con">
+                            <div class="con colorWhite">개인정보 처리방침</div>
+                            <div class="con colorWhite">서비스 이용약관</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 
