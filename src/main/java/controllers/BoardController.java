@@ -25,6 +25,7 @@ public class BoardController extends HttpServlet {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
 
+				
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,
 				// 게시글 번호를 가져와야함.
@@ -73,6 +74,8 @@ public class BoardController extends HttpServlet {
 
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = dao.selectByNoti();
+				
+				request.setAttribute("cpage", cpage);
 
 				request.setAttribute("category", category);
 				request.setAttribute("type", "freeBoard");
