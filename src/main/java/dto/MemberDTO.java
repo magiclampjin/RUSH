@@ -17,6 +17,19 @@ public class MemberDTO {
 	private boolean agreement; //개인정보동의 여부
 	
 	public MemberDTO() {}
+	
+	public MemberDTO(String id, String pw, String idNumber, String name, String email, String nickName, String phone, boolean agreement) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.idNumber = idNumber;
+		this.name = name;
+		this.email = email;
+		this.nickName = nickName;
+		this.phone = phone;
+		this.agreement = agreement;
+	}
+	
 	public MemberDTO(String id, int level, String pw, String idNumber, String name, String email, String nickName,
 			String phone, int point, Timestamp signupDate, int warningCount, boolean agreement) {
 		super();

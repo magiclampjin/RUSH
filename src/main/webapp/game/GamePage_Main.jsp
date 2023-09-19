@@ -14,11 +14,18 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="stylesheet" href="/css/game/game.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <style>
 * {
 	box-sizing: border-box;
+}
+
+a{
+	text-decoration: none;
 }
 
 div {
@@ -34,6 +41,7 @@ div {
 	background-color: white;
 	width: 300px;
 	height: 200px;
+	border-radius : 3%;
 }
 
 .gameContainer {
@@ -117,40 +125,30 @@ div {
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack active">
-										<span class="fontKorean">최신게임</span>
-									</button>
-									<button type="button" class="btn btn-dark bColorBlack">
-										<span class="fontKorean">인기게임</span>
-									</button>
-									<button type="button" class="btn btn-dark bColorBlack">
-										<span class="fontKorean">리듬게임</span>
-									</button>
-									<button type="button" class="btn btn-dark bColorBlack">
-										<span class="fontKorean">아케이드게임</span>
-									</button>
-									<button type="button" class="btn btn-dark bColorBlack">
-										<span class="fontKorean">퍼즐게임</span>
-									</button>
+									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="fav"><span class="fontKorean text-white">인기게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-10">
-						<div class="row g-0 mt-4 mb-5 p-3">
+						<div class="row g-0 mt-4 mb-5">
 							<p class="fs-2 text-white fontKorean">최신게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임1</p>
+								<a href="/moveToGamePage.game"><div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임1</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임2</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임2</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임3</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">
@@ -163,16 +161,16 @@ div {
 							<p class="fs-2 text-white fontKorean">인기게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임1</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임1</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임2</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임2</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임3</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">
@@ -185,16 +183,16 @@ div {
 							<p class="fs-2 text-white fontKorean">리듬게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임1</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임1</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임2</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임2</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임3</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">
@@ -207,16 +205,16 @@ div {
 							<p class="fs-2 text-white fontKorean">아케이드 게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임1</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임1</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임2</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임2</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임3</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">
@@ -229,16 +227,16 @@ div {
 							<p class="fs-2 text-white fontKorean">퍼즐게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임1</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임1</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임2</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임2</p>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test"></div>
-								<p class="text-white">게임3</p>
+								<div class="test ml45 mr45"></div>
+								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">
@@ -291,9 +289,17 @@ div {
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	$("#new").on("click",function(){
+		let category = $("#new").children("span").text();
+		console.log(category);
+		/* location.href = "/moveToCategory?category="; */
+	})
+	
+	</script>
 </body>
 </html>
