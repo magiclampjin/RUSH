@@ -99,16 +99,17 @@ public class BoardDAO {
 		}
 	}
 
-	public int getRecordCount() throws Exception {
-		String sql = "select count(*) as count from common_board";
+	public int getRecordCount(String category) throws Exception {
+		String sql = "select count(*) as count from board_reply_count where cbCategory= ?";
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();) {
-
-			if (rs.next()) {
-				return rs.getInt("count");
-			} else {
-				return 0;
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, category);
+			try(ResultSet rs = pstat.executeQuery()){
+				if (rs.next()) {
+					return rs.getInt("count");
+				} else {
+					return 0;
+				}
 			}
 		}
 	}

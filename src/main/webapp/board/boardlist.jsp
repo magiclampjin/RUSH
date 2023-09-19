@@ -152,7 +152,7 @@ a {
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 									</div>
 									<div class="writer">${noti.nickName }</div>
-									<div class="date fontEnglish">${noti.stringFormat }</div>
+									<div class="date">${noti.stringFormat }</div>
 									<div class="view fontEnglish">${noti.view }</div>
 									<div class="recommend fontEnglish">${noti.recommend }</div>
 									<div class="file">
@@ -171,7 +171,7 @@ a {
 										</div>
 										<div class="info">
 											<div class="minWriter colorDarkgray">${noti.nickName }</div>
-											<div class="minDate fontEnglish colorDarkgray">${noti.stringFormat }</div>
+											<div class="minDate colorDarkgray">${noti.stringFormat }</div>
 											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${noti.view }</div>
 											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${noti.recommend }</div>
 											<div class="minFile">
@@ -191,7 +191,7 @@ a {
 										<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 									</div>
 									<div class="writer">${post.nickName }</div>
-									<div class="date fontEnglish">${post.stringFormat }</div>
+									<div class="date">${post.stringFormat }</div>
 									<div class="view fontEnglish">${post.view }</div>
 									<div class="recommend fontEnglish">${post.recommend }</div>
 									<div class="file">
@@ -210,7 +210,7 @@ a {
 										</div>
 										<div class="info">
 											<div class="minWriter colorDarkgray">${post.nickName }</div>
-											<div class="minDate fontEnglish colorDarkgray">${post.stringFormat }</div>
+											<div class="minDate colorDarkgray">${post.stringFormat }</div>
 											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${post.view }</div>
 											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }</div>
 											<div class="minFile">

@@ -66,7 +66,7 @@ public class BoardController extends HttpServlet {
 					list = dao.selectByCategory(category,
 							currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 							Constants.RECORD_COUNT_PER_PAGE);
-					request.setAttribute("recordTotalCount", dao.getRecordCount());
+					request.setAttribute("recordTotalCount", dao.getRecordCount(category));
 
 				} else {
 					// 검색 키워드가 넘어온 경우

@@ -27,8 +27,9 @@ $(document).ready(function() {
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
-		
+		console.log(pageTotalCount)
 		console.log(startNavi)
+		console.log(endNavi)
 
 		let needPrev = true;
 		let needNext = true;
@@ -46,50 +47,47 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-left";
-			aTag.href = "/listBoard.board?cpage=1" + "&category="+category+"&keyword=${keyword }";
+			aTag.href = "/listing.board?" + "category="+category+"&cpage=1";
 			aTag.appendChild(iTag);
-			console.log(aTag)
-			console.log("durl")
-			pagination.appendChild(aTag);
+			pagination.append($(aTag));
 		}
 
 		if (needPrev) {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-left";
-			aTag.href = "/listing.board?cpage=" + (startNavi - 1);
+			aTag.href = "/listing.board?category="+category+"&cpage=" + (startNavi - 1);
 			aTag.appendChild(iTag);
-			pagination.appendChild(aTag);
+			pagination.append($(aTag));
 		}
 
 		for (let i = startNavi; i <= endNavi; i++) {
 			let aTag = document.createElement('a');
 			aTag.textContent = i;
-			aTag.href = "/listBoard.board?cpage=" + i + "&category=${category }&keyword=${keyword }";
-			aTag.style.backgroundColor = "white"
+			aTag.className += "colorBlack fontEnglish";
+			aTag.href = "/listing.board?category="+category+"&cpage=" + i;
 			if (i == currentPage) {
-				aTag.style.backgroundColor = "#670FDF";
-				aTag.style.color = "white"
+				aTag.className = "colorWhite bColorBlue fontEnglish"
 			}
-			//pagination.appendChild(aTag);
+			pagination.append($(aTag));
 		}
 
 		if (needNext) {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-right";
-			aTag.href = "/listBoard.board?cpage=" + (endNavi + 1);
+			aTag.href = "/listing.board?category="+category+"&cpage=" + (endNavi + 1);
 			aTag.appendChild(iTag);
-			//pagination.appendChild(aTag);
+			pagination.append($(aTag));
 		}
 
 		if (endNavi != pageTotalCount) {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-right";
-			aTag.href = "/listBoard.board?cpage=" + pageTotalCount + "&category=${category }&keyword=${keyword }";
+			aTag.href = "/listing.board?category="+category+"&cpage="+pageTotalCount;
 			aTag.appendChild(iTag);
-			//pagination.appendChild(aTag);
+			pagination.append($(aTag));
 		}
 	}
 })
