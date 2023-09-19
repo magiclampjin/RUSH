@@ -16,6 +16,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 	* {
 		box-sizing: border-box;
@@ -135,6 +136,10 @@
 </head>
 
 <body>
+
+
+	
+	
 	<div class="container-fluid p-0">
         <div class="header bColorBlack">
             <div class="header_guide">
@@ -322,7 +327,8 @@
 			$("#inputPw").focus();
 			return false;
 		}
-	}
+	};
+	
 	
 	</script>
 </body>

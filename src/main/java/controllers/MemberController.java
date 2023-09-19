@@ -76,15 +76,17 @@ public class MemberController extends HttpServlet {
 			} else if(cmd.equals("/login.member")) {
 				// 회원 로그인
 				String id = request.getParameter("id");
-				String pw = request.getParameter("pw");
+				String pw = EncryptionUtils.getSHA512(request.getParameter("pw"));
 				
 				boolean isAuthenticated = dao.selectByIdPw(id, pw);
-				
-				if(isAuthenticated) { // 로그인에 성공하는 순간
-					request.getSession().setAttribute("loginID", id); // session scope
-				}	
 
-				response.sendRedirect("/index.jsp");
+				if(isAuthenticated) { // 로그인에 성공하는 순간
+					request.getSession().setAttribute("loginID", id);
+					response.sendRedirect("/index.jsp");
+				} else {
+					response.sendRedirect("/member/login.jsp?login=failed");
+				}
+				
 			}
 			
 		}catch(Exception e) {

@@ -231,7 +231,7 @@
 	                </div>
 	                <div class="box" id="birthDiv">
                         <i class="fa-solid fa-address-card icon"></i>
-                        <input type="text" id="birth" name="birth" class="input" placeholder="생년월일 + 뒷자리 1자" maxlength="7">
+                        <input type="text" id="birth" name="birth" class="input fontEnglish" placeholder="생년월일 + 뒷자리 1자" maxlength="7">
 	                </div>
 	                <div>
 	                <div class="box" id="contactDiv">
