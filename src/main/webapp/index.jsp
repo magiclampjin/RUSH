@@ -165,8 +165,8 @@ a {
 									data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item" href="/board/boardlist.jsp?menu=free">자유게시판</a></li>
-										<li><a class="dropdown-item fontEnglish" href="/board/boardlist.jsp?menu=qna">Q&A</a></li>
+										<li><a class="dropdown-item" href="/listing.board">자유게시판</a></li>
+										<li><a class="dropdown-item fontEnglish" href="/listing.qna">Q&A</a></li>
 										<li><a class="dropdown-item" href="#">명예의 전당</a></li>
 									</ul></li>
 								<li class="nav-item dropdown col-3 text-end"><a
