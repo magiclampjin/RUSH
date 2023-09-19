@@ -37,7 +37,7 @@ public class BoardController extends HttpServlet {
 				int postSeq = 18;
 				BoardDTO post = dao.selectPost(postSeq);
 				request.setAttribute("post", post);
-//				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
+				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/update.board")) {
 				// 게시글 수정

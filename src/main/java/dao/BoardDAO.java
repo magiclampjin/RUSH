@@ -34,14 +34,14 @@ public class BoardDAO {
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 
 	public BoardDTO selectPost(int postSeq) throws Exception { // post.jsp에서 게시글 출력할 떄 사용
-		String sql = "selete * from common_board where cbSeq = ?";
+		String sql = "select * from common_board where cbSeq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(postSeq, 1);
+			pstat.setInt(1, postSeq);
 			try (ResultSet rs = pstat.executeQuery();) {
 				rs.next();
 				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbNickname"),
-						rs.getString("Cetegory"), rs.getString("cbTitle"), rs.getString("cbContent"),
-						rs.getTimestamp("writeDate"), rs.getInt("view"), rs.getInt("recommend"));
+						rs.getString("cbCategory"), rs.getString("cbTitle"), rs.getString("cbContent"),
+						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"), rs.getInt("cbRecommend"));
 			}
 		}
 	}

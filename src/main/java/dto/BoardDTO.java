@@ -126,7 +126,7 @@ public class BoardDTO {
 		this.replyCount = replyCount;
 	}
 	
-	public String getStringFormat() {
+	public String timeCal(String where) {
 		long currentTime = System.currentTimeMillis();
 		long writeTime = this.writeDate.getTime();
 		long gapTime = currentTime - writeTime;
@@ -138,11 +138,25 @@ public class BoardDTO {
 		} else if (gapTime < 60000 * 60 * 24) {
 			long hour = gapTime / 60000 / 60;
 			long min = ((gapTime / 60000) % 60);
-			return hour + "시간 " + min + "분";
+			return "약 "+hour + "시간 전";
 		} else {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = null;
+			if(where.equals("board")) {
+				sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+			}else if(where.equals("post")) {
+				sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+			}
 			return sdf.format(writeTime);
 		}
+	}
+	
+	public String getStringFormat() {
+		return this.timeCal("board");
+	}
+	
+	public String getFormedDate() { //post.jsp 용 
+		return this.timeCal("post");
 	}
 	
 }
