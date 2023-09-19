@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/board/freeboard.css">
+<link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/boardMainPagination.js"></script>
 
