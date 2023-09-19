@@ -291,7 +291,7 @@ div {
 	<script>
 	
 	$("#new").on("click",function(){
-		let category = $("#new").children()
+		let category = $("#new").children("span").text();
 		console.log(category);
 		/* location.href = "/moveToCategory?category="; */
 	})
