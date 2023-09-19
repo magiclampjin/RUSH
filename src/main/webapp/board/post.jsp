@@ -179,6 +179,31 @@ a {
 	white-space: nowrap;
 }
 
+.topBtns{
+	height:50px;
+	display:flex;
+	justify-content: end;
+	align-items:center;
+	
+}
+
+.topBtns button{
+	padding:5px 10px;
+	border:3px solid black;
+	background-color:#FFFFFF00;
+	margin-left:10px;
+	border-radius:5px;
+}
+
+.topBtns button:hover{
+	background-color:#5d6ce1;
+	color:white;
+	border:3px solid #5d6ce1;	
+}
+
+.topBtns button:hover i{
+	color:white;
+}
 
 </style>
 </head>
@@ -254,7 +279,12 @@ a {
 		<div class="body">
 			<div class="body_guide">
 				<div class="row g-0 mb80">
-					<div class="col-12 common fontEnglish fw700 fs40 mt80 mb50">자유게시판</div>
+					<div class="col-12 common fontEnglish fw700 fs40 mt80">자유게시판</div>
+					<div class="col-12 topBtns">
+						<button><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+						<button><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+						
+					</div> 
 					<div class="col-12">
 						<div class="row g-0 post">
 							<div class="col-12 postTop">
@@ -309,6 +339,21 @@ a {
 
 						<div class="col-12">
 							<div class="row g-0 replys mb200">
+							
+								<script>
+									$.ajax({
+										url:"/load.reply",
+										data:{
+											postSeq = ${seq}
+										},
+										dataType:"json",
+										type:"post"
+									}).done(function(resp){
+									
+									});
+								</script>
+							
+							
 								<div class="col-12 reply">
 									<div class="row g-0">
 										<div class="col-10">
@@ -347,7 +392,7 @@ a {
 									<div class="row g-0">
 										<div
 											class="col-1 d-flex justify-content-center align-items-center">
-											<i class="fa-solid fa-l fa-xl"></i>
+											<i class="fa-solid fa-arrow-turn-up fa-rotate-90 fa-xl"></i>
 										</div>
 										<div class="col-11">
 											<div class="d-flex align-items-end mb10">

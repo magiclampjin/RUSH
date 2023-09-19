@@ -18,7 +18,8 @@ public class ReplyController extends HttpServlet {
 				// 댓글
 				
 			} else if(cmd.equals("/load.reply")) {
-				// 댓글 출력
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				
 				
 			} else if(cmd.equals("/update.reply")) {
 				// 댓글 수정
