@@ -25,17 +25,18 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border-left: 1px solid;
-  border-right: 1px solid;
-  border-top: 1px solid;
+  /* border: 1px solid; */
 }
-.boardNav_li:first-child {
+.boardNav_body a:first-child > .boardNav_li {
+  border: 1px solid;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-.boardNav_li:last-child {
+.boardNav_body a:last-child > .boardNav_li {
   border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -271,6 +272,12 @@ ul.tabs a.current {
   }
   .post .minBoard > .minCon > .info > div:not(:first-child) {
     margin-left: 20px;
+  }
+  .post .minBoard > .minCon > .info > .minWriter {
+    width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .search_write {
