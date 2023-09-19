@@ -175,41 +175,44 @@
         </div>
     </a>
     <div class="footer bColorBlack">
-        <div class="footer_guide">
-            <div class="footer_logo fontLogo colorWhite">RUSH</div>
-            <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
-            <div class="footer_contents">
-                <div class="about conDiv fontEnglish colorWhite">
-                    <div class="footer_title fontEnglish">ABOUT US</div>
-                    <div class="footer_con ">
-                        <div class="con">팀명 :
-                        </div>
-                        <div class="encon"> SKY</div>
-                    </div>
-                </div>
-                <div class="office conDiv fontEnglish colorWhite">
-                    <div class="footer_title fontEnglish">OFFICE</div>
-                    <div class="footer_con">
-                        <div class="con">충청남도 천안시 서북구<br> 천안대로 1223-24</div>
-                    </div>
-                </div>
-                <div class="contact conDiv fontEnglish colorWhite">
-                    <div class="footer_title fontEnglish">CONTACT US</div>
-                    <div class="footer_con fontEnglish">
-                        <div class="con fontEnglish">a@naver.com</div>
-                        <div class="con fontEnglish">01012345678</div>
-                    </div>
-                </div>
-                <div class="provision conDiv fontEnglish colorWhite">
-                    <div class="footer_title fontEnglish">PROVISION</div>
-                    <div class="footer_con">
-                        <div class="con">개인정보 처리방침</div>
-                        <div class="con">서비스 이용약관</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <div class="footer bColorBlack">
+			<div class="footer_guide">
+				<div class="footer_logo fontLogo colorWhite">RUSH</div>
+				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+					RIGHT RESERVED</div>
+				<div class="footer_contents">
+					<div class="about conDiv fontEnglish colorWhite">
+						<div class="footer_title fontEnglish">ABOUT US</div>
+						<div class="footer_con ">
+							<div class="con">팀명 :</div>
+							<div class="encon">SKY</div>
+						</div>
+					</div>
+					<div class="office conDiv fontEnglish colorWhite">
+						<div class="footer_title fontEnglish">OFFICE</div>
+						<div class="footer_con">
+							<div class="con">
+								충청남도 천안시 서북구<br> 천안대로 1223-24
+							</div>
+						</div>
+					</div>
+					<div class="contact conDiv fontEnglish colorWhite">
+						<div class="footer_title fontEnglish">CONTACT US</div>
+						<div class="footer_con fontEnglish">
+							<div class="con fontEnglish">a@naver.com</div>
+							<div class="con fontEnglish">01012345678</div>
+						</div>
+					</div>
+					<div class="provision conDiv fontEnglish colorWhite">
+						<div class="footer_title fontEnglish">PROVISION</div>
+						<div class="footer_con">
+							<div class="con">개인정보 처리방침</div>
+							<div class="con">서비스 이용약관</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
     <button id="going_up">화살표</button>
     <script>
