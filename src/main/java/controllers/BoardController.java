@@ -24,7 +24,7 @@ public class BoardController extends HttpServlet {
 		try {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
-
+				
 				
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,

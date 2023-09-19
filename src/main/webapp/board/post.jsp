@@ -205,6 +205,13 @@ a {
 	color:white;
 }
 
+.replyUpdate,
+.replyDelete {
+	display:flex;
+	justify-content: center;
+    align-items: center;
+}
+
 </style>
 </head>
 
@@ -291,7 +298,7 @@ a {
 								<div class="col-12 fw400 fs35 mb15" id="postTitle">${post.title}
 								</div>
 								<div class="col-12 fontEnglish fw400 fs25 mb10 pl15"
-									id="postWriter">${post.writer}</div>
+									id="postWriter">${post.nickName}</div>
 								<div class="col-12 fw400 fs20 colorDarkgray pl15"
 									id="postDetailInfo">${post.formedDate }&nbsp;&nbsp;&nbsp;조회
 									${post.view}</div>
@@ -325,16 +332,13 @@ a {
 					<div class="row g-0">
 						<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
 						<div class="col-12 mb30">
-							<form action="" method="post" id="frm">
-								<div class="row g-0 replyInput">
-									<div class="col-10 col-lg-11" id="replyInsertTxt"
-										contenteditable></div>
-									<textarea id="replyTxt"></textarea>
-									<div class="col-2 col-lg-1 btnCover">
-										<button class="fw400 fs25 colorDarkgray replyInsertBtn">등록</button>
-									</div>
+							<div class="row g-0 replyInput">
+								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable></div>
+								<input type="hidden" id="postSeq" value="${post.seq}">
+								<div class="col-2 col-lg-1 btnCover">
+									<button class="fw400 fs25 colorDarkgray replyInsertBtn" id="replyInsertBtn">등록</button>
 								</div>
-							</form>
+							</div>		
 						</div>
 
 						<div class="col-12">
@@ -350,40 +354,46 @@ a {
 										type:"post"
 									}).done(function(resp){
 										let postWriter = "${post.writer}";
-										let loginId = "${loginID}";
+										let loginID = "${loginID}";
 										let replys = $("#replys");
 										for(let i=0; i<resp.length; i++){
-											console.log(resp[i].contents);
-											let replyTag = #("<div>").attr("class", "");
+											
+											let replyTag = $("<div>").attr("class", "col-12 reply");
+											let row = $("<div>").attr("class","row g-0");
+											let col10 = $("<div>").attr("class","col-10");
+											let writerCover = $("<div>").attr("class","d-flex align-items-end mb10").append($("<div>").attr("class","writer fw500 fs20").html(resp[i].nickName));
+											if(resp[i].writer == postWriter){
+												let isWriterTag = $("<div>").attr("class","isWriter colorWhite bColorBlue fw400 fs15").html("작성자");
+												writerCover.append(isWriterTag);
+											}
+											let contents = $("<div>").attr("class","contents fw400 fs20 mb10").html(resp[i].contents);
+											let detailInfo = $("<div>").attr("class","replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate+"&nbsp;&nbsp;");
+											let nestedReplyBtn = $("<a>").attr("href","#").attr("class","nestedReplyBtn colorDarkgray").html("답글 쓰기");
+											detailInfo.append(nestedReplyBtn);
+											
+											row.append(col10.append(writerCover).append(contents).append(detailInfo));
+											if(resp[i].writer == loginID){
+												let replyBtns = $("<div>").attr("class","col-2 d-none d-md-flex replyBtns");
+												let updateBtn = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("수정");
+												let deleteBtn = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("삭제");
+												replyBtns.append(updateBtn).append(deleteBtn);
+												
+												let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns");
+												let updateBtnMini = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("<i class='fa-solid fa-pen-to-square'></i>");
+												let deleteBtnMini = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+												replyBtnsMini.append(updateBtnMini).append(deleteBtnMini);
+												
+												row.append(replyBtns).append(replyBtnsMini);
+											}
+											
+											replys.append(replyTag.append(row));
+											
 										}
 									});
 								</script>
 							
-							
-								<div class="col-12 reply">
-									<div class="row g-0">
-										<div class="col-10">
-											<div class="d-flex align-items-end mb10">
-												<div class="writer fw500 fs20">writer01</div>
-												<div class="isWriter colorWhite bColorBlue fw400 fs15">작성자</div>
-											</div>
-											<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
-											<div class="replyDetailInfo fw400 fs15 colorDarkgray">
-												2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
-													class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
-											</div>
-										</div>
-										<div class="col-2 d-none d-md-flex replyBtns">
-											<button class="replyUpdate bColorGreen fw400 fs17">수정</button>
-											<button class="replyDelete bColorGreen fw400 fs17">삭제</button>
-										</div>
-										<div class="col-2 d-md-none replyBtns">
-											<button class="replyUpdate bColorGreen fw400 fs17"><i class="fa-solid fa-pen-to-square"></i></button>
-											<button class="replyDelete bColorGreen fw400 fs17"><i class="fa-solid fa-trash-can"></i></button>
-										</div>
-									</div>
-
-								</div>
+					
+								
 								<div class="col-12 reply">
 									<div class="d-flex align-items-end mb10">
 										<div class="writer fw500 fs20">writer01</div>

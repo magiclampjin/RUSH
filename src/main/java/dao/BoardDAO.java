@@ -50,8 +50,8 @@ public class BoardDAO {
 			pstat.setInt(1, postSeq);
 			try (ResultSet rs = pstat.executeQuery();) {
 				rs.next();
-				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbNickname"),
-						rs.getString("cbCategory"), rs.getString("cbTitle"), rs.getString("cbContent"),
+				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbCategory"),
+						rs.getString("cbNickname"), rs.getString("cbTitle"), rs.getString("cbContent"),
 						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"), rs.getInt("cbRecommend"));
 			}
 		}

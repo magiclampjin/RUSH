@@ -35,13 +35,20 @@ public class ReplyController extends HttpServlet {
 		
 		try {
 			if(cmd.equals("/insert.reply")) {
-				// 댓글 작성
+				// 댓글 작성							
+				String contents = request.getParameter("contents");
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				String writer = (String) request.getSession().getAttribute("loginID");
+				
+				dao.insert(new ReplyDTO(0, writer, postSeq, null, contents, null, 0));
+				
 				
 			} else if(cmd.equals("/load.reply")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				List<ReplyDTO> replys = dao.selectAll(postSeq);
 				Gson gson = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
-					private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+					private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
+					private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
 					public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
 						long currentTime = System.currentTimeMillis();
 						long writeTime = arg0.getTime();
@@ -56,7 +63,7 @@ public class ReplyController extends HttpServlet {
 							long min = ((gapTime / 60000) % 60);
 							return new JsonPrimitive("약 "+hour + "시간 전");
 						} else {
-							return new JsonPrimitive(sdf.format(arg0));
+							return new JsonPrimitive(sdfDay.format(arg0)+"&nbsp;&nbsp;"+sdfTime.format(arg0));
 						}					
 					}
 				}).create();
