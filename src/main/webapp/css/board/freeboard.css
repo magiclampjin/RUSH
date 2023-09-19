@@ -169,7 +169,7 @@ ul.tabs a.current {
 .bFile {
   font-size: 20px;
 }
-.pagination {
+#pagination {
   display: flex;
   justify-content: center;
   margin-top: 40px;
@@ -178,6 +178,7 @@ ul.tabs a.current {
 .search_write {
   display: flex;
   margin-top: 40px;
+  margin-botton: 100px;
 }
 .search {
   width: 70%;
