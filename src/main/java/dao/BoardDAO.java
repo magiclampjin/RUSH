@@ -14,8 +14,11 @@ import javax.sql.DataSource;
 import dto.BoardDTO;
 
 public class BoardDAO {
-	private BoardDAO() {}
+	private BoardDAO() {
+	}
+
 	private static BoardDAO instance;
+
 	public static BoardDAO getInstance() {
 		if (instance == null)
 			instance = new BoardDAO();
@@ -27,15 +30,29 @@ public class BoardDAO {
 		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mysql");
 		return ds.getConnection();
 	}
-	
+
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
+
+	public BoardDTO selectPost(int postSeq) throws Exception { // post.jsp에서 게시글 출력할 떄 사용
+		String sql = "selete * from common_board where cbSeq = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(postSeq, 1);
+			try (ResultSet rs = pstat.executeQuery();) {
+				rs.next();
+				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbNickname"),
+						rs.getString("Cetegory"), rs.getString("cbTitle"), rs.getString("cbContent"),
+						rs.getTimestamp("writeDate"), rs.getInt("view"), rs.getInt("recommend"));
+			}
+		}
+	}
+
 	// 공지 게시글 불러오기
-	public List<BoardDTO> selectByNoti() throws Exception{
-		String sql ="select * from board_reply_count where cbCategory = \"notice\" order by cbSeq desc;";
+	public List<BoardDTO> selectByNoti() throws Exception {
+		String sql = "select * from board_reply_count where cbCategory = \"notice\" order by cbSeq desc;";
 		List<BoardDTO> list = new ArrayList<>();
-		try(Connection con = this.getConnection();
+		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();){
+				ResultSet rs = pstat.executeQuery();) {
 			while (rs.next()) {
 				int cbSeq = rs.getInt("cbSeq");
 				String cbID = rs.getString("cbID");
@@ -47,14 +64,15 @@ public class BoardDAO {
 				String cbCategory = rs.getString("cbCategory");
 				int cbRecommend = rs.getInt("cbRecommend");
 				int replyCount = rs.getInt("replyCount");
-				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView, cbRecommend, replyCount));
+				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
+						cbRecommend, replyCount));
 			}
 			return list;
 		}
 	}
-	
+
 	// 카테고리에 해당하는 모든 게시물 불러오기
-	public List<BoardDTO> selectByCategory(String category, int start, int count) throws Exception{
+	public List<BoardDTO> selectByCategory(String category, int start, int count) throws Exception {
 		String sql = "select *  from board_reply_count where cbCategory = ? order by cbSeq desc limit ?, ?;";
 		List<BoardDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -73,14 +91,15 @@ public class BoardDAO {
 					String cbCategory = rs.getString("cbCategory");
 					int cbRecommend = rs.getInt("cbRecommend");
 					int replyCount = rs.getInt("replyCount");
-					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView, cbRecommend, replyCount));
+					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
+							cbRecommend, replyCount));
 				}
 				return list;
 			}
 		}
 	}
-	
-	public int getRecordCount() throws Exception{
+
+	public int getRecordCount() throws Exception {
 		String sql = "select count(*) as count from common_board";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);

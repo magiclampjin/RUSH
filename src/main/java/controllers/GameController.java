@@ -15,7 +15,13 @@ public class GameController extends HttpServlet {
 		System.out.println("game cmd: "+cmd);
 		
 		try {
-			
+			if(cmd.equals("/moveToGamePage.game")) {
+				request.getRequestDispatcher("/game/GamePage_Play.jsp").forward(request, response);
+			}else if(cmd.equals("/moveToCategory.game")) {
+				String category = request.getParameter("category");
+				request.setAttribute("category", category);
+				request.getRequestDispatcher("/game/GamePage_Category.jsp").forward(request, response);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/error.html");

@@ -134,6 +134,7 @@ a {
 						<div class="writer">작성자</div>
 						<div class="date">작성일</div>
 						<div class="view">조회</div>
+						<div class="recommend">추천</div>
 						<div class="file">파일</div>
 					</div>
 					<div class="boardMain">
@@ -152,6 +153,7 @@ a {
 									<div class="writer">${noti.nickName }</div>
 									<div class="date fontEnglish">${noti.stringFormat }</div>
 									<div class="view fontEnglish">${noti.view }</div>
+									<div class="recommend fontEnglish">${noti.recommend }</div>
 									<div class="file">
 										<i class="fa-solid fa-paperclip"></i>
 									</div>
@@ -170,6 +172,7 @@ a {
 											<div class="minWriter">${noti.nickName }</div>
 											<div class="minDate fontEnglish">${noti.stringFormat }</div>
 											<div class="minView fontEnglish">${noti.view }</div>
+											<div class="minRecommend fontEnglish">추천</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
@@ -234,13 +237,13 @@ a {
 									<input type="text">
 								</div>
 								<div class="sertchBtn">
-									<input type="submit" class="boardBtn" value="검색">
+									<input type="submit" class="boardBtn bColorGreen" value="검색">
 								</div>
 							</form>
 
 						</div>
 						<div class="write">
-							<input type="button" value="글쓰기" class="boardBtn">
+							<input type="button" value="글쓰기" class="boardBtn bColorGreen">
 						</div>
 					</div>
 				</div>
