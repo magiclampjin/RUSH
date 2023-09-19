@@ -140,9 +140,9 @@
 	                    <i class="fa-solid fa-check icon"></i>
 	                    <input type="password" id="pw2" class="input fontEnglish" placeholder="Confirm Password">
 	                </div>
-	                <div class="box">
+	                <div class="box" id="nicknameDiv">
 	                    <i class="fa-solid fa-paperclip icon"></i>
-	                    <input type="text" id="nickname" name="nickname" class="input fontEnglish" placeholder="Nickname">
+	                    <input type="text" id="nickname" name="nickname" class="input fontEnglish" placeholder="Nickname" maxlength="10">
 	                </div>
 	                <div id="checkAccount"></div>
 	            </div>
@@ -186,7 +186,7 @@
 </body>
 
 <script>
-	let isRegex = false; // 정규식
+	let flag = false; // 조건 확인
 
 	// 아이디
 	let regexId = /^[\w]{8,14}$/; // 8~14자로 구성, 알파벳 대소문자, 숫자, _로만 구성
@@ -199,11 +199,36 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-            isRegex = false;
+            flag = false;
         } else {
         	$("#idDiv").css("border", "1px solid forestgreen");
         	$("#checkAccount").html("");
-        	isRegex = true;
+        	flag = true;
+        	
+        	$.ajax({
+        		url:"/idCheck.member",
+        		data: {
+        			id : $("#id").val()
+        		}
+        	}).done(function(resp){      			
+      			if(resp == "used") {
+      				$("#checkAccount").html("이미 사용 중인 아이디입니다.");
+      	            $("#checkAccount").css({
+      	            	"color" : "red",
+      	            	"font-size" : "13px"
+      	            });
+      	          $("#idDiv").css("border", "1px solid red");
+      	          flag = false;
+      			} else if(resp == "usable"){
+      				$("#checkAccount").html("사용 가능한 아이디입니다.");
+      				$("#checkAccount").css({
+      	            	"color" : "forestgreen",
+      	            	"font-size" : "13px"
+      	            });
+      				$("#idDiv").css("border", "1px solid forestgreen");
+      				flag = true;
+      			}
+        	});
         }
 	});
 
@@ -218,11 +243,11 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-	        isRegex = false;
+	        flag = false;
 	    } else {
 	    	$("#pwDiv").css("border", "1px solid forestgreen");
 	    	$("#checkAccount").html("");
-	    	isRegex = true;
+	    	flag = true;
 	    }
 	});
 	
@@ -236,12 +261,40 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-			isRegex = false;
+			flag = false;
 		} else {
 			$("#pw2Div").css("border", "1px solid forestgreen");
 			$("#checkAccount").html("");
-			isRegex = true;
+			flag = true;
 		}
+	});
+	
+	// 닉네임
+	$("#nickname").on("keyup", function(){
+		$.ajax({
+    		url:"/nicknameCheck.member",
+    		data: {
+    			nickname : $("#nickname").val()
+    		}
+    	}).done(function(resp){      			
+  			if(resp == "used") {
+  				$("#checkAccount").html("이미 사용 중인 닉네임입니다.");
+  	            $("#checkAccount").css({
+  	            	"color" : "red",
+  	            	"font-size" : "13px"
+  	            });
+  	            $("#nicknameDiv").css("border", "1px solid red");
+  	            flag = false;
+  			} else if(resp == "usable"){
+  				$("#checkAccount").html("사용 가능한 닉네임입니다.");
+  				$("#checkAccount").css({
+  	            	"color" : "forestgreen",
+  	            	"font-size" : "13px"
+  	            });
+  				$("#nicknameDiv").css("border", "1px solid forestgreen");
+  				flag = true;
+  			}
+    	});
 	});
 	
 	// 이름
@@ -255,11 +308,11 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-	        isRegex = false;
+	        flag = false;
     	} else {
     		$("#nameDiv").css("border", "1px solid forestgreen");
 	    	$("#checkInfo").html("");
-	    	isRegex = true;
+	    	flag = true;
     	}
     });
     
@@ -274,11 +327,11 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-	        isRegex = false;
+	        flag = false;
     	} else {
     		$("#birthDiv").css("border", "1px solid forestgreen");
 	    	$("#checkInfo").html("");
-	    	isRegex = true;
+	    	flag = true;
     	}
     });
     
@@ -293,11 +346,11 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-	        isRegex = false;
+	        flag = false;
 		} else {
 			$("#contactDiv").css("border", "1px solid forestgreen");
 	    	$("#checkInfo").html("");
-	    	isRegex = true;
+	    	flag = true;
 		}
 	});
 	
@@ -312,14 +365,15 @@
             	"color" : "red",
             	"font-size" : "13px"
             });
-	        isRegex = false;
+	        flag = false;
 		} else {
 			$("#emailDiv").css("border", "1px solid forestgreen");
 	    	$("#checkInfo").html("");
-	    	isRegex = true;
+	    	flag = true;
 		}
 	});
 	
+	// null값 체크
 	function checkNull() {
 		if($("#id").val() == "") {
 			alert("아이디를 입력하세요.");
@@ -356,12 +410,13 @@
 			return false;
 		}
 		
-		if($("#checkbox").is(":checked") == false) {
-			alert("개인정보 수집 및 활용에 동의를 눌러주세요.");
-			return false;
+		if($("#checkbox").is(":checked") == true) {
+			$("#checkbox").val("true");
+		} else {
+			$("#checkbox").val("false");
 		}
 		
-		return isRegex;
+		return flag;
 	}
 
 </script>
