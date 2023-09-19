@@ -28,6 +28,11 @@ public class BoardController extends HttpServlet {
 				
 			} else if(cmd.equals("/load.board")) {
 				// 게시글 출력
+				String cpage = request.getParameter("cpage");
+				int currentPage = (cpage == null)?1:Integer.parseInt(cpage);
+				request.getSession().setAttribute("lastPageNum", currentPage);
+				
+				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 				
 			} else if(cmd.equals("/update.board")) {
 				// 게시글 수정
@@ -64,6 +69,7 @@ public class BoardController extends HttpServlet {
 				notiList = dao.selectByNoti();
 				System.out.println(notiList.size());
 				
+				request.setAttribute("cpage", cpage);
 				request.setAttribute("category", category);
 				request.setAttribute("type", "freeBoard");
 				request.setAttribute("notiList", notiList);

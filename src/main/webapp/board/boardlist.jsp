@@ -145,7 +145,8 @@ a {
 										<div class="loud">
 											<i class="fa-solid fa-bullhorn"></i>
 										</div>
-										<div class="mainTitle">${noti.title }</div>
+										<a href="/load.board?cpage=${cpage }&seq=${noti.seq }"><div class="mainTitle">${noti.title }</div></a>
+										
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 									</div>
 									<div class="writer">${noti.nickName }</div>
@@ -162,7 +163,7 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<div class="mainTitle">${noti.title }</div>
+											<a href="/load.board?cpage=${cpage }&seq=${noti.seq }"><div class="mainTitle">${noti.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 										</div>
 										<div class="info">
@@ -182,7 +183,7 @@ a {
 								<div class="maxBoard">
 									<div class="num fontEnglish">${post.seq }</div>
 									<div class="title">
-										<div class="mainTitle">${post.title }</div>
+										<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div class="mainTitle">${post.title }</div></a>
 										<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 									</div>
 									<div class="writer">${post.nickName }</div>
@@ -199,13 +200,13 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
-											<div class="replyCnt colorPink fontEnglish">3</div>
+											<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div class="mainTitle">${post.title }</div></a>
+											<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 										</div>
 										<div class="info">
-											<div class="minWriter">작성자</div>
-											<div class="minDate fontEnglish">2023-09-16</div>
-											<div class="minView fontEnglish">조회</div>
+											<div class="minWriter">${post.nickName }</div>
+											<div class="minDate fontEnglish">${post.stringFormat }</div>
+											<div class="minView fontEnglish">${noti.view }</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
