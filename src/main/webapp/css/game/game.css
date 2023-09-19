@@ -72,7 +72,22 @@
 	font-size: 30px;
 }
 
+/* GamePage css  */
 
+.ml45{
+	margin-left : 45px;
+}
+.mr45{
+	margin-right : 45px;
+}
+
+.mxWidth{
+	max-width: 300px;
+}
+.mxConWidth{
+	max-width: 1300px;
+}
+/* GamePage css  */
 
 .w700 {
     width: 700px;
