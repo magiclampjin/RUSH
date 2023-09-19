@@ -143,6 +143,14 @@ a {
 	height: 50px;
 }
 
+.postBtnsMini {
+	margin: 10px 0px 0px 10px;
+	border: 0px;
+	border-radius: 10px;
+	width: 50px;
+	height: 50px;
+}
+
 .reply, .nestedReply {
 	border: 1px solid #7d7d7d;
 	padding: 15px 0px 0px 15px;
@@ -262,13 +270,22 @@ a {
 							</div>
 						</div>
 						<div class="row g-0 postBottom mb40">
-							<div class="col-3 fw400 fs20 mt10">첨부 파일</div>
-							<div class="col-4 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
-							<div class="col-5 d-flex justify-content-end fw400 fs20">
-								<button class="postBtns bColorGreen" id="update">수정</button>
-								<button class="postBtns bColorGreen" id="delete">삭제</button>
-								<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
+							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
+							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
+								<div class="d-none d-md-flex">
+									<button class="postBtns bColorGreen" id="update">수정</button>
+									<button class="postBtns bColorGreen" id="delete">삭제</button>
+									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
+								</div>
+								
+								<div class="d-md-none">
+									<button class="postBtnsMini bColorGreen" id="update"><i class="fa-solid fa-pen-to-square"></i></button>
+									<button class="postBtnsMini bColorGreen" id="delete"><i class="fa-solid fa-trash-can"></i></button>
+									<button class="postBtnsMini bColorBlue colorWhite" id="goList">목록</button>
+								</div>
 							</div>
+						
 						</div>
 					</div>
 					<div class="row g-0">
@@ -301,9 +318,13 @@ a {
 													class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
 											</div>
 										</div>
-										<div class="col-2 replyBtns">
+										<div class="col-2 d-none d-md-flex replyBtns">
 											<button class="replyUpdate bColorGreen fw400 fs17">수정</button>
 											<button class="replyDelete bColorGreen fw400 fs17">삭제</button>
+										</div>
+										<div class="col-2 d-md-none replyBtns">
+											<button class="replyUpdate bColorGreen fw400 fs17"><i class="fa-solid fa-pen-to-square"></i></button>
+											<button class="replyDelete bColorGreen fw400 fs17"><i class="fa-solid fa-trash-can"></i></button>
 										</div>
 									</div>
 
