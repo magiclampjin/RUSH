@@ -112,8 +112,8 @@ a {
 			<div class="board_guide">
 				<div class="boardNav">
 					<div class="boardNav_body">
-						<div class="boardNav_li bColorGreen">자유게시판</div>
-						<div class="boardNav_li fontEnglish">Q&A</div>
+						<a href="/listing.board?cpage=1"><div class="boardNav_li bColorGreen">자유게시판</div></a>
+						<a href="/listing.qna?cpage=1"><div class="boardNav_li fontEnglish">Q&A</div></a>
 					</div>
 				</div>
 				<div class="boardCont">
@@ -146,7 +146,7 @@ a {
 										<div class="loud">
 											<i class="fa-solid fa-bullhorn"></i>
 										</div>
-										<a href="/load.board?cpage=${cpage }&seq=${noti.seq }"><div class="mainTitle">${noti.title }</div></a>
+										<a href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div class="mainTitle">${noti.title }</div></a>
 										
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 									</div>
@@ -165,14 +165,14 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<a href="/load.board?cpage=${cpage }&seq=${noti.seq }"><div class="mainTitle">${noti.title }</div></a>
+											<a href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&category=${category }"><div class="mainTitle">${noti.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 										</div>
 										<div class="info">
-											<div class="minWriter">${noti.nickName }</div>
-											<div class="minDate fontEnglish">${noti.stringFormat }</div>
-											<div class="minView fontEnglish">${noti.view }</div>
-											<div class="minRecommend fontEnglish">추천</div>
+											<div class="minWriter colorDarkgray">${noti.nickName }</div>
+											<div class="minDate fontEnglish colorDarkgray">${noti.stringFormat }</div>
+											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${noti.view }</div>
+											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${noti.recommend }</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
@@ -186,18 +186,19 @@ a {
 								<div class="maxBoard">
 									<div class="num fontEnglish">${post.seq }</div>
 									<div class="title">
-										<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div class="mainTitle">${post.title }</div></a>
+										<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div class="mainTitle">${post.title }</div></a>
 										<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 									</div>
 									<div class="writer">${post.nickName }</div>
 									<div class="date fontEnglish">${post.stringFormat }</div>
 									<div class="view fontEnglish">${noti.view }</div>
+									<div class="recommend fontEnglish">${noti.recommend }</div>
 									<div class="file">
 										<i class="fa-solid fa-paperclip"></i>
 									</div>
 								</div>
 								<div class="minBoard">
-									<div class="num fontEnglish">1</div>
+									<div class="num fontEnglish">${post.seq }</div>
 									<div class="minCon">
 										<div class="title">
 											<div class="loud">
@@ -207,9 +208,10 @@ a {
 											<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 										</div>
 										<div class="info">
-											<div class="minWriter">${post.nickName }</div>
-											<div class="minDate fontEnglish">${post.stringFormat }</div>
-											<div class="minView fontEnglish">${noti.view }</div>
+											<div class="minWriter colorDarkgray">${post.nickName }</div>
+											<div class="minDate fontEnglish colorDarkgray">${post.stringFormat }</div>
+											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${post.view }</div>
+											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
