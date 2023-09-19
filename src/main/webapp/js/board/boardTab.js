@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	let category = $("#category").val();
-	console.log(category)
 	$("ul.tabs a").removeClass("current");
 	let page = $("ul.tabs a")
 
