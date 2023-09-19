@@ -212,6 +212,16 @@ a {
     align-items: center;
 }
 
+.recommendBtn{
+	border: 3px solid white;
+    width: 140px;
+    height: 50px;
+    border-radius: 10px;
+    display:flex;
+	justify-content: center;
+    align-items: center;
+}
+
 </style>
 </head>
 
@@ -372,8 +382,8 @@ a {
 											detailInfo.append(nestedReplyBtn);
 											
 											row.append(col10.append(writerCover).append(contents).append(detailInfo));
+											let replyBtns = $("<div>").attr("class","col-2 d-none d-md-flex replyBtns");
 											if(resp[i].writer == loginID){
-												let replyBtns = $("<div>").attr("class","col-2 d-none d-md-flex replyBtns");
 												let updateBtn = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("수정");
 												let deleteBtn = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("삭제");
 												replyBtns.append(updateBtn).append(deleteBtn);
@@ -384,6 +394,9 @@ a {
 												replyBtnsMini.append(updateBtnMini).append(deleteBtnMini);
 												
 												row.append(replyBtns).append(replyBtnsMini);
+											}else{
+												let recommendBtn = $("<div>").attr("class","col-2 bColorBlue colorWhite fw400 fs17 recommendBtn").html("<i class='fa-regular fa-thumbs-up' style='color:white'></i>"+"&nbsp;&nbsp;추천");
+												row.append(replyBtns.append(recommendBtn));
 											}
 											
 											replys.append(replyTag.append(row));
