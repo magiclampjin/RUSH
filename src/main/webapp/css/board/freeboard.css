@@ -97,22 +97,25 @@ ul.tabs a.current {
 }
 
 .num {
-  width: 10%;
+  width: 8%;
 }
 .title {
-  width: 40%;
+  width: 44%;
 }
 .writer {
-  width: 15%;
+  width: 12%;
 }
 .date {
-  width: 15%;
+  width: 12%;
 }
 .view {
-  width: 10%;
+  width: 8%;
+}
+.recommend {
+  width: 8%;
 }
 .file {
-  width: 10%;
+  width: 8%;
 }
 
 .boardMain {
@@ -207,7 +210,6 @@ ul.tabs a.current {
 
 /* board Btn */
 .boardBtn {
-  background-color: #ccf423;
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
@@ -225,6 +227,9 @@ ul.tabs a.current {
     display: none;
   }
   .boardHeader > .view {
+    display: none;
+  }
+  .boardHeader > .recommend {
     display: none;
   }
   .boardHeader > .file {
