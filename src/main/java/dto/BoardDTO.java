@@ -138,6 +138,7 @@ public class BoardDTO {
 		} else if (gapTime < 60000 * 60 * 24) {
 			long hour = gapTime / 60000 / 60;
 			long min = ((gapTime / 60000) % 60);
+
 			return "약 "+hour + "시간 전";
 		} else {
 			SimpleDateFormat sdf = null;
