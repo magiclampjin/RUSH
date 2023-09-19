@@ -338,18 +338,24 @@ a {
 						</div>
 
 						<div class="col-12">
-							<div class="row g-0 replys mb200">
+							<div class="row g-0 replys mb200" id="replys">
 							
 								<script>
 									$.ajax({
 										url:"/load.reply",
 										data:{
-											postSeq = ${seq}
+											postSeq : "${post.seq}"
 										},
 										dataType:"json",
 										type:"post"
 									}).done(function(resp){
-									
+										let postWriter = "${post.writer}";
+										let loginId = "${loginID}";
+										let replys = $("#replys");
+										for(let i=0; i<resp.length; i++){
+											console.log(resp[i].contents);
+											let replyTag = #("<div>").attr("class", "");
+										}
 									});
 								</script>
 							

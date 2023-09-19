@@ -1,6 +1,9 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -26,8 +29,17 @@ public class ReplyDAO {
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 	
-	public List<ReplyDTO> selectAll(int postSeq){
+	public List<ReplyDTO> selectAll(int postSeq) throws Exception{
 		String sql = "select * from reply where cbSeq = ?;";
-		return null;
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, postSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replys = new ArrayList<>();
+				while(rs.next()) {
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend")));
+				}
+				return replys;
+			}
+		}
 	}
 }
