@@ -61,8 +61,16 @@
     font-size: 2vw;
 }
 
+.fs15{
+	font-size: 1.5vw;
+}
+
 .fs17{
     font-size: 1.5vw;
+}
+
+.fs30px{
+	font-size: 30px;
 }
 
 
