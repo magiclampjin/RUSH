@@ -38,7 +38,7 @@ public class MemberController extends HttpServlet {
 				boolean agreement = Boolean.parseBoolean(request.getParameter("agree"));
 				
 				dao.insert(new MemberDTO(id, pw, idNumber, name, email, nickName, phone, agreement));
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/member/login.jsp");
 				
 			} else if(cmd.equals("/idCheck.member")) {
 				// 아이디 중복 체크
@@ -85,6 +85,11 @@ public class MemberController extends HttpServlet {
 	            } else {
 	               response.getWriter().append("failed");
 	            }
+				
+			} else if(cmd.equals("/logout.member")) {
+				// 회원 로그아웃
+				request.getSession().invalidate();
+				response.sendRedirect("/member/login.jsp");
 				
 			}
 			
