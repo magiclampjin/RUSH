@@ -194,7 +194,7 @@ ul.tabs a.current {
 .search_write {
   display: flex;
   margin-top: 40px;
-  margin-botton: 100px;
+  margin-bottom: 100px;
 }
 .search {
   width: 70%;
@@ -234,6 +234,11 @@ ul.tabs a.current {
 }
 
 @media (max-width: 786px) {
+	.boardTitle {
+    font-size: 30px;
+    margin-left: 0px;
+}
+	
   ul.boardTabs li {
     font-size: 15px;
     padding: 15px 0;
