@@ -17,6 +17,7 @@ public class GameController extends HttpServlet {
 		try {
 			if(cmd.equals("/moveToGamePage.game")) {
 				request.getRequestDispatcher("/game/GamePage_Play.jsp").forward(request, response);
+				
 			}else if(cmd.equals("/moveToCategory.game")) {
 				String category = request.getParameter("category");
 				request.setAttribute("category", category);
@@ -27,6 +28,8 @@ public class GameController extends HttpServlet {
 				//GameFavoriteDAO, GameFavoriteDTO 작성 해야함.
 				//ajax로 할듯?
 				
+			}else if(cmd.equals("/moveToBestGame.game")) {
+				request.getRequestDispatcher("/GamePage_BestGame?").forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
