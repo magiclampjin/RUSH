@@ -140,3 +140,31 @@
 .replyBtnsMini div div{
 	width:35px;
 }
+
+.nestedReply{
+	display:flex;
+	justify-content:end;
+	border:1px solid #7d7d7d;
+	height: 150px;
+}
+
+#nestedReplyInput:focus{
+	outline:none;
+}
+#nestedReplyInput{
+	overflow-y: auto;
+	height: 150px;
+}
+
+.mininested{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+}
+
+.mininested button {
+	border:0px;
+	background-color:#FFFFFF00;
+}
+
+
