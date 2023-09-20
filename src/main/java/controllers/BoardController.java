@@ -1,13 +1,18 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
@@ -24,7 +29,20 @@ public class BoardController extends HttpServlet {
 		try {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
+				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
+				String title = request.getParameter("title");
 				
+				String uploadPath = request.getServletContext().getRealPath("files");
+				File filepath = new File(uploadPath);
+				System.out.println(("File 생성"));
+				if(!filepath.exists()) {
+					filepath.mkdir();
+				}
+				
+				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8", new DefaultFileRenamePolicy());
+				System.out.println("여기1");
+				String content = multi.getParameter("content");
+				String id = (String) request.getSession().getAttribute("loginID");
 				
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,
@@ -86,7 +104,15 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("boardList", list);
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
-				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
+				request.getRequestDispatcher("/board/boardList.jsp").forward(request, response);
+			}else if(cmd.equals("/write.board")) {
+				String menu = request.getParameter("menu");
+				System.out.println(menu);
+				String category = request.getParameter("category");
+				System.out.println(category);
+				request.setAttribute("menu", menu);
+				request.setAttribute("category", category);
+				request.getRequestDispatcher("/board/boardWrite.jsp").forward(request, response);
 			}
 
 		} catch (Exception e) {
