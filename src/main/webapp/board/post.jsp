@@ -198,17 +198,17 @@ a {
 	border-radius: 5px;
 }
 
-.topBtns button:hover {
+.topBtns button:hover, .recommendBtn:hover {
 	background-color: #5d6ce1;
 	color: white;
 	border: 3px solid #5d6ce1;
 }
 
-.topBtns button:hover i {
+.topBtns button:hover i, .recommendBtn:hover i {
 	color: white;
 }
 
-.topBtns .btnClicked {
+.topBtns .btnClicked, .replyBtns .btnClicked {
 	background-color: #5d6ce1;
 	color: white;
 	border: 3px solid #5d6ce1;
@@ -236,14 +236,7 @@ a {
 	margin: 1px;
 }
 
-.recommendBtn:hover {
-	background-color: #5d6ce1;
-	color: white;
-}
 
-.recommendBtn:hover i {
-	color: white;
-}
 </style>
 </head>
 
@@ -369,22 +362,38 @@ a {
 						</div>
 						<div class="row g-0 postBottom mb40">
 							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
-							<div
-								class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">
+								<c:choose>
+									<c:when test="${files.size() > 0}">
+										<c:forEach var="i" items="${files}">
+											<a href="/download.file?sysname=${i.systemName}&oriname=${i.originName}">${i.originName}</a><br>
+										</c:forEach>
+									</c:when>
+									<c:otherwise><span class="colorBlack">없음</span></c:otherwise>
+								</c:choose>	
+							</div>
 							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
 								<div class="d-none d-md-flex">
-									<button class="postBtns bColorGreen" id="update">수정</button>
-									<button class="postBtns bColorGreen" id="delete">삭제</button>
+									<c:choose>
+										<c:when test="${ loginID eq post.writer}">
+											<button class="postBtns bColorGreen" id="update">수정</button>
+											<button class="postBtns bColorGreen" id="delete">삭제</button>
+										</c:when>
+									</c:choose>
 									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
 								</div>
 
 								<div class="d-md-none">
-									<button class="postBtnsMini bColorGreen" id="update">
-										<i class="fa-solid fa-pen-to-square"></i>
-									</button>
-									<button class="postBtnsMini bColorGreen" id="delete">
-										<i class="fa-solid fa-trash-can"></i>
-									</button>
+									<c:choose>
+										<c:when test="${ loginID eq post.writer}">
+											<button class="postBtnsMini bColorGreen" id="update">
+												<i class="fa-solid fa-pen-to-square"></i>
+											</button>
+											<button class="postBtnsMini bColorGreen" id="delete">
+												<i class="fa-solid fa-trash-can"></i>
+											</button>
+										</c:when>
+									</c:choose>
 									<button class="postBtnsMini bColorBlue colorWhite" id="goList">
 										<i class="fa-solid fa-bars" style="color: #ffffff;"></i>
 									</button>

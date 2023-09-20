@@ -44,7 +44,7 @@ $(document).ready(function() {
 					replyBtns.append(btncoverforupdate.append(save).append(cancel));
 					
 					let btncovermini = $("<div>").attr("class","defaultCover");
-					let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns");
+					let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns replyBtnsMini");
 					let updateBtnMini = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("<i class='fa-solid fa-pen-to-square'></i>");
 					let deleteBtnMini = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
 					replyBtnsMini.append(btncovermini.append(updateBtnMini).append(deleteBtnMini));
@@ -54,14 +54,19 @@ $(document).ready(function() {
 					let saveMini = $("<div>").attr("class","replySave bColorGreen fw400 fs17").html("<i class='fa-solid fa-check'></i>");
 					replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 					
-					let replyId = $("<input>").attr("type","hidden").val(resp[i].seq).attr("id","replyId");
-					row.append(replyBtns).append(replyBtnsMini).append(replyId);
+					row.append(replyBtns).append(replyBtnsMini);
 				}else{
 					replyBtns = $("<div>").attr("class","col-2 replyBtns");
 					let recommendBtn = $("<div>").attr("class","col-2 fw400 fs15 recommendBtn").attr("id","replyRec").html("<i class='fa-regular fa-thumbs-up'></i>"+"&nbsp;추천");
+					
+					if(resp[i].recId !== undefined){
+						recommendBtn.addClass("btnClicked");
+					}
 					row.append(replyBtns.append(recommendBtn));
 				}
 				
+				let replyId = $("<input>").attr("type","hidden").val(resp[i].seq).attr("id","replyId");
+				row.append(replyId);
 				replys.append(replyTag.append(row));	
 			}
 		});
@@ -277,5 +282,49 @@ $(document).ready(function() {
 			replyBackup = null;
 			replyObj = null;
 		});
+	});
+	
+	
+	
+	// 댓글 좋아요 버튼 
+	$(document).on("click",".recommendBtn",function(){
+		let recbtn = $(this);
+		
+		if($(this).hasClass("btnClicked")===true){ //delete
+			$.ajax({
+				url:"/deleteReplyRecommend.reply",
+				data:{
+					replySeq : $(this).parent().siblings("#replyId").val()
+				},
+				type:"post",
+				dataType:"json"
+			}).done(function(success){
+				if(success == 1)
+					recbtn.removeClass("btnClicked");
+				else{
+					alert("삭제된 댓글입니다.");
+					replyReload(postSeq);
+				}
+			});
+			
+				
+		}else{ //insert
+			$.ajax({
+				url:"/insertReplyRecommend.reply",
+				data:{
+					replySeq : $(this).parent().siblings("#replyId").val()
+				},
+				type:"post",
+				dataType:"json"
+			}).done(function(success){
+				if(success == 1)
+					recbtn.addClass("btnClicked");
+				else{
+					alert("삭제된 댓글입니다.");
+					replyReload(postSeq);
+				}
+			});
+		
+		}
 	});
 });
