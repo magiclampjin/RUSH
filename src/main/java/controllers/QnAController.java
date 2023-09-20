@@ -2,7 +2,9 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import constants.Constants;
 import dao.FileDAO;
 import dao.QNABoardDAO;
+import dto.BoardDTO;
 import dto.FileDTO;
 import dto.QNABoardDTO;
  
@@ -88,6 +92,45 @@ public class QnAController extends HttpServlet {
 				
 			} else if(cmd.equals("/listing.qna")) {
 				// 게시판 출력 
+				String cpage = request.getParameter("cpage");
+				int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
+				request.getSession().setAttribute("lastPageNum", currentPage);
+				
+				List<QNABoardDTO> list = new ArrayList<>();
+				
+				// 검색한 키워드
+				String keyword = request.getParameter("keyword");
+				String searchBy = request.getParameter("searchBy");
+				
+				if(keyword==null) { // 찾는 값 없음
+					System.out.println("찾는 값: "+keyword);
+					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE));
+					request.getSession().setAttribute("latestPageNum", currentPage);
+					
+					request.setAttribute("list", list);
+					request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCount());
+					
+				}
+//				else {
+//					if(searchBy.equals("title")) {
+//						System.out.println("찾는 값: "+keyword);
+//						list = QNABoardDAO.getInstance().selectBy(currentPage, currentPage, keyword);
+//						request.getSession().setAttribute("latestPageNum", currentPage);
+//						
+//						request.setAttribute("list", list);
+//						request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCountTitle(keyword));
+//					
+//						request.setAttribute("keyword", keyword);
+//					
+//					}else if(searchBy.equals("writer")){
+//						
+//					}else if(searchBy.equals("content")){
+//						
+//					}
+//				}
+				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+				request.getRequestDispatcher("/qna/qnaList.jsp").forward(request, response);
 				
 			}else if(cmd.equals("/write.qna")) {
 				// q&a에서 글쓰기 누를때
