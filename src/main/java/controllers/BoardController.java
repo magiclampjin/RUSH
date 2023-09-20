@@ -27,6 +27,9 @@ import dto.FileDTO;
 public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
+		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
+		
 		String cmd = request.getRequestURI();
 		System.out.println("board cmd: " + cmd);
 
@@ -70,7 +73,7 @@ public class BoardController extends HttpServlet {
 				}
 
 				if (parentSeq != 0) {
-					response.sendRedirect("/listing.board");
+					response.sendRedirect("/listing.board?cpage=1&category="+category);
 				}
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,
