@@ -5,13 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RUSH-게시판</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+<!-- 스타일 시트, 자바 스크립트 -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/boardMainPagination.js"></script>
 
+<!-- 부트스트랩, fontawesome -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -113,21 +116,23 @@ a {
 			<div class="board_guide">
 				<div class="boardNav">
 					<div class="boardNav_body">
-						<a href="/listing.board?cpage=1"><div class="boardNav_li bColorGreen">자유게시판</div></a>
-						<a href="/listing.qna?cpage=1"><div class="boardNav_li fontEnglish">Q&A</div></a>
+						<a href="/listing.board?cpage=1"><div
+								class="boardNav_li bColorGreen">자유게시판</div></a> <a
+							href="/listing.qna?cpage=1"><div
+								class="boardNav_li fontEnglish">Q&A</div></a>
 					</div>
 				</div>
 				<div class="boardCont">
 					<div class="boardTitle">자유게시판</div>
 					<ul class="tabs boardTabs">
-						<a href="/listing.board?category=rhythm&cpage=1" class="rhythm current"><li
-							class="tab-link">리듬게임</li></a>
+						<a href="/listing.board?category=rhythm&cpage=1"
+							class="rhythm current"><li class="tab-link">리듬게임</li></a>
 						<a href="/listing.board?category=arcade&cpage=1" class="arcade"><li
 							class="tab-link">아케이드게임</li></a>
 						<a href="/listing.board?category=puzzle&cpage=1" class="puzzle"><li
 							class="tab-link">퍼즐게임</li></a>
 					</ul>
-					
+
 
 					<div class="boardHeader">
 						<div class="num">번호</div>
@@ -147,8 +152,10 @@ a {
 										<div class="loud">
 											<i class="fa-solid fa-bullhorn"></i>
 										</div>
-										<a href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div class="mainTitle">${noti.title }</div></a>
-										
+										<a
+											href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div
+												class="mainTitle">${noti.title }</div></a>
+
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 									</div>
 									<div class="writer">${noti.nickName }</div>
@@ -166,14 +173,20 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<a href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&category=${category }"><div class="mainTitle">${noti.title }</div></a>
+											<a
+												href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&category=${category }"><div
+													class="mainTitle">${noti.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 										</div>
 										<div class="info">
 											<div class="minWriter colorDarkgray">${noti.nickName }</div>
 											<div class="minDate colorDarkgray">${noti.stringFormat }</div>
-											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${noti.view }</div>
-											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${noti.recommend }</div>
+											<div class="minView fontEnglish colorDarkgray">
+												<i class="fa-regular fa-eye"></i>&nbsp;${noti.view }
+											</div>
+											<div class="minRecommend fontEnglish colorDarkgray">
+												<i class="fa-regular fa-thumbs-up"></i>&nbsp;${noti.recommend }
+											</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
@@ -187,7 +200,9 @@ a {
 								<div class="maxBoard">
 									<div class="num fontEnglish">${post.seq }</div>
 									<div class="title">
-										<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div class="mainTitle">${post.title }</div></a>
+										<a
+											href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
+												class="mainTitle">${post.title }</div></a>
 										<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 									</div>
 									<div class="writer">${post.nickName }</div>
@@ -205,14 +220,19 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div class="mainTitle">${post.title }</div></a>
+											<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div
+													class="mainTitle">${post.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 										</div>
 										<div class="info">
 											<div class="minWriter colorDarkgray">${post.nickName }</div>
 											<div class="minDate colorDarkgray">${post.stringFormat }</div>
-											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${post.view }</div>
-											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }</div>
+											<div class="minView fontEnglish colorDarkgray">
+												<i class="fa-regular fa-eye"></i>&nbsp;${post.view }
+											</div>
+											<div class="minRecommend fontEnglish colorDarkgray">
+												<i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }
+											</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
@@ -246,20 +266,22 @@ a {
 
 						</div>
 						<div class="write">
-							<input type="button" value="글쓰기" class="boardBtn bColorGreen">
+							<a id="writeBtnLink" href=""><input type="button" value="글쓰기"
+								class="boardBtn bColorGreen"></a>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<input type="hidden" value="${category }" id="category">
-		<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
-		<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
-		<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
-		<input type="hidden" id="lastPageNum" value="${lastPageNum }">
-		
-		<a href="#">
+
+		<input type="hidden" value="${category }" id="category"> <input
+			type="hidden" id="recordTotalCount" value="${recordTotalCount }">
+		<input type="hidden" id="recordCountPerPage"
+			value="${recordCountPerPage }"> <input type="hidden"
+			id="naviCountPerPage" value="${naviCountPerPage }"> <input
+			type="hidden" id="lastPageNum" value="${lastPageNum }"> <a
+			href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>
 			</div>
