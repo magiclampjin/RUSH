@@ -27,6 +27,9 @@ import dto.FileDTO;
 public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
+		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
 		String cmd = request.getRequestURI();
 		System.out.println("board cmd: " + cmd);
 
