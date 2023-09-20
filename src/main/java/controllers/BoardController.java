@@ -76,12 +76,6 @@ public class BoardController extends HttpServlet {
 	            }
 				
 			} else if (cmd.equals("/load.board")) {
-				// cpage 가져와야하고,
-				// 게시글 번호를 가져와야함.
-				// 그리고 게시판 위치 (자유게시판인지 qna인지) -> 이거는 여기서 보내주는 것
-
-				
-				// <a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }">
 				int cpage =  Integer.parseInt(request.getParameter("cpage"));
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
 				String category = request.getParameter("category");
@@ -97,6 +91,10 @@ public class BoardController extends HttpServlet {
 					request.setAttribute("postRec",postRec);
 				if(bookmark)
 					request.setAttribute("bookmark",bookmark);
+				
+				List<FileDTO> files = fdao.selectForPost(postSeq);
+				request.setAttribute("files", files);
+				
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/update.board")) {
@@ -104,8 +102,10 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
-
-				
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				String category = request.getParameter("category");
+				dao.deletePost(postSeq);
+				response.sendRedirect("/listing.board?cpage=1&category="+category);	
 			} else if (cmd.equals("/listing.board")) {
 	            // 게시판 출력
 	            String category = request.getParameter("category");
@@ -155,22 +155,18 @@ public class BoardController extends HttpServlet {
 	         } else if(cmd.equals("/insertRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/deleteRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/insertBookmark.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/deleteBookmark.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			}
 

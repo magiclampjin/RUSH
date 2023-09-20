@@ -1,7 +1,13 @@
 package controllers;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +20,30 @@ public class FileController extends HttpServlet {
 		String cmd = request.getRequestURI();
 		System.out.println("file cmd: "+cmd);
 		
+		response.setContentType("text/html; charset=utf8");
+		
 		try {
 			if(cmd.equals("/insert.file")) {
 				// 파일 업로드
 				
 			} else if(cmd.equals("/download.file")) {
 				// 파일 다운로드
+				String sys_name = request.getParameter("sysname");
+				String ori_name = request.getParameter("oriname");
+				ori_name = new String(ori_name.getBytes("utf8"), "ISO-8859-1");
+				String filePath = request.getServletContext().getRealPath("files");
+				
+				response.setHeader("Content-Disposition", "attachment; filename="+ori_name);
+				File targetFile = new File(filePath+"/"+sys_name);
+				byte[] fileContents = new byte[(int) targetFile.length()];
+				
+				try(DataInputStream dis = new DataInputStream(new FileInputStream(targetFile))){
+					ServletOutputStream sos = response.getOutputStream();
+					dis.readFully(fileContents);
+					sos.write(fileContents);
+					sos.flush();
+				}
+						
 				
 			} else if(cmd.equals("/delete.file")) {
 				// 파일 삭제

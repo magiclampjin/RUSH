@@ -29,14 +29,15 @@ public class ReplyDAO {
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 	
-	public List<ReplyDTO> selectAll(int postSeq) throws Exception{
-		String sql = "select * from reply where cbSeq = ?;";
+	public List<ReplyDTO> selectAll(int postSeq, String loginId) throws Exception{
+		String sql = "select * from replyrecList where cbSeq = ? and (isnull(recid) or recid = ?);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
+			pstat.setString(2, loginId);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {
-					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend")));
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid")));
 				}
 				return replys;
 			}
@@ -63,6 +64,41 @@ public class ReplyDAO {
 			pstat.setString(3, nick);
 			pstat.setString(4, reply.getContents());
 			pstat.executeUpdate();
+		}
+	}
+	
+	public void delete(int replySeq) throws Exception{
+		String sql = "delete from reply where rSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, replySeq);
+			pstat.executeUpdate();
+		}
+	}
+	
+	public void update(int replySeq, String replyCcontents) throws Exception{
+		String sql = "update reply set rContents = ? where rSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, replyCcontents);
+			pstat.setInt(2, replySeq);
+			pstat.executeUpdate();
+		}
+	}
+	
+	public int  insertRecommend(int replySeq, String loginId) throws Exception{
+		String sql = "insert into replyRecommend values(null, ?, ?);";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, replySeq);
+			pstat.setString(2, loginId);
+			return pstat.executeUpdate();
+		}
+	}
+	
+	public int  deletetRecommend(int replySeq, String loginId) throws Exception{
+		String sql = "delete from replyRecommend where rseq = ? and mid = ?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, replySeq);
+			pstat.setString(2, loginId);
+			return pstat.executeUpdate();
 		}
 	}
 }

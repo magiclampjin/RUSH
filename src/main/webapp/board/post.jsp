@@ -151,15 +151,37 @@ a {
 	height: 50px;
 }
 
-.reply, .nestedReply {
-	border: 1px solid #7d7d7d;
+.reply{
 	padding: 15px 0px 0px 15px;
+}
+
+.reply, .nestedReply{
+	border: 1px solid #7d7d7d;
 }
 
 .replyInsertBtn {
 	border: 0px;
 	background-color: #ffffff00;
 	padding: 0px 25px 25px 0px;
+}
+
+.nestedCover {
+	padding: 0px 25px 25px 0px;
+}
+
+.nestedCover button{
+	border: 0px;
+	background-color: #ffffff00;
+	margin-left:15px;
+}
+
+
+.replyBtns div, .nestedReplyBtn {
+	cursor: pointer;
+}
+
+.nestedReplyBtn:hover{
+	text-decoration: underline;
 }
 
 .isWriter {
@@ -173,74 +195,65 @@ a {
 	justify-content: center;
 }
 
-.filename{
+.filename {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.topBtns{
-	height:50px;
-	display:flex;
+.topBtns {
+	height: 50px;
+	display: flex;
 	justify-content: end;
-	align-items:center;
+	align-items: center;
 }
 
-.topBtns button{
-	padding:5px 10px;
-	border:3px solid black;
-	background-color:#FFFFFF00;
-	margin-left:10px;
-	border-radius:5px;
+.topBtns button {
+	padding: 5px 10px;
+	border: 3px solid black;
+	background-color: #FFFFFF00;
+	margin-left: 10px;
+	border-radius: 5px;
 }
 
-.topBtns button:hover{
-	background-color:#5d6ce1;
-	color:white;
-	border:3px solid #5d6ce1;	
-}
-
-.topBtns button:hover i{
-	color:white;
-}
-
-.topBtns .btnClicked{
-	background-color:#5d6ce1;
-	color:white;
-	border:3px solid #5d6ce1;	
-}
-
-.btnClicked i{
-	color:white;
-} 
-
-
-
-.replyUpdate,
-.replyDelete {
-	display:flex;
-	justify-content: center;
-    align-items: center;
-}
-
-.recommendBtn{
-	border: 2px solid black;
-    width: 70px;
-    height: 40px;
-    border-radius: 10px;
-    display:flex;
-	justify-content: center;
-    align-items: center;
-    margin:1px;
-}
-
-.recommendBtn:hover{
+.topBtns button:hover, .recommendBtn:hover {
 	background-color: #5d6ce1;
-	color:white;
+	color: white;
+	border: 3px solid #5d6ce1;
 }
-.recommendBtn:hover i{
-	color:white;
+
+.topBtns button:hover i, .recommendBtn:hover i {
+	color: white;
 }
+
+.topBtns .btnClicked, .replyBtns .btnClicked {
+	background-color: #5d6ce1;
+	color: white;
+	border: 3px solid #5d6ce1;
+}
+
+.btnClicked i {
+	color: white;
+}
+
+.replyUpdate, .replyDelete, .replyCancel,
+.replySave {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.recommendBtn {
+	border: 2px solid black;
+	width: 70px;
+	height: 40px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1px;
+}
+
 
 </style>
 </head>
@@ -317,34 +330,40 @@ a {
 			<div class="body_guide">
 				<div class="row g-0 mb80">
 					<div class="col-12 common fontEnglish fw700 fs40 mt80">자유게시판</div>
-					
+
 					<!-- 글 작성자 = 로그인 사용자이면 글 추천, 글 북마크 버튼 출력 x -->
 					<c:choose>
 						<c:when test="${loginID ne post.writer}">
-							
+
 							<div class="col-12 topBtns">
-								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
-								
+								<button id="postRec">
+									<i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천
+								</button>
+								<button id="bookmark">
+									<i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크
+								</button>
+
 								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
 								<c:choose>
 									<c:when test="${not empty postRec}">
 										<script>
-											$("#postRec").attr("class", "btnClicked");
+											$("#postRec").attr("class",
+													"btnClicked");
 										</script>
 									</c:when>
 								</c:choose>
 								<c:choose>
-									<c:when test="${not empty bookmark}">						
+									<c:when test="${not empty bookmark}">
 										<script>
-											$("#bookmark").attr("class", "btnClicked");
+											$("#bookmark").attr("class",
+													"btnClicked");
 										</script>
 									</c:when>
 								</c:choose>
-							</div> 
+							</div>
 						</c:when>
 					</c:choose>
-					
+
 					<div class="col-12">
 						<div class="row g-0 post">
 							<div class="col-12 postTop">
@@ -361,45 +380,93 @@ a {
 						</div>
 						<div class="row g-0 postBottom mb40">
 							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
-							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">
+								<c:choose>
+									<c:when test="${files.size() > 0}">
+										<c:forEach var="i" items="${files}">
+											<a href="/download.file?sysname=${i.systemName}&oriname=${i.originName}">${i.originName}</a><br>
+										</c:forEach>
+									</c:when>
+									<c:otherwise><span class="colorBlack">없음</span></c:otherwise>
+								</c:choose>	
+							</div>
 							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
 								<div class="d-none d-md-flex">
-									<button class="postBtns bColorGreen" id="update">수정</button>
-									<button class="postBtns bColorGreen" id="delete">삭제</button>
+									<c:choose>
+										<c:when test="${ loginID eq post.writer}">
+											<button class="postBtns bColorGreen" id="update">수정</button>
+											<button class="postBtns bColorGreen" id="delete">삭제</button>
+										</c:when>
+									</c:choose>
 									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
 								</div>
-								
+
 								<div class="d-md-none">
-									<button class="postBtnsMini bColorGreen" id="update"><i class="fa-solid fa-pen-to-square"></i></button>
-									<button class="postBtnsMini bColorGreen" id="delete"><i class="fa-solid fa-trash-can"></i></button>
-									<button class="postBtnsMini bColorBlue colorWhite" id="goList"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
+									<c:choose>
+										<c:when test="${ loginID eq post.writer}">
+											<button class="postBtnsMini bColorGreen" id="update">
+												<i class="fa-solid fa-pen-to-square"></i>
+											</button>
+											<button class="postBtnsMini bColorGreen" id="delete">
+												<i class="fa-solid fa-trash-can"></i>
+											</button>
+										</c:when>
+									</c:choose>
+									<button class="postBtnsMini bColorBlue colorWhite" id="goList">
+										<i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+									</button>
 								</div>
-								
-								<input type="hidden" id="cpage" value="${cpage}">
-								<input type="hidden" id="category" value="${category}">
-								
+
+								<input type="hidden" id="cpage" value="${cpage}"> <input
+									type="hidden" id="category" value="${category}">
+
 							</div>
-							
+
 						</div>
 					</div>
 					<div class="row g-0">
 						<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
 						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
-								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable></div>
+								<div class="col-10 col-lg-11" id="replyInsertTxt"
+									contenteditable></div>
 								<input type="hidden" id="postSeq" value="${post.seq}">
 								<div class="col-2 col-lg-1 btnCover">
-									<button class="fw400 fs25 colorDarkgray replyInsertBtn" id="replyInsertBtn">등록</button>
+									<button class="fw400 fs25 colorDarkgray replyInsertBtn"
+										id="replyInsertBtn">등록</button>
 								</div>
-							</div>		
+							</div>
 						</div>
 
 						<div class="col-12">
-							<input type="hidden" id="loginID" value="${loginID}">
-							<input type="hidden" id="postWriter" value="${post.writer}">
-							<div class="row g-0 replys mb200" id="replys">
-	
-								<div class="col-12 reply">
+							<input type="hidden" id="loginID" value="${loginID}"> <input
+								type="hidden" id="postWriterName" value="${post.writer}">
+							<div class="row g-0 replys mb200 justify-content-end" id="replys">
+							
+			
+	<!-- 						<div class="col-10 nestedReply">
+								<input type="hidden" id="postSeq" value="댓글번호">
+								<div class="col-10" id="nestedReplyInput" contenteditable></div>
+								
+								<div class="d-none d-xl-flex col-xl-2 btnCover nestedCover">
+									<button class="fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyCancel">취소</button>
+									<button class="fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyInsert">등록</button>
+								</div>
+								
+
+								 <div class="col-2 d-xl-none mininested">
+									<button class="fw400 fs25 colorDarkgray nestedReplyCancel">취소</button>
+									<button class="fw400 fs25 colorDarkgray nestedReplyInsert">등록</button>			
+								 </div>
+							</div>
+								 -->
+							
+							
+							
+							
+							
+							
+								<!-- 	<div class="col-12 reply">
 									<div class="d-flex align-items-end mb10">
 										<div class="writer fw500 fs20">writer01</div>
 									</div>
@@ -426,14 +493,10 @@ a {
 											</div>
 										</div>
 									</div>
-								</div>
-
+								</div> -->
 							</div>
-
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 
