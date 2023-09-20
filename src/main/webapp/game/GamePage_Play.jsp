@@ -34,10 +34,26 @@
 	background-color: white;
 	margin: auto;
 }
+a{
+	text-decoration: none;
+}
 
 .gameContainer { 
 	max-width: 1300px;
 	margin: auto;
+}
+.rankCon{
+	max-width : 1030px;
+	width : 100%;
+}
+.rankCon{
+	max-width : 1030px;
+	width : 100%;
+}
+.devTable{
+	border : 1px solid white;
+	width : 100%;
+	text
 }
 </style>
 </head>
@@ -116,7 +132,6 @@
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
 									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">인기게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">리듬게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
@@ -138,7 +153,7 @@
 							<div
 								class="col-2 d-flex justify-content-center align-content-bottom">
 								<div>
-									<button type="button" class="btn btn-outline-light">
+									<button type="button" class="btn btn-outline-light" id="favorite">
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
@@ -164,6 +179,66 @@
 							</div>
 							
 							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
+						</div>
+						<div class="row g-0 mt150">
+							<div class="col-12" id="rank">
+								<div class="rankCon">
+								<hr class="colorWhite">
+									<div class="row g-0 p-2">
+										<div class="col-1">
+										<span class="text-white fontKorean">순위</span>
+										</div>
+										<div class="col-7">
+											<span class="text-white fontKorean">플레이어 정보</span>
+										</div>
+										<div class="col-4">
+											<span class="text-white fontKorean">점수</span>
+										</div>
+									</div>
+									<hr class="colorWhite">
+									<div class="row">
+									<!-- 요기서 데이터 추ㄹ력 -->
+									</div>
+								</div>
+							</div>
+							<div class="col-12" id="info">
+								<div class="row g-0 w100p">
+									<div class="col-12">
+										<p class="text-white fontKorean fs-2">게임 설명</p>
+										<hr class="colorBlue border-3 opacity-75">
+									</div>
+									<div class="col-12">
+										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+									</div>				
+								</div>
+								<div class="row g-0 w100p">
+									<div class="col-12">
+										<p class="text-white fontKorean fs-2">조작 방법</p>
+										<hr class="colorGreen border-3 opacity-75">
+									</div>
+									<div class="col-12">
+										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+									</div>				
+								</div>
+								<div class="row g-0 w100p">
+									<div class="col-12">
+										<p class="text-white fontKorean fs-2">제작자 정보</p>
+										<hr class="colorPink border-3 opacity-75">
+									</div>
+									<div class="col-12">
+										<table class="devTable">
+											<tr>
+												<td><p class="text-white fontKorean">제작자</p></td>
+												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+											</tr>
+											<tr>
+												<td><p class="text-white fontKorean">제작자</p></td>
+												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+											</tr>
+										</table>
+									</div>				
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -209,9 +284,23 @@
 		</div>
 		</div>
 		<script>
+		$("#rank").css("display","flex");
+		$("#rank").css("justify-content","center");
+		$("#info").css("display","none");
         $(".btn").on("click",function(){
             // $(".categories").text();
             console.log("");
+        });
+        
+        $("#btnradio1").on("click",function(){
+        	$("#rank").css("display","flex");
+        	$("#rank").css("justify-content","center");
+        	$("#info").css("display","none");
+        });
+        
+        $("#btnradio2").on("click",function(){
+        	$("#info").css("display","block");
+        	$("#rank").css("display","none");
         });
     </script>
 </body>

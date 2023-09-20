@@ -30,6 +30,7 @@ public class BoardController extends HttpServlet {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
+				String category = request.getParameter("category");
 				String title = request.getParameter("title");
 				
 				String uploadPath = request.getServletContext().getRealPath("files");
@@ -43,7 +44,8 @@ public class BoardController extends HttpServlet {
 				System.out.println("여기1");
 				String content = multi.getParameter("content");
 				String id = (String) request.getSession().getAttribute("loginID");
-				
+				String userNick = dao.selectNickName(id);
+				int result = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,
 				// 게시글 번호를 가져와야함.

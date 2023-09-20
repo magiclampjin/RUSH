@@ -126,7 +126,6 @@ div {
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
 									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack" id="fav"><span class="fontKorean text-white">인기게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
@@ -153,28 +152,6 @@ div {
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">
 									<span class="fontKorean"><span class="fontKorean">더보기</span></span>
-								</button>
-							</div>
-						</div>
-
-						<div class="row g-0 mb-5">
-							<p class="fs-2 text-white fontKorean">인기게임</p>
-							<!-- 나중에 jstl 적용? -->
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임1</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임2</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임3</p>
-							</div>
-							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary">
-									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
 						</div>
