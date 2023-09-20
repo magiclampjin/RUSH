@@ -187,37 +187,5 @@ public class BoardDAO {
 		}
 	}
 	
-	public int insert(BoardDTO dto) throws Exception{
-		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?, default);";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
-			pstat.setString(1, dto.getWriter());
-			pstat.setString(2, dto.getNickName());
-			pstat.setString(3, dto.getTitle());
-			pstat.setString(4, dto.getContents());
-			pstat.setString(5, dto.getCategory());
-			try(ResultSet rs = pstat.getGeneratedKeys()){
-				rs.next();
-				return rs.getInt(1);
-			}
-			
-		}
-	}
-	
-	public String selectNickName(String id) throws Exception{
-		String sql = "select mNickname from members where mID=?";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, id);
-			try(ResultSet rs = pstat.executeQuery()){
-				if (rs.next()) {
-					return rs.getString("mNickname");
-				} else {
-					return null;
-				}
-			}
-		}
-	}
-	
 	
 }

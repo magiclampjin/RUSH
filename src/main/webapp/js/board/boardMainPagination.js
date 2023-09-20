@@ -27,6 +27,9 @@ $(document).ready(function() {
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
+		console.log(pageTotalCount)
+		console.log(startNavi)
+		console.log(endNavi)
 
 		let needPrev = true;
 		let needNext = true;
