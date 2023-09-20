@@ -43,6 +43,9 @@ a {
 	right: 0;
 	left: auto;
 }
+.num,.writer,.date,.file{width:15%;}
+.title{width:40%;}
+
 </style>
 </head>
 <body>
@@ -132,8 +135,12 @@ a {
 	                                <div class="maxBoard">
 	                                    <div class="num fontEnglish">${qna.seq }</div>
 	                                    <div class="title">
-	                                        <div class="lock"><i class="fa-solid fa-lock"></i></i></div>
-	                                        <a href="">
+	                                        <div class="lock">
+	                                        	<c:if test="${qna.secret eq true}">
+	                                        		<i class="fa-solid fa-lock"></i>
+	                                        	</c:if>
+	                                        </div>
+	                                        <a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
 	                                        	<div class="mainTitle">${qna.title }</div>
 	                                        </a>
 	                                        <div class="replyCnt colorPink fontEnglish">답변완료</div>
@@ -182,7 +189,7 @@ a {
 
                             </div>
                             <div class="write">
-                                <input type="button" value="글쓰기" class="boardBtn">
+                                <a href="/qna/qnaWrite.jsp"><input type="button" value="글쓰기" class="boardBtn"></a>
                             </div>
                         </div>
                     </div>

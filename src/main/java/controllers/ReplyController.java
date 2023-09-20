@@ -74,9 +74,11 @@ public class ReplyController extends HttpServlet {
 			} else if(cmd.equals("/update.reply")) {
 				// 댓글 수정
 				
-			} else if(cmd.equals("/delete.board")) {
+			} else if(cmd.equals("/delete.reply")) {
 				// 댓글 삭제
 				
+			} else if(cmd.equals("/insertRecommend.reply")) {
+				// 댓글 좋아요
 			}
 			
 		}catch(Exception e) {

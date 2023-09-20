@@ -300,15 +300,12 @@ a {
 					<div class="col-12">
 						<div class="row g-0 post">
 							<div class="col-12 postTop">
-								<div class="col-12 fw400 fs35 mb15" id="postTitle">${post.title}
+								<div class="col-12 fw400 fs35 mb15" id="postTitle">${qnalist.title}
 								</div>
 								<div class="col-12 fontEnglish fw400 fs25 mb10 pl15"
-									id="postWriter">${post.nickName}</div>
-								<div class="col-12 fw400 fs20 colorDarkgray pl15"
-									id="postDetailInfo">${post.formedDate }&nbsp;&nbsp;&nbsp;조회
-									${post.view}</div>
+									id="postWriter">${qnalist.nickName}</div>
 								<hr>
-								<div class="col-12 fw400 fs25" id="postContents">${post.contents}</div>
+								<div class="col-12 fw400 fs25" id="postContents">${qnalist.contents}</div>
 							</div>
 						</div>
 						<div class="row g-0 postBottom mb40">
@@ -328,7 +325,6 @@ a {
 								</div>
 								
 								<input type="hidden" id="cpage" value="${cpage}">
-								<input type="hidden" id="category" value="${category}">
 								
 							</div>
 							
@@ -339,7 +335,7 @@ a {
 						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
 								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable></div>
-								<input type="hidden" id="postSeq" value="${post.seq}">
+								<input type="hidden" id="postSeq" value="${qnalist.seq}">
 								<div class="col-2 col-lg-1 btnCover">
 									<button class="fw400 fs25 colorDarkgray replyInsertBtn" id="replyInsertBtn">등록</button>
 								</div>

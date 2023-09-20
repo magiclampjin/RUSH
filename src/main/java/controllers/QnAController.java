@@ -49,7 +49,6 @@ public class QnAController extends HttpServlet {
 				String mID = "ID";
 				String mNickname = "Nickname";
 				
-				
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
 				String category = multi.getParameter("category");
@@ -83,6 +82,15 @@ public class QnAController extends HttpServlet {
 				
 			} else if(cmd.equals("/load.qna")) {
 				// 게시글 출력
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
+				
+				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
+				
+				
+				request.setAttribute("qnalist", list);
+				request.setAttribute("cpage", cpage);
+				request.getRequestDispatcher("/qna/qnaWatch.jsp").forward(request, response);
 				
 			} else if(cmd.equals("/update.qna")) {
 				// 게시글 수정
@@ -132,17 +140,14 @@ public class QnAController extends HttpServlet {
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/qna/qnaList.jsp").forward(request, response);
 				
-			}else if(cmd.equals("/write.qna")) {
+			}
+			else if(cmd.equals("/write.qna")) {
 				// q&a에서 글쓰기 누를때
 				// q&a 매개변수
 				String menu = request.getParameter("menu");
 				System.out.println("qna : "+menu);
-				// 카테고리도 받아와야함
-				String category = request.getParameter("category");
-				System.out.println("category : "+category);
 				request.setAttribute("menu", menu);
-				request.setAttribute("category", category);
-				request.getRequestDispatcher("/qna/qnaWrite.jsp").forward(request, response);
+				request.getRequestDispatcher("/board/boardWrite.jsp").forward(request, response);
 			}
 			
 		}catch(Exception e) {
