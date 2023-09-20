@@ -104,8 +104,10 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
-
-				
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				String category = request.getParameter("category");
+				dao.deletePost(postSeq);
+				response.sendRedirect("/listing.board?cpage=1&category="+category);	
 			} else if (cmd.equals("/listing.board")) {
 	            // 게시판 출력
 	            String category = request.getParameter("category");
@@ -155,22 +157,18 @@ public class BoardController extends HttpServlet {
 	         } else if(cmd.equals("/insertRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/deleteRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/insertBookmark.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/deleteBookmark.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			}
 

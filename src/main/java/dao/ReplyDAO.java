@@ -65,4 +65,21 @@ public class ReplyDAO {
 			pstat.executeUpdate();
 		}
 	}
+	
+	public void delete(int replySeq) throws Exception{
+		String sql = "delete from reply where rSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, replySeq);
+			pstat.executeUpdate();
+		}
+	}
+	
+	public void update(int replySeq, String replyCcontents) throws Exception{
+		String sql = "update reply set rContents = ? where rSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, replyCcontents);
+			pstat.setInt(2, replySeq);
+			pstat.executeUpdate();
+		}
+	}
 }
