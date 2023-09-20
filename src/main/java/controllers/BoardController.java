@@ -100,7 +100,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("boardList", list);
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
-				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
+				request.getRequestDispatcher("/board/boardList.jsp").forward(request, response);
 
 			}else if(cmd.equals("/write.board")){
 				// 자유게시판에서 글쓰기 누를 때 
