@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -32,6 +33,8 @@ public class ReplyController extends HttpServlet {
 		System.out.println("reply cmd: "+cmd);
 		
 		ReplyDAO dao = ReplyDAO.getInstance();
+		PrintWriter pw = response.getWriter();
+		Gson gsonDefault = new Gson();
 		
 		try {
 			if(cmd.equals("/insert.reply")) {
@@ -45,7 +48,8 @@ public class ReplyController extends HttpServlet {
 				
 			} else if(cmd.equals("/load.reply")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
-				List<ReplyDTO> replys = dao.selectAll(postSeq);
+				String loginId = (String) request.getSession().getAttribute("loginID");
+				List<ReplyDTO> replys = dao.selectAll(postSeq,loginId);
 				Gson gson = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
 					private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
 					private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
@@ -83,9 +87,19 @@ public class ReplyController extends HttpServlet {
 				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
 				dao.delete(replySeq);
 				
-			} else if(cmd.equals("/insertRecommend.reply")) {
-				// 댓글 좋아요
-			}
+			} else if(cmd.equals("/insertReplyRecommend.reply")) {
+				// 댓글 좋아요 추가
+				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
+				String loginId = (String) request.getSession().getAttribute("loginID");
+				int result = dao.insertRecommend(replySeq, loginId);
+				pw.append(gsonDefault.toJson(result));
+			} else if(cmd.equals("/deleteReplyRecommend.reply")) {
+				// 댓글 좋아요 취소
+				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
+				String loginId = (String) request.getSession().getAttribute("loginID");
+				int result = dao.deletetRecommend(replySeq, loginId);
+				pw.append(gsonDefault.toJson(result));
+			} 
 			
 		}catch(Exception e) {
 			e.printStackTrace();

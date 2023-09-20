@@ -198,17 +198,17 @@ a {
 	border-radius: 5px;
 }
 
-.topBtns button:hover {
+.topBtns button:hover, .recommendBtn:hover {
 	background-color: #5d6ce1;
 	color: white;
 	border: 3px solid #5d6ce1;
 }
 
-.topBtns button:hover i {
+.topBtns button:hover i, .recommendBtn:hover i {
 	color: white;
 }
 
-.topBtns .btnClicked {
+.topBtns .btnClicked, .replyBtns .btnClicked {
 	background-color: #5d6ce1;
 	color: white;
 	border: 3px solid #5d6ce1;
@@ -236,14 +236,7 @@ a {
 	margin: 1px;
 }
 
-.recommendBtn:hover {
-	background-color: #5d6ce1;
-	color: white;
-}
 
-.recommendBtn:hover i {
-	color: white;
-}
 </style>
 </head>
 
