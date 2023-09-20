@@ -63,32 +63,32 @@ public class BoardController extends HttpServlet {
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
 
+				
 			} else if (cmd.equals("/listing.board")) {
-				// 게시판 출력
-				String category = request.getParameter("category");
-				category = (category == null) ? "rhythm" : category;
+	            // 게시판 출력
+	            String category = request.getParameter("category");
+	            category = (category == null) ? "rhythm" : category;
 
-				String cpage = request.getParameter("cpage");
-				int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
-				request.getSession().setAttribute("lastPageNum", currentPage);
+	            String cpage = request.getParameter("cpage");
+	            int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
+	            request.getSession().setAttribute("lastPageNum", currentPage);
 
-				List<BoardDTO> list = new ArrayList<>();
+	            List<BoardDTO> list = new ArrayList<>();
 
-				// 검색한 카테고리, 키워드에 맞는 페이지 찾기
-				String search = request.getParameter("search");
-				String keyword = request.getParameter("keyword");
+	            // 검색한 카테고리, 키워드에 맞는 페이지 찾기
+	            String search = request.getParameter("search");
+	            String keyword = request.getParameter("keyword");
 
-				if (keyword == null || keyword.equals("")) {
-					// 검색 키워드가 넘어오지 않은 경우
-					list = dao.selectByCategory(category,
-							currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
-							Constants.RECORD_COUNT_PER_PAGE);
-					request.setAttribute("recordTotalCount", dao.getRecordCount(category));
+	            if (keyword == null || keyword.equals("")) {
+	               // 검색 키워드가 넘어오지 않은 경우
+	               list = dao.selectByCategory(category,
+	                     currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
+	                     Constants.RECORD_COUNT_PER_PAGE);
+	               request.setAttribute("recordTotalCount", dao.getRecordCount(category));
 
-				} else {
-					// 검색 키워드가 넘어온 경우
-				}
-
+	            } else {
+	               // 검색 키워드가 넘어온 경우
+	            }
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = dao.selectByNoti();
 				
@@ -100,7 +100,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("boardList", list);
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
-				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
+				request.getRequestDispatcher("/board/boardList.jsp").forward(request, response);
 
 			}else if(cmd.equals("/write.board")){
 				// 자유게시판에서 글쓰기 누를 때 
