@@ -150,35 +150,6 @@ a {
 
 						</form>
 						<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
-						<!-- <form action="/insert.qna" method="post"
-								enctype="multipart/form-data">
-
-								<div class="row bottom">
-									<div class="col-11">
-										<input id="secret" class="screteChk" type="checkbox">
-										<input id="secret_hidden" class="screteChk" type="hidden"
-											name="secret" value="false"> <label for="secret"
-											class="colorDarkgray">비밀글 설정하기</label>
-
-									</div>
-									<script>
-										document.getElementById("secret").onchange = function() {
-											if ($("#secret").is(":checked")) {
-												$("#secret_hidden").val("true");
-												console.log($("#secret_hidden")
-														.val());
-											} else {
-												$("#secret_hidden")
-														.val("false");
-												console.log($("#secret_hidden")
-														.val());
-											}
-										};
-									</script>
-
-									<input class="submitBtn col-1" type="submit" value="작성">
-								</div>
-							</form> -->
 					</c:when>
 					<c:otherwise>
 						<form action="/insert.board" method="post"

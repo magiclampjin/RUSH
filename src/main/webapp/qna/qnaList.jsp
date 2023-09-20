@@ -152,6 +152,7 @@ a {
 			                                        		<c:otherwise>
 			                                        			<div class="mainTitle">비밀글입니다.</div>
 			                                        			<script>
+			                                        				
 			                                        				console.log($(this));
 			                                        			</script>
 			                                        		</c:otherwise>
