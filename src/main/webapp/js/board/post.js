@@ -44,7 +44,7 @@ $(document).ready(function() {
 					replyBtns.append(btncoverforupdate.append(save).append(cancel));
 					
 					let btncovermini = $("<div>").attr("class","defaultCover");
-					let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns");
+					let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns replyBtnsMini");
 					let updateBtnMini = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("<i class='fa-solid fa-pen-to-square'></i>");
 					let deleteBtnMini = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
 					replyBtnsMini.append(btncovermini.append(updateBtnMini).append(deleteBtnMini));
