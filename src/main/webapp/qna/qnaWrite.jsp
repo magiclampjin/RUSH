@@ -215,16 +215,6 @@ label {
 							        	console.log($("#secret_hidden").val());
 							        }
 								};
-								/* $("#secret").("change",function(){
-							        if($("#secret").is(":checked")){
-							        	$("#secret").val("true");
-							        	console.log($("#secret").val());
-							        }
-							        else{
-							        	$("#secret").val("false");
-							        	console.log($("#secret").val());
-							        }
-							    }); */
 							</script>
 		
 							<input class="submitBtn col-1" type="submit" value="작성">
