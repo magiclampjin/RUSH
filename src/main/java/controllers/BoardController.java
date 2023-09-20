@@ -3,13 +3,14 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import constants.Constants; //pagination에 사용 될 상수 저장용
+import constants.Constants;
 import dao.BoardDAO;
 import dto.BoardDTO;
 
@@ -81,6 +82,13 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
+			
+			}else if(cmd.equals("/write.board")){
+				// 자유게시판에서 글쓰기 누를 때 
+				String menu = request.getParameter("menu");
+				System.out.println("free "+menu);
+				request.setAttribute("menu", menu);
+				request.getRequestDispatcher("/qna/qnaWrite.jsp").forward(request, response);
 			}
 
 		} catch (Exception e) {

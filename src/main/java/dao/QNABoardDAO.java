@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -29,15 +30,19 @@ public class QNABoardDAO {
 		String sql = "insert into qna_board values(0,?,?,?,?,default,?,?);";
 		
 		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
+				PreparedStatement pstat = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);){
 			pstat.setString(1, dto.getWriter());
 			pstat.setString(2, dto.getNickName());
 			pstat.setString(3, dto.getTitle());
 			pstat.setString(4, dto.getContents());
 			pstat.setString(5, dto.getCategory());
 			pstat.setBoolean(6, dto.isSecret());
+			pstat.executeUpdate();
 			
-			return pstat.executeUpdate();
+			try(ResultSet rs = pstat.getGeneratedKeys()){
+				rs.next();
+				return rs.getInt(1);
+			}
 		}
 	}
 	

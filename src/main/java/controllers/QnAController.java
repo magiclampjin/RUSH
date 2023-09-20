@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import dao.FileDAO;
 import dao.QNABoardDAO;
+import dto.FileDTO;
 import dto.QNABoardDTO;
  
 @WebServlet("*.qna")
@@ -35,6 +38,7 @@ public class QnAController extends HttpServlet {
 				int maxSize = 1024 * 1024 *10;
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf8",new DefaultFileRenamePolicy());
 				
+				// 아직 Session 안해서 일단 String으로 넣어놓음
 //				String mID = (String)request.getSession().getAttribute("loginID");
 //				String mNickname = (String )request.getSession().getAttribute("loginNickname");
 //				
@@ -53,8 +57,25 @@ public class QnAController extends HttpServlet {
 				if(secret.equals("false")) {
 					checked = false;
 				}
+				// auto_increment로 seq값 생성됨
+				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,checked));
+				System.out.println("부모 번호 : "+parent_seq);
 				
-				QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,checked));
+				Enumeration<String> fileNames = multi.getFileNames();
+				
+				while(fileNames.hasMoreElements()) {
+					String fileName = fileNames.nextElement();
+					System.out.println("파일 이름 : "+fileName);
+					
+					if(multi.getFile(fileName)!=null) {
+						String ori_name = multi.getOriginalFileName(fileName);
+						String sys_name = multi.getFilesystemName(fileName);
+						
+						FileDAO.getInstance().insert(new FileDTO(0,parent_seq,ori_name,sys_name));
+					}
+				}
+				response.sendRedirect("/listing.qna");
+				
 				
 			} else if(cmd.equals("/load.qna")) {
 				// 게시글 출력
