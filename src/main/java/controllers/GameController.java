@@ -13,7 +13,7 @@ import dao.GameDAO;
 public class GameController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GameDAO dao = new GameDAO();
+		GameDAO dao = GameDAO.getInstance();
 		String cmd = request.getRequestURI();
 		System.out.println("game cmd: "+cmd);
 		

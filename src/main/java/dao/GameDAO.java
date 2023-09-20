@@ -8,7 +8,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class GameDAO {
-	public GameDAO() {}
+	private GameDAO() {}
 	private static GameDAO instance;
 	public static GameDAO getInstance() {
 		if (instance == null)
