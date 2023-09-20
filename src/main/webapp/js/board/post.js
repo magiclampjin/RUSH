@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#replys").html(replyReload( $("#postSeq").val()));
+	
 			
 	function replyReload(postSeq){
 		$.ajax({
@@ -10,8 +10,9 @@ $(document).ready(function() {
 			dataType:"json",
 			type:"post"
 		}).done(function(resp){
-			let postWriter = $("#loginID").val();
-			let loginID = $("#postWriter").val();
+			let postWriter = $("#postWriter").val();
+			console.log("postWriter: "+postWriter);
+			let loginID = $("#loginID").val();
 			let replys = $("#replys");
 			for(let i=0; i<resp.length; i++){
 				
@@ -19,6 +20,8 @@ $(document).ready(function() {
 				let row = $("<div>").attr("class","row g-0");
 				let col10 = $("<div>").attr("class","col-10");
 				let writerCover = $("<div>").attr("class","d-flex align-items-end mb10").append($("<div>").attr("class","writer fw500 fs20").html(resp[i].nickName));
+				console.log("댓글 작성자: "+resp[i].writer);
+				console.log("글 작성자: "+postWriter);
 				if(resp[i].writer == postWriter){
 					let isWriterTag = $("<div>").attr("class","isWriter colorWhite bColorBlue fw400 fs15").html("작성자");
 					writerCover.append(isWriterTag);
@@ -53,6 +56,9 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
+	// 댓글창 로드
+	$("#replys").html(replyReload( $("#postSeq").val()));
 
 	let cpage = $("#cpage").val();
 	let category = $("#category").val();

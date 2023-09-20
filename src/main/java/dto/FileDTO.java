@@ -5,6 +5,7 @@ public class FileDTO {
 	private int parentSeq;
 	private String originName;
 	private String systemName;
+	
 	public FileDTO() {}
 	public FileDTO(int seq, int parentSeq, String originName, String systemName) {
 		super();
@@ -37,6 +38,8 @@ public class FileDTO {
 	public void setSystemName(String systemName) {
 		this.systemName = systemName;
 	}
+	
+	
 	
 	
 }
