@@ -25,6 +25,7 @@ public class FileDAO {
 	}
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
+
 	public int insert(FileDTO dto) throws Exception{
 		String sql = "insert into file values(0,?,?,?);";
 		try(Connection con = this.getConnection();
@@ -32,7 +33,6 @@ public class FileDAO {
 			pstat.setInt(1, dto.getParentSeq());
 			pstat.setString(2, dto.getOriginName());
 			pstat.setString(3, dto.getSystemName());
-			
 			return pstat.executeUpdate();
 		}
 	}
