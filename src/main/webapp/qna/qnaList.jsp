@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/freeboard.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
+<script type="text/javascript" src="/js/board/qnaBoardPagination.js"></script>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -17,6 +19,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+
+
 <style>
 * {
 	box-sizing: border-box;
@@ -106,9 +111,9 @@ a {
             <div class="board_guide">
                 <div class="boardNav">
                     <div class="boardNav_body">
-                        <div class="boardNav_li bColorGreen">자유게시판</div>
-                        <div class="boardNav_li fontEnglish">Q&A</div>
-                    </div>
+						<a href="/listing.board?cpage=1"><div class="boardNav_li">자유게시판</div></a>
+						<a href="/listing.qna?cpage=1"><div class="boardNav_li fontEnglish bColorGreen">Q&A</div></a>
+					</div>
                 </div>
                 <div class="boardCont">
                     <div class="boardTitle">Q&A</div>
@@ -119,82 +124,52 @@ a {
                             <div class="title">제목</div>
                             <div class="writer">작성자</div>
                             <div class="date">작성일</div>
-                            <div class="view">조회</div>
                             <div class="file">파일</div>
                         </div>
                         <div class="boardMain">
-                            <div class="post">
-                                <div class="maxBoard">
-                                    <div class="num"></div>
-                                    <div class="title">
-                                        <div class="lock"><i class="fa-solid fa-lock"></i></i></div>
-                                        <div class="mainTitle">회원만 작성할 수 있는 공지글 영역입니다.</div>
-                                        <div class="replyCnt colorPink fontEnglish">3</div>
-                                    </div>
-                                    <div class="writer">작성자</div>
-                                    <div class="date fontEnglish">2023-09-16</div>
-                                    <div class="view fontEnglish">조회</div>
-                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
-                                </div>
-                                <div class="minBoard">
-                                    <div class="num"></div>
-                                    <div class="minCon">
-                                        <div class="title">
-                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
-                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
-                                            <div class="replyCnt colorPink fontEnglish">3</div>
-                                        </div>
-                                        <div class="info">
-                                            <div class="minWriter">작성자</div>
-                                            <div class="minDate fontEnglish">2023-09-16</div>
-                                            <div class="minView fontEnglish">조회</div>
-                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <div class="maxBoard">
-                                    <div class="num fontEnglish">1</div>
-                                    <div class="title">
-                                        <div class="mainTitle">회원만 작성할 수 있는 자유게시판 영역입니다.</div>
-                                        <div class="replyCnt colorPink fontEnglish">3</div>
-                                    </div>
-                                    <div class="writer">작성자</div>
-                                    <div class="date fontEnglish">2023-09-16</div>
-                                    <div class="view fontEnglish">조회</div>
-                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
-                                </div>
-                                <div class="minBoard">
-                                    <div class="num fontEnglish">1</div>
-                                    <div class="minCon">
-                                        <div class="title">
-                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
-                                            <div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
-                                            <div class="replyCnt colorPink fontEnglish">3</div>
-                                        </div>
-                                        <div class="info">
-                                            <div class="minWriter">작성자</div>
-                                            <div class="minDate fontEnglish">2023-09-16</div>
-                                            <div class="minView fontEnglish">조회</div>
-                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        	<c:forEach var="qna" items="${list }">
+	                            <div class="post">
+	                                <div class="maxBoard">
+	                                    <div class="num fontEnglish">${qna.seq }</div>
+	                                    <div class="title">
+	                                        <div class="lock"><i class="fa-solid fa-lock"></i></i></div>
+	                                        <a href="">
+	                                        	<div class="mainTitle">${qna.title }</div>
+	                                        </a>
+	                                        <div class="replyCnt colorPink fontEnglish">답변완료</div>
+	                                    </div>
+	                                    <div class="writer">${qna.nickName }</div>
+	                                    <div class="date fontEnglish">${qna.stringFormat }</div>
+	                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
+	                                </div>
+	                                <div class="minBoard">
+	                                    <div class="num">${qna.seq }</div>
+	                                    <div class="minCon">
+	                                        <div class="title">
+	                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+	                                            <div class="mainTitle">${qna.title }</div>
+	                                            <div class="replyCnt colorPink fontEnglish">답변완료</div>
+	                                        </div>
+	                                        <div class="info">
+	                                            <div class="minWriter">${qna.nickName }</div>
+	                                            <div class="minDate fontEnglish">${qna.stringFormat }</div>
+	                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+                            </c:forEach>
                         </div>
-                        <div class="pagination">
-                            123456789>>>
-                        </div>
+                        <div id="pagination"> </div>
                         <div class="search_write">
                             <div class="write"></div>
                             <div class="search">
                                 <form action="">
                                     <div class="category">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>제목</option>
-                                            <option value="1">작성자</option>
-                                            <option value="2">내용</option>
+                                        <select name="searchBy" class="form-select" aria-label="Default select example">
+                                            <option value="title">제목</option>
+                                            <option value="writer">작성자</option>
+                                            <option value="content">내용</option>
                                         </select>
                                     </div>
                                     <div class="keyword">
@@ -213,9 +188,13 @@ a {
                     </div>
                 </div>
             </div>
-
-
         </div>
+        
+        <input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
+		<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
+		<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
+		<input type="hidden" id="lastPageNum" value="${lastPageNum }">
+        
         <a href="#">
             <div class="upArrow bColorPink colorWhite">
                 <i class="fa-solid fa-arrow-up-long"></i>
