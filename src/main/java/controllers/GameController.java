@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.GameDAO;
+
 @WebServlet("*.game")
 public class GameController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		GameDAO dao = new GameDAO();
 		String cmd = request.getRequestURI();
 		System.out.println("game cmd: "+cmd);
 		
@@ -27,7 +30,7 @@ public class GameController extends HttpServlet {
 				String gameName = request.getParameter("gName");
 				//GameFavoriteDAO, GameFavoriteDTO 작성 해야함.
 				//ajax로 할듯?
-				
+				int result = dao.insertFavorite(gameName, mID);
 			}else if(cmd.equals("/moveToBestGame.game")) {
 				request.getRequestDispatcher("/GamePage_BestGame?").forward(request, response);
 			}
