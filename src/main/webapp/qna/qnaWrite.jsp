@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Q&A 게시글 작성</title>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -204,18 +205,6 @@ label {
 								<label for="secret" class="colorDarkgray">비밀글 설정하기</label>
 								
 							</div>
-							<script>
-								document.getElementById("secret").onchange = function(){
-									if($("#secret").is(":checked")){
-							        	$("#secret_hidden").val("true");
-							        	console.log($("#secret_hidden").val());
-							        }
-							        else{
-							        	$("#secret_hidden").val("false");
-							        	console.log($("#secret_hidden").val());
-							        }
-								};
-							</script>
 		
 							<input class="submitBtn col-1" type="submit" value="작성">
 						</div>

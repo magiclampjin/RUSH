@@ -10,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
-
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
 import dto.BoardDTO;
@@ -50,7 +48,6 @@ public class BoardController extends HttpServlet {
 				
 				boolean postRec = dao.checkPostRecommend(postSeq, (String)request.getSession().getAttribute("loginID"));
 				boolean bookmark = dao.checkPostBookmark(postSeq, (String)request.getSession().getAttribute("loginID"));
-				
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("category", category);
@@ -104,7 +101,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
-			
+
 			}else if(cmd.equals("/insertRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));

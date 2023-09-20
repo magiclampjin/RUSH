@@ -84,6 +84,14 @@ public class QnAController extends HttpServlet {
 				// 게시글 출력
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
+				// String id = (String)request.getSession().getAttribute("loginID");
+//				String secret = request.getParameter("secret");
+//				
+//				if(secret.equals("true")) {
+//					if(id==)
+//				}else {
+//					
+//				}
 				
 				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
 				

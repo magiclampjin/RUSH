@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/board/freeboard.css">
+<link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/qnaBoardPagination.js"></script>
 
@@ -140,9 +140,23 @@ a {
 	                                        		<i class="fa-solid fa-lock"></i>
 	                                        	</c:if>
 	                                        </div>
-	                                        <a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-	                                        	<div class="mainTitle">${qna.title }</div>
-	                                        </a>
+	                                        
+	                                        	<c:choose>
+	                                        	<c:when test="${qna.secret eq true}">
+	                                        		<div class="mainTitle">비밀글입니다.</div>
+	                                        		<c:if test="${qna.writer} == ${loginID }">
+	                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+	                                        			<div class="mainTitle"></div>
+	                                        			</a>
+	                                        		</c:if>
+	                                        	</c:when>
+	                                        	<c:otherwise>
+	                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+	                                        		<div class="mainTitle">${qna.title }</div>
+	                                        	</a>
+	                                        	</c:otherwise>
+	                                        	</c:choose>
+	                                        
 	                                        <div class="replyCnt colorPink fontEnglish">답변완료</div>
 	                                    </div>
 	                                    <div class="writer">${qna.nickName }</div>
@@ -189,7 +203,7 @@ a {
 
                             </div>
                             <div class="write">
-                                <a href="/qna/qnaWrite.jsp"><input type="button" value="글쓰기" class="boardBtn"></a>
+                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" class="boardBtn"></a>
                             </div>
                         </div>
                     </div>
