@@ -196,6 +196,8 @@ public class BoardDAO {
 			pstat.setString(3, dto.getTitle());
 			pstat.setString(4, dto.getContents());
 			pstat.setString(5, dto.getCategory());
+			pstat.executeUpdate();
+			
 			try(ResultSet rs = pstat.getGeneratedKeys()){
 				rs.next();
 				return rs.getInt(1);
