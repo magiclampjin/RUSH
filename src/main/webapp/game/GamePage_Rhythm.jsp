@@ -25,9 +25,6 @@
 	width: 300px;
 	height: 200px;
 }
-a{
-	text-decoration: none;
-}
 
 .game {
 	min-width : 579px;
@@ -37,17 +34,26 @@ a{
 	background-color: white;
 	margin: auto;
 }
+a{
+	text-decoration: none;
+}
 
 .gameContainer { 
 	max-width: 1300px;
 	margin: auto;
 }
-.gamePic{
-	max-width: 200px;
-	max-height: 150px;
-	width: 100%;
-	height: 100%;
-	background-color: white;
+.rankCon{
+	max-width : 1030px;
+	width : 100%;
+}
+.rankCon{
+	max-width : 1030px;
+	width : 100%;
+}
+.devTable{
+	border : 1px solid white;
+	width : 100%;
+	text
 }
 </style>
 </head>
@@ -118,64 +124,127 @@ a{
 			</div>
 		</div>
 		<div class="container-fluid g-0 bColorBlack">
-			<div class="gameContainer p-4">
-				<div class="row">
-					<div class="col-12">
-						<p class="text-white fontKorean fs-2">베스트 게임</p>
-					</div>
-				</div>
-				<div class="row">
-					<hr class="colorWhite">
-					<div class="col-1">
-						<p class="text-white fontKorean">순위</p>
-					</div>
-					<div class="col-8 col-md-5">
-						<p class="text-white fontKorean">게임 정보</p>
-					</div>
-					<div class="col-3 d-none d-md-flex">
-						<p class="text-white fontKorean">플레이 정보</p>
-					</div>
-					<div class="col-3">
-						<p class="text-white fontKorean">게임 바로가기</p>
-					</div>
-					<hr class="colorWhite">
-				</div>
-				<div class="row d-flex justify-content-center align-items-center">
-					<div class="col-1">
-						<p class="colorPink fontEnligh fs-2">1</p>
-					</div>
-					<div class="col-8 col-md-5 d-flex">
-						<div class="row">
-							<div class="col-7">
-								<div class="gamePic"></div>
-							</div>
-							<div class="col-5 d-flex align-items-center">
-								<div class="row">
-									<div class="col-12">
-										<p class="text-white">게임 이름</p>
-									</div>
-									<div class="col-12">
-										<p class="text-white">만든사람 이름</p>
-									</div>
-									<div class="col-12 d-flex d-md-none">
-										<p class="text-white">플레이 정보</p>
-									</div>
+			<div class="gameContainer">
+				<div class="row g-0">
+					<div class="col-2 d-flex justify-content-center">
+						<div class="row g-0">
+							<div class="col-12 mt-5">
+								<div class="btn-group-vertical" role="group"
+									aria-label="Vertical button group">
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<!-- js로 넘어가기 -->
 								</div>
-								
-								
 							</div>
 						</div>
-						
-						
 					</div>
-					<div class="col-3 d-none d-md-flex">
-						<p class="text-white fontKorean">플레이 정보</p>
+					<div class="col-10 pr45">
+						<div class="row g-0">
+							<div class="col-12">
+								<p class="gameCategory fs-5 mb-0 text-white fontKorean">리듬 게임</p>
+							</div>
+						</div>
+						<div class="row g-0">
+							<div class="col-10">
+								<p class="gameName fs-2 mt-0 text-white fontKorean">KJ MAX</p>
+							</div>
+							<div
+								class="col-2 d-flex justify-content-center align-content-bottom">
+								<div>
+									<button type="button" class="btn btn-outline-light">
+										<i class="fa-regular fa-star colorWhite"></i>
+										즐겨찾기
+									</button>
+								</div>
+							</div>
+							<hr class="border border-primary border-3 opacity-75">
+						</div>
+						<div class="row g-0">
+							<div class="col-12 game">play ground</div>
+						</div>
+						<div class="row g-0">
+							<div class="col-12 d-flex justify-content-center mt150">
+								<div class="btn-group w100p mxWidth1030" role="group"
+									aria-label="Basic radio toggle button group">
+									<input type="radio" class="btn-check" name="btnradio"
+										id="btnradio1" autocomplete="off" checked> <label
+										class="btn btn-outline-light" for="btnradio1">게임 순위</label>
+
+									<input type="radio" class="btn-check" name="btnradio"
+										id="btnradio2" autocomplete="off"> <label
+										class="btn btn-outline-light" for="btnradio2">게임 정보</label>
+								</div>
+							</div>
+							
+							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
+						</div>
+						<div class="row g-0 mt150">
+							<div class="col-12" id="rank">
+								<div class="rankCon">
+								<hr class="colorWhite">
+									<div class="row g-0 p-2">
+										<div class="col-1">
+										<span class="text-white fontKorean">순위</span>
+										</div>
+										<div class="col-7">
+											<span class="text-white fontKorean">플레이어 정보</span>
+										</div>
+										<div class="col-4">
+											<span class="text-white fontKorean">점수</span>
+										</div>
+									</div>
+									<hr class="colorWhite">
+									<div class="row">
+									<!-- 요기서 데이터 추ㄹ력 -->
+									</div>
+								</div>
+							</div>
+							<div class="col-12" id="info">
+								<div class="row g-0 w100p">
+									<div class="col-12">
+										<p class="text-white fontKorean fs-2">게임 설명</p>
+										<hr class="colorBlue border-3 opacity-75">
+									</div>
+									<div class="col-12">
+										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+									</div>				
+								</div>
+								<div class="row g-0 w100p">
+									<div class="col-12">
+										<p class="text-white fontKorean fs-2">조작 방법</p>
+										<hr class="colorGreen border-3 opacity-75">
+									</div>
+									<div class="col-12">
+										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+									</div>				
+								</div>
+								<div class="row g-0 w100p">
+									<div class="col-12">
+										<p class="text-white fontKorean fs-2">제작자 정보</p>
+										<hr class="colorPink border-3 opacity-75">
+									</div>
+									<div class="col-12">
+										<table class="devTable">
+											<tr>
+												<td><p class="text-white fontKorean">제작자</p></td>
+												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+											</tr>
+											<tr>
+												<td><p class="text-white fontKorean">제작자</p></td>
+												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+											</tr>
+										</table>
+									</div>				
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-3">
-						<button type="button" class="btn btn-success fontEnglish fw900">PLAY GAME</button>
-					</div>
+
 				</div>
 			</div>
+
 		</div>
 		<div class="container-fluid g-0">
 			<div class="footer bColorBlack">
@@ -215,9 +284,23 @@ a{
 		</div>
 		</div>
 		<script>
+		$("#rank").css("display","flex");
+		$("#rank").css("justify-content","center");
+		$("#info").css("display","none");
         $(".btn").on("click",function(){
             // $(".categories").text();
             console.log("");
+        });
+        
+        $("#btnradio1").on("click",function(){
+        	$("#rank").css("display","flex");
+        	$("#rank").css("justify-content","center");
+        	$("#info").css("display","none");
+        });
+        
+        $("#btnradio2").on("click",function(){
+        	$("#info").css("display","block");
+        	$("#rank").css("display","none");
         });
     </script>
 </body>

@@ -184,7 +184,6 @@ a {
 	display:flex;
 	justify-content: end;
 	align-items:center;
-	
 }
 
 .topBtns button{
@@ -205,6 +204,18 @@ a {
 	color:white;
 }
 
+.topBtns .btnClicked{
+	background-color:#5d6ce1;
+	color:white;
+	border:3px solid #5d6ce1;	
+}
+
+.btnClicked i{
+	color:white;
+} 
+
+
+
 .replyUpdate,
 .replyDelete {
 	display:flex;
@@ -213,13 +224,22 @@ a {
 }
 
 .recommendBtn{
-	border: 3px solid white;
-    width: 140px;
-    height: 50px;
+	border: 2px solid black;
+    width: 70px;
+    height: 40px;
     border-radius: 10px;
     display:flex;
 	justify-content: center;
     align-items: center;
+    margin:1px;
+}
+
+.recommendBtn:hover{
+	background-color: #5d6ce1;
+	color:white;
+}
+.recommendBtn:hover i{
+	color:white;
 }
 
 </style>
@@ -298,8 +318,24 @@ a {
 				<div class="row g-0 mb80">
 					<div class="col-12 common fontEnglish fw700 fs40 mt80">자유게시판</div>
 					<div class="col-12 topBtns">
-						<button><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-						<button><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+						<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+						<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+						
+						<c:choose>
+							<c:when test="${not empty postRec}">
+								<script>
+									$("#postRec").attr("class", "btnClicked");
+								</script>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${not empty bookmark}">						
+								<script>
+									$("#bookmark").attr("class", "btnClicked");
+								</script>
+							</c:when>
+						</c:choose>
+						
 						
 					</div> 
 					<div class="col-12">
@@ -352,61 +388,10 @@ a {
 						</div>
 
 						<div class="col-12">
+							<input type="hidden" id="loginID" value="${post.writer}">
+							<input type="hidden" id="postWriter" value="${loginID}">
 							<div class="row g-0 replys mb200" id="replys">
-							
-								<script>
-									$.ajax({
-										url:"/load.reply",
-										data:{
-											postSeq : "${post.seq}"
-										},
-										dataType:"json",
-										type:"post"
-									}).done(function(resp){
-										let postWriter = "${post.writer}";
-										let loginID = "${loginID}";
-										let replys = $("#replys");
-										for(let i=0; i<resp.length; i++){
-											
-											let replyTag = $("<div>").attr("class", "col-12 reply");
-											let row = $("<div>").attr("class","row g-0");
-											let col10 = $("<div>").attr("class","col-10");
-											let writerCover = $("<div>").attr("class","d-flex align-items-end mb10").append($("<div>").attr("class","writer fw500 fs20").html(resp[i].nickName));
-											if(resp[i].writer == postWriter){
-												let isWriterTag = $("<div>").attr("class","isWriter colorWhite bColorBlue fw400 fs15").html("작성자");
-												writerCover.append(isWriterTag);
-											}
-											let contents = $("<div>").attr("class","contents fw400 fs20 mb10").html(resp[i].contents);
-											let detailInfo = $("<div>").attr("class","replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate+"&nbsp;&nbsp;");
-											let nestedReplyBtn = $("<a>").attr("href","#").attr("class","nestedReplyBtn colorDarkgray").html("답글 쓰기");
-											detailInfo.append(nestedReplyBtn);
-											
-											row.append(col10.append(writerCover).append(contents).append(detailInfo));
-											let replyBtns = $("<div>").attr("class","col-2 d-none d-md-flex replyBtns");
-											if(resp[i].writer == loginID){
-												let updateBtn = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("수정");
-												let deleteBtn = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("삭제");
-												replyBtns.append(updateBtn).append(deleteBtn);
-												
-												let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns");
-												let updateBtnMini = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("<i class='fa-solid fa-pen-to-square'></i>");
-												let deleteBtnMini = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
-												replyBtnsMini.append(updateBtnMini).append(deleteBtnMini);
-												
-												row.append(replyBtns).append(replyBtnsMini);
-											}else{
-												let recommendBtn = $("<div>").attr("class","col-2 bColorBlue colorWhite fw400 fs17 recommendBtn").html("<i class='fa-regular fa-thumbs-up' style='color:white'></i>"+"&nbsp;&nbsp;추천");
-												row.append(replyBtns.append(recommendBtn));
-											}
-											
-											replys.append(replyTag.append(row));
-											
-										}
-									});
-								</script>
-							
-					
-								
+	
 								<div class="col-12 reply">
 									<div class="d-flex align-items-end mb10">
 										<div class="writer fw500 fs20">writer01</div>
