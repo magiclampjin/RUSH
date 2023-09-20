@@ -150,10 +150,11 @@ a {
 			                                        			</a>
 			                                        		</c:when>
 			                                        		<c:otherwise>
-			                                        			<div class="mainTitle">비밀글입니다.</div>
+			                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
 			                                        			<script>
-			                                        				
-			                                        				console.log($(this));
+			                                        				function checkSecret(elem){
+			                                        					alert("비밀글은 글을 작성한 본인만 확인가능합니다.");
+			                                        				}
 			                                        			</script>
 			                                        		</c:otherwise>
 		                                        		</c:choose>
@@ -180,7 +181,31 @@ a {
 		                                        		<i class="fa-solid fa-lock"></i>
 		                                        	</c:if>
 	                                        	</div>
-	                                            <div class="mainTitle">${qna.title }</div>
+	                                            
+	                                            <c:choose>
+		                                        	<c:when test="${qna.secret eq true}">
+		                                        		<c:choose>
+			                                        		<c:when test="${qna.writer == loginID }">
+			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        				<div class="mainTitle">비밀글입니다.</div>
+			                                        			</a>
+			                                        		</c:when>
+			                                        		<c:otherwise>
+			                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
+			                                        			<script>
+			                                        				function checkSecret(elem){
+			                                        					alert("비밀글은 글을 작성한 본인만 확인가능합니다.");
+			                                        				}
+			                                        			</script>
+			                                        		</c:otherwise>
+		                                        		</c:choose>
+		                                        	</c:when>
+		                                        	<c:otherwise>
+			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        		<div class="mainTitle">${qna.title }</div>
+			                                        	</a>
+		                                        	</c:otherwise>
+	                                        	</c:choose>
 	                                            <div class="replyCnt colorPink fontEnglish">답변완료</div>
 	                                        </div>
 	                                        <div class="info">
