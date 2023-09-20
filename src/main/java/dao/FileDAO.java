@@ -32,7 +32,7 @@ public class FileDAO {
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, dto.getParentSeq());
 			pstat.setString(2, dto.getOriginName());
-
+			pstat.setString(3, dto.getSystemName());
 			return pstat.executeUpdate();
 		}
 	}
