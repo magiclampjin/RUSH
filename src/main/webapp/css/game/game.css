@@ -26,6 +26,11 @@
 .mxConWidth{
 	max-width: 1300px;
 }
+
+.mt49{
+	margin-top : 50px;
+}
+
 .mt150{
 	margin-top : 150px;
 }
@@ -40,4 +45,17 @@
 .pr45{
 	padding-right : 45px;
 }
+
+.marginAuto{
+	margin : auto;
+}
 /* GamePage css  */
+
+
+.fw900 {
+    font-weight: 900;
+}
+
+.colorLime{
+	
+}
