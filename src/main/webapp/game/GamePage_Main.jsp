@@ -138,7 +138,7 @@ div {
 							<p class="fs-2 text-white fontKorean">최신게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<a href="/moveToGamePage.game"><div class="test ml45 mr45"></div>
+								<a href="/moveToGamePage.game?game=KJMAX"><div class="test ml45 mr45"></div>
 								<p class="text-white ml45">게임1</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">

@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -31,6 +32,33 @@ public class GameDAO {
 			pstat.setString(1, name);
 			pstat.setString(2, id);
 			return pstat.executeUpdate();
+		}
+	}
+	public String selectByGameName(String gName) throws Exception{
+		String sql = "select * from game where gName = ?";
+		String result = "";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, gName);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getString("gCategory");	
+		}
+	}
+	public int selectFavorite(String gName, String mID) throws Exception {
+		String sql = "select count(*) as count from game_favorite where gName = ? and mID = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, gName);
+			pstat.setString(2, mID);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			int count = rs.getInt("count");
+			return count;
 		}
 	}
 	
