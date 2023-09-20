@@ -51,11 +51,28 @@ a{
 	max-width : 1030px;
 	width : 100%;
 }
+.devTable th,td{
+	border : 1px solid white;
+	vertical-align : middle;
+	padding : 3px;
+}
+.devTable th{
+	width : 20%;
+}
+.devTable td{
+	width : 80%;
+}
 .devTable{
 	border : 1px solid white;
 	width : 100%;
-	text
 }
+.btn-check-input:checked~.btn.btn-outline-light::before{
+	background-color: #ccf423;
+}
+.bColorBlue {
+  background-color: #5d6ce1;
+}
+
 </style>
 </head>
 <body>
@@ -72,7 +89,8 @@ a{
 			let isFavorite = res;
 			console.log(isFavorite);
 			if(isFavorite == 1){
-				$("favorite").addClass("active");
+				$("#favorite").css("display","none");
+				$("#delfavorite").css("display","block");
 				console.log("active");
 			}
 		});
@@ -184,6 +202,10 @@ a{
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
+									<button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
+										<i class="fa-regular fa-star colorWhite"></i>
+										즐겨찾기
+									</button>
 								</div>
 							</div>
 							<hr class="border border-primary border-3 opacity-75">
@@ -229,7 +251,7 @@ a{
 								</div>
 							</div>
 							<div class="col-12" id="info">
-								<div class="row g-0 w100p">
+								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">게임 설명</p>
 										<hr class="colorBlue border-3 opacity-75">
@@ -238,7 +260,7 @@ a{
 										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
 									</div>				
 								</div>
-								<div class="row g-0 w100p">
+								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">조작 방법</p>
 										<hr class="colorGreen border-3 opacity-75">
@@ -247,7 +269,7 @@ a{
 										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
 									</div>				
 								</div>
-								<div class="row g-0 w100p">
+								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">제작자 정보</p>
 										<hr class="colorPink border-3 opacity-75">
@@ -255,15 +277,15 @@ a{
 									<div class="col-12">
 										<table class="devTable">
 											<tr>
-												<td><p class="text-white fontKorean">제작자</p></td>
-												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+												<th class="text-white fontKorean fw900">제작자</th>
+												<td class="text-white fontKorean">제작자이름</td>
 											</tr>
 											<tr>
-												<td><p class="text-white fontKorean">제작자</p></td>
-												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+												<th class="text-white fontKorean fw900">제작자 소속</th>
+												<td class="text-white fontKorean">공주대학교 SKY팀</td>
 											</tr>
 										</table>
-									</div>				
+									</div>
 								</div>
 							</div>
 						</div>
@@ -332,6 +354,18 @@ a{
         $("#favorite").on("click",function(){
         	$.ajax({
         	      url:"/favorite.game",
+        	      data:{
+        	        mID:"rubiver",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+        	        gameName:'${game}'
+        	      },
+        	      type:"post"
+        	    }).done(function (res){
+        	      console.log(res);
+        	    });
+        });
+        $("#favorite").on("click",function(){
+        	$.ajax({
+        	      url:"/deletefavorite.game",
         	      data:{
         	        mID:"rubiver",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
         	        gameName:'${game}'

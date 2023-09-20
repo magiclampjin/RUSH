@@ -37,7 +37,6 @@ public class GameController extends HttpServlet {
 			}else if(cmd.equals("/favorite.game")) {
 				String mID = request.getParameter("mID"); //넘어오는 파라미터 이름은 추후 수정 가능.
 				String gameName = request.getParameter("gameName");
-				//GameFavoriteDAO, GameFavoriteDTO 작성 해야함.
 				//ajax로 할듯?
 				int result = dao.insertFavorite(gameName, mID);
 				PrintWriter out = response.getWriter();
@@ -56,6 +55,18 @@ public class GameController extends HttpServlet {
 				int isFavorite = dao.selectFavorite(gameName, mID);
 				PrintWriter out = response.getWriter();
 				out.println(isFavorite);
+			}else if(cmd.equals("/deletefavorite.game")) {
+				String mID = request.getParameter("mID"); //넘어오는 파라미터 이름은 추후 수정 가능.
+				String gameName = request.getParameter("gameName");
+				int result = dao.insertFavorite(gameName, mID);
+				PrintWriter out = response.getWriter();
+				if(result>0) {
+					System.out.println("즐겨찾기 성공");
+					out.println("o");
+				}else {
+					System.out.println("즐겨찾기 실패");
+					out.println("x");
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

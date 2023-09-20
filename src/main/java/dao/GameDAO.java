@@ -34,6 +34,17 @@ public class GameDAO {
 			return pstat.executeUpdate();
 		}
 	}
+	public int deleteFavorite(String name, String id) throws Exception {
+		String sql = "delete from game_favorite where gName = ? and mID = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, name);
+			pstat.setString(2, id);
+			return pstat.executeUpdate();
+		}
+	}
 	public String selectByGameName(String gName) throws Exception{
 		String sql = "select * from game where gName = ?";
 		String result = "";
