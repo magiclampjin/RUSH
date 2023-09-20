@@ -38,9 +38,17 @@ public class BoardController extends HttpServlet {
 				String category = request.getParameter("category");
 				
 				BoardDTO post = dao.selectPost(postSeq);
+				
+				boolean postRec = dao.checkPostRecommend(postSeq, (String)request.getSession().getAttribute("loginID"));
+				boolean bookmark = dao.checkPostBookmark(postSeq, (String)request.getSession().getAttribute("loginID"));
+				
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("category", category);
+				if(postRec)
+					request.setAttribute("postRec",postRec);
+				if(bookmark)
+					request.setAttribute("bookmark",bookmark);
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/update.board")) {
@@ -87,6 +95,10 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
+			} else if(cmd.equals("/insertRecommend.board")) {
+				
+			} else if(cmd.equals("/insertBookmark.board")) {
+				
 			}
 
 		} catch (Exception e) {

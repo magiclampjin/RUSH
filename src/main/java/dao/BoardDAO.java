@@ -42,6 +42,28 @@ public class BoardDAO {
 		}
 	}
 	
+	public boolean checkPostRecommend(int postSeq, String loginId) throws Exception{
+		String sql = "select * from postRecommend where cbSeq = ? and mId = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, postSeq);
+			pstat.setString(2, loginId);
+			try (ResultSet rs = pstat.executeQuery();) {
+				return rs.next();
+			}
+		}
+	}
+	
+	public boolean checkPostBookmark(int postSeq, String loginId) throws Exception{
+		String sql = "select * from bookmark where cbSeq = ? and mId = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, postSeq);
+			pstat.setString(2, loginId);
+			try (ResultSet rs = pstat.executeQuery();) {
+				return rs.next();
+			}
+		}
+	}
+	
 	public BoardDTO selectPost(int postSeq) throws Exception { // post.jsp에서 게시글 출력할 떄 사용
 		this.upViewCount(postSeq);
 		
