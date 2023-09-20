@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,9 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
+import dao.FileDAO;
 import dto.BoardDTO;
+import dto.FileDTO;
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
@@ -25,27 +28,44 @@ public class BoardController extends HttpServlet {
 		System.out.println("board cmd: " + cmd);
 
 		BoardDAO dao = BoardDAO.getInstance();
+		FileDAO fdao =FileDAO.getInstance();
 
 		try {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
-				String category = request.getParameter("category");
-				String title = request.getParameter("title");
 				
 				String uploadPath = request.getServletContext().getRealPath("files");
 				File filepath = new File(uploadPath);
-				System.out.println(("File 생성"));
 				if(!filepath.exists()) {
 					filepath.mkdir();
 				}
-				
+				System.out.println(uploadPath);
 				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8", new DefaultFileRenamePolicy());
-				System.out.println("여기1");
-				String content = multi.getParameter("content");
+				String category = multi.getParameter("category");
+				String title = multi.getParameter("title");
+				String content = multi.getParameter("contents");
+				
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = dao.selectNickName(id);
-				int result = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
+				System.out.println("title"+title+"contents"+content);
+				int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
+				
+				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
+				while(fileNames.hasMoreElements()) { // 파일이 존재하는 동안
+					String fileName = fileNames.nextElement(); // 다음 파일을 불러옴
+					
+					if(multi.getFile(fileName) != null) {
+						String ori_name = multi.getOriginalFileName(fileName);
+						String sys_name = multi.getFilesystemName(fileName);
+						FileDTO fileDto = new FileDTO(0, parentSeq, ori_name, sys_name);
+						int fileResult = fdao.insert(fileDto);
+					}
+				}
+				
+				if(parentSeq!=0) {
+					response.sendRedirect("/listing.board");
+				}
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,
 				// 게시글 번호를 가져와야함.

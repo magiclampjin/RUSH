@@ -49,14 +49,6 @@ a {
 	right: 0;
 	left: auto;
 }
-
-/*
-
-.writebtn {
-	background-color: #ccf423;
-}
-
-*/
 </style>
 </head>
 <body>
@@ -129,27 +121,36 @@ a {
 			<div class="boardWrite_guide">
 				<c:choose>
 					<c:when test="${menu == 'qna'}">
-						<div class="container row g-0 p-0">
-							<form action="/insert.qna" method="post"
+						<form action="/insert.board" method="post"
+							enctype="multipart/form-data">
+							<div class="writeTitle">Q&A 작성</div>
+							<input type="text" class="inputTitle" name="title"
+								placeholder="제목을 입력하세요">
+							<div class="fileBox">
+								<input type="button" id="btnAdd" class="writebtn bColorGreen"
+									value="+">
+								</button>
+								<span>파일첨부</span>
+								<div id="fileContainer"></div>
+							</div>
+							<textarea id="summernote" class="content" rows="35" cols="100"
+								placeholder="내용을 입력하세요." name="contents"></textarea>
+							<div class="secretBox">
+								<input id="secret" class="screteChk" type="checkbox"> <input
+									id="secret_hidden" class="screteChk" type="hidden"
+									name="secret" value="false"> <label for="secret"
+									class="colorDarkgray">비밀글 설정하기</label>
+							</div>
+							<div class="writeBox">
+								<a href="/listing.board?category=${category }&cpage=1"><input
+									class="writebtn bColorGreen" type="button" value="목록으로"></a>
+								<input class="writebtn bColorGreen" type="submit" value="작성">
+							</div>
+
+						</form>
+						<!-- <form action="/insert.qna" method="post"
 								enctype="multipart/form-data">
-								<!-- 카테고리 숨겨놓음 -->
-								<input type="hidden" value="${category }" name="category">
-								<div class="qna col-12">
-									<h2 class="fontEnglish">Q&A - 게시글 작성</h2>
-								</div>
-								<div class="titleBox col-12">
-									<input class="inputTitle" type="text" name="title"
-										placeholder="제목을 입력하세요">
-								</div>
-								<div class="col-12 fileBox">
-									<button type="button" id="btnAdd">+</button>
-									<span>파일첨부</span>
-									<div id="fileContainer"></div>
-								</div>
-								<div class="col-12">
-									<textarea id="summernote" class="content" rows="35" cols="100"
-										placeholder="내용을 입력하세요." name="contents"></textarea>
-								</div>
+
 								<div class="row bottom">
 									<div class="col-11">
 										<input id="secret" class="screteChk" type="checkbox">
@@ -171,25 +172,16 @@ a {
 														.val());
 											}
 										};
-										/* $("#secret").("change",function(){
-										    if($("#secret").is(":checked")){
-										    	$("#secret").val("true");
-										    	console.log($("#secret").val());
-										    }
-										    else{
-										    	$("#secret").val("false");
-										    	console.log($("#secret").val());
-										    }
-										}); */
 									</script>
 
 									<input class="submitBtn col-1" type="submit" value="작성">
 								</div>
-							</form>
-						</div>
+							</form> -->
 					</c:when>
 					<c:otherwise>
-						<form action="/insert.board?category=${category }" method="post" enctype="multipart/form-data">
+						<form action="/insert.board" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" value="${category }" name="category">
 							<div class="writeTitle">자유게시글 작성</div>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요">
@@ -203,53 +195,53 @@ a {
 							<textarea id="summernote" class="content" rows="35" cols="100"
 								placeholder="내용을 입력하세요." name="contents"></textarea>
 							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+								<a href="/listing.board?category=${category }&cpage=1"><input
+									class="writebtn bColorGreen" type="button" value="목록으로"></a>
 								<input class="writebtn bColorGreen" type="submit" value="작성">
 							</div>
+						</form>
+					</c:otherwise>
+				</c:choose>
 			</div>
-			</form>
-			</c:otherwise>
-			</c:choose>
 		</div>
-	</div>
 
-	<div class="footer bColorBlack">
-		<div class="footer_guide">
-			<div class="footer_logo fontLogo colorWhite">RUSH</div>
-			<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-				RIGHT RESERVED</div>
-			<div class="footer_contents">
-				<div class="about conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-					<div class="footer_con ">
-						<div class="con colorWhite">팀명 :</div>
-						<div class="encon colorWhite">SKY</div>
+		<div class="footer bColorBlack">
+			<div class="footer_guide">
+				<div class="footer_logo fontLogo colorWhite">RUSH</div>
+				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+					RIGHT RESERVED</div>
+				<div class="footer_contents">
+					<div class="about conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+						<div class="footer_con ">
+							<div class="con colorWhite">팀명 :</div>
+							<div class="encon colorWhite">SKY</div>
+						</div>
+					</div>
+					<div class="office conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
+						<div class="footer_con">
+							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
+						</div>
+					</div>
+					<div class="contact conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+						<div class="footer_con fontEnglish">
+							<div class="con fontEnglish colorWhite">a@naver.com</div>
+							<div class="con fontEnglish colorWhite">01012345678</div>
+						</div>
+					</div>
+					<div class="provision conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
+						<div class="footer_con">
+							<div class="con colorWhite">개인정보 처리방침</div>
+							<div class="con colorWhite">서비스 이용약관</div>
+						</div>
 					</div>
 				</div>
-				<div class="office conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">OFFICE</div>
-					<div class="footer_con">
-						<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-					</div>
-				</div>
-				<div class="contact conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-					<div class="footer_con fontEnglish">
-						<div class="con fontEnglish colorWhite">a@naver.com</div>
-						<div class="con fontEnglish colorWhite">01012345678</div>
-					</div>
-				</div>
-				<div class="provision conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">PROVISION</div>
-					<div class="footer_con">
-						<div class="con colorWhite">개인정보 처리방침</div>
-						<div class="con colorWhite">서비스 이용약관</div>
-					</div>
-				</div>
+
 			</div>
-
 		</div>
-	</div>
 	</div>
 </body>
 </html>

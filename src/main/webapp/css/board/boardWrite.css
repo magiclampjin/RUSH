@@ -75,7 +75,9 @@ input[type=file]::file-selector-button:hover {
 .writeBox>a{
 	margin-right:15px;
 }
-
+.secretBox{
+	margin-top:20px;
+}
 .note-editor {
 	margin-top: 10px;
 }

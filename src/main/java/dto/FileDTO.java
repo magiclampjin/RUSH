@@ -3,15 +3,13 @@ package dto;
 public class FileDTO {
 	private int seq;
 	private int parentSeq;
-	private String fileLocation;
 	private String originName;
 	private String systemName;
 	public FileDTO() {}
-	public FileDTO(int seq, int parentSeq, String fileLocation, String originName, String systemName) {
+	public FileDTO(int seq, int parentSeq, String originName, String systemName) {
 		super();
 		this.seq = seq;
 		this.parentSeq = parentSeq;
-		this.fileLocation = fileLocation;
 		this.originName = originName;
 		this.systemName = systemName;
 	}
@@ -26,12 +24,6 @@ public class FileDTO {
 	}
 	public void setParentSeq(int parentSeq) {
 		this.parentSeq = parentSeq;
-	}
-	public String getFileLocation() {
-		return fileLocation;
-	}
-	public void setFileLocation(String fileLocation) {
-		this.fileLocation = fileLocation;
 	}
 	public String getOriginName() {
 		return originName;
