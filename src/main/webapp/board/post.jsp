@@ -388,8 +388,10 @@ a {
 						</div>
 
 						<div class="col-12">
+							<input type="hidden" id="loginID" value="${post.writer}">
+							<input type="hidden" id="postWriter" value="${loginID}">
 							<div class="row g-0 replys mb200" id="replys">
-							
+								
 								<script>
 									$.ajax({
 										url:"/load.reply",

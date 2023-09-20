@@ -1,13 +1,17 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
@@ -16,10 +20,15 @@ import dto.BoardDTO;
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
+		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
+		
 		String cmd = request.getRequestURI();
 		System.out.println("board cmd: " + cmd);
 
 		BoardDAO dao = BoardDAO.getInstance();
+		PrintWriter pw = response.getWriter();
+		Gson gson = new Gson();
 
 		try {
 			if (cmd.equals("/insert.board")) {
@@ -96,9 +105,25 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/board/boardlist.jsp").forward(request, response);
 			} else if(cmd.equals("/insertRecommend.board")) {
-				
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				int result = dao.insertPostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
+				System.out.println(result);
+				pw.append(gson.toJson(result));
+			} else if(cmd.equals("/deleteRecommend.board")) {
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				int result = dao.deletePostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
+				System.out.println(result);
+				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/insertBookmark.board")) {
-				
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				int result = dao.insertPostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
+				System.out.println(result);
+				pw.append(gson.toJson(result));
+			} else if(cmd.equals("/deleteBookmark.board")) {
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
+				System.out.println(result);
+				pw.append(gson.toJson(result));
 			}
 
 		} catch (Exception e) {
