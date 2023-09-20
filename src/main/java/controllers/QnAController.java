@@ -43,11 +43,13 @@ public class QnAController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf8",new DefaultFileRenamePolicy());
 				
 				// 아직 Session 안해서 일단 String으로 넣어놓음
-//				String mID = (String)request.getSession().getAttribute("loginID");
-//				String mNickname = (String )request.getSession().getAttribute("loginNickname");
-//				
-				String mID = "ID";
-				String mNickname = "Nickname";
+				String mID = (String)request.getSession().getAttribute("loginID");
+				String mNickname = (String )request.getSession().getAttribute("loginNickname");
+				System.out.println("ID : "+ mID);
+				System.out.println("Nickname : "+mNickname);
+				
+//				String mID = "ID";
+//				String mNickname = "Nickname";
 				
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");

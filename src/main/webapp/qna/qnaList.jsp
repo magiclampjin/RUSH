@@ -45,6 +45,7 @@ a {
 }
 .num,.writer,.date,.file{width:15%;}
 .title{width:40%;}
+.mainTitle{padding-left:5px;}
 
 </style>
 </head>
@@ -140,21 +141,27 @@ a {
 	                                        		<i class="fa-solid fa-lock"></i>
 	                                        	</c:if>
 	                                        </div>
-	                                        
 	                                        	<c:choose>
-	                                        	<c:when test="${qna.secret eq true}">
-	                                        		<div class="mainTitle">비밀글입니다.</div>
-	                                        		<c:if test="${qna.writer} == ${loginID }">
-	                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-	                                        			<div class="mainTitle"></div>
-	                                        			</a>
-	                                        		</c:if>
-	                                        	</c:when>
-	                                        	<c:otherwise>
-	                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-	                                        		<div class="mainTitle">${qna.title }</div>
-	                                        	</a>
-	                                        	</c:otherwise>
+		                                        	<c:when test="${qna.secret eq true}">
+		                                        		<c:choose>
+			                                        		<c:when test="${qna.writer == loginID }">
+			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        				<div class="mainTitle">비밀글입니다.</div>
+			                                        			</a>
+			                                        		</c:when>
+			                                        		<c:otherwise>
+			                                        			<div class="mainTitle">비밀글입니다.</div>
+			                                        			<script>
+			                                        				console.log($(this));
+			                                        			</script>
+			                                        		</c:otherwise>
+		                                        		</c:choose>
+		                                        	</c:when>
+		                                        	<c:otherwise>
+			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        		<div class="mainTitle">${qna.title }</div>
+			                                        	</a>
+		                                        	</c:otherwise>
 	                                        	</c:choose>
 	                                        
 	                                        <div class="replyCnt colorPink fontEnglish">답변완료</div>
@@ -167,7 +174,11 @@ a {
 	                                    <div class="num">${qna.seq }</div>
 	                                    <div class="minCon">
 	                                        <div class="title">
-	                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
+	                                            <div class="lock">
+		                                            <c:if test="${qna.secret eq true}">
+		                                        		<i class="fa-solid fa-lock"></i>
+		                                        	</c:if>
+	                                        	</div>
 	                                            <div class="mainTitle">${qna.title }</div>
 	                                            <div class="replyCnt colorPink fontEnglish">답변완료</div>
 	                                        </div>

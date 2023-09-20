@@ -11,6 +11,7 @@
 <!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardWrite.css">
+
 <script type="text/javascript" src="/js/board/summernote_editor.js"></script>
 
 <!-- 부트스트랩 -->
@@ -121,7 +122,7 @@ a {
 			<div class="boardWrite_guide">
 				<c:choose>
 					<c:when test="${menu == 'qna'}">
-						<form action="/insert.board" method="post"
+						<form action="/insert.qna" method="post"
 							enctype="multipart/form-data">
 							<div class="writeTitle">Q&A 작성</div>
 							<input type="text" class="inputTitle" name="title"
@@ -148,6 +149,7 @@ a {
 							</div>
 
 						</form>
+						<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
 						<!-- <form action="/insert.qna" method="post"
 								enctype="multipart/form-data">
 
