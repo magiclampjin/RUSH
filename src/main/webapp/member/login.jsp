@@ -7,6 +7,7 @@
 <title>Login</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/member/login.css">
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -41,19 +42,22 @@
 	#container {
 		display: flex;
 		min-width: 786px;
+		min-height: 877px;
 	}
 	
 	.loginBox {
 		width: 500px;
 		margin: auto;
-		margin-top: 100px;
+		/* margin-top: 100px; */
 	}
 	
 	#title {
+		text-align: center;
 		font-size: 70px;
 	}
 	
 	#subTitle {
+		text-align: center;
 		font-size: 30px;
 	}
 	
@@ -83,7 +87,6 @@
 	
 	#inputId::placeholder, #inputPw::placeholder {
 		font-size: 20px;
-		padding: 0 10px;
 	}
 	
 	.rem_fg {
@@ -121,6 +124,7 @@
 		margin-top: 40px;
 		justify-content: center;
 		align-items: center;
+		margin-bottom: 40px;
 	}
 	
 	#signupText {
@@ -137,10 +141,6 @@
 </head>
 
 <body>
-
-
-	
-	
 	<div class="container-fluid p-0">
         <div class="header bColorBlack">
             <div class="header_guide">
