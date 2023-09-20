@@ -362,8 +362,16 @@ a {
 						</div>
 						<div class="row g-0 postBottom mb40">
 							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
-							<div
-								class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">
+								<c:choose>
+									<c:when test="${files.size() > 0}">
+										<c:forEach var="i" items="${files}">
+											<a href="/download.file?sysname=${i.systemName}&oriname=${i.originName}">${i.originName}</a><br>
+										</c:forEach>
+									</c:when>
+									<c:otherwise><span class="colorBlack">없음</span></c:otherwise>
+								</c:choose>	
+							</div>
 							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
 								<div class="d-none d-md-flex">
 									<c:choose>
