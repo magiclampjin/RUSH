@@ -162,6 +162,10 @@ a {
 	padding: 0px 25px 25px 0px;
 }
 
+.replyBtns div {
+	cursor: pointer;
+}
+
 .isWriter {
 	border: 1px solid #5d6ce1;
 	border-radius: 10px;
@@ -173,75 +177,73 @@ a {
 	justify-content: center;
 }
 
-.filename{
+.filename {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.topBtns{
-	height:50px;
-	display:flex;
+.topBtns {
+	height: 50px;
+	display: flex;
 	justify-content: end;
-	align-items:center;
+	align-items: center;
 }
 
-.topBtns button{
-	padding:5px 10px;
-	border:3px solid black;
-	background-color:#FFFFFF00;
-	margin-left:10px;
-	border-radius:5px;
+.topBtns button {
+	padding: 5px 10px;
+	border: 3px solid black;
+	background-color: #FFFFFF00;
+	margin-left: 10px;
+	border-radius: 5px;
 }
 
-.topBtns button:hover{
-	background-color:#5d6ce1;
-	color:white;
-	border:3px solid #5d6ce1;	
-}
-
-.topBtns button:hover i{
-	color:white;
-}
-
-.topBtns .btnClicked{
-	background-color:#5d6ce1;
-	color:white;
-	border:3px solid #5d6ce1;	
-}
-
-.btnClicked i{
-	color:white;
-} 
-
-
-
-.replyUpdate,
-.replyDelete {
-	display:flex;
-	justify-content: center;
-    align-items: center;
-}
-
-.recommendBtn{
-	border: 2px solid black;
-    width: 70px;
-    height: 40px;
-    border-radius: 10px;
-    display:flex;
-	justify-content: center;
-    align-items: center;
-    margin:1px;
-}
-
-.recommendBtn:hover{
+.topBtns button:hover {
 	background-color: #5d6ce1;
-	color:white;
-}
-.recommendBtn:hover i{
-	color:white;
+	color: white;
+	border: 3px solid #5d6ce1;
 }
 
+.topBtns button:hover i {
+	color: white;
+}
+
+.topBtns .btnClicked {
+	background-color: #5d6ce1;
+	color: white;
+	border: 3px solid #5d6ce1;
+}
+
+.btnClicked i {
+	color: white;
+}
+
+.replyUpdate, .replyDelete, .replyCancel,
+.replySave {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.recommendBtn {
+	border: 2px solid black;
+	width: 70px;
+	height: 40px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1px;
+}
+
+.recommendBtn:hover {
+	background-color: #5d6ce1;
+	color: white;
+}
+
+.recommendBtn:hover i {
+	color: white;
+}
 </style>
 </head>
 
@@ -317,34 +319,40 @@ a {
 			<div class="body_guide">
 				<div class="row g-0 mb80">
 					<div class="col-12 common fontEnglish fw700 fs40 mt80">자유게시판</div>
-					
+
 					<!-- 글 작성자 = 로그인 사용자이면 글 추천, 글 북마크 버튼 출력 x -->
 					<c:choose>
 						<c:when test="${loginID ne post.writer}">
-							
+
 							<div class="col-12 topBtns">
-								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
-								
+								<button id="postRec">
+									<i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천
+								</button>
+								<button id="bookmark">
+									<i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크
+								</button>
+
 								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
 								<c:choose>
 									<c:when test="${not empty postRec}">
 										<script>
-											$("#postRec").attr("class", "btnClicked");
+											$("#postRec").attr("class",
+													"btnClicked");
 										</script>
 									</c:when>
 								</c:choose>
 								<c:choose>
-									<c:when test="${not empty bookmark}">						
+									<c:when test="${not empty bookmark}">
 										<script>
-											$("#bookmark").attr("class", "btnClicked");
+											$("#bookmark").attr("class",
+													"btnClicked");
 										</script>
 									</c:when>
 								</c:choose>
-							</div> 
+							</div>
 						</c:when>
 					</c:choose>
-					
+
 					<div class="col-12">
 						<div class="row g-0 post">
 							<div class="col-12 postTop">
@@ -361,45 +369,53 @@ a {
 						</div>
 						<div class="row g-0 postBottom mb40">
 							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
-							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div
+								class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
 							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
 								<div class="d-none d-md-flex">
 									<button class="postBtns bColorGreen" id="update">수정</button>
 									<button class="postBtns bColorGreen" id="delete">삭제</button>
 									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
 								</div>
-								
+
 								<div class="d-md-none">
-									<button class="postBtnsMini bColorGreen" id="update"><i class="fa-solid fa-pen-to-square"></i></button>
-									<button class="postBtnsMini bColorGreen" id="delete"><i class="fa-solid fa-trash-can"></i></button>
-									<button class="postBtnsMini bColorBlue colorWhite" id="goList"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
+									<button class="postBtnsMini bColorGreen" id="update">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</button>
+									<button class="postBtnsMini bColorGreen" id="delete">
+										<i class="fa-solid fa-trash-can"></i>
+									</button>
+									<button class="postBtnsMini bColorBlue colorWhite" id="goList">
+										<i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+									</button>
 								</div>
-								
-								<input type="hidden" id="cpage" value="${cpage}">
-								<input type="hidden" id="category" value="${category}">
-								
+
+								<input type="hidden" id="cpage" value="${cpage}"> <input
+									type="hidden" id="category" value="${category}">
+
 							</div>
-							
+
 						</div>
 					</div>
 					<div class="row g-0">
 						<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
 						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
-								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable></div>
+								<div class="col-10 col-lg-11" id="replyInsertTxt"
+									contenteditable></div>
 								<input type="hidden" id="postSeq" value="${post.seq}">
 								<div class="col-2 col-lg-1 btnCover">
-									<button class="fw400 fs25 colorDarkgray replyInsertBtn" id="replyInsertBtn">등록</button>
+									<button class="fw400 fs25 colorDarkgray replyInsertBtn"
+										id="replyInsertBtn">등록</button>
 								</div>
-							</div>		
+							</div>
 						</div>
 
 						<div class="col-12">
-							<input type="hidden" id="loginID" value="${loginID}">
-							<input type="hidden" id="postWriter" value="${post.writer}">
+							<input type="hidden" id="loginID" value="${loginID}"> <input
+								type="hidden" id="postWriterName" value="${post.writer}">
 							<div class="row g-0 replys mb200" id="replys">
-	
-								<div class="col-12 reply">
+								<!-- 	<div class="col-12 reply">
 									<div class="d-flex align-items-end mb10">
 										<div class="writer fw500 fs20">writer01</div>
 									</div>
@@ -426,14 +442,10 @@ a {
 											</div>
 										</div>
 									</div>
-								</div>
-
+								</div> -->
 							</div>
-
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 

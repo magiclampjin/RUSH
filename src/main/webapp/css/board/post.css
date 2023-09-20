@@ -105,15 +105,35 @@
     display: flex;
     justify-content: end;
     align-items: end;
+    margin: 0px 0px 7px 0px;
+    border-right: 2px solid white;
 }
 
+
 .replyUpdate,
-.replyDelete {
+.replyDelete,
+.replyCancel,
+.replySave {
     border: 3px solid white;
     width: 70px;
     height: 40px;
     border-radius: 10px;
 }
 
+.defaultCover{
+	display: flex;
+}
 
+.updateCover{
+	display: none;
+}
 
+.contents{
+	overflow-y:auto;
+	max-height: 100px;
+}
+
+.replyDetailInfo{
+	margin:15px 0px;
+} 
+.

@@ -73,9 +73,15 @@ public class ReplyController extends HttpServlet {
 				
 			} else if(cmd.equals("/update.reply")) {
 				// 댓글 수정
+				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
+				String replyContents = request.getParameter("replyContents");
+				
+				dao.update(replySeq, replyContents);
 				
 			} else if(cmd.equals("/delete.reply")) {
 				// 댓글 삭제
+				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
+				dao.delete(replySeq);
 				
 			} else if(cmd.equals("/insertRecommend.reply")) {
 				// 댓글 좋아요

@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -196,6 +195,8 @@ public class BoardDAO {
 			pstat.setString(3, dto.getTitle());
 			pstat.setString(4, dto.getContents());
 			pstat.setString(5, dto.getCategory());
+			pstat.executeUpdate();
+			
 			try(ResultSet rs = pstat.getGeneratedKeys()){
 				rs.next();
 				return rs.getInt(1);
@@ -219,5 +220,12 @@ public class BoardDAO {
 		}
 	}
 	
-	
+	public void deletePost(int postSeq) throws Exception{
+		String sql = "delete from common_board where cbSeq = ?;";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, postSeq);
+			pstat.executeUpdate();
+		}
+	}
 }
