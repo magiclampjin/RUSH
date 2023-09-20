@@ -31,6 +31,9 @@
             width : 1300px;
             margin: auto;
         }
+        a{
+			text-decoration: none;
+		}
 </style>
 </head>
 <body>
