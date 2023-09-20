@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	
+	$("#replys").html(replyReload( $("#postSeq").val()));
+			
 	function replyReload(postSeq){
 		$.ajax({
 			url:"/load.reply",
