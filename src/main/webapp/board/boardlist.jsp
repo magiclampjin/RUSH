@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/board/freeboard.css">
+<link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
+<script type="text/javascript" src="/js/board/boardMainPagination.js"></script>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -112,21 +113,21 @@ a {
 			<div class="board_guide">
 				<div class="boardNav">
 					<div class="boardNav_body">
-						<div class="boardNav_li bColorGreen">자유게시판</div>
-						<div class="boardNav_li fontEnglish">Q&A</div>
+						<a href="/listing.board?cpage=1"><div class="boardNav_li bColorGreen">자유게시판</div></a>
+						<a href="/listing.qna?cpage=1"><div class="boardNav_li fontEnglish">Q&A</div></a>
 					</div>
 				</div>
 				<div class="boardCont">
 					<div class="boardTitle">자유게시판</div>
 					<ul class="tabs boardTabs">
-						<a href="/listing.board?category=rhythm" class="rhythm current"><li
+						<a href="/listing.board?category=rhythm&cpage=1" class="rhythm current"><li
 							class="tab-link">리듬게임</li></a>
-						<a href="/listing.board?category=arcade" class="arcade"><li
+						<a href="/listing.board?category=arcade&cpage=1" class="arcade"><li
 							class="tab-link">아케이드게임</li></a>
-						<a href="/listing.board?category=puzzle" class="puzzle"><li
+						<a href="/listing.board?category=puzzle&cpage=1" class="puzzle"><li
 							class="tab-link">퍼즐게임</li></a>
 					</ul>
-					<input type="hidden" value="${category }" id="category">
+					
 
 					<div class="boardHeader">
 						<div class="num">번호</div>
@@ -134,6 +135,7 @@ a {
 						<div class="writer">작성자</div>
 						<div class="date">작성일</div>
 						<div class="view">조회</div>
+						<div class="recommend">추천</div>
 						<div class="file">파일</div>
 					</div>
 					<div class="boardMain">
@@ -145,12 +147,14 @@ a {
 										<div class="loud">
 											<i class="fa-solid fa-bullhorn"></i>
 										</div>
-										<div class="mainTitle">${noti.title }</div>
+										<a href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div class="mainTitle">${noti.title }</div></a>
+										
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 									</div>
 									<div class="writer">${noti.nickName }</div>
-									<div class="date fontEnglish">${noti.stringFormat }</div>
+									<div class="date">${noti.stringFormat }</div>
 									<div class="view fontEnglish">${noti.view }</div>
+									<div class="recommend fontEnglish">${noti.recommend }</div>
 									<div class="file">
 										<i class="fa-solid fa-paperclip"></i>
 									</div>
@@ -162,13 +166,14 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<div class="mainTitle">${noti.title }</div>
+											<a href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&category=${category }"><div class="mainTitle">${noti.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 										</div>
 										<div class="info">
-											<div class="minWriter">${noti.nickName }</div>
-											<div class="minDate fontEnglish">${noti.stringFormat }</div>
-											<div class="minView fontEnglish">${noti.view }</div>
+											<div class="minWriter colorDarkgray">${noti.nickName }</div>
+											<div class="minDate colorDarkgray">${noti.stringFormat }</div>
+											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${noti.view }</div>
+											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${noti.recommend }</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
@@ -182,30 +187,32 @@ a {
 								<div class="maxBoard">
 									<div class="num fontEnglish">${post.seq }</div>
 									<div class="title">
-										<div class="mainTitle">${post.title }</div>
+										<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div class="mainTitle">${post.title }</div></a>
 										<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 									</div>
 									<div class="writer">${post.nickName }</div>
-									<div class="date fontEnglish">${post.stringFormat }</div>
-									<div class="view fontEnglish">${noti.view }</div>
+									<div class="date">${post.stringFormat }</div>
+									<div class="view fontEnglish">${post.view }</div>
+									<div class="recommend fontEnglish">${post.recommend }</div>
 									<div class="file">
 										<i class="fa-solid fa-paperclip"></i>
 									</div>
 								</div>
 								<div class="minBoard">
-									<div class="num fontEnglish">1</div>
+									<div class="num fontEnglish">${post.seq }</div>
 									<div class="minCon">
 										<div class="title">
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<div class="mainTitle">관리자만 작성할 수 있는 공지글 영역입니다.</div>
-											<div class="replyCnt colorPink fontEnglish">3</div>
+											<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div class="mainTitle">${post.title }</div></a>
+											<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 										</div>
 										<div class="info">
-											<div class="minWriter">작성자</div>
-											<div class="minDate fontEnglish">2023-09-16</div>
-											<div class="minView fontEnglish">조회</div>
+											<div class="minWriter colorDarkgray">${post.nickName }</div>
+											<div class="minDate colorDarkgray">${post.stringFormat }</div>
+											<div class="minView fontEnglish colorDarkgray"><i class="fa-regular fa-eye"></i>&nbsp;${post.view }</div>
+											<div class="minRecommend fontEnglish colorDarkgray"><i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }</div>
 											<div class="minFile">
 												<i class="fa-solid fa-paperclip"></i>
 											</div>
@@ -217,36 +224,41 @@ a {
 						</c:forEach>
 
 					</div>
-					<div class="pagination">123456789>>></div>
+					<div id="pagination"></div>
 					<div class="search_write">
 						<div class="write"></div>
 						<div class="search">
 							<form action="">
 								<div class="category">
 									<select class="form-select" aria-label="Default select example">
-										<option selected>제목</option>
-										<option value="1">작성자</option>
-										<option value="2">내용</option>
+										<option value="title" selected>제목</option>
+										<option value="writer">작성자</option>
+										<option value="content">내용</option>
 									</select>
 								</div>
 								<div class="keyword">
 									<input type="text">
 								</div>
 								<div class="sertchBtn">
-									<input type="submit" class="boardBtn" value="검색">
+									<input type="submit" class="boardBtn bColorGreen" value="검색">
 								</div>
 							</form>
 
 						</div>
 						<div class="write">
-							<input type="button" value="글쓰기" class="boardBtn">
+							<input type="button" value="글쓰기" class="boardBtn bColorGreen">
 						</div>
 					</div>
 				</div>
 			</div>
-
-
 		</div>
+		
+		<input type="hidden" value="${category }" id="category">
+		<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
+		<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
+		<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
+		<input type="hidden" id="lastPageNum" value="${lastPageNum }">
+		
 		<a href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>

@@ -1,10 +1,16 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import dto.ReplyDTO;
 
 public class ReplyDAO {
 	private ReplyDAO() {}
@@ -22,4 +28,41 @@ public class ReplyDAO {
 	}
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
+	
+	public List<ReplyDTO> selectAll(int postSeq) throws Exception{
+		String sql = "select * from reply where cbSeq = ?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, postSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replys = new ArrayList<>();
+				while(rs.next()) {
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend")));
+				}
+				return replys;
+			}
+		}
+	}
+	
+	public String getNickname(String id) throws Exception{
+		String sql = "select mnickname from members where mid = ?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1,id);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getString("mnickname");
+			}
+		}
+	}
+	
+	public void insert(ReplyDTO reply) throws Exception{
+		String nick = this.getNickname(reply.getWriter());
+		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default);";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1,reply.getParentSeq());
+			pstat.setString(2, reply.getWriter());
+			pstat.setString(3, nick);
+			pstat.setString(4, reply.getContents());
+			pstat.executeUpdate();
+		}
+	}
 }
