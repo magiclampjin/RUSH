@@ -25,20 +25,24 @@ public class BoardController extends HttpServlet {
 		try {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
-
+				
+				
 			} else if (cmd.equals("/load.board")) {
 				// cpage 가져와야하고,
 				// 게시글 번호를 가져와야함.
 				// 그리고 게시판 위치 (자유게시판인지 qna인지) -> 이거는 여기서 보내주는 것
 
-//				int cpage = Integer.parseInt(request.getParameter("cpage"));
-//				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
-
-				int cpage = 1;
-				int postSeq = 18;
+				
+				// <a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }">
+				int cpage =  Integer.parseInt(request.getParameter("cpage"));
+				int postSeq = Integer.parseInt(request.getParameter("seq"));
+				String category = request.getParameter("category");
+				
 				BoardDTO post = dao.selectPost(postSeq);
 				request.setAttribute("post", post);
-//				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
+				request.setAttribute("cpage", cpage);
+				request.setAttribute("category", category);
+				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/update.board")) {
 				// 게시글 수정
@@ -66,7 +70,7 @@ public class BoardController extends HttpServlet {
 					list = dao.selectByCategory(category,
 							currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 							Constants.RECORD_COUNT_PER_PAGE);
-					request.setAttribute("recordTotalCount", dao.getRecordCount());
+					request.setAttribute("recordTotalCount", dao.getRecordCount(category));
 
 				} else {
 					// 검색 키워드가 넘어온 경우
@@ -74,6 +78,8 @@ public class BoardController extends HttpServlet {
 
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = dao.selectByNoti();
+				
+				request.setAttribute("cpage", cpage);
 
 				request.setAttribute("category", category);
 				request.setAttribute("type", "freeBoard");

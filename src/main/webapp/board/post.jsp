@@ -121,6 +121,10 @@ a {
 	padding-bottom: 180px;
 }
 
+.pl15 {
+	padding-left: 15px;
+}
+
 .postTop {
 	min-height: 190px;
 	padding: 25px 15px;
@@ -136,6 +140,14 @@ a {
 	border: 0px;
 	border-radius: 10px;
 	width: 100px;
+	height: 50px;
+}
+
+.postBtnsMini {
+	margin: 10px 0px 0px 10px;
+	border: 0px;
+	border-radius: 10px;
+	width: 50px;
 	height: 50px;
 }
 
@@ -160,6 +172,56 @@ a {
 	align-items: center;
 	justify-content: center;
 }
+
+.filename{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.topBtns{
+	height:50px;
+	display:flex;
+	justify-content: end;
+	align-items:center;
+	
+}
+
+.topBtns button{
+	padding:5px 10px;
+	border:3px solid black;
+	background-color:#FFFFFF00;
+	margin-left:10px;
+	border-radius:5px;
+}
+
+.topBtns button:hover{
+	background-color:#5d6ce1;
+	color:white;
+	border:3px solid #5d6ce1;	
+}
+
+.topBtns button:hover i{
+	color:white;
+}
+
+.replyUpdate,
+.replyDelete {
+	display:flex;
+	justify-content: center;
+    align-items: center;
+}
+
+.recommendBtn{
+	border: 3px solid white;
+    width: 140px;
+    height: 50px;
+    border-radius: 10px;
+    display:flex;
+	justify-content: center;
+    align-items: center;
+}
+
 </style>
 </head>
 
@@ -234,152 +296,202 @@ a {
 		<div class="body">
 			<div class="body_guide">
 				<div class="row g-0 mb80">
-					<div class="col-12 common fontEnglish fw700 fs40 mt80 mb50">자유게시판</div>
+					<div class="col-12 common fontEnglish fw700 fs40 mt80">자유게시판</div>
+					<div class="col-12 topBtns">
+						<button><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+						<button><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+						
+					</div> 
 					<div class="col-12">
 						<div class="row g-0 post">
 							<div class="col-12 postTop">
-								<div class="col-12 fw400 fs35 mb15" id="postTitle">제목
-									영역입니다.</div>
-								<div class="col-12 fontEnglish fw400 fs25 mb10" id="postWriter">writer01</div>
-								<div class="col-12 fw400 fs20 colorDarkgray" id="postDetailInfo">
-									2023.09.17 18:41 조회 0</div>
+								<div class="col-12 fw400 fs35 mb15" id="postTitle">${post.title}
+								</div>
+								<div class="col-12 fontEnglish fw400 fs25 mb10 pl15"
+									id="postWriter">${post.nickName}</div>
+								<div class="col-12 fw400 fs20 colorDarkgray pl15"
+									id="postDetailInfo">${post.formedDate }&nbsp;&nbsp;&nbsp;조회
+									${post.view}</div>
+								<hr>
+								<div class="col-12 fw400 fs25" id="postContents">${post.contents}</div>
 							</div>
-							<hr>
-							<div class="col-12 fw400 fs25" id="postContents">내용 영역입니다.</div>
+						</div>
+						<div class="row g-0 postBottom mb40">
+							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
+							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
+								<div class="d-none d-md-flex">
+									<button class="postBtns bColorGreen" id="update">수정</button>
+									<button class="postBtns bColorGreen" id="delete">삭제</button>
+									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
+								</div>
+								
+								<div class="d-md-none">
+									<button class="postBtnsMini bColorGreen" id="update"><i class="fa-solid fa-pen-to-square"></i></button>
+									<button class="postBtnsMini bColorGreen" id="delete"><i class="fa-solid fa-trash-can"></i></button>
+									<button class="postBtnsMini bColorBlue colorWhite" id="goList"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
+								</div>
+								
+								<input type="hidden" id="cpage" value="${cpage}">
+								<input type="hidden" id="category" value="${category}">
+								
+							</div>
+							
 						</div>
 					</div>
-					<div class="col-2 fw400 fs20 mt10">첨부 파일</div>
-					<div class="col-4 fw400 fs20 colorBlue mt10">test.txt</div>
-					<div class="col-6 d-flex justify-content-end fw400 fs20">
-						<button class="postBtns bColorGreen" id="update">수정</button>
-						<button class="postBtns bColorGreen" id="delete">삭제</button>
-						<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
-					</div>
-				</div>
-				
-				<div class="row g-0">
-					<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
-					<div class="col-12 mb30">
-						<form action="" method="post" id="frm">
+					<div class="row g-0">
+						<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
+						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
-								<div class="col-10 col-lg-11" id="replyInsertTxt"
-									contenteditable></div>
-								<textarea id="replyTxt"></textarea>
+								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable></div>
+								<input type="hidden" id="postSeq" value="${post.seq}">
 								<div class="col-2 col-lg-1 btnCover">
-									<button class="fw400 fs25 colorDarkgray replyInsertBtn">등록</button>
+									<button class="fw400 fs25 colorDarkgray replyInsertBtn" id="replyInsertBtn">등록</button>
 								</div>
-							</div>
-						</form>
-					</div>
+							</div>		
+						</div>
 
-					<div class="col-12">
-						<div class="row g-0 replys mb200">
-							<div class="col-12 reply">
-								<div class="row g-0">
-									<div class="col-10">
-										<div class="d-flex align-items-end mb10">
-											<div class="writer fw500 fs20">writer01</div>
-											<div class="isWriter colorWhite bColorBlue fw400 fs15">작성자</div>
-										</div>
-										<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
-										<div class="replyDetailInfo fw400 fs15 colorDarkgray">
-											2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
-												class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
-										</div>
+						<div class="col-12">
+							<div class="row g-0 replys mb200" id="replys">
+							
+								<script>
+									$.ajax({
+										url:"/load.reply",
+										data:{
+											postSeq : "${post.seq}"
+										},
+										dataType:"json",
+										type:"post"
+									}).done(function(resp){
+										let postWriter = "${post.writer}";
+										let loginID = "${loginID}";
+										let replys = $("#replys");
+										for(let i=0; i<resp.length; i++){
+											
+											let replyTag = $("<div>").attr("class", "col-12 reply");
+											let row = $("<div>").attr("class","row g-0");
+											let col10 = $("<div>").attr("class","col-10");
+											let writerCover = $("<div>").attr("class","d-flex align-items-end mb10").append($("<div>").attr("class","writer fw500 fs20").html(resp[i].nickName));
+											if(resp[i].writer == postWriter){
+												let isWriterTag = $("<div>").attr("class","isWriter colorWhite bColorBlue fw400 fs15").html("작성자");
+												writerCover.append(isWriterTag);
+											}
+											let contents = $("<div>").attr("class","contents fw400 fs20 mb10").html(resp[i].contents);
+											let detailInfo = $("<div>").attr("class","replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate+"&nbsp;&nbsp;");
+											let nestedReplyBtn = $("<a>").attr("href","#").attr("class","nestedReplyBtn colorDarkgray").html("답글 쓰기");
+											detailInfo.append(nestedReplyBtn);
+											
+											row.append(col10.append(writerCover).append(contents).append(detailInfo));
+											let replyBtns = $("<div>").attr("class","col-2 d-none d-md-flex replyBtns");
+											if(resp[i].writer == loginID){
+												let updateBtn = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("수정");
+												let deleteBtn = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("삭제");
+												replyBtns.append(updateBtn).append(deleteBtn);
+												
+												let replyBtnsMini = $("<div>").attr("class","col-2 d-md-none replyBtns");
+												let updateBtnMini = $("<div>").attr("class","replyUpdate bColorGreen fw400 fs17").html("<i class='fa-solid fa-pen-to-square'></i>");
+												let deleteBtnMini = $("<div>").attr("class","replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+												replyBtnsMini.append(updateBtnMini).append(deleteBtnMini);
+												
+												row.append(replyBtns).append(replyBtnsMini);
+											}else{
+												let recommendBtn = $("<div>").attr("class","col-2 bColorBlue colorWhite fw400 fs17 recommendBtn").html("<i class='fa-regular fa-thumbs-up' style='color:white'></i>"+"&nbsp;&nbsp;추천");
+												row.append(replyBtns.append(recommendBtn));
+											}
+											
+											replys.append(replyTag.append(row));
+											
+										}
+									});
+								</script>
+							
+					
+								
+								<div class="col-12 reply">
+									<div class="d-flex align-items-end mb10">
+										<div class="writer fw500 fs20">writer01</div>
 									</div>
-									<div class="col-2 replyBtns">
-										<button class="replyUpdate bColorGreen fw400 fs17">수정</button>
-										<button class="replyDelete bColorGreen fw400 fs17">삭제</button>
+									<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
+									<div class="replyDetailInfo fw400 fs15 colorDarkgray">
+										2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
+											class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
+									</div>
+								</div>
+								<div class="col-12 nestedReply">
+									<div class="row g-0">
+										<div
+											class="col-1 d-flex justify-content-center align-items-center">
+											<i class="fa-solid fa-arrow-turn-up fa-rotate-90 fa-xl"></i>
+										</div>
+										<div class="col-11">
+											<div class="d-flex align-items-end mb10">
+												<div class="writer fw500 fs20">writer01</div>
+											</div>
+											<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
+											<div class="replyDetailInfo fw400 fs15 colorDarkgray">
+												2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
+													class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
+											</div>
+										</div>
 									</div>
 								</div>
 
-							</div>
-							<div class="col-12 reply">
-								<div class="d-flex align-items-end mb10">
-									<div class="writer fw500 fs20">writer01</div>
-								</div>
-								<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
-								<div class="replyDetailInfo fw400 fs15 colorDarkgray">
-									2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
-										class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
-								</div>
-							</div>
-							<div class="col-12 nestedReply">
-								<div class="row g-0">
-									<div
-										class="col-1 d-flex justify-content-center align-items-center">
-										<i class="fa-solid fa-l fa-xl"></i>
-									</div>
-									<div class="col-11">
-										<div class="d-flex align-items-end mb10">
-											<div class="writer fw500 fs20">writer01</div>
-										</div>
-										<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
-										<div class="replyDetailInfo fw400 fs15 colorDarkgray">
-											2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
-												class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
-										</div>
-									</div>
-								</div>
 							</div>
 
 						</div>
-
 					</div>
+
+
 				</div>
+			</div>
 
 
+
+
+			<a href="#">
+				<div class="upArrow bColorPink colorWhite">
+					<i class="fa-solid fa-arrow-up-long"></i>
+				</div>
+			</a>
+
+			<div class="footer bColorBlack">
+				<div class="footer_guide">
+					<div class="footer_logo fontLogo colorWhite">RUSH</div>
+					<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+						RIGHT RESERVED</div>
+					<div class="footer_contents">
+						<div class="about conDiv fontEnglish">
+							<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+							<div class="footer_con ">
+								<div class="con colorWhite">팀명 :</div>
+								<div class="encon colorWhite">SKY</div>
+							</div>
+						</div>
+						<div class="office conDiv fontEnglish">
+							<div class="footer_title fontEnglish colorWhite">OFFICE</div>
+							<div class="footer_con">
+								<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
+							</div>
+						</div>
+						<div class="contact conDiv fontEnglish">
+							<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+							<div class="footer_con fontEnglish">
+								<div class="con fontEnglish colorWhite">a@naver.com</div>
+								<div class="con fontEnglish colorWhite">01012345678</div>
+							</div>
+						</div>
+						<div class="provision conDiv fontEnglish">
+							<div class="footer_title fontEnglish colorWhite">PROVISION</div>
+							<div class="footer_con">
+								<div class="con colorWhite">개인정보 처리방침</div>
+								<div class="con colorWhite">서비스 이용약관</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
-
-
-
-
-		<a href="#">
-			<div class="upArrow bColorPink colorWhite">
-				<i class="fa-solid fa-arrow-up-long"></i>
-			</div>
-		</a>
-
-		<div class="footer bColorBlack">
-			<div class="footer_guide">
-				<div class="footer_logo fontLogo colorWhite">RUSH</div>
-				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-					RIGHT RESERVED</div>
-				<div class="footer_contents">
-					<div class="about conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-						<div class="footer_con ">
-							<div class="con colorWhite">팀명 :</div>
-							<div class="encon colorWhite">SKY</div>
-						</div>
-					</div>
-					<div class="office conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
-						<div class="footer_con">
-							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-						</div>
-					</div>
-					<div class="contact conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-						<div class="footer_con fontEnglish">
-							<div class="con fontEnglish colorWhite">a@naver.com</div>
-							<div class="con fontEnglish colorWhite">01012345678</div>
-						</div>
-					</div>
-					<div class="provision conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
-						<div class="footer_con">
-							<div class="con colorWhite">개인정보 처리방침</div>
-							<div class="con colorWhite">서비스 이용약관</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
 </body>
 
 </html>
