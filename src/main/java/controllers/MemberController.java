@@ -81,7 +81,11 @@ public class MemberController extends HttpServlet {
 				boolean isAuthenticated = dao.selectByIdPw(id, pw);
 
 				if(isAuthenticated) { // 로그인에 성공하는 순간
-	               request.getSession().setAttribute("loginID", id);
+	               request.getSession().setAttribute("loginID", id); // 아이디 세션
+	               
+	               String nickName = dao.selectNicknameById(id);
+	               request.getSession().setAttribute("loginNickname", nickName); // 닉네임 세션
+	               
 	            } else {
 	               response.getWriter().append("failed");
 	            }
@@ -89,8 +93,6 @@ public class MemberController extends HttpServlet {
 			} else if(cmd.equals("/logout.member")) {
 				// 회원 로그아웃
 				request.getSession().invalidate();
-				response.sendRedirect("/member/login.jsp");
-				
 			}
 			
 		}catch(Exception e) {
