@@ -44,14 +44,6 @@ public class ReplyDAO {
 		}
 	}
 	
-	/*
-	 * public String getNickname(String id) throws Exception{ String sql =
-	 * "select mnickname from members where mid = ?;"; try(Connection con =
-	 * this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
-	 * pstat.setString(1,id); try(ResultSet rs = pstat.executeQuery();){ rs.next();
-	 * return rs.getString("mnickname"); } } }
-	 */
-	
 	public void insert(ReplyDTO reply) throws Exception{
 		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default, null);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
@@ -95,6 +87,17 @@ public class ReplyDAO {
 			pstat.setInt(1, replySeq);
 			pstat.setString(2, loginId);
 			return pstat.executeUpdate();
+		}
+	}
+	
+	public void nestedInsert(ReplyDTO reply) throws Exception{
+		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default, ?);";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1,reply.getParentSeq());
+			pstat.setString(2, reply.getWriter());
+			pstat.setString(3, reply.getNickName());
+			pstat.setString(4, reply.getContents());
+			pstat.executeUpdate();
 		}
 	}
 }

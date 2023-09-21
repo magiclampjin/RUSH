@@ -11,10 +11,11 @@ public class ReplyDTO {
 	private Timestamp writeDate;
 	private int recommend;
 	private String recId;
+	private int parentRSeq;
 	
 	public ReplyDTO() {}
 	public ReplyDTO(int seq, String writer, int parentSeq, String nickName, String contents, Timestamp writeDate,
-			int recommend) {
+			int recommend, String recId, int parentRSeq) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -23,7 +24,10 @@ public class ReplyDTO {
 		this.contents = contents;
 		this.writeDate = writeDate;
 		this.recommend = recommend;
+		this.recId = recId;
+		this.parentRSeq = parentRSeq;
 	}
+
 	public ReplyDTO(int seq, String writer, int parentSeq, String nickName, String contents, Timestamp writeDate,
 			int recommend, String recId) {
 		super();
@@ -84,6 +88,10 @@ public class ReplyDTO {
 	public void setRecId(String recId) {
 		this.recId = recId;
 	}
-	
-	
+	public int getParentRSeq() {
+		return parentRSeq;
+	}
+	public void setParentRSeq(int parentRSeq) {
+		this.parentRSeq = parentRSeq;
+	}
 }
