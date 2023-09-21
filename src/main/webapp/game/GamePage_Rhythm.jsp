@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,14 +51,51 @@ a{
 	max-width : 1030px;
 	width : 100%;
 }
+.devTable th,td{
+	border : 1px solid white;
+	vertical-align : middle;
+	padding : 3px;
+}
+.devTable th{
+	width : 20%;
+}
+.devTable td{
+	width : 80%;
+}
 .devTable{
 	border : 1px solid white;
 	width : 100%;
-	text
 }
+.btn-check-input:checked~.btn.btn-outline-light::before{
+	background-color: #ccf423;
+}
+.bColorBlue {
+  background-color: #5d6ce1;
+}
+
 </style>
 </head>
 <body>
+<script>
+	window.onload = function(){
+		$.ajax({
+			url:"/checkFavorite.game",
+			data:{
+				game:"${game}",
+				mID : "rubiver"
+			},
+			type : "post"
+		}).done(function(res){
+			let isFavorite = res;
+			console.log(isFavorite);
+			if(isFavorite == 1){
+				$("#favorite").css("display","none");
+				$("#delfavorite").css("display","block");
+				console.log("active");
+			}
+		});
+	}
+</script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
@@ -143,17 +181,28 @@ a{
 					<div class="col-10 pr45">
 						<div class="row g-0">
 							<div class="col-12">
-								<p class="gameCategory fs-5 mb-0 text-white fontKorean">리듬 게임</p>
+								<p class="gameCategory fs-5 mb-0 text-white fontKorean">
+								<c:choose>
+									<c:when test="${category == 'Rhythm' }">리듬 게임</c:when>
+									<c:when test="${category == 'Arcade' }">아케이드 게임</c:when>
+									<c:when test="${category == 'Puzzle' }">퍼즐 게임</c:when>
+								</c:choose>
+								
+								</p>
 							</div>
 						</div>
 						<div class="row g-0">
 							<div class="col-10">
-								<p class="gameName fs-2 mt-0 text-white fontKorean">KJ MAX</p>
+								<p class="gameName fs-2 mt-0 text-white fontKorean">${game}</p>
 							</div>
 							<div
 								class="col-2 d-flex justify-content-center align-content-bottom">
 								<div>
-									<button type="button" class="btn btn-outline-light">
+									<button type="button" class="btn btn-outline-light" id="favorite">
+										<i class="fa-regular fa-star colorWhite"></i>
+										즐겨찾기
+									</button>
+									<button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
@@ -196,13 +245,12 @@ a{
 										</div>
 									</div>
 									<hr class="colorWhite">
-									<div class="row">
-									<!-- 요기서 데이터 추ㄹ력 -->
+									<div id="rankCon">
 									</div>
 								</div>
 							</div>
 							<div class="col-12" id="info">
-								<div class="row g-0 w100p">
+								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">게임 설명</p>
 										<hr class="colorBlue border-3 opacity-75">
@@ -211,7 +259,7 @@ a{
 										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
 									</div>				
 								</div>
-								<div class="row g-0 w100p">
+								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">조작 방법</p>
 										<hr class="colorGreen border-3 opacity-75">
@@ -220,7 +268,7 @@ a{
 										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
 									</div>				
 								</div>
-								<div class="row g-0 w100p">
+								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">제작자 정보</p>
 										<hr class="colorPink border-3 opacity-75">
@@ -228,15 +276,15 @@ a{
 									<div class="col-12">
 										<table class="devTable">
 											<tr>
-												<td><p class="text-white fontKorean">제작자</p></td>
-												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+												<th class="text-white fontKorean fw900">제작자</th>
+												<td class="text-white fontKorean">제작자이름</td>
 											</tr>
 											<tr>
-												<td><p class="text-white fontKorean">제작자</p></td>
-												<td colspan="4"><p class="text-white fontKorean">제작자</p></td>
+												<th class="text-white fontKorean fw900">제작자 소속</th>
+												<td class="text-white fontKorean">공주대학교 SKY팀</td>
 											</tr>
 										</table>
-									</div>				
+									</div>
 								</div>
 							</div>
 						</div>
@@ -296,11 +344,74 @@ a{
         	$("#rank").css("display","flex");
         	$("#rank").css("justify-content","center");
         	$("#info").css("display","none");
+        	$.ajax({
+    			url:"/getRecord.game",
+    			data:{
+    				gameName:"${game}"
+    			},
+    			type : "post"
+    		}).done(function(res){
+    			let record = JSON.parse(res);
+    			console.log(record);
+    			console.log(record[0]["nickName"]);
+    			$("#rankCon").text("");
+    			for(let i=0; i<record.length; i++){
+    				let divRow = $("<div>");
+    				divRow.addClass("row g-0 p-2");
+    				let divColRank = $("<div>");
+    				if(i<3){
+        				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3");
+        				divColRank.append(i+1);
+    				}else{
+        				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
+        				divColRank.append(i+1);	
+    				}
+    				
+    				
+    				let divColInfo = $("<div>");
+    				divColInfo.addClass("col-7 text-white");
+    				divColInfo.append(record[i]["nickName"]);
+    				
+    				let divColScore = $("<div>");
+    				divColScore.addClass("col-4 text-white");
+    				divColScore.append(record[i]["score"]);
+    				
+    				divRow.append(divColRank);
+    				divRow.append(divColInfo);
+    				divRow.append(divColScore);
+    				
+    				$("#rankCon").append(divRow);
+    			}
+    		});
         });
         
         $("#btnradio2").on("click",function(){
         	$("#info").css("display","block");
         	$("#rank").css("display","none");
+        });
+        $("#favorite").on("click",function(){
+        	$.ajax({
+        	      url:"/favorite.game",
+        	      data:{
+        	        mID:"rubiver",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+        	        gameName:'${game}'
+        	      },
+        	      type:"post"
+        	    }).done(function (res){
+        	      console.log(res);
+        	    });
+        });
+        $("#deletefavorite").on("click",function(){
+        	$.ajax({
+        	      url:"/deletefavorite.game",
+        	      data:{
+        	        mID:"rubiver",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+        	        gameName:'${game}'
+        	      },
+        	      type:"post"
+        	    }).done(function (res){
+        	      console.log(res);
+        	    });
         });
     </script>
 </body>
