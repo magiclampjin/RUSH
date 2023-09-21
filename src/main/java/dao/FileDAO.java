@@ -32,13 +32,18 @@ public class FileDAO {
 	public int insert(FileDTO dto) throws Exception{
 		String sql = "insert into file values(0,?,?,?,?,?);";
 		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
+				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
 			pstat.setInt(1, dto.getParentSeq());
 			pstat.setString(2, dto.getOriginName());
 			pstat.setString(3, dto.getSystemName());
 			pstat.setBoolean(4, dto.isImg());
 			pstat.setBoolean(5, dto.isQna());
-			return pstat.executeUpdate();
+			pstat.executeUpdate();
+			
+			try(ResultSet rs = pstat.getGeneratedKeys()){
+				rs.next();
+				return rs.getInt(1);
+			}
 		}
 	}
 	
@@ -55,6 +60,37 @@ public class FileDAO {
 				}
 				return list;
 			}
+		}
+	}
+	
+	public int updateParentSeq(int parent, int seq) throws Exception{
+		String sql = "update file set cbSeq = ? where fSeq = ?";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, parent);
+			pstat.setInt(2, seq);
+			return pstat.executeUpdate();
+		}
+	}
+	
+	public String selectSysName(int seq) throws Exception{
+		String sql = "select fSystemName from file where fSeq=? and cbSeq=0;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery();){
+				if(rs.next()) {
+					return rs.getString("fSystemName");
+				}else {
+					return null;
+				}
+			}
+		}
+	}
+	
+	public int deleteFile(int seq) throws Exception{
+		String sql = "delete from file where fSeq=? and cbSeq=0;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, seq);
+			return pstat.executeUpdate();
 		}
 	}
 

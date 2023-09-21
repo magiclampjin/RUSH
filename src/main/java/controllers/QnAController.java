@@ -74,7 +74,8 @@ public class QnAController extends HttpServlet {
 						String ori_name = multi.getOriginalFileName(fileName);
 						String sys_name = multi.getFilesystemName(fileName);
 						
-						FileDAO.getInstance().insert(new FileDTO(0,parent_seq,ori_name,sys_name));
+						// 추후에 파일관련 기능 구현되면 파일인지 이미지인지 구분해서 5번쨰 변수 알맞게 수정해주세요!
+						FileDAO.getInstance().insert(new FileDTO(0,parent_seq,ori_name,sys_name,false,true));
 					}
 				}
 				response.sendRedirect("/listing.qna");

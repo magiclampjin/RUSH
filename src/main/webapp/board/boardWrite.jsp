@@ -161,7 +161,6 @@ a {
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
 									value="+">
-								</button>
 								<span>파일첨부</span>
 								<div id="fileContainer"></div>
 							</div>
