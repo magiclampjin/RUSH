@@ -52,6 +52,44 @@ a{
 </style>
 </head>
 <body>
+<script>
+	window.onload = function(){
+		$.ajax({
+			url:"/getBestGame.game",
+		}).done(function(res){
+			let data = JSON.parse(res);
+			console.log(data);
+			console.log(data.length);
+			for(let i=0; i<data.length; i++){
+				let divRow = $("<div>");
+				divRow.addClass("row g-0 p-2");
+				
+				let divColRank = $("<div>");
+				divColRank.addClass("col-1 text-white")
+				divColRank.append(i+1);
+				
+				let divColInfo = $("<div>");
+				divColInfo.addClass("col-8 col-md-5 d-flex");
+				divColInfo.append(data[i]);
+				
+				let divColPlayInfo = $("<div>");
+				divColPlayInfo.addClass("col-3 d-none d-md-flex align-item-center");
+				divColPlayInfo.append("W 50% M 50%");
+				
+				let divColBtn = $("<div>");
+				divColBtn.addClass("col-3");
+				divColBtn.html("<button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button>");
+				
+				divRow.append(divColRank);
+				divRow.append(divColInfo);
+				divRow.append(divColPlayInfo);
+				divRow.append(divColBtn);
+				
+				$(".bestCon").append(divRow);
+			}
+		});
+	}
+</script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
@@ -124,7 +162,7 @@ a{
 						<p class="text-white fontKorean fs-2">베스트 게임</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row mt40">
 					<hr class="colorWhite">
 					<div class="col-1">
 						<p class="text-white fontKorean">순위</p>
@@ -165,15 +203,19 @@ a{
 								
 							</div>
 						</div>
-						
-						
 					</div>
-					<div class="col-3 d-none d-md-flex">
-						<p class="text-white fontKorean">플레이 정보</p>
+					<div class="col-3 d-none d-md-flex align-item-center">
+						<span class="text-white fontEnglish fs-3 fw900">W</span> &nbsp;&nbsp;
+						<span class="text-white fontEnglish fs-5">50% </span> &nbsp;&nbsp;
+						<span class="text-white fontEnglish fs-3 fw900">M </span> &nbsp;&nbsp;
+						<span class="text-white fontEnglish fs-5">50% </span>
 					</div>
 					<div class="col-3">
 						<button type="button" class="btn btn-success fontEnglish fw900">PLAY GAME</button>
 					</div>
+				</div>
+				<div class="bestCon">
+					
 				</div>
 			</div>
 		</div>
@@ -214,7 +256,7 @@ a{
 			</div>
 		</div>
 		</div>
-		<script>
+	<script>
         $(".btn").on("click",function(){
             // $(".categories").text();
             console.log("");
