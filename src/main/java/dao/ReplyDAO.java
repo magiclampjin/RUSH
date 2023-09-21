@@ -44,24 +44,20 @@ public class ReplyDAO {
 		}
 	}
 	
-	public String getNickname(String id) throws Exception{
-		String sql = "select mnickname from members where mid = ?;";
-		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1,id);
-			try(ResultSet rs = pstat.executeQuery();){
-				rs.next();
-				return rs.getString("mnickname");
-			}
-		}
-	}
+	/*
+	 * public String getNickname(String id) throws Exception{ String sql =
+	 * "select mnickname from members where mid = ?;"; try(Connection con =
+	 * this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+	 * pstat.setString(1,id); try(ResultSet rs = pstat.executeQuery();){ rs.next();
+	 * return rs.getString("mnickname"); } } }
+	 */
 	
 	public void insert(ReplyDTO reply) throws Exception{
-		String nick = this.getNickname(reply.getWriter());
 		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1,reply.getParentSeq());
 			pstat.setString(2, reply.getWriter());
-			pstat.setString(3, nick);
+			pstat.setString(3, reply.getNickName());
 			pstat.setString(4, reply.getContents());
 			pstat.executeUpdate();
 		}
