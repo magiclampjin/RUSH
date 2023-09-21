@@ -90,6 +90,7 @@ a{
 			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
+				$(".fa-star").removeClass("colorWhite");
 				console.log("active");
 			}else{
 				
@@ -117,8 +118,7 @@ a{
     				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
     				divColRank.append(i+1);	
 				}
-				
-				
+								
 				let divColInfo = $("<div>");
 				divColInfo.addClass("col-7 text-white");
 				divColInfo.append(record[i]["nickName"]);
@@ -209,10 +209,10 @@ a{
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">리듬게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="new"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack active" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 									<!-- js로 넘어가기 -->
 								</div>
 							</div>
@@ -269,7 +269,7 @@ a{
 							
 							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 						</div>
-						<div class="row g-0 mt150">
+						<div class="row g-0 mt49">
 							<div class="col-12" id="rank">
 								<div class="rankCon">
 								<hr class="colorWhite">
@@ -290,7 +290,7 @@ a{
 								</div>
 							</div>
 							<div class="col-12" id="info">
-								<div class="row g-0 w100p mt150">
+								<div class="row g-0 w100p">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">게임 설명</p>
 										<hr class="colorBlue border-3 opacity-75">
@@ -431,36 +431,53 @@ a{
         });
         
         $("#favorite").on("click",function(){
-        	if($(this).hasClass("active") == true){
-        		console.log("존재");
-        		$.ajax({
-          	      url:"/deletefavorite.game",
-          	      data:{
-          	        mID:"rubiver123",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
-          	        gameName:'${game}'
-          	      },
-          	      type:"post"
-          	    }).done(function (res){
-          	      console.log(res);
-          	      location.reload();
-          	    });
+        	let id = '${loginID}';
+        	if(id != ""){
+        		console.log("로그인했음.");
+        		if($(this).hasClass("active") == true){
+            		console.log("존재");
+            		$.ajax({
+              	      url:"/deletefavorite.game",
+              	      data:{
+              	        mID:"${loginID}",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+              	        gameName:'${game}'
+              	      },
+              	      type:"post"
+              	    }).done(function (res){
+              	      console.log(res);
+              	      location.reload();
+              	      $(".fa-star").addClass("colorWhite");
+              	    });
+            	}else{
+            		console.log("x");
+            		$.ajax({
+              	      url:"/favorite.game",
+              	      data:{
+              	        mID:"${loginID}",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨.*/ 
+              	        gameName:'${game}'
+              	      },
+              	      type:"post"
+              	    }).done(function (res){
+              	      console.log(res);
+              	      location.reload();
+              	    });
+            	}
         	}else{
-        		console.log("x");
-        		$.ajax({
-          	      url:"/favorite.game",
-          	      data:{
-          	        mID:"rubiver123",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨.*/ 
-          	        gameName:'${game}'
-          	      },
-          	      type:"post"
-          	    }).done(function (res){
-          	      console.log(res);
-          	      location.reload();
-          	    });
+        		alert("로그인을 해야합니다.");
+        	}
+        	
+        });
+        $("#favorite").hover(function(){
+        	if(!$(this).hasClass("active")){
+        		$(".fa-star").removeClass("colorWhite");	
+        	}
+        }, function() {
+        	if(!$(this).hasClass("active")){
+        		$(".fa-star").addClass("colorWhite");	
         	}
         });
-        $("#delfavorite").on("click",function(){
-        	
+        $("#new").on("click",function(){
+        	location.href = "/game/GamePage_Main.jsp";
         });
     </script>
 </body>

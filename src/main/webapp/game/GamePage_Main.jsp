@@ -48,9 +48,77 @@ div {
 	max-width: 1300px;
 	margin: auto;
 }
+
+.btn-primary1 {
+    background-color: #f393ff;
+    border-color: #131217
+}
+
+.btn-primary1:hover {
+    background-color: #f393ff;
+    border-color: #131217;
+    opacity:70%;
+}
+
+.btn-primary2 {
+    background-color: #5d6ce1;
+    border-color: #131217
+}
+
+.btn-primary2:hover {
+    background-color: #5d6ce1;
+    border-color: #131217;
+    opacity:70%;
+}
+
+.btn-primary3 {
+    background-color: #ccf423;
+    border-color: #131217
+}
+
+.btn-primary3:hover {
+    background-color: #ccf423;
+    border-color: #131217;
+    opacity:70%;
+}
+
+
 </style>
 </head>
 <body>
+<script>
+/* <div class="col-xs-12 col-lg-6 col-xl-4"> */
+	window.onload = function(){
+		$.ajax({
+			url:"/getBestGame.game",
+		}).done(function(res){
+			let data = JSON.parse(res);
+			console.log(data);
+			console.log(data.length);
+			for(let i=0; i<data.length; i++){
+				let divCol = $("<div>");
+				divCol.addClass("col-xs-12 col-lg-6 col-xl-4");
+				
+				let divAnker = $("<a>");
+				divAnker.attr("href","/moveToGamePage.game?game="+data[i]["gName"]);
+				
+				let divImage = $("<img>");
+				divImage.addClass("test ml45 mr45");
+				divImage.attr("src",data[i]["gImageURL"]);
+				divAnker.append(divImage);
+				
+				let divName = $("<p>");
+				divName.addClass("text-white ml45");
+				divName.append(data[i]["gName"]);
+				
+				divCol.append(divAnker);
+				divCol.append(divName);
+				
+				$("#newGames").append(divCol);
+			}
+		});
+	};
+</script>
 	<div class="container-fluid p-0 g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
@@ -134,24 +202,15 @@ div {
 						</div>
 					</div>
 					<div class="col-10">
-						<div class="row g-0 mt-4 mb-5">
+						<div class="row g-0 mt-4" id="newGames">
 							<p class="fs-2 text-white fontKorean">최신게임</p>
-							<!-- 나중에 jstl 적용? -->
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<a href="/moveToGamePage.game?game=KJMAX"><div class="test ml45 mr45"> 리듬게임</div>
-								<p class="text-white ml45">게임1</p></a>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<a href = "/moveToGamePage.game?game=DoodleJump"><div class="test ml45 mr45">다른게임</div>
-								<p class="text-white ml45">게임2</p></a>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임3</p>
-							</div>
+							
+							
+						</div>
+						<div class="row mb-5">
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary">
-									<span class="fontKorean"><span class="fontKorean">더보기</span></span>
+								<button type="button" class="btn btn-primary1" id="newGamesMore">
+									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
 						</div>
@@ -172,7 +231,7 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary">
+								<button type="button" class="btn btn-primary2" id="rhythmGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -194,7 +253,7 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary">
+								<button type="button" class="btn btn-primary3">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -216,7 +275,7 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary">
+								<button type="button" class="btn btn-primary1" id="puzzleGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -275,7 +334,16 @@ div {
 		let category = $("#new").children("span").text();
 		console.log(category);
 		/* location.href = "/moveToCategory?category="; */
-	})
+	});
+	$("#newGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game";
+	});
+	$("#rhythmGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game?category=Rhythm";
+	});
+	$("#puzzleGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game?category=Puzzle";
+	});
 	
 	</script>
 </body>
