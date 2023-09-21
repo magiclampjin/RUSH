@@ -97,20 +97,6 @@ public class MemberDAO {
 		}
 	}
 	
-	public boolean selectByNameEmail(String name, String email) throws Exception {
-		String sql = "select * from members where mName = ? and mEmail = ?";
-		
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, name);
-			pstat.setString(2, email);
-			
-			try(ResultSet rs = pstat.executeQuery();) {
-				return rs.next();
-			}
-		}
-	}
-	
 	public String selectIdByNameEmail(String name, String email) throws Exception {
 		String sql = "select * from members where mName = ? and mEmail = ?";
 		
@@ -120,8 +106,11 @@ public class MemberDAO {
 			pstat.setString(2, email);
 			
 			try(ResultSet rs = pstat.executeQuery();) {
-				rs.next();
-				return rs.getString("mId");
+				if(rs.next()) {
+					return rs.getString("mId");
+				} else {
+					return null;
+				}
 			}
 		}
 	}
@@ -141,15 +130,13 @@ public class MemberDAO {
 		}
 	}
 	
-	public int updateByPw(String pw, String id, String name, String email) throws Exception {
-		String sql = "update members set mPw = ? where mId = ? and mName = ? and mEmail = ?";
+	public int updatePwById(String pw, String id) throws Exception {
+		String sql = "update members set mPw = ? where mId = ?";
 		
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, pw);
 			pstat.setString(2, id);
-			pstat.setString(3, name);
-			pstat.setString(4, email);
 			return pstat.executeUpdate();
 		}
 	}
