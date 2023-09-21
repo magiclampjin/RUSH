@@ -44,7 +44,7 @@ public class ReplyController extends HttpServlet {
 				long gapTime = currentTime - writeTime;
 
 				if (gapTime < 60000) {
-					return new JsonPrimitive((gapTime / 1000) + "초 전");
+					return new JsonPrimitive("방금 전");
 				} else if (gapTime < 60000 * 60) {
 					return new JsonPrimitive( gapTime / 60000 + " 분 전");
 				} else if (gapTime < 60000 * 60 * 24) {
