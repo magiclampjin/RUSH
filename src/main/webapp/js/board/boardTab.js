@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	// 현재 접속한 카테고리 설정
 	let category = $("#category").val();
-	console.log(category)
 	$("ul.tabs a").removeClass("current");
 	let page = $("ul.tabs a")
 	

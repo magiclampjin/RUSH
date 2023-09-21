@@ -266,6 +266,13 @@ ul.tabs a.current {
 		font-size: 15px;
 		padding: 15px 0;
 	}
+	.num {
+	width: 20%;
+}
+
+.title {
+	width: 80%;
+}
 	.boardHeader>.writer {
 		display: none;
 	}
@@ -293,10 +300,10 @@ ul.tabs a.current {
 		align-items: center;
 	}
 	.post .minBoard>.num {
-		width: 10%;
+		width: 20%;
 	}
 	.post .minBoard>.minCon {
-		width: calc(90% - 30px);
+		width: calc(80% - 30px);
 		display: flex;
 		flex-direction: column;
 		margin-left: 30px;
