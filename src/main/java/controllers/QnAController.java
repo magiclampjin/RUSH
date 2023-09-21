@@ -117,7 +117,6 @@ public class QnAController extends HttpServlet {
 				System.out.println("keyword : "+keyword +", searchBy "+searchBy);
 				
 				if(keyword.equals("")) { // 찾는 값 없음
-					System.out.println("찾는 값 없음");
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE));
 					request.getSession().setAttribute("latestPageNum", currentPage);
 					
@@ -126,7 +125,6 @@ public class QnAController extends HttpServlet {
 
 				}
 				else {
-					System.out.println("찾는 값 있음");
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE),searchBy,keyword);
 					request.getSession().setAttribute("latestPageNum", currentPage);
 					
