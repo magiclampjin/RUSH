@@ -1,9 +1,9 @@
 $(document).ready(function() {
 	let category = $("#category").val();
-
-	// 검색 했을 때 카테고리 고정해주는 용도임
-	// 검색 기능 끝내고 다시 구현 예정
-	// $("option[value=\""+category+"\"]").attr("selected","true");
+	let search = $("#search").val();
+	console.log(search)
+	let keyword = $("#keyword").val();
+	console.log(keyword)
 
 	let recordTotalCount = $("#recordTotalCount").val();
 	if (recordTotalCount != 0) {
@@ -44,7 +44,12 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-left";
-			aTag.href = "/listing.board?" + "category="+category+"&cpage=1";
+			if(keyword==""){
+				aTag.href = "/listing.board?" + "category="+category+"&cpage=1";
+			}else{
+				aTag.href = "/listing.board?" + "category="+category+"&search="+search+"&keyword="+keyword+"&cpage=1";
+			}
+			
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -53,7 +58,12 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-left";
-			aTag.href = "/listing.board?category="+category+"&cpage=" + (startNavi - 1);
+			if(keyword==""){
+				aTag.href = "/listing.board?category="+category+"&cpage=" + (startNavi - 1);
+			}else{
+				aTag.href = "/listing.board?category="+category+"&search="+search+"&keyword="+keyword+"&cpage=" + (startNavi - 1);
+			}
+			
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -62,7 +72,12 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			aTag.textContent = i;
 			aTag.className += "colorBlack fontEnglish";
-			aTag.href = "/listing.board?category="+category+"&cpage=" + i;
+			if(keyword==""){
+				aTag.href = "/listing.board?category="+category+"&cpage=" + i;
+			}else{
+				aTag.href = "/listing.board?category="+category+"&search="+search+"&keyword="+keyword+"&cpage=" + i;
+			}
+			
 			if (i == currentPage) {
 				aTag.className = "colorWhite bColorBlue fontEnglish"
 			}
@@ -73,7 +88,12 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-right";
-			aTag.href = "/listing.board?category="+category+"&cpage=" + (endNavi + 1);
+			if(keyword==""){
+				aTag.href = "/listing.board?category="+category+"&cpage=" + (endNavi + 1);
+			}else{
+				aTag.href = "/listing.board?category="+category+"&search="+search+"&keyword="+keyword+"&cpage=" + (endNavi + 1);
+			}
+			
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -82,7 +102,12 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-right";
-			aTag.href = "/listing.board?category="+category+"&cpage="+pageTotalCount;
+			if(keyword==""){
+				aTag.href = "/listing.board?category="+category+"&cpage="+pageTotalCount;
+			}else{
+				aTag.href = "/listing.board?category="+category+"&search="+search+"&keyword="+keyword+"&cpage="+pageTotalCount;
+			}
+			
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
