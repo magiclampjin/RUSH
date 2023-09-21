@@ -29,7 +29,7 @@ public class GameController extends HttpServlet {
 			if(cmd.equals("/moveToGamePage.game")) {
 				String gameName = request.getParameter("game");
 				String gameCategory = dao.selectByGameName(gameName);
-				String mID = "rubiver";  //추후 mID 넘기는거로 변경해야함.
+				String mID = "rubiver123";  //추후 mID 넘기는거로 변경해야함.
 				System.out.println(gameName);
 				System.out.println(gameCategory);
 				request.setAttribute("game",gameName);
@@ -64,13 +64,13 @@ public class GameController extends HttpServlet {
 			}else if(cmd.equals("/deletefavorite.game")) {
 				String mID = request.getParameter("mID"); //넘어오는 파라미터 이름은 추후 수정 가능.
 				String gameName = request.getParameter("gameName");
-				int result = dao.insertFavorite(gameName, mID);
+				int result = dao.deleteFavorite(gameName, mID);
 				PrintWriter out = response.getWriter();
 				if(result>0) {
-					System.out.println("즐겨찾기 성공");
+					System.out.println("즐겨찾기제거 성공");
 					out.println("o");
 				}else {
-					System.out.println("즐겨찾기 실패");
+					System.out.println("즐겨찾기제거 실패");
 					out.println("x");
 				}
 			}else if(cmd.equals("/getRecord.game")) {

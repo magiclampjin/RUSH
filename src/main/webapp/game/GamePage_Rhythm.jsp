@@ -82,16 +82,17 @@ a{
 			url:"/checkFavorite.game",
 			data:{
 				game:"${game}",
-				mID : "rubiver"
+				mID : "rubiver123"
 			},
 			type : "post"
 		}).done(function(res){
 			let isFavorite = res;
 			console.log(isFavorite);
 			if(isFavorite == 1){
-				$("#favorite").css("display","none");
-				$("#delfavorite").css("display","block");
+				$("#favorite").addClass("active");
 				console.log("active");
+			}else{
+				
 			}
 		});
 	}
@@ -202,10 +203,10 @@ a{
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
-									<button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
+									<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
-									</button>
+									</button> -->
 								</div>
 							</div>
 							<hr class="border border-primary border-3 opacity-75">
@@ -389,29 +390,38 @@ a{
         	$("#info").css("display","block");
         	$("#rank").css("display","none");
         });
+        
         $("#favorite").on("click",function(){
-        	$.ajax({
-        	      url:"/favorite.game",
-        	      data:{
-        	        mID:"rubiver",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
-        	        gameName:'${game}'
-        	      },
-        	      type:"post"
-        	    }).done(function (res){
-        	      console.log(res);
-        	    });
+        	if($(this).hasClass("active") == true){
+        		console.log("존재");
+        		$.ajax({
+          	      url:"/deletefavorite.game",
+          	      data:{
+          	        mID:"rubiver123",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+          	        gameName:'${game}'
+          	      },
+          	      type:"post"
+          	    }).done(function (res){
+          	      console.log(res);
+          	      location.reload();
+          	    });
+        	}else{
+        		console.log("x");
+        		$.ajax({
+          	      url:"/favorite.game",
+          	      data:{
+          	        mID:"rubiver123",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨.*/ 
+          	        gameName:'${game}'
+          	      },
+          	      type:"post"
+          	    }).done(function (res){
+          	      console.log(res);
+          	      location.reload();
+          	    });
+        	}
         });
-        $("#deletefavorite").on("click",function(){
-        	$.ajax({
-        	      url:"/deletefavorite.game",
-        	      data:{
-        	        mID:"rubiver",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
-        	        gameName:'${game}'
-        	      },
-        	      type:"post"
-        	    }).done(function (res){
-        	      console.log(res);
-        	    });
+        $("#delfavorite").on("click",function(){
+        	
         });
     </script>
 </body>
