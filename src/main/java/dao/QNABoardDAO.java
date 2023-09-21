@@ -71,7 +71,7 @@ public class QNABoardDAO {
 	// 찾을 키워드 없을
 	public List<QNABoardDTO> selectBy(int start, int end) throws Exception{
 		String sql = "select * "
-				+ "from (select row_number() over(order by qbseq desc) rn, qna_board.* from qna_board) temp "
+				+ "from (select row_number() over(order by qbseq desc) rn, qnarepfile.* from qnarepfile) temp "
 				+ "where rn between ? and ?;";
 		
 		try(Connection con = this.getConnection();
@@ -84,7 +84,7 @@ public class QNABoardDAO {
 					list.add(new QNABoardDTO(rs.getInt("qbSeq"),rs.getString("mID"),
 							rs.getString("mNickname"),rs.getString("qbTitle"),
 							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-							rs.getString("qbCategory"),rs.getBoolean("secret")));
+							rs.getString("qbCategory"),rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn")));
 				}
 				return list;
 			}
@@ -94,10 +94,9 @@ public class QNABoardDAO {
 	
 	// 찾을 키워드 있을 때
 	public List<QNABoardDTO> selectBy(int start, int end,String searchBy ,String keyword) throws Exception{
-		System.out.println("여기는 DAO -> keyword : "+keyword +", searchBy "+searchBy);
 		String sql = "select * "
-				+ "from (select row_number() over(order by qbseq desc) rn, qna_board.* "
-				+ 		"from qna_board "
+				+ "from (select row_number() over(order by qbseq desc) rn, qnarepfile.* "
+				+ 		"from qnarepfile "
 				+ 		"where "+ searchBy +" like ?) temp "
 				+ "where rn between ? and ?;";
 		try(Connection con = this.getConnection();
@@ -112,7 +111,7 @@ public class QNABoardDAO {
 					list.add(new QNABoardDTO(rs.getInt("qbseq"),rs.getString("mID"),
 							rs.getString("mNickname"),rs.getString("qbTitle"),
 							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-							rs.getString("qbCategory"),rs.getBoolean("secret")));
+							rs.getString("qbCategory"),rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn")));
 				}
 				return list;
 			}
@@ -149,17 +148,18 @@ public class QNABoardDAO {
 	}
 	
 	public QNABoardDTO selectPost(int qnaSeq) throws Exception{
-		String sql = "select * from qna_board where qbSeq=?;";
+		String sql = "select * from qnarepfile where qbSeq=?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 				
 				pstat.setInt(1, qnaSeq);
+				
 				try(ResultSet rs = pstat.executeQuery();){
 					rs.next();
 					return new QNABoardDTO(rs.getInt("qbseq"),rs.getString("mID"),
 							rs.getString("mNickname"),rs.getString("qbTitle"),
 							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-							rs.getString("qbCategory"),rs.getBoolean("secret"));
+							rs.getString("qbCategory"),rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn"));
 				}
 			}
 	}
@@ -171,6 +171,7 @@ public class QNABoardDAO {
 				
 				pstat.setInt(1, qnaSeq);
 				ResultSet rs = pstat.executeQuery();
+				System.out.println("answerYN : "+rs.getInt(1));
 				return rs.getInt(1);
 			}
 	}
@@ -182,6 +183,7 @@ public class QNABoardDAO {
 				
 				pstat.setInt(1, qnaSeq);
 				ResultSet rs = pstat.executeQuery();
+				System.out.println("fileYN : "+rs.getInt(1));
 				return rs.getInt(1);
 			}
 	}
