@@ -94,6 +94,7 @@ public class QNABoardDAO {
 	
 	// 찾을 키워드 있을 때
 	public List<QNABoardDTO> selectBy(int start, int end,String searchBy ,String keyword) throws Exception{
+		System.out.println("여기는 DAO -> keyword : "+keyword +", searchBy "+searchBy);
 		String sql = "select * "
 				+ "from (select row_number() over(order by qbseq desc) rn, qna_board.* "
 				+ 		"from qna_board "

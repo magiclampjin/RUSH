@@ -112,17 +112,21 @@ public class QnAController extends HttpServlet {
 				List<QNABoardDTO> list = new ArrayList<>();
 				
 				// 검색한 키워드
-				String keyword = request.getParameter("keyword");
-				String searchBy = request.getParameter("searchBy");
+				String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
+				String searchBy = request.getParameter("searchBy") == null ? "" : request.getParameter("searchBy");
+				System.out.println("keyword : "+keyword +", searchBy "+searchBy);
 				
-				
-				if(keyword.equals("") || keyword==null) { // 찾는 값 없음
+				if(keyword.equals("")) { // 찾는 값 없음
+					System.out.println("찾는 값 없음");
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE));
 					request.getSession().setAttribute("latestPageNum", currentPage);
 					
 					request.setAttribute("list", list);
 					request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCount());
-				}else {
+
+				}
+				else {
+					System.out.println("찾는 값 있음");
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE),searchBy,keyword);
 					request.getSession().setAttribute("latestPageNum", currentPage);
 					
@@ -132,6 +136,7 @@ public class QnAController extends HttpServlet {
 					request.setAttribute("keyword", keyword);
 					
 				}
+				
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/qna/qnaList.jsp").forward(request, response);
