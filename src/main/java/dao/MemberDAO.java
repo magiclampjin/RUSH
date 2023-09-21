@@ -82,4 +82,18 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	public String selectNicknameById(String id) throws Exception {
+		String sql = "select mNickname from members where mID = ?";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();) {
+				rs.next();
+				return rs.getString("mNickname");
+			}
+		}
+	}
 }

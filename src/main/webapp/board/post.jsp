@@ -151,9 +151,12 @@ a {
 	height: 50px;
 }
 
-.reply, .nestedReply {
-	border: 1px solid #7d7d7d;
+.reply{
 	padding: 15px 0px 0px 15px;
+}
+
+.reply, .nestedReply{
+	border: 1px solid #7d7d7d;
 }
 
 .replyInsertBtn {
@@ -162,8 +165,23 @@ a {
 	padding: 0px 25px 25px 0px;
 }
 
-.replyBtns div {
+.nestedCover {
+	padding: 0px 25px 25px 0px;
+}
+
+.nestedCover button{
+	border: 0px;
+	background-color: #ffffff00;
+	margin-left:15px;
+}
+
+
+.replyBtns div, .nestedReplyBtn {
 	cursor: pointer;
+}
+
+.nestedReplyBtn:hover{
+	text-decoration: underline;
 }
 
 .isWriter {
@@ -423,7 +441,31 @@ a {
 						<div class="col-12">
 							<input type="hidden" id="loginID" value="${loginID}"> <input
 								type="hidden" id="postWriterName" value="${post.writer}">
-							<div class="row g-0 replys mb200" id="replys">
+							<div class="row g-0 replys mb200 justify-content-end" id="replys">
+							
+			
+	<!-- 						<div class="col-10 nestedReply">
+								<input type="hidden" id="postSeq" value="댓글번호">
+								<div class="col-10" id="nestedReplyInput" contenteditable></div>
+								
+								<div class="d-none d-xl-flex col-xl-2 btnCover nestedCover">
+									<button class="fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyCancel">취소</button>
+									<button class="fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyInsert">등록</button>
+								</div>
+								
+
+								 <div class="col-2 d-xl-none mininested">
+									<button class="fw400 fs25 colorDarkgray nestedReplyCancel">취소</button>
+									<button class="fw400 fs25 colorDarkgray nestedReplyInsert">등록</button>			
+								 </div>
+							</div>
+								 -->
+							
+							
+							
+							
+							
+							
 								<!-- 	<div class="col-12 reply">
 									<div class="d-flex align-items-end mb10">
 										<div class="writer fw500 fs20">writer01</div>

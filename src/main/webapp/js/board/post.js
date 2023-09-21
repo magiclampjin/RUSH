@@ -25,7 +25,7 @@ $(document).ready(function() {
 				}
 				let contents = $("<div>").attr("class","contents fw400 fs20 mb10").html(resp[i].contents);
 				let detailInfo = $("<div>").attr("class","replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate+"&nbsp;&nbsp;");
-				let nestedReplyBtn = $("<a>").attr("href","#").attr("class","nestedReplyBtn colorDarkgray").html("답글 쓰기");
+				let nestedReplyBtn = $("<a>").attr("class","nestedReplyBtn colorDarkgray").html("답글 쓰기");
 				detailInfo.append(nestedReplyBtn);
 				
 				row.append(col10.append(writerCover).append(contents).append(detailInfo));
@@ -95,6 +95,9 @@ $(document).ready(function() {
 		// 댓글 삽입 시 댓글 수정 취소 시 사용할 백업 내용 삭제
 		replyBackup = null;
 		replyObj = null;
+		nestedReplyParentSeq = null;
+		nestedReplyObj = null;
+
 		
 		$.ajax({
 			url:"/insert.reply",
@@ -107,8 +110,6 @@ $(document).ready(function() {
 			$("#replys").html("");
 			$("#replys").html(replyReload(postSeq));
 		});
-		// location.reload(true);
-		
 	});
 	
 	// 게시글 북마크/ 추천 눌렀을 때 게시글 삭제됏으면 삭제된 게시글이라고 출력
@@ -200,9 +201,35 @@ $(document).ready(function() {
 	// 댓글 삭제
 	$(document).on("click",".replyDelete",function() {
 		
-		// 댓글 삭제 시 댓글 수정 취소 시 사용할 백업 내용 삭제
-		replyBackup = null;
-		replyObj = null;
+		if(replyBackup != null){ // 수정중인 댓글이 있으면?
+			if(confirm("댓글 수정을 취소하시겠습니까?")){
+				replyObj.closest(".reply").find(".contents").html(replyBackup);
+				replyObj.closest(".reply").find(".contents").attr("contenteditable",false);
+				replyObj.parent().css("display","flex");
+				replyObj.parent().siblings(".updateCover").css("display","none");
+				
+				replyObj.parent().parent().siblings(".replyBtns").children(".defaultCover").css("display","flex");
+				replyObj.parent().parent().siblings(".replyBtns").children(".updateCover").css("display","none");
+				// 댓글 삭제 시 댓글 수정 취소 시 사용할 백업 내용 삭제, 답글 수정 취소시 백업할 내용 삭제
+				replyBackup = null;
+				replyObj = null;
+				
+			}else{
+				return false;
+			}
+		}
+		
+		if(nestedReplyObj != null) { // 작성 중인 당급이 있으면?
+			let replyid = $(this).closest(".reply").find("#replyId").val();
+			if(confirm("답글 작성을 취소하시겠습니가?")){
+				nestedReplyObj.remove();
+				nestedReplyParentSeq = null;
+				nestedReplyObj = null;
+			}else{
+				return false;
+			}
+		}
+		
 		
 		$.ajax({
 			url:"delete.reply",
@@ -224,7 +251,7 @@ $(document).ready(function() {
 	$(document).on("click",".replyUpdate",function() {
 		
 		if(replyBackup != null){ // 수정중인 댓글이 있으면?
-			if(confirm("수정을 취소하시겠습니까?")){
+			if(confirm("댓글 수정을 취소하시겠습니까?")){
 				replyObj.closest(".reply").find(".contents").html(replyBackup);
 				replyObj.closest(".reply").find(".contents").attr("contenteditable",false);
 				replyObj.parent().css("display","flex");
@@ -233,6 +260,17 @@ $(document).ready(function() {
 				replyObj.parent().parent().siblings(".replyBtns").children(".defaultCover").css("display","flex");
 				replyObj.parent().parent().siblings(".replyBtns").children(".updateCover").css("display","none");
 				
+			}else{
+				return false;
+			}
+		}
+		
+		if(nestedReplyObj != null) { // 작성 중인 당급이 있으면?
+			let replyid = $(this).closest(".reply").find("#replyId").val();
+			if(confirm("답글 작성을 취소하시겠습니가?")){
+				nestedReplyObj.remove();
+				nestedReplyParentSeq = null;
+				nestedReplyObj = null;
 			}else{
 				return false;
 			}
@@ -326,5 +364,79 @@ $(document).ready(function() {
 			});
 		
 		}
+	});
+	
+	let nestedReplyParentSeq = null;
+	let nestedReplyObj = null;
+	// 답글 쓰기 클릭
+	$(document).on("click",".nestedReplyBtn",function(){
+		// 답글 작성 ui
+		if(nestedReplyObj != null){ //작성중인 답글이 있으면
+			let replyid = $(this).closest(".reply").find("#replyId").val();
+			if(replyid == nestedReplyParentSeq){
+				return false;
+			} else{
+				if(confirm("답글 작성을 취소하시겠습니가?")){
+					nestedReplyObj.remove();
+					nestedReplyParentSeq = null;
+					nestedReplyObj = null;
+				}else{
+					return false;
+				}
+			}
+		}
+		
+		//수정중인 댓글이 있으면
+		if(replyBackup != null){ // 수정중인 댓글이 있으면?
+			if(confirm("댓글 수정을 취소하시겠습니까?")){
+				replyObj.closest(".reply").find(".contents").html(replyBackup);
+				replyObj.closest(".reply").find(".contents").attr("contenteditable",false);
+				replyObj.parent().css("display","flex");
+				replyObj.parent().siblings(".updateCover").css("display","none");
+				
+				replyObj.parent().parent().siblings(".replyBtns").children(".defaultCover").css("display","flex");
+				replyObj.parent().parent().siblings(".replyBtns").children(".updateCover").css("display","none");
+				replyBackup = null;
+				replyObj = null;
+			}else{
+				return false;
+			}
+		}
+		
+		let nestedReply = $("<div>").attr("class","col-12 nestedReply");
+		
+		let arrow = $("<div>").attr("class","col-1 d-flex justify-content-center align-items-center").html("<i class='fa-solid fa-arrow-turn-up fa-rotate-90 fa-xl'></i>");
+		nestedReplyObj = nestedReply;
+		let replyid = $(this).closest(".reply").find("#replyId").val();
+		let replySeq = $("<input>").attr("id","nestedReplySeq").attr("type","hidden").val(replyid);
+		nestedReplyParentSeq = replyid;
+		let nestedReplyInput = $("<div>").attr("id","nestedReplyInput").attr("class","col-9").attr("contenteditable","true").focus();
+	
+		nestedReply.append(arrow).append(nestedReplyInput);
+		let nestedCover = $("<div>").attr("class","d-none d-xl-flex col-xl-2 btnCover nestedCover");
+		let insert = $("<button>").attr("class","fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyInsert").html("등록");
+		let cancel = $("<button>").attr("class","fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyCancel").html("취소");
+		nestedCover.append(insert).append(cancel);
+		
+		let nestedCoverMini = $("<div>").attr("class","col-2 d-xl-none mininested");
+		let insertMini = $("<button>").attr("class","fw400 fs25 colorDarkgray nestedReplyInsert").html("등록");
+		let cancelMini = $("<button>").attr("class","fw400 fs25 colorDarkgray nestedReplyCancel").html("취소");
+		nestedCoverMini.append(insertMini).append(cancelMini);
+		
+		nestedReply.append(replySeq).append(nestedCover).append(nestedCoverMini);
+		
+		$(this).closest(".reply").after(nestedReply);
+	}); 
+	
+	// 답글작성 취소
+	$(document).on("click",".nestedReplyCancel",function(){
+		$(this).closest(".nestedReply").remove();
+		nestedReplyParentSeq = null;
+		nestedReplyObj = null;
+	});
+	
+	// 답글작성 저장
+	$(document).on("click",".nestedReplyInsert",function(){
+		
 	});
 });
