@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/boardMainPagination.js"></script>
+<script type="text/javascript" src="/js/board/isUser.js"></script>
 
 <!-- 부트스트랩, fontawesome -->
 <link
@@ -301,7 +302,10 @@ a {
 			value="${recordCountPerPage }"> <input type="hidden"
 			id="naviCountPerPage" value="${naviCountPerPage }"> <input
 			type="hidden" id="lastPageNum" value="${lastPageNum }"> <input
-			type="hidden" value=${search } id="search"> <a href="#">
+			type="hidden" value=${search } id="search"> 
+			<input type="hidden" value=${loginID } id="userID">
+			
+			<a href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>
 			</div>
