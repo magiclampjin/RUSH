@@ -82,7 +82,7 @@ a{
 			url:"/checkFavorite.game",
 			data:{
 				game:"${game}",
-				mID : "rubiver123"
+				mID : "${loginID}"
 			},
 			type : "post"
 		}).done(function(res){
@@ -93,6 +93,45 @@ a{
 				console.log("active");
 			}else{
 				
+			}
+		});
+		$.ajax({
+			url:"/getRecord.game",
+			data:{
+				gameName:"${game}"
+			},
+			type : "post"
+		}).done(function(res){
+			let record = JSON.parse(res);
+			console.log(record);
+			console.log(record[0]["nickName"]);
+			$("#rankCon").text("");
+			for(let i=0; i<record.length; i++){
+				let divRow = $("<div>");
+				divRow.addClass("row g-0 p-2");
+				let divColRank = $("<div>");
+				if(i<3){
+    				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3");
+    				divColRank.append(i+1);
+				}else{
+    				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
+    				divColRank.append(i+1);	
+				}
+				
+				
+				let divColInfo = $("<div>");
+				divColInfo.addClass("col-7 text-white");
+				divColInfo.append(record[i]["nickName"]);
+				
+				let divColScore = $("<div>");
+				divColScore.addClass("col-4 text-white");
+				divColScore.append(record[i]["score"]);
+				
+				divRow.append(divColRank);
+				divRow.append(divColInfo);
+				divRow.append(divColScore);
+				
+				$("#rankCon").append(divRow);
 			}
 		});
 	}
