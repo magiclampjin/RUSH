@@ -536,7 +536,6 @@ $(document).ready(function() {
 				}
 			});
 		} else if ($(this).html() == "답글 닫기") {
-			console.log(nestedReplyAll);
 			nestedReplyAll.remove();
 			
 			$(this).html("답글 보기");
