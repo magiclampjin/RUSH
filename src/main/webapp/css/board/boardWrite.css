@@ -82,6 +82,12 @@ input[type=file]::file-selector-button:hover {
 	margin-top: 10px;
 }
 
+/*summernote images size fix*/
+
+.note-editable img{
+  max-width: 100%;
+}
+
 @media ( max-width : 786px) {
 	.writeTitle {
 		font-size: 30px;

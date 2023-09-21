@@ -5,11 +5,41 @@ $(document).ready(function() {
 		minHeight: 700,
 		maxHeight: 1000,
 		focus: true,
-		lang: 'ko-KR'
+		lang: 'ko-KR',
+		callbacks: {
+			onImageUpload: function(files) {
+				let formData = new FormData();
+				for (let i = 0; i < files.length; i++) {
+					formData.append("image", files[i])
+				}
+				$.ajax({
+					url: "/insert.file?isqna=false",
+					method: "post",
+					data: formData,
+					processData: false,
+					contentType: false,
+					dataType: "json",
+				}).done(function(resp) {
+					
+					console.log(resp)
+					console.log(resp.length)
+					console.log("A")
+					for(let i =0;i<resp.length;i++){
+						console.log("resp[i]"+resp[i]);
+						let img = $("<img>");
+						img.attr("src", resp[i]).attr("isimg","true");
+						let imgInfo = $("<input>");
+						console.log(img)
+						$("#summernote").summernote('insertNode', img[0]);
+					}
+					
+				});
+			}
+		}
 	});
 
 	let count = 0;
-	
+
 	$("#btnAdd").on("click", function() {
 		console.log("b")
 		if ($("input[type=file]").length > 5) {
@@ -42,6 +72,19 @@ $(document).ready(function() {
 
 	$(document).on("click", ".del", function() {
 		$(this).closest("div").remove();
+	})
+
+	$("#boardForm").on("submit", function() {
+		if ($("#title").val() == "") {
+			$("#title").css("background-color", "pink")
+			return false;
+		}
+		if ($("#content").val() == "") {
+			$('#content').focus();
+			$(".note-editor").css("background-color", "pink")
+			return false;
+		}
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 	})
 });
 
