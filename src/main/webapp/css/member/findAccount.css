@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+#container {
+    width: 100%;
+    height: 1100px;
+}
+
+#box {
+    width: 600px;
+    height: 100%;
+    margin: auto;
+}
+
+#findIdBox {
+    margin-top: 100px;
+}
+
+#findPwBox {
+    margin-top: 150px;
+}
+
+.titleBox {
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+.subtitle {
+    font-size: 20px;
+}
+
+.subtitle2 {
+    font-size: 15px;
+}
+
+.inputTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.input {
+    height: 40px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.findBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 5px;
+    width: 20%;
+    height: 35px;
+    text-align: center;
+}
+
+#pwBox {
+	display: none;
+}
+
+.mt-10 {
+	margin-top: 100px;
+}

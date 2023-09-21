@@ -90,6 +90,39 @@ public class MemberController extends HttpServlet {
 	               response.getWriter().append("failed");
 	            }
 				
+			} else if(cmd.equals("/findId.member")) {
+				// 아이디 찾기
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				
+				boolean ExistId = dao.selectByNameEmail(name, email);
+				if(!ExistId) {
+					response.getWriter().append("null");
+				} else {
+					String id = dao.selectIdByNameEmail(name, email);
+					response.getWriter().append(id);
+				}
+				
+			} else if(cmd.equals("/findPw.member")) {
+				// 비밀번호 찾기
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				
+				boolean ExistPw = dao.selectByIdNameEmail(id, name, email);
+				if(!ExistPw) {
+					response.getWriter().append("null");
+				}
+				
+			} else if(cmd.equals("/updatePw.member")) {
+				// 비밀번호 수정
+				String pw = EncryptionUtils.getSHA512(request.getParameter("pw"));
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				dao.updateByPw(pw, id, name, email);
+				response.sendRedirect("/member/login.jsp");
+				
 			} else if(cmd.equals("/logout.member")) {
 				// 회원 로그아웃
 				request.getSession().invalidate();
