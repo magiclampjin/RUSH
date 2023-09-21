@@ -54,7 +54,9 @@ public class GameController extends HttpServlet {
 					out.println("x");
 				}
 			}else if(cmd.equals("/moveToBestGame.game")) {
-				request.getRequestDispatcher("/GamePage_BestGame?").forward(request, response);
+//				List<String> list = dao.selectFamousGame();
+//				request.setAttribute("best", list);
+				request.getRequestDispatcher("/game/GamePage_BestGame.jsp").forward(request, response);
 			}else if(cmd.equals("/checkFavorite.game")) {
 				String gameName = request.getParameter("game");
 				String mID = request.getParameter("mID");
@@ -80,6 +82,10 @@ public class GameController extends HttpServlet {
 				System.out.println(list.get(0).getGameName());
 				PrintWriter out = response.getWriter();
 				out.println(gson.toJson(list));
+			}else if(cmd.equals("/getBestGame.game")) {
+				List<String> list = dao.selectFamousGame();
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(list));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

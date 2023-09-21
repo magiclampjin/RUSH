@@ -52,6 +52,44 @@ a{
 </style>
 </head>
 <body>
+<script>
+	window.onload = function(){
+		$.ajax({
+			url:"/getBestGame.game",
+		}).done(function(res){
+			let data = JSON.parse(res);
+			console.log(data);
+			console.log(data.length);
+			for(let i=0; i<data.length; i++){
+				let divRow = $("<div>");
+				divRow.addClass("row g-0 p-2");
+				
+				let divColRank = $("<div>");
+				divColRank.addClass("col-1 text-white")
+				divColRank.append(i+1);
+				
+				let divColInfo = $("<div>");
+				divColInfo.addClass("col-8 col-md-5 d-flex");
+				divColInfo.append(data[i]);
+				
+				let divColPlayInfo = $("<div>");
+				divColPlayInfo.addClass("col-3 d-none d-md-flex align-item-center");
+				divColPlayInfo.append("W 50% M 50%");
+				
+				let divColBtn = $("<div>");
+				divColBtn.addClass("col-3");
+				divColBtn.html("<button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button>");
+				
+				divRow.append(divColRank);
+				divRow.append(divColInfo);
+				divRow.append(divColPlayInfo);
+				divRow.append(divColBtn);
+				
+				$(".bestCon").append(divRow);
+			}
+		});
+	}
+</script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
@@ -165,8 +203,6 @@ a{
 								
 							</div>
 						</div>
-						
-						
 					</div>
 					<div class="col-3 d-none d-md-flex align-item-center">
 						<span class="text-white fontEnglish fs-3 fw900">W</span> &nbsp;&nbsp;
@@ -177,6 +213,9 @@ a{
 					<div class="col-3">
 						<button type="button" class="btn btn-success fontEnglish fw900">PLAY GAME</button>
 					</div>
+				</div>
+				<div class="bestCon">
+					
 				</div>
 			</div>
 		</div>
