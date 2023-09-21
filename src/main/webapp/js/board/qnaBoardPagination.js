@@ -37,12 +37,16 @@ $(document).ready(function() {
 		}
 
 		let pagination = $("#pagination")
+		let searchBy = $("#searchBy").val();
+		let searchByKeyword = $("#searchByKeyword").val();
+		
+
 
 		if (startNavi != 1) {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-left";
-			aTag.href = "/listing.qna?cpage=1";
+			aTag.href = "/listing.qna?cpage=1&searchBy="+searchBy+"&keyword="+searchByKeyword;
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -51,7 +55,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-left";
-			aTag.href = "/listing.qna?cpage=" + (startNavi - 1);
+			aTag.href = "/listing.qna?cpage=" + (startNavi - 1)+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -60,7 +64,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			aTag.textContent = i;
 			aTag.className += "colorBlack fontEnglish";
-			aTag.href = "/listing.qna?cpage=" + i;
+			aTag.href = "/listing.qna?cpage=" + i+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
 			if (i == currentPage) {
 				aTag.className = "colorWhite bColorBlue fontEnglish"
 			}
@@ -71,7 +75,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-right";
-			aTag.href = "/listing.qna?cpage=" + (endNavi + 1);
+			aTag.href = "/listing.qna?cpage=" + (endNavi + 1)+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -80,7 +84,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-right";
-			aTag.href = "/listing.qna?cpage="+pageTotalCount;
+			aTag.href = "/listing.qna?cpage="+pageTotalCount+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}

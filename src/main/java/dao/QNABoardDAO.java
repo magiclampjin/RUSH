@@ -93,16 +93,15 @@ public class QNABoardDAO {
 	}
 	
 	// 찾을 키워드 있을 때
-	// 제목으로 키워드 찾을 때
-	public List<QNABoardDTO> selectBy(int start, int end, String search) throws Exception{
+	public List<QNABoardDTO> selectBy(int start, int end,String searchBy ,String keyword) throws Exception{
 		String sql = "select * "
 				+ "from (select row_number() over(order by qbseq desc) rn, qna_board.* "
 				+ 		"from qna_board "
-				+ 		"where qbtitle like ?) temp "
+				+ 		"where "+ searchBy +" like ?) temp "
 				+ "where rn between ? and ?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, "%"+search+"%");
+			pstat.setString(1, "%"+keyword+"%");
 			pstat.setInt(2, start);
 			pstat.setInt(3, end);
 			
@@ -118,25 +117,24 @@ public class QNABoardDAO {
 			}
 		}
 	}
-	
-	public int getRecordCountTitle(String search) throws Exception{
+	// 키워드 있을 때 레코드 개수
+	public int getRecordCountKeyword(String searchBy ,String keyword) throws Exception{
 		String sql = "select count(*) "
 				+ "from (select row_number() over(order by qbseq desc) rn, qna_board.* "
 				+ 		"from qna_board "
-				+ 		"where qbtitle like ?) temp;";
+				+ 		"where "+ searchBy +" like ?) temp;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 				
-				pstat.setString(1, "%"+search+"%");
+				pstat.setString(1, "%"+keyword+"%");
 				ResultSet rs = pstat.executeQuery();
 				rs.next(); // 화살표가 데이터 라인을 가리킴
 
 				return rs.getInt(1);
 			}
 	}
-			
-			
-			
+	
+	// 키워드 없을 때 레코드 개수		
 	public int getRecordCount() throws Exception{
 		String sql = "select count(*) from qna_board;";
 		try(Connection con = this.getConnection();

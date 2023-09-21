@@ -166,11 +166,34 @@ a {
 		                                        	</c:otherwise>
 	                                        	</c:choose>
 	                                        
-	                                        <div class="replyCnt colorPink fontEnglish">답변완료</div>
+	                                        <div class="replyCnt colorPink fontEnglish">
+											<!-- qnaReply 의 list를 넘겨줘야함 -->
+	                                        <c:forEach var="qnaReply" items="${qnaReply }">
+		                                        <c:choose>
+		                                        	<c:when test="${qna.seq eq qnaReply.seq }">
+		                                        		답변완료
+		                                        	</c:when>
+		                                        	<c:otherwise>
+		                                        		답변대기
+		                                        	</c:otherwise>
+		                                        </c:choose>
+	                                        </c:forEach>
+	                                        </div>
 	                                    </div>
 	                                    <div class="writer">${qna.nickName }</div>
 	                                    <div class="date fontEnglish">${qna.stringFormat }</div>
-	                                    <div class="file"><i class="fa-solid fa-paperclip"></i></div>
+	                                    <div class="file">
+	                                    <c:forEach var="file" items="${file }">
+	                                    	<c:choose>
+	                                        	<c:when test="${file.qna eq true }">
+	                                        		<i class="fa-solid fa-paperclip"></i>
+	                                        	</c:when>
+	                                        	<c:otherwise>
+	                                        		
+	                                        	</c:otherwise>
+	                                        </c:choose>
+	                                    </c:forEach>
+	                                    </div>
 	                                </div>
 	                                <div class="minBoard">
 	                                    <div class="num">${qna.seq }</div>
@@ -222,25 +245,25 @@ a {
                         <div class="search_write">
                             <div class="write"></div>
                             <div class="search">
-                                <form action="">
+                                <form action="/listing.qna">
                                     <div class="category">
-                                        <select name="searchBy" class="form-select" aria-label="Default select example">
-                                            <option value="title">제목</option>
-                                            <option value="writer">작성자</option>
-                                            <option value="content">내용</option>
+                                        <select id="selectOption" name="searchBy" class="form-select" aria-label="Default select example">
+                                            <option value="qbTitle">제목</option>
+                                            <option value="mNickname">작성자</option>
+                                            <option value="qbContents">내용</option>
                                         </select>
                                     </div>
                                     <div class="keyword">
-                                        <input type="text">
+                                        <input type="text" id="keyword" name="keyword">
                                     </div>
                                     <div class="sertchBtn">
-                                        <input type="submit" class="boardBtn" value="검색">
+                                        <input type="submit" class="boardBtn bColorGreen" value="검색">
                                     </div>
                                 </form>
 
                             </div>
                             <div class="write">
-                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" class="boardBtn"></a>
+                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" class="boardBtn bColorGreen"></a>
                             </div>
                         </div>
                     </div>
@@ -252,6 +275,8 @@ a {
 		<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
 		<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
 		<input type="hidden" id="lastPageNum" value="${lastPageNum }">
+		<input type="hidden" id="searchBy" value="${searchBy }">
+		<input type="hidden" id="searchByKeyword" value="${keyword }">
         
         <a href="#">
             <div class="upArrow bColorPink colorWhite">

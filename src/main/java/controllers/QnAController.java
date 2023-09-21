@@ -110,32 +110,23 @@ public class QnAController extends HttpServlet {
 				String keyword = request.getParameter("keyword");
 				String searchBy = request.getParameter("searchBy");
 				
-				if(keyword==null) { // 찾는 값 없음
-					System.out.println("찾는 값: "+keyword);
+				
+				if(keyword.equals("") || keyword==null) { // 찾는 값 없음
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE));
 					request.getSession().setAttribute("latestPageNum", currentPage);
 					
 					request.setAttribute("list", list);
 					request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCount());
+				}else {
+					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE),searchBy,keyword);
+					request.getSession().setAttribute("latestPageNum", currentPage);
+					
+					request.setAttribute("list", list);
+					request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCountKeyword(searchBy,keyword));
+					request.setAttribute("searchBy", searchBy);
+					request.setAttribute("keyword", keyword);
 					
 				}
-//				else {
-//					if(searchBy.equals("title")) {
-//						System.out.println("찾는 값: "+keyword);
-//						list = QNABoardDAO.getInstance().selectBy(currentPage, currentPage, keyword);
-//						request.getSession().setAttribute("latestPageNum", currentPage);
-//						
-//						request.setAttribute("list", list);
-//						request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCountTitle(keyword));
-//					
-//						request.setAttribute("keyword", keyword);
-//					
-//					}else if(searchBy.equals("writer")){
-//						
-//					}else if(searchBy.equals("content")){
-//						
-//					}
-//				}
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/qna/qnaList.jsp").forward(request, response);
