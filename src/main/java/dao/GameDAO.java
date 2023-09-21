@@ -3,10 +3,15 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import dto.GameRecordDTO;
 
 public class GameDAO {
 	private GameDAO() {}
@@ -71,6 +76,38 @@ public class GameDAO {
 			int count = rs.getInt("count");
 			return count;
 		}
+	}
+	
+	public List<GameRecordDTO> selectGameRecord(String gName) throws Exception{
+		String sql = "select * from game_record where gName = ? order by grScore desc;";
+		List<GameRecordDTO> list = new ArrayList<>();
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, gName);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				while(rs.next()) {
+					GameRecordDTO dto = new GameRecordDTO();
+					int seq = rs.getInt("grSeq");
+					String mID = rs.getString("mID");
+					String gameName = rs.getString("gName");
+					String mNickname = rs.getString("mNickname");
+					Timestamp grStartGameTiem = rs.getTimestamp("grStartGameTime");
+					int grScore = rs.getInt("grScore");
+					dto.setSeq(seq);
+					dto.setId(mID);
+					dto.setGameName(gameName);
+					dto.setNickName(mNickname);
+					dto.setStartGameTime(grStartGameTiem);
+					dto.setScore(grScore);
+					list.add(dto);
+				}
+			}
+		}
+		return list;
 	}
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)

@@ -245,8 +245,7 @@ a{
 										</div>
 									</div>
 									<hr class="colorWhite">
-									<div class="row">
-									<!-- 요기서 데이터 추ㄹ력 -->
+									<div id="rankCon">
 									</div>
 								</div>
 							</div>
@@ -345,6 +344,45 @@ a{
         	$("#rank").css("display","flex");
         	$("#rank").css("justify-content","center");
         	$("#info").css("display","none");
+        	$.ajax({
+    			url:"/getRecord.game",
+    			data:{
+    				gameName:"${game}"
+    			},
+    			type : "post"
+    		}).done(function(res){
+    			let record = JSON.parse(res);
+    			console.log(record);
+    			console.log(record[0]["nickName"]);
+    			$("#rankCon").text("");
+    			for(let i=0; i<record.length; i++){
+    				let divRow = $("<div>");
+    				divRow.addClass("row g-0 p-2");
+    				let divColRank = $("<div>");
+    				if(i<3){
+        				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3");
+        				divColRank.append(i+1);
+    				}else{
+        				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
+        				divColRank.append(i+1);	
+    				}
+    				
+    				
+    				let divColInfo = $("<div>");
+    				divColInfo.addClass("col-7 text-white");
+    				divColInfo.append(record[i]["nickName"]);
+    				
+    				let divColScore = $("<div>");
+    				divColScore.addClass("col-4 text-white");
+    				divColScore.append(record[i]["score"]);
+    				
+    				divRow.append(divColRank);
+    				divRow.append(divColInfo);
+    				divRow.append(divColScore);
+    				
+    				$("#rankCon").append(divRow);
+    			}
+    		});
         });
         
         $("#btnradio2").on("click",function(){
@@ -363,7 +401,7 @@ a{
         	      console.log(res);
         	    });
         });
-        $("#favorite").on("click",function(){
+        $("#deletefavorite").on("click",function(){
         	$.ajax({
         	      url:"/deletefavorite.game",
         	      data:{

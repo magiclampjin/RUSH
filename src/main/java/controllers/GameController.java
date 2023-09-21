@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.GameDAO;
+import dto.GameRecordDTO;
 
 @WebServlet("*.game")
 public class GameController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GameDAO dao = GameDAO.getInstance();
+		Gson gson = new Gson();
 		String cmd = request.getRequestURI();
 		System.out.println("game cmd: "+cmd);
 		
@@ -67,6 +73,13 @@ public class GameController extends HttpServlet {
 					System.out.println("즐겨찾기 실패");
 					out.println("x");
 				}
+			}else if(cmd.equals("/getRecord.game")) {
+				List<GameRecordDTO> list = new ArrayList<>();
+				String gameName = request.getParameter("gameName");
+				list = dao.selectGameRecord(gameName);
+				System.out.println(list.get(0).getGameName());
+				PrintWriter out = response.getWriter();
+				out.println(gson.toJson(list));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
