@@ -149,4 +149,20 @@ public class QNABoardDAO {
 		}
 	}
 	
+	public QNABoardDTO selectPost(int qnaSeq) throws Exception{
+		String sql = "select * from qna_board where qbSeq=?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+				
+				pstat.setInt(1, qnaSeq);
+				try(ResultSet rs = pstat.executeQuery();){
+					rs.next();
+					return new QNABoardDTO(rs.getInt("qbseq"),rs.getString("mID"),
+							rs.getString("mNickname"),rs.getString("qbTitle"),
+							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
+							rs.getString("qbCategory"),rs.getBoolean("secret"));
+				}
+			}
+	}
+	
 }

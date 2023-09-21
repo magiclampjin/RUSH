@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/board/freeboard.css">
+<link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/qnaBoardPagination.js"></script>
 
@@ -43,6 +43,10 @@ a {
 	right: 0;
 	left: auto;
 }
+.num,.writer,.date,.file{width:15%;}
+.title{width:40%;}
+.mainTitle{padding-left:5px;}
+
 </style>
 </head>
 <body>
@@ -132,10 +136,36 @@ a {
 	                                <div class="maxBoard">
 	                                    <div class="num fontEnglish">${qna.seq }</div>
 	                                    <div class="title">
-	                                        <div class="lock"><i class="fa-solid fa-lock"></i></i></div>
-	                                        <a href="">
-	                                        	<div class="mainTitle">${qna.title }</div>
-	                                        </a>
+	                                        <div class="lock">
+	                                        	<c:if test="${qna.secret eq true}">
+	                                        		<i class="fa-solid fa-lock"></i>
+	                                        	</c:if>
+	                                        </div>
+	                                        	<c:choose>
+		                                        	<c:when test="${qna.secret eq true}">
+		                                        		<c:choose>
+			                                        		<c:when test="${qna.writer == loginID }">
+			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        				<div class="mainTitle">비밀글입니다.</div>
+			                                        			</a>
+			                                        		</c:when>
+			                                        		<c:otherwise>
+			                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
+			                                        			<script>
+			                                        				function checkSecret(elem){
+			                                        					alert("비밀글은 글을 작성한 본인만 확인가능합니다.");
+			                                        				}
+			                                        			</script>
+			                                        		</c:otherwise>
+		                                        		</c:choose>
+		                                        	</c:when>
+		                                        	<c:otherwise>
+			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        		<div class="mainTitle">${qna.title }</div>
+			                                        	</a>
+		                                        	</c:otherwise>
+	                                        	</c:choose>
+	                                        
 	                                        <div class="replyCnt colorPink fontEnglish">답변완료</div>
 	                                    </div>
 	                                    <div class="writer">${qna.nickName }</div>
@@ -146,8 +176,36 @@ a {
 	                                    <div class="num">${qna.seq }</div>
 	                                    <div class="minCon">
 	                                        <div class="title">
-	                                            <div class="loud"><i class="fa-solid fa-bullhorn"></i></div>
-	                                            <div class="mainTitle">${qna.title }</div>
+	                                            <div class="lock">
+		                                            <c:if test="${qna.secret eq true}">
+		                                        		<i class="fa-solid fa-lock"></i>
+		                                        	</c:if>
+	                                        	</div>
+	                                            
+	                                            <c:choose>
+		                                        	<c:when test="${qna.secret eq true}">
+		                                        		<c:choose>
+			                                        		<c:when test="${qna.writer == loginID }">
+			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        				<div class="mainTitle">비밀글입니다.</div>
+			                                        			</a>
+			                                        		</c:when>
+			                                        		<c:otherwise>
+			                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
+			                                        			<script>
+			                                        				function checkSecret(elem){
+			                                        					alert("비밀글은 글을 작성한 본인만 확인가능합니다.");
+			                                        				}
+			                                        			</script>
+			                                        		</c:otherwise>
+		                                        		</c:choose>
+		                                        	</c:when>
+		                                        	<c:otherwise>
+			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        		<div class="mainTitle">${qna.title }</div>
+			                                        	</a>
+		                                        	</c:otherwise>
+	                                        	</c:choose>
 	                                            <div class="replyCnt colorPink fontEnglish">답변완료</div>
 	                                        </div>
 	                                        <div class="info">
@@ -182,7 +240,7 @@ a {
 
                             </div>
                             <div class="write">
-                                <input type="button" value="글쓰기" class="boardBtn">
+                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" class="boardBtn"></a>
                             </div>
                         </div>
                     </div>
