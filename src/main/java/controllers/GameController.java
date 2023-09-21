@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
+import dto.GameDTO;
 import dto.GameRecordDTO;
 
 @WebServlet("*.game")
@@ -29,7 +30,6 @@ public class GameController extends HttpServlet {
 			if(cmd.equals("/moveToGamePage.game")) {
 				String gameName = request.getParameter("game");
 				String gameCategory = dao.selectByGameName(gameName);
-				String mID = "rubiver123";  //추후 mID 넘기는거로 변경해야함.
 				System.out.println(gameName);
 				System.out.println(gameCategory);
 				request.setAttribute("game",gameName);
@@ -54,7 +54,7 @@ public class GameController extends HttpServlet {
 					out.println("x");
 				}
 			}else if(cmd.equals("/moveToBestGame.game")) {
-				request.getRequestDispatcher("/GamePage_BestGame?").forward(request, response);
+				request.getRequestDispatcher("/game/GamePage_BestGame.jsp").forward(request, response);
 			}else if(cmd.equals("/checkFavorite.game")) {
 				String gameName = request.getParameter("game");
 				String mID = request.getParameter("mID");
@@ -80,6 +80,16 @@ public class GameController extends HttpServlet {
 				System.out.println(list.get(0).getGameName());
 				PrintWriter out = response.getWriter();
 				out.println(gson.toJson(list));
+			}else if(cmd.equals("/getBestGame.game")) {
+				List<GameDTO> list = dao.selectBestGame();
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(list));
+			}else if(cmd.equals("/getCategoryGame.game")) {
+				String category = request.getParameter("category");
+				List<GameDTO> list = dao.selectCategoryGame(category);
+				PrintWriter out = response.getWriter();
+				out.println(gson.toJson(list));
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

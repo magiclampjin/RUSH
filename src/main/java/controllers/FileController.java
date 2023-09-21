@@ -35,6 +35,7 @@ public class FileController extends HttpServlet {
 		String cmd = request.getRequestURI();
 		System.out.println("file cmd: "+cmd);
 
+		response.setContentType("text/html; charset=utf8"); // 한글깨짐방지
 		FileDAO dao = FileDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
@@ -55,6 +56,17 @@ public class FileController extends HttpServlet {
 				boolean isqna = Boolean.parseBoolean(multi.getParameter("isqna"));
 				Enumeration<String> fileNames = multi.getFileNames();
 				List<String> fileList = new ArrayList<>();
+				
+				// fileSeq라는 이름이 session에 존재한다면 불러와서 추가하고
+				// 없다면 새로 만들기
+				// 하나의 게시물에 이미지 첨부를 여러번 나눠서 할수도 있기 때문
+				List<Integer> fileSeq = null;
+				if(request.getSession().getAttribute("fileSeq")==null) {
+					fileSeq = new ArrayList<>();
+				}else {
+					fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
+				}
+				
 				while(fileNames.hasMoreElements()) {
 					String fileName = fileNames.nextElement(); 
 					
@@ -64,15 +76,15 @@ public class FileController extends HttpServlet {
 						
 						FileDTO fileDto = new FileDTO(0, 0, ori_name, sys_name, true, isqna);
 						fileList.add("/files/"+fileDto.getSystemName());
-						for(int i =0;i<fileList.size();i++) {
-							System.out.println(fileList.get(i));
-						}
-						int fileResult = dao.insert(fileDto);
+						fileSeq.add(dao.insert(fileDto));
+						
+						//int fileResult = dao.insert(fileDto);
 						//pw.append("/files/"+sys_name);
 					}
 				}
+				// 이미지 첨부 파일을 모두 DB에 저장하고 나면 DB에 저장된 seq를 세션에 모두 등록
+				request.getSession().setAttribute("fileSeq", fileSeq);
 				String result = gson.toJson(fileList);
-				System.out.println(result);
 				pw.append(result);
 				
 
