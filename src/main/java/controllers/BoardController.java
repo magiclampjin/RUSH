@@ -71,13 +71,16 @@ public class BoardController extends HttpServlet {
 	            }
 	            
 	            // 세션에 저장해둔 첨부 이미지의 parentSeq를 변경
-	            List<Integer> fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
-	            for(int i =0;i<fileSeq.size();i++) {
-	            	fdao.updateParentSeq(parentSeq, fileSeq.get(i));
+	            if(request.getSession().getAttribute("fileSeq")!=null) {
+	            	 List<Integer> fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
+	 	            for(int i =0;i<fileSeq.size();i++) {
+	 	            	fdao.updateParentSeq(parentSeq, fileSeq.get(i));
+	 	            }
+	 	            
+	 	            // 첨부 이미지의 parentSeq를 변경해줬다면 session정보 지우기
+	 	            request.getSession().removeAttribute("fileSeq");
 	            }
-	            
-	            // 첨부 이미지의 parentSeq를 변경해줬다면 session정보 지우기
-	            request.getSession().removeAttribute("fileSeq");
+	           
 
 	            if (parentSeq != 0) {
 	               response.sendRedirect("/listing.board?cpage=1&category="+category);
@@ -139,6 +142,7 @@ public class BoardController extends HttpServlet {
 	            } else {
 	               // 검색 키워드가 넘어온 경우
 	            }
+	            // 게시글
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = dao.selectByNoti();
 				

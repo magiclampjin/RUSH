@@ -13,7 +13,9 @@ public class BoardDTO {
 	private Timestamp writeDate;
 	private int view;
 	private int recommend;
-	private int replyCount;
+	private int fCount;
+	private int rCount;
+	
 
 	public BoardDTO(){}
 
@@ -32,7 +34,7 @@ public class BoardDTO {
 	}
 	
 	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
-			Timestamp writeDate, int view, int recommend, int replyCount) {
+			Timestamp writeDate, int view, int recommend, int fCount, int rCount) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -43,7 +45,8 @@ public class BoardDTO {
 		this.writeDate = writeDate;
 		this.view = view;
 		this.recommend = recommend;
-		this.replyCount = replyCount;
+		this.fCount = fCount;
+		this.rCount = rCount;
 	}
 
 	public int getSeq() {
@@ -119,13 +122,21 @@ public class BoardDTO {
 	}
 
 	public int getReplyCount() {
-		return replyCount;
+		return rCount;
 	}
 
 	public void setReplyCount(int replyCount) {
-		this.replyCount = replyCount;
+		this.rCount = replyCount;
 	}
-	
+
+	public int getfCount() {
+		return fCount;
+	}
+
+	public void setfCount(int fCount) {
+		this.fCount = fCount;
+	}
+
 	public String timeCal(String where) {
 		long currentTime = System.currentTimeMillis();
 		long writeTime = this.writeDate.getTime();
