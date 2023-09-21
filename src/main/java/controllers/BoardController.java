@@ -87,7 +87,8 @@ public class BoardController extends HttpServlet {
 	            }
 				
 			} else if (cmd.equals("/load.board")) {
-				int cpage =  Integer.parseInt(request.getParameter("cpage"));
+				String cpage = request.getParameter("cpage");
+		        int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
 				String category = request.getParameter("category");
 				

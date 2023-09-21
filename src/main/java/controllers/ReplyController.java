@@ -20,6 +20,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import constants.Constants;
 import dao.ReplyDAO;
 import dto.ReplyDTO;
 
@@ -72,6 +73,12 @@ public class ReplyController extends HttpServlet {
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				List<ReplyDTO> replys = dao.selectAll(postSeq,loginId);
 
+				String replyPage = request.getParameter("replyPage");
+				int currentReplyPage = (replyPage == null) ? 1 : Integer.parseInt(replyPage);
+				request.getSession().setAttribute("lastReplyPageNum", currentReplyPage);
+				request.setAttribute("recordCountPerPage", Constants.REPLY_COUNT_PER_PAGE);
+				request.setAttribute("naviCountPerPage", Constants.REPLY_NAVI_COUNT_PER_PAGE);
+				
 				pw.append(gsonTs.toJson(replys));
 	
 			} else if(cmd.equals("/update.reply")) {
