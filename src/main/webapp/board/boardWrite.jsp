@@ -180,11 +180,11 @@ a {
 					</c:when>
 					<c:otherwise>
 						<form action="/insert.board" method="post"
-							enctype="multipart/form-data">
+							enctype="multipart/form-data" id="boardForm">
 							<input type="hidden" value="${category }" name="category">
 							<div class="writeTitle">자유게시글 작성</div>
 							<input type="text" class="inputTitle" name="title"
-								placeholder="제목을 입력하세요">
+								placeholder="제목을 입력하세요" id="title">
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
 									value="+">
@@ -192,7 +192,7 @@ a {
 								<span>파일첨부</span>
 								<div id="fileContainer"></div>
 							</div>
-							<textarea id="summernote" class="content" rows="35" cols="100"
+							<textarea id="summernote" class="content" id="content" rows="35" cols="100"
 								placeholder="내용을 입력하세요." name="contents"></textarea>
 							<div class="writeBox">
 								<a href="/listing.board?category=${category }&cpage=1"><input
