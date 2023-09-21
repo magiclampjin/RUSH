@@ -20,16 +20,10 @@ $(document).ready(function() {
 					contentType: false,
 					dataType: "json",
 				}).done(function(resp) {
-					
-					console.log(resp)
-					console.log(resp.length)
-					console.log("A")
+					$("input[name=files]").val("");
 					for(let i =0;i<resp.length;i++){
-						console.log("resp[i]"+resp[i]);
 						let img = $("<img>");
-						img.attr("src", resp[i]).attr("isimg","true");
-						let imgInfo = $("<input>");
-						console.log(img)
+						img.attr("src", resp[i]);
 						$("#summernote").summernote('insertNode', img[0]);
 					}
 					
@@ -41,7 +35,6 @@ $(document).ready(function() {
 	let count = 0;
 
 	$("#btnAdd").on("click", function() {
-		console.log("b")
 		if ($("input[type=file]").length > 5) {
 			alert("파일은 5개까지 첨부 가능합니다.");
 			return false;
@@ -85,6 +78,7 @@ $(document).ready(function() {
 			return false;
 		}
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
 	})
 });
 

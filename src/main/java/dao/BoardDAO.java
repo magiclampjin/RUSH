@@ -120,7 +120,7 @@ public class BoardDAO {
 
 	// 공지 게시글 불러오기
 	public List<BoardDTO> selectByNoti() throws Exception {
-		String sql = "select * from board_reply_count where cbCategory = \"notice\" order by cbSeq desc;";
+		String sql = "select * from postinfo where cbCategory = \"notice\" order by cbSeq desc;";
 		List<BoardDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -135,9 +135,10 @@ public class BoardDAO {
 				int cbView = rs.getInt("cbView");
 				String cbCategory = rs.getString("cbCategory");
 				int cbRecommend = rs.getInt("cbRecommend");
-				int replyCount = rs.getInt("replyCount");
+				int fileCount = rs.getInt("fCount");
+				int replyCount = rs.getInt("rCount");
 				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-						cbRecommend, replyCount));
+						cbRecommend, fileCount, replyCount));
 			}
 			return list;
 		}
@@ -145,7 +146,7 @@ public class BoardDAO {
 
 	// 카테고리에 해당하는 모든 게시물 불러오기
 	public List<BoardDTO> selectByCategory(String category, int start, int count) throws Exception {
-		String sql = "select *  from board_reply_count where cbCategory = ? order by cbSeq desc limit ?, ?;";
+		String sql = "select *  from postinfo where cbCategory = ? order by cbSeq desc limit ?, ?;";
 		List<BoardDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, category);
@@ -162,9 +163,10 @@ public class BoardDAO {
 					int cbView = rs.getInt("cbView");
 					String cbCategory = rs.getString("cbCategory");
 					int cbRecommend = rs.getInt("cbRecommend");
-					int replyCount = rs.getInt("replyCount");
+					int fileCount = rs.getInt("fCount");
+					int replyCount = rs.getInt("rCount");
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, replyCount));
+							cbRecommend, fileCount, replyCount));
 				}
 				return list;
 			}
@@ -172,7 +174,7 @@ public class BoardDAO {
 	}
 
 	public int getRecordCount(String category) throws Exception {
-		String sql = "select count(*) as count from board_reply_count where cbCategory= ?";
+		String sql = "select count(*) as count from postinfo where cbCategory= ?";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, category);
