@@ -28,18 +28,6 @@ public class ReplyDTO {
 		this.parentRSeq = parentRSeq;
 	}
 
-	public ReplyDTO(int seq, String writer, int parentSeq, String nickName, String contents, Timestamp writeDate,
-			int recommend, String recId) {
-		super();
-		this.seq = seq;
-		this.writer = writer;
-		this.parentSeq = parentSeq;
-		this.nickName = nickName;
-		this.contents = contents;
-		this.writeDate = writeDate;
-		this.recommend = recommend;
-		this.recId = recId;
-	}
 	public int getSeq() {
 		return seq;
 	}
