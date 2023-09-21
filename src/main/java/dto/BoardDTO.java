@@ -130,7 +130,6 @@ public class BoardDTO {
 		long currentTime = System.currentTimeMillis();
 		long writeTime = this.writeDate.getTime();
 		long gapTime = currentTime - writeTime;
-		System.out.println(gapTime);
 
 		if (gapTime < 60000) {
 			return "방금 전";

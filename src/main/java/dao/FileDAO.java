@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -34,6 +37,22 @@ public class FileDAO {
 			pstat.setString(2, dto.getOriginName());
 			pstat.setString(3, dto.getSystemName());
 			return pstat.executeUpdate();
+		}
+	}
+	
+	public List<FileDTO> selectForPost(int postSeq) throws Exception{
+		//post.jsp load 시 사용됨
+		String sql ="select * from file where cbSeq = ?;";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, postSeq);
+			try (ResultSet rs = pstat.executeQuery();) {
+				
+				List<FileDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					list.add(new FileDTO(rs.getInt("fSeq"), rs.getInt("cbSeq"), rs.getString("fOriginName"), rs.getString("fSystemName")));
+				}
+				return list;
+			}
 		}
 	}
 
