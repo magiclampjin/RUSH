@@ -88,9 +88,13 @@ public class QnAController extends HttpServlet {
 				
 				
 				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
+				int qnaYN= QNABoardDAO.getInstance().answerYN(qnaSeq);
+				int fileYN = QNABoardDAO.getInstance().fileYN(qnaSeq);
 				
 				request.setAttribute("qnalist", list);
 				request.setAttribute("cpage", cpage);
+				request.setAttribute("qnaYN", qnaYN);
+				request.setAttribute("fileYN", fileYN);
 				request.getRequestDispatcher("/qna/qnaWatch.jsp").forward(request, response);
 				
 			} else if(cmd.equals("/update.qna")) {
@@ -108,35 +112,29 @@ public class QnAController extends HttpServlet {
 				List<QNABoardDTO> list = new ArrayList<>();
 				
 				// 검색한 키워드
-				String keyword = request.getParameter("keyword");
-				String searchBy = request.getParameter("searchBy");
+				String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
+				String searchBy = request.getParameter("searchBy") == null ? "" : request.getParameter("searchBy");
+				System.out.println("keyword : "+keyword +", searchBy "+searchBy);
 				
-				if(keyword==null) { // 찾는 값 없음
-					System.out.println("찾는 값: "+keyword);
+				if(keyword.equals("")) { // 찾는 값 없음
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE));
 					request.getSession().setAttribute("latestPageNum", currentPage);
 					
 					request.setAttribute("list", list);
 					request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCount());
+
+				}
+				else {
+					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE),searchBy,keyword);
+					request.getSession().setAttribute("latestPageNum", currentPage);
+					
+					request.setAttribute("list", list);
+					request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCountKeyword(searchBy,keyword));
+					request.setAttribute("searchBy", searchBy);
+					request.setAttribute("keyword", keyword);
 					
 				}
-//				else {
-//					if(searchBy.equals("title")) {
-//						System.out.println("찾는 값: "+keyword);
-//						list = QNABoardDAO.getInstance().selectBy(currentPage, currentPage, keyword);
-//						request.getSession().setAttribute("latestPageNum", currentPage);
-//						
-//						request.setAttribute("list", list);
-//						request.setAttribute("recordTotalCount", QNABoardDAO.getInstance().getRecordCountTitle(keyword));
-//					
-//						request.setAttribute("keyword", keyword);
-//					
-//					}else if(searchBy.equals("writer")){
-//						
-//					}else if(searchBy.equals("content")){
-//						
-//					}
-//				}
+				
 				request.setAttribute("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/qna/qnaList.jsp").forward(request, response);

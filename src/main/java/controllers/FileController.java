@@ -45,7 +45,6 @@ public class FileController extends HttpServlet {
 		try {
 			if(cmd.equals("/insert.file")) {
 				// 파일 업로드
-
 				String uploadPath = request.getServletContext().getRealPath("files");
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
 				File filepath = new File(uploadPath);
@@ -88,6 +87,7 @@ public class FileController extends HttpServlet {
 				String result = gson.toJson(fileList);
 				pw.append(result);
 				
+
 			} else if(cmd.equals("/download.file")) {
 				// 파일 다운로드
 				String sys_name = request.getParameter("sysname");
