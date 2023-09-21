@@ -119,6 +119,14 @@ public class BoardController extends HttpServlet {
 				// 게시글 삭제
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String category = request.getParameter("category");
+				List<String> filesName = fdao.inPostFilesNameList(postSeq);
+				
+				String uploadPath = request.getServletContext().getRealPath("files");
+				for(String file:filesName) {
+					File filepath = new File(uploadPath+"/"+file);
+					filepath.delete();
+					// 외래키 cascade로 설정하면 DB에서는 게시글 삭제할 때 연쇄적으로 삭제됨. 
+				}
 				dao.deletePost(postSeq);
 				response.sendRedirect("/listing.board?cpage=1&category=" + category);
 			} else if (cmd.equals("/listing.board")) {
