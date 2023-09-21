@@ -1,5 +1,26 @@
 $(document).ready(function() {
+	// 페이지 처음 들어갔을 때 고정 체크
+	var game = $("#candy");
+	
+    // 카테고리 전환
+    $(document).on("click", ".game", function(){
+		game = $(this).attr("id");
+		console.log(game);
+	
+        $(this).removeClass("bColorBlack");
+        $(this).removeClass("colorWhite");
+        $(this).addClass("bColorGreen");
+        $(this).addClass("colorBlack");
+
+        $(".game").not($(this)).removeClass("bColorGreen");
+        $(".game").not($(this)).removeClass("colorBlack");
+        $(".game").not($(this)).addClass("bColorBlack");
+        $(".game").not($(this)).addClass("colorWhite");
+    });
+	
     // 상위 5개 추출
+    let listNum = 5;
+    
     for(let i = 1; i <= 5; i++) {
         let scoreBox = $("<div>");
         scoreBox.addClass("scoreBox row g-0");
@@ -48,20 +69,5 @@ $(document).ready(function() {
         infoDiv.append(userInfo);
         scoreBox.append(rank).append(infoDiv);
         $("#ranker").append(scoreBox);
-
     }
-    
-
-    // 카테고리 전환
-    $(document).on("click", ".game", function(){
-        $(this).removeClass("bColorBlack");
-        $(this).removeClass("colorWhite");
-        $(this).addClass("bColorGreen");
-        $(this).addClass("colorBlack");
-
-        $(".game").not($(this)).removeClass("bColorGreen");
-        $(".game").not($(this)).removeClass("colorBlack");
-        $(".game").not($(this)).addClass("bColorBlack");
-        $(".game").not($(this)).addClass("colorWhite");
-    });
 });
