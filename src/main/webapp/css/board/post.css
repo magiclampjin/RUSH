@@ -154,6 +154,7 @@
 #nestedReplyInput{
 	overflow-y: auto;
 	height: 150px;
+	padding: 20px 0px;
 }
 
 .mininested{
@@ -167,4 +168,7 @@
 	background-color:#FFFFFF00;
 }
 
+#replyInsertTxt {
+	padding:20px 15px;
+}
 
