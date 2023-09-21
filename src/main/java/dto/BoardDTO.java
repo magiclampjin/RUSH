@@ -132,7 +132,7 @@ public class BoardDTO {
 		long gapTime = currentTime - writeTime;
 
 		if (gapTime < 60000) {
-			return (gapTime / 1000) + "초 전";
+			return "방금 전";
 		} else if (gapTime < 60000 * 60) {
 			return gapTime / 60000 + " 분 전";
 		} else if (gapTime < 60000 * 60 * 24) {
