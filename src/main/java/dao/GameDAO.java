@@ -65,16 +65,26 @@ public class GameDAO {
 		}
 	}
 	
-	public List<GameDTO> selectGame()throws Exception{
-		String sql = "";
+	public List<GameDTO> selectBestGame()throws Exception{
+		String sql = "select row_number() over (order by gr.gName desc) as seq, gr.gName, count(*) as count, g.gDeveloper, g.gImageURL from game_record gr,game g where g.gName = gr.gName group by gr.gName order by count desc;";
 		List<GameDTO> list = new ArrayList<>();
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
 				){
-			
+			while(rs.next()) {
+				GameDTO dto = new GameDTO();
+				String gName = rs.getString("gName");
+				String dev = rs.getString("gDeveloper");
+				String image = rs.getString("gImageURL");
+				dto.setgName(gName);
+				dto.setgDeveloper(dev);
+				dto.setgImageURL(image);
+				list.add(dto);
+			}
+			return list;
 		}
-		return list;
 	}
 	public int selectFavorite(String gName, String mID) throws Exception {
 		String sql = "select count(*) as count from game_favorite where gName = ? and mID = ?";

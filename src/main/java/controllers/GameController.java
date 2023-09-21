@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
+import dto.GameDTO;
 import dto.GameRecordDTO;
 
 @WebServlet("*.game")
@@ -82,7 +83,7 @@ public class GameController extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println(gson.toJson(list));
 			}else if(cmd.equals("/getBestGame.game")) {
-				List<String> list = dao.selectFamousGame();
+				List<GameDTO> list = dao.selectBestGame();
 				PrintWriter out = response.getWriter();
 				out.print(gson.toJson(list));
 			}

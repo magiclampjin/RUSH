@@ -90,6 +90,7 @@ a{
 			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
+				$(".fa-star").removeClass("colorWhite");
 				console.log("active");
 			}else{
 				
@@ -209,10 +210,10 @@ a{
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">리듬게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="new"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack active" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 									<!-- js로 넘어가기 -->
 								</div>
 							</div>
@@ -446,6 +447,7 @@ a{
               	    }).done(function (res){
               	      console.log(res);
               	      location.reload();
+              	      $(".fa-star").addClass("colorWhite");
               	    });
             	}else{
             		console.log("x");
@@ -466,8 +468,17 @@ a{
         	}
         	
         });
-        $("#delfavorite").on("click",function(){
-        	
+        $("#favorite").hover(function(){
+        	if(!$(this).hasClass("active")){
+        		$(".fa-star").removeClass("colorWhite");	
+        	}
+        }, function() {
+        	if(!$(this).hasClass("active")){
+        		$(".fa-star").addClass("colorWhite");	
+        	}
+        });
+        $("#new").on("click",function(){
+        	location.href = "/game/GamePage_Main.jsp";
         });
     </script>
 </body>

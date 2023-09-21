@@ -69,11 +69,20 @@ a{
 				divColRank.append(i+1);
 				
 				let divColInfo = $("<div>");
-				divColInfo.addClass("col-8 col-md-5 d-flex");
-				divColInfo.append(data[i]);
+				divColInfo.addClass("col-8 col-md-5 d-flex text-white");
+				let imgDiv = $("<img>");
+				imgDiv.attr("src",data[i]["gImageURL"]);
+				imgDiv.css({
+					width:"200px",
+					height:"150px"
+				});
+				
+				divColInfo.append(imgDiv);
+				divColInfo.append(data[i]["gName"]);
+				divColInfo.append(data[i]["gDeveloper"]);
 				
 				let divColPlayInfo = $("<div>");
-				divColPlayInfo.addClass("col-3 d-none d-md-flex align-item-center");
+				divColPlayInfo.addClass("col-3 d-none d-md-flex align-item-center text-white");
 				divColPlayInfo.append("W 50% M 50%");
 				
 				let divColBtn = $("<div>");
