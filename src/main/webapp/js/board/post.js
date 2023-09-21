@@ -437,6 +437,8 @@ $(document).ready(function() {
 	
 	// 답글작성 저장
 	$(document).on("click",".nestedReplyInsert",function(){
+		console.log($("#nestedReplyInput").html());
+		
 		
 	});
 });

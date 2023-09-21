@@ -44,7 +44,7 @@ public class ReplyController extends HttpServlet {
 				String writer = (String) request.getSession().getAttribute("loginID");
 				String nickname = (String) request.getSession().getAttribute("loginNickname");
 				
-				dao.insert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0));
+				dao.insert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0, null));
 				
 				
 			} else if(cmd.equals("/load.reply")) {
