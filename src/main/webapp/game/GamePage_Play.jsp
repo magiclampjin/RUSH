@@ -302,19 +302,6 @@ a{
         	$("#info").css("display","block");
         	$("#rank").css("display","none");
         });
-        
-        $("#favorite").on("click",function(){
-        	$.ajax({
-        	      url:"/getReply.reply",
-        	      data:{
-        	        mID:${boardCon.seq},
-        	        gameName:
-        	      },
-        	      type:"post"
-        	    }).done(function (res){
-        	      console.log(res);
-        	    });
-        });
     </script>
 </body>
 </html>

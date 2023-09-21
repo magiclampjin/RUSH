@@ -95,6 +95,9 @@ $(document).ready(function() {
 		// 댓글 삽입 시 댓글 수정 취소 시 사용할 백업 내용 삭제
 		replyBackup = null;
 		replyObj = null;
+		nestedReplyParentSeq = null;
+		nestedReplyObj = null;
+
 		
 		$.ajax({
 			url:"/insert.reply",
@@ -107,8 +110,6 @@ $(document).ready(function() {
 			$("#replys").html("");
 			$("#replys").html(replyReload(postSeq));
 		});
-		// location.reload(true);
-		
 	});
 	
 	// 게시글 북마크/ 추천 눌렀을 때 게시글 삭제됏으면 삭제된 게시글이라고 출력
@@ -200,9 +201,35 @@ $(document).ready(function() {
 	// 댓글 삭제
 	$(document).on("click",".replyDelete",function() {
 		
-		// 댓글 삭제 시 댓글 수정 취소 시 사용할 백업 내용 삭제
-		replyBackup = null;
-		replyObj = null;
+		if(replyBackup != null){ // 수정중인 댓글이 있으면?
+			if(confirm("댓글 수정을 취소하시겠습니까?")){
+				replyObj.closest(".reply").find(".contents").html(replyBackup);
+				replyObj.closest(".reply").find(".contents").attr("contenteditable",false);
+				replyObj.parent().css("display","flex");
+				replyObj.parent().siblings(".updateCover").css("display","none");
+				
+				replyObj.parent().parent().siblings(".replyBtns").children(".defaultCover").css("display","flex");
+				replyObj.parent().parent().siblings(".replyBtns").children(".updateCover").css("display","none");
+				// 댓글 삭제 시 댓글 수정 취소 시 사용할 백업 내용 삭제, 답글 수정 취소시 백업할 내용 삭제
+				replyBackup = null;
+				replyObj = null;
+				
+			}else{
+				return false;
+			}
+		}
+		
+		if(nestedReplyObj != null) { // 작성 중인 당급이 있으면?
+			let replyid = $(this).closest(".reply").find("#replyId").val();
+			if(confirm("답글 작성을 취소하시겠습니가?")){
+				nestedReplyObj.remove();
+				nestedReplyParentSeq = null;
+				nestedReplyObj = null;
+			}else{
+				return false;
+			}
+		}
+		
 		
 		$.ajax({
 			url:"delete.reply",
@@ -376,13 +403,16 @@ $(document).ready(function() {
 			}
 		}
 		
-		let nestedReply = $("<div>").attr("class","col-10 nestedReply");
+		let nestedReply = $("<div>").attr("class","col-12 nestedReply");
+		
+		let arrow = $("<div>").attr("class","col-1 d-flex justify-content-center align-items-center").html("<i class='fa-solid fa-arrow-turn-up fa-rotate-90 fa-xl'></i>");
 		nestedReplyObj = nestedReply;
 		let replyid = $(this).closest(".reply").find("#replyId").val();
 		let replySeq = $("<input>").attr("id","nestedReplySeq").attr("type","hidden").val(replyid);
 		nestedReplyParentSeq = replyid;
-		let nestedReplyInput = $("<div>").attr("id","nestedReplyInput").attr("class","col-10").attr("contenteditable","true").focus();
+		let nestedReplyInput = $("<div>").attr("id","nestedReplyInput").attr("class","col-9").attr("contenteditable","true").focus();
 	
+		nestedReply.append(arrow).append(nestedReplyInput);
 		let nestedCover = $("<div>").attr("class","d-none d-xl-flex col-xl-2 btnCover nestedCover");
 		let insert = $("<button>").attr("class","fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyInsert").html("등록");
 		let cancel = $("<button>").attr("class","fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyCancel").html("취소");

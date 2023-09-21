@@ -11,6 +11,7 @@
 <!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardWrite.css">
+
 <script type="text/javascript" src="/js/board/summernote_editor.js"></script>
 
 <!-- 부트스트랩 -->
@@ -121,7 +122,7 @@ a {
 			<div class="boardWrite_guide">
 				<c:choose>
 					<c:when test="${menu == 'qna'}">
-						<form action="/insert.board" method="post"
+						<form action="/insert.qna" method="post"
 							enctype="multipart/form-data">
 							<div class="writeTitle">Q&A 작성</div>
 							<input type="text" class="inputTitle" name="title"
@@ -148,43 +149,15 @@ a {
 							</div>
 
 						</form>
-						<!-- <form action="/insert.qna" method="post"
-								enctype="multipart/form-data">
-
-								<div class="row bottom">
-									<div class="col-11">
-										<input id="secret" class="screteChk" type="checkbox">
-										<input id="secret_hidden" class="screteChk" type="hidden"
-											name="secret" value="false"> <label for="secret"
-											class="colorDarkgray">비밀글 설정하기</label>
-
-									</div>
-									<script>
-										document.getElementById("secret").onchange = function() {
-											if ($("#secret").is(":checked")) {
-												$("#secret_hidden").val("true");
-												console.log($("#secret_hidden")
-														.val());
-											} else {
-												$("#secret_hidden")
-														.val("false");
-												console.log($("#secret_hidden")
-														.val());
-											}
-										};
-									</script>
-
-									<input class="submitBtn col-1" type="submit" value="작성">
-								</div>
-							</form> -->
+						<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
 					</c:when>
 					<c:otherwise>
 						<form action="/insert.board" method="post"
-							enctype="multipart/form-data">
+							enctype="multipart/form-data" id="boardForm">
 							<input type="hidden" value="${category }" name="category">
 							<div class="writeTitle">자유게시글 작성</div>
 							<input type="text" class="inputTitle" name="title"
-								placeholder="제목을 입력하세요">
+								placeholder="제목을 입력하세요" id="title">
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
 									value="+">
@@ -192,7 +165,7 @@ a {
 								<span>파일첨부</span>
 								<div id="fileContainer"></div>
 							</div>
-							<textarea id="summernote" class="content" rows="35" cols="100"
+							<textarea id="summernote" class="content" id="content" rows="35" cols="100"
 								placeholder="내용을 입력하세요." name="contents"></textarea>
 							<div class="writeBox">
 								<a href="/listing.board?category=${category }&cpage=1"><input
