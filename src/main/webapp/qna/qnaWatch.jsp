@@ -18,7 +18,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="/js/board/post.js"></script>
+<script src="/js/board/qna.js"></script>
 
 <style>
 * {
@@ -300,24 +300,36 @@ a {
 					<div class="col-12">
 						<div class="row g-0 post">
 							<div class="col-12 postTop">
-								<div class="col-12 fw400 fs35 mb15" id="postTitle">${post.title}
+								<div class="col-12 fw400 fs35 mb15" id="postTitle">${qnalist.title}
 								</div>
 								<div class="col-12 fontEnglish fw400 fs25 mb10 pl15"
-									id="postWriter">${post.nickName}</div>
-								<div class="col-12 fw400 fs20 colorDarkgray pl15"
-									id="postDetailInfo">${post.formedDate }&nbsp;&nbsp;&nbsp;조회
-									${post.view}</div>
+									id="postWriter">${qnalist.nickName}</div>
 								<hr>
-								<div class="col-12 fw400 fs25" id="postContents">${post.contents}</div>
+								<div class="col-12 fw400 fs25" id="postContents">${qnalist.contents}</div>
 							</div>
 						</div>
 						<div class="row g-0 postBottom mb40">
 							<div class="col-3 col-sm-2 col-xl-1 fw400 fs20 mt10">첨부 파일</div>
-							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">testnamelonglongloooooong.txt</div>
+							<div class="col-4 col-sm-4 col-xl-5 fw400 fs20 colorBlue mt10 filename">
+								<c:choose>
+									<c:when test="${files.size() >0 }">
+										<c:forEach var="qnaFiles" items="${files }">
+											${qnaFiles.originName}
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<span class="colorBlack">없음</span>
+									</c:otherwise>
+								</c:choose>
+							</div>
 							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
 								<div class="d-none d-md-flex">
-									<button class="postBtns bColorGreen" id="update">수정</button>
-									<button class="postBtns bColorGreen" id="delete">삭제</button>
+									<c:choose>
+										<c:when test="${ loginID eq qnalist.writer}">
+											<button class="postBtns bColorGreen" id="update">수정</button>
+											<button class="postBtns bColorGreen" id="delete">삭제</button>
+										</c:when>
+									</c:choose>
 									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
 								</div>
 								
@@ -328,7 +340,6 @@ a {
 								</div>
 								
 								<input type="hidden" id="cpage" value="${cpage}">
-								<input type="hidden" id="category" value="${category}">
 								
 							</div>
 							
@@ -339,7 +350,7 @@ a {
 						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
 								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable></div>
-								<input type="hidden" id="postSeq" value="${post.seq}">
+								<input type="hidden" id="postSeq" value="${qnalist.seq}">
 								<div class="col-2 col-lg-1 btnCover">
 									<button class="fw400 fs25 colorDarkgray replyInsertBtn" id="replyInsertBtn">등록</button>
 								</div>
