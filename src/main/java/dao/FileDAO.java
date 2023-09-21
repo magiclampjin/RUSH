@@ -107,5 +107,19 @@ public class FileDAO {
 			}
 		}
 	}
+	
+	public List<FileDTO> inPostFilesList(int parentSeq) throws Exception{
+		String sql = "select * from file where cbSeq = ? and qna = false;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, parentSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<FileDTO> files = new ArrayList<>();
+				while(rs.next()) {
+					files.add(new FileDTO(rs.getInt("fSeq"), rs.getInt("cbSeq"), rs.getString("fOriginName"), rs.getString("fSystemName"), rs.getBoolean("img"), rs.getBoolean("qna")));
+				}
+				return files;
+			}
+		}
+	}
 
 }

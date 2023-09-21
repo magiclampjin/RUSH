@@ -371,4 +371,20 @@ public class BoardDAO {
 			pstat.executeUpdate();
 		}
 	}
+	
+	public void update(BoardDTO dto) throws Exception{
+		String sql ="update common_board set cbtitle=?, cbcontent=? where cbseq =?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+
+			pstat.setString(1, dto.getTitle());
+			pstat.setString(2, dto.getContents());
+			pstat.setInt(3, dto.getSeq());
+			System.out.println("제목: "+dto.getTitle());
+			System.out.println("내용: "+dto.getContents());
+			System.out.println("번호: "+dto.getSeq());
+			pstat.executeUpdate();
+		
+		}
+	}
 }
