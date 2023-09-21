@@ -47,7 +47,6 @@ public class BoardController extends HttpServlet {
 	            if (!filepath.exists()) {
 	               filepath.mkdir();
 	            }
-	            System.out.println(uploadPath);
 	            MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8",
 	                  new DefaultFileRenamePolicy());
 	            String category = multi.getParameter("category");
@@ -56,17 +55,20 @@ public class BoardController extends HttpServlet {
 
 	            String id = (String) request.getSession().getAttribute("loginID");
 	            String userNick = dao.selectNickName(id);
-	            System.out.println("title" + title + "contents" + content);
 	            int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
 
 	            Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
+	            
+	            
 	            while (fileNames.hasMoreElements()) { // 파일이 존재하는 동안
 	               String fileName = fileNames.nextElement(); // 다음 파일을 불러옴
-
 	               if (multi.getFile(fileName) != null) {
+	            	   multi.getFile(fileName).toString();
 	                  String ori_name = multi.getOriginalFileName(fileName);
 	                  String sys_name = multi.getFilesystemName(fileName);
-	                  FileDTO fileDto = new FileDTO(0, parentSeq, ori_name, sys_name);
+	                  System.out.println("ori"+ori_name);
+	                  System.out.println("sys"+sys_name);
+	                  FileDTO fileDto = new FileDTO(0, parentSeq, ori_name, sys_name, false, false);
 	                  int fileResult = fdao.insert(fileDto);
 	               }
 	            }

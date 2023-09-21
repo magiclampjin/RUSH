@@ -30,12 +30,14 @@ public class FileDAO {
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 
 	public int insert(FileDTO dto) throws Exception{
-		String sql = "insert into file values(0,?,?,?);";
+		String sql = "insert into file values(0,?,?,?,?,?);";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, dto.getParentSeq());
 			pstat.setString(2, dto.getOriginName());
 			pstat.setString(3, dto.getSystemName());
+			pstat.setBoolean(4, dto.isImg());
+			pstat.setBoolean(5, dto.isQna());
 			return pstat.executeUpdate();
 		}
 	}
@@ -49,7 +51,7 @@ public class FileDAO {
 				
 				List<FileDTO> list = new ArrayList<>();
 				while(rs.next()) {
-					list.add(new FileDTO(rs.getInt("fSeq"), rs.getInt("cbSeq"), rs.getString("fOriginName"), rs.getString("fSystemName")));
+					list.add(new FileDTO(rs.getInt("fSeq"), rs.getInt("cbSeq"), rs.getString("fOriginName"), rs.getString("fSystemName"), rs.getBoolean("img"), rs.getBoolean("qna")));
 				}
 				return list;
 			}
