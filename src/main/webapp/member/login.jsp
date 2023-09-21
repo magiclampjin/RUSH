@@ -7,7 +7,6 @@
 <title>Login</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/member/login.css">
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -227,7 +226,7 @@
 	                        <input type="checkbox" id="remID">
 	                        <p class="fontEnglish">Remember me</p>
 	                     </div>
-	                     <a href="#" id="find" class="fontEnglish colorBlue">Forgot ID or Password?</a>
+	                     <a href="/member/findAccount.jsp" id="find" class="fontEnglish colorBlue">Forgot ID or Password?</a>
 	                  </div>
 	                  <button id="login" class="fontEnglish colorWhite bColorBlue">Login</button>
 
