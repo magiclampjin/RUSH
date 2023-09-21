@@ -142,12 +142,12 @@ div {
 								<p class="text-white ml45">게임1</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<a href = "/moveToGamePage.game?game=DoodleJump"><div class="test ml45 mr45">다른게임</div>
+								<a href = "/moveToGamePage.game?game=FlappyBird"><div class="test ml45 mr45">다른게임</div>
 								<p class="text-white ml45">게임2</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임3</p>
+								<a href = "/moveToGamePage.game?game=Tetris"><div class="test ml45 mr45">다른게임</div>
+								<p class="text-white ml45">게임2</p></a>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary">

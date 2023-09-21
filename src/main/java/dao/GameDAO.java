@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.GameDTO;
 import dto.GameRecordDTO;
 
 public class GameDAO {
@@ -63,6 +64,18 @@ public class GameDAO {
 			return rs.getString("gCategory");	
 		}
 	}
+	
+	public List<GameDTO> selectGame()throws Exception{
+		String sql = "";
+		List<GameDTO> list = new ArrayList<>();
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			
+		}
+		return list;
+	}
 	public int selectFavorite(String gName, String mID) throws Exception {
 		String sql = "select count(*) as count from game_favorite where gName = ? and mID = ?";
 		try(
@@ -105,6 +118,21 @@ public class GameDAO {
 					dto.setScore(grScore);
 					list.add(dto);
 				}
+			}
+		}
+		return list;
+	}
+	
+	public List<String> selectFamousGame() throws Exception {
+		List<String> list = new ArrayList();
+		String sql = "select row_number() over (order by gName desc) as seq, gName, count(*) as count from game_record group by gName order by count desc;";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs =  pstat.executeQuery();
+				){
+			while(rs.next()) {
+				list.add(rs.getString("gName"));
 			}
 		}
 		return list;
