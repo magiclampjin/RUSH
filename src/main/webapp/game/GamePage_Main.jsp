@@ -128,7 +128,7 @@ div {
 									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<a href="/moveToBestGame.game"><button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button></a>
 								</div>
 							</div>
 						</div>
@@ -138,12 +138,12 @@ div {
 							<p class="fs-2 text-white fontKorean">최신게임</p>
 							<!-- 나중에 jstl 적용? -->
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<a href="/moveToGamePage.game"><div class="test ml45 mr45"></div>
+								<a href="/moveToGamePage.game?game=KJMAX"><div class="test ml45 mr45"> 리듬게임</div>
 								<p class="text-white ml45">게임1</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임2</p>
+								<a href = "/moveToGamePage.game?game=DoodleJump"><div class="test ml45 mr45">다른게임</div>
+								<p class="text-white ml45">게임2</p></a>
 							</div>
 							<div class="col-xs-12 col-lg-6 col-xl-4">
 								<div class="test ml45 mr45"></div>
