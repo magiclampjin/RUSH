@@ -110,20 +110,5 @@ public class GameDAO {
 		return list;
 	}
 	
-	public List<String> selectFamousGame() throws Exception {
-		List<String> list = new ArrayList();
-		String sql = "select row_number() over (order by gName desc) as seq, gName, count(*) as count from game_record group by gName order by count desc;";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs =  pstat.executeQuery();
-				){
-			while(rs.next()) {
-				list.add(rs.getString("gName"));
-			}
-		}
-		return list;
-	}
-	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 }
