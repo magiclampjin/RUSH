@@ -124,7 +124,7 @@ a{
 						<p class="text-white fontKorean fs-2">베스트 게임</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row mt40">
 					<hr class="colorWhite">
 					<div class="col-1">
 						<p class="text-white fontKorean">순위</p>
@@ -168,8 +168,11 @@ a{
 						
 						
 					</div>
-					<div class="col-3 d-none d-md-flex">
-						<p class="text-white fontKorean">플레이 정보</p>
+					<div class="col-3 d-none d-md-flex align-item-center">
+						<span class="text-white fontEnglish fs-3 fw900">W</span> &nbsp;&nbsp;
+						<span class="text-white fontEnglish fs-5">50% </span> &nbsp;&nbsp;
+						<span class="text-white fontEnglish fs-3 fw900">M </span> &nbsp;&nbsp;
+						<span class="text-white fontEnglish fs-5">50% </span>
 					</div>
 					<div class="col-3">
 						<button type="button" class="btn btn-success fontEnglish fw900">PLAY GAME</button>
@@ -214,7 +217,7 @@ a{
 			</div>
 		</div>
 		</div>
-		<script>
+	<script>
         $(".btn").on("click",function(){
             // $(".categories").text();
             console.log("");
