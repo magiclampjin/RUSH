@@ -25,7 +25,7 @@ public class FileController extends HttpServlet {
 		try {
 			if(cmd.equals("/insert.file")) {
 				// 파일 업로드
-				
+				// QnAController 의 insert.qna에 글 넣으면서 같이 넣음!
 			} else if(cmd.equals("/download.file")) {
 				// 파일 다운로드
 				String sys_name = request.getParameter("sysname");
