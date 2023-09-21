@@ -176,11 +176,11 @@ a {
 }
 
 
-.replyBtns div, .nestedReplyBtn {
+.replyBtns div, .nestedReplyBtn, .nestedReplyPrintBtn {
 	cursor: pointer;
 }
 
-.nestedReplyBtn:hover{
+.nestedReplyBtn:hover ,.nestedReplyPrintBtn:hover{
 	text-decoration: underline;
 }
 
@@ -254,6 +254,17 @@ a {
 	margin: 1px;
 }
 
+.nestedReplyPrintBtn{
+	margin-right:10px;
+}
+
+.ptb15{
+	padding:15px 0px;
+}
+
+.nopadding{
+	padding: 10px 0 0 0;
+}
 
 </style>
 </head>
