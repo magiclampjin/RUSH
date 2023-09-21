@@ -110,5 +110,19 @@ public class GameDAO {
 		return list;
 	}
 	
+	public int insertGameRecord(GameRecordDTO dto) throws Exception {
+		String sql = "insert into game_record values(0,?,?,?,now(),?);";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getGameName());
+			pstat.setString(3, dto.getNickName());
+			pstat.setInt(4, dto.getScore());
+			return pstat.executeUpdate();
+		}
+	}
+	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 }
