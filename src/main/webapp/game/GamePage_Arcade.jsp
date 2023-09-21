@@ -153,7 +153,7 @@ a{
 							<div
 								class="col-2 d-flex justify-content-center align-content-bottom">
 								<div>
-									<button type="button" class="btn btn-outline-light active" id="favorite">
+									<button type="button" class="btn btn-outline-light" id="favorite">
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
