@@ -202,7 +202,7 @@ $(document).ready(function() {
 	
 	// 게시글 수정
 	$(".update").on("click",function(){
-		location.href = "updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&postSeq="+postSeq;
+		location.href = "updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
 	});
 
 	// 댓글 삭제

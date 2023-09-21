@@ -348,20 +348,13 @@ public class BoardDAO {
 		}
 	}
 	
-	public String selectNickName(String id) throws Exception{
-		String sql = "select mNickname from members where mID=?";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, id);
-			try(ResultSet rs = pstat.executeQuery()){
-				if (rs.next()) {
-					return rs.getString("mNickname");
-				} else {
-					return null;
-				}
-			}
-		}
-	}
+	/*
+	 * public String selectNickName(String id) throws Exception{ String sql =
+	 * "select mNickname from members where mID=?"; try(Connection con =
+	 * this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+	 * pstat.setString(1, id); try(ResultSet rs = pstat.executeQuery()){ if
+	 * (rs.next()) { return rs.getString("mNickname"); } else { return null; } } } }
+	 */
 	
 	public void deletePost(int postSeq) throws Exception{
 		String sql = "delete from common_board where cbSeq = ?;";
@@ -380,9 +373,6 @@ public class BoardDAO {
 			pstat.setString(1, dto.getTitle());
 			pstat.setString(2, dto.getContents());
 			pstat.setInt(3, dto.getSeq());
-			System.out.println("제목: "+dto.getTitle());
-			System.out.println("내용: "+dto.getContents());
-			System.out.println("번호: "+dto.getSeq());
 			pstat.executeUpdate();
 		
 		}

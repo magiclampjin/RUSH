@@ -167,6 +167,7 @@ a {
 							enctype="multipart/form-data" id="boardForm">
 							<input type="hidden" value="${category }" name="category">
 							<input type="hidden" value="${post.seq}" name="postSeq">
+							<input type="hidden" value="${requestScope.cpage}" name="cpage">
 							<div class="writeTitle">자유게시글 게시글 수정</div>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요" id="title" value="${post.title}">
@@ -178,15 +179,29 @@ a {
 										<c:when test="${files.size()>0}">
 											<c:forEach var="i" items="${files}" varStatus="status">
 												<div>
-													<input type="hidden" value="${i.seq}" name="file${status.index}">
+													
 													<input type="file" style="display:none">
 													<span style="display: inline; margin-top: 10px;" id="file${status.index}">${i.originName}</span>
-													<input value="x" type="button" class="del" style="border: none; width: 30px; height: 30px;">
+													<input value="x" type="button" class="del filedel" style="border: none; width: 30px; height: 30px;">
+													<input type="hidden" value="${i.seq}">
 												</div>
 											</c:forEach>
 										</c:when>
 									</c:choose>
 								
+									<script>
+										$(document).on("click", ".filedel", function() {
+											let fileSeq = $(this).next().val();
+											$.ajax({
+												url:"delete.file",
+												data:{
+													fileSeq : fileSeq
+												},
+												type:"post"
+											});
+										});
+										
+									</script>
 								</div>
 							</div>
 							<textarea id="summernote" class="content" id="content" rows="35"

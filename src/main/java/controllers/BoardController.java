@@ -55,7 +55,7 @@ public class BoardController extends HttpServlet {
 				String content = multi.getParameter("contents");
 
 				String id = (String) request.getSession().getAttribute("loginID");
-				String userNick = dao.selectNickName(id);
+				String userNick = (String) request.getSession().getAttribute("loginNickname");
 				int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
 
 				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
@@ -115,35 +115,39 @@ public class BoardController extends HttpServlet {
 			} else if (cmd.equals("/updateLoad.board")) {
 				// 게시글 수정
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				String cpage = request.getParameter("cpage");
+				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				String category = request.getParameter("category");
+				
 				List<FileDTO> files = fdao.inPostFilesList(postSeq);
 				BoardDTO post = dao.selectPost(postSeq);
 				
 				request.setAttribute("category", category);
 				request.setAttribute("files", files);
 				request.setAttribute("post", post);
+				request.setAttribute("cpage", currentPage);
 				
 				request.getRequestDispatcher("/board/postUpdate.jsp").forward(request, response);
 				
 
 			} else if (cmd.equals("/update.board")) {
 				// 게시글 수정
-				
-				
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
-
 				String uploadPath = request.getServletContext().getRealPath("files");
+
+				
 				File filepath = new File(uploadPath);
 				if (!filepath.exists()) {
 					filepath.mkdir();
 				}
 				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8",
 						new DefaultFileRenamePolicy());
-
+				String cpage = multi.getParameter("cpage");
 				String category = multi.getParameter("category");
 				int postSeq = Integer.parseInt(multi.getParameter("postSeq"));
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
+				
 
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
@@ -173,9 +177,9 @@ public class BoardController extends HttpServlet {
 					request.getSession().removeAttribute("fileSeq");
 				}
 
-				if (postSeq != 0) {
-					response.sendRedirect("/listing.board?cpage=1&category=" + category);
-				}
+				
+				response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage);
+			
 				
 				
 

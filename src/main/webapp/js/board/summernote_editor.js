@@ -46,10 +46,24 @@ $(document).ready(function() {
 					}
 
 				});
-			}
+			},
+			onMediaDelete: function ($target, editor, $editable) {
+	           
+            	let deletedImageUrl = $target.attr('src');
+				$.ajax({
+					url: "/deleteFiieName.file",
+					data:{
+						filePath : deletedImageUrl
+					},
+					type:"post",
+					dataType:"json"
+				});
+	              
+	        }
 		}
 	});
 
+	
 	let count = 0;
 
 	$("#btnAdd").on("click", function() {

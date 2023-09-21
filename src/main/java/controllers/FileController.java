@@ -105,7 +105,24 @@ public class FileController extends HttpServlet {
 				
 			} else if(cmd.equals("/delete.file")) {
 				// 파일 삭제
+				int fileSeq = Integer.parseInt(request.getParameter("fileSeq"));
 				
+				String sysname = dao.selectSysName(fileSeq);
+				int result = dao.deleteFile(fileSeq);
+				if(result == 1) {
+					String uploadPath = request.getServletContext().getRealPath("files");
+					File filepath = new File(uploadPath+"/"+sysname);
+					filepath.delete();
+				}	
+			} else if(cmd.equals("/deleteFiieName.file")) {
+				String sysname = request.getParameter("filePath");
+				sysname = sysname.substring(7);
+				int result = dao.deleteFile(sysname);
+				if(result == 1) {
+					String uploadPath = request.getServletContext().getRealPath("files");
+					File filepath = new File(uploadPath+"/"+sysname);
+					filepath.delete();
+				}	
 			}
 			
 		}catch(Exception e) {
