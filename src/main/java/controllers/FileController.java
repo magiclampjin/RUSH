@@ -1,5 +1,6 @@
 package controllers;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +8,14 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +34,13 @@ public class FileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getRequestURI();
 		System.out.println("file cmd: "+cmd);
-		
+
 		FileDAO dao = FileDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
-		
+
+		response.setContentType("text/html; charset=utf8");
+
 		try {
 			if(cmd.equals("/insert.file")) {
 				// 파일 업로드
@@ -42,6 +52,7 @@ public class FileController extends HttpServlet {
 				}
 				
 				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8", new DefaultFileRenamePolicy());
+				boolean isqna = Boolean.parseBoolean(multi.getParameter("isqna"));
 				Enumeration<String> fileNames = multi.getFileNames();
 				List<String> fileList = new ArrayList<>();
 				while(fileNames.hasMoreElements()) {
@@ -51,7 +62,7 @@ public class FileController extends HttpServlet {
 						String ori_name = multi.getOriginalFileName(fileName);
 						String sys_name = multi.getFilesystemName(fileName);
 						
-						FileDTO fileDto = new FileDTO(0, 0, ori_name, sys_name);
+						FileDTO fileDto = new FileDTO(0, 0, ori_name, sys_name, true, isqna);
 						fileList.add("/files/"+fileDto.getSystemName());
 						for(int i =0;i<fileList.size();i++) {
 							System.out.println(fileList.get(i));
@@ -66,6 +77,22 @@ public class FileController extends HttpServlet {
 				
 			} else if(cmd.equals("/download.file")) {
 				// 파일 다운로드
+				String sys_name = request.getParameter("sysname");
+				String ori_name = request.getParameter("oriname");
+				ori_name = new String(ori_name.getBytes("utf8"), "ISO-8859-1");
+				String filePath = request.getServletContext().getRealPath("files");
+				
+				response.setHeader("Content-Disposition", "attachment; filename="+ori_name);
+				File targetFile = new File(filePath+"/"+sys_name);
+				byte[] fileContents = new byte[(int) targetFile.length()];
+				
+				try(DataInputStream dis = new DataInputStream(new FileInputStream(targetFile))){
+					ServletOutputStream sos = response.getOutputStream();
+					dis.readFully(fileContents);
+					sos.write(fileContents);
+					sos.flush();
+				}
+						
 				
 			} else if(cmd.equals("/delete.file")) {
 				// 파일 삭제

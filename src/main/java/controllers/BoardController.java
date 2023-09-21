@@ -47,7 +47,6 @@ public class BoardController extends HttpServlet {
 	            if (!filepath.exists()) {
 	               filepath.mkdir();
 	            }
-	            System.out.println(uploadPath);
 	            MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8",
 	                  new DefaultFileRenamePolicy());
 	            String category = multi.getParameter("category");
@@ -56,17 +55,20 @@ public class BoardController extends HttpServlet {
 
 	            String id = (String) request.getSession().getAttribute("loginID");
 	            String userNick = dao.selectNickName(id);
-	            System.out.println("title" + title + "contents" + content);
 	            int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
 
 	            Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
+	            
+	            
 	            while (fileNames.hasMoreElements()) { // 파일이 존재하는 동안
 	               String fileName = fileNames.nextElement(); // 다음 파일을 불러옴
-
 	               if (multi.getFile(fileName) != null) {
+	            	   multi.getFile(fileName).toString();
 	                  String ori_name = multi.getOriginalFileName(fileName);
 	                  String sys_name = multi.getFilesystemName(fileName);
-	                  FileDTO fileDto = new FileDTO(0, parentSeq, ori_name, sys_name);
+	                  System.out.println("ori"+ori_name);
+	                  System.out.println("sys"+sys_name);
+	                  FileDTO fileDto = new FileDTO(0, parentSeq, ori_name, sys_name, false, false);
 	                  int fileResult = fdao.insert(fileDto);
 	               }
 	            }
@@ -76,12 +78,6 @@ public class BoardController extends HttpServlet {
 	            }
 				
 			} else if (cmd.equals("/load.board")) {
-				// cpage 가져와야하고,
-				// 게시글 번호를 가져와야함.
-				// 그리고 게시판 위치 (자유게시판인지 qna인지) -> 이거는 여기서 보내주는 것
-
-				
-				// <a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }">
 				int cpage =  Integer.parseInt(request.getParameter("cpage"));
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
 				String category = request.getParameter("category");
@@ -97,6 +93,10 @@ public class BoardController extends HttpServlet {
 					request.setAttribute("postRec",postRec);
 				if(bookmark)
 					request.setAttribute("bookmark",bookmark);
+				
+				List<FileDTO> files = fdao.selectForPost(postSeq);
+				request.setAttribute("files", files);
+				
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/update.board")) {
@@ -104,33 +104,35 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
-
-			} else if (cmd.equals("/listing.board")) {
-				// 게시판 출력
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String category = request.getParameter("category");
-				category = (category == null) ? "rhythm" : category;
+				dao.deletePost(postSeq);
+				response.sendRedirect("/listing.board?cpage=1&category="+category);	
+			} else if (cmd.equals("/listing.board")) {
+	            // 게시판 출력
+	            String category = request.getParameter("category");
+	            category = (category == null) ? "rhythm" : category;
 
-				String cpage = request.getParameter("cpage");
-				int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
-				request.getSession().setAttribute("lastPageNum", currentPage);
+	            String cpage = request.getParameter("cpage");
+	            int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
+	            request.getSession().setAttribute("lastPageNum", currentPage);
 
-				List<BoardDTO> list = new ArrayList<>();
+	            List<BoardDTO> list = new ArrayList<>();
 
-				// 검색한 카테고리, 키워드에 맞는 페이지 찾기
-				String search = request.getParameter("search");
-				String keyword = request.getParameter("keyword");
+	            // 검색한 카테고리, 키워드에 맞는 페이지 찾기
+	            String search = request.getParameter("search");
+	            String keyword = request.getParameter("keyword");
 
-				if (keyword == null || keyword.equals("")) {
-					// 검색 키워드가 넘어오지 않은 경우
-					list = dao.selectByCategory(category,
-							currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
-							Constants.RECORD_COUNT_PER_PAGE);
-					request.setAttribute("recordTotalCount", dao.getRecordCount(category));
+	            if (keyword == null || keyword.equals("")) {
+	               // 검색 키워드가 넘어오지 않은 경우
+	               list = dao.selectByCategory(category,
+	                     currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
+	                     Constants.RECORD_COUNT_PER_PAGE);
+	               request.setAttribute("recordTotalCount", dao.getRecordCount(category));
 
-				} else {
-					// 검색 키워드가 넘어온 경우
-				}
-
+	            } else {
+	               // 검색 키워드가 넘어온 경우
+	            }
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = dao.selectByNoti();
 				
@@ -155,22 +157,18 @@ public class BoardController extends HttpServlet {
 	         } else if(cmd.equals("/insertRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/deleteRecommend.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostRecommend(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/insertBookmark.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.insertPostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			} else if(cmd.equals("/deleteBookmark.board")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
-				System.out.println(result);
 				pw.append(gson.toJson(result));
 			}
 

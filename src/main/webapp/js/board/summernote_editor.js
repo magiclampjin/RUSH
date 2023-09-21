@@ -10,26 +10,29 @@ $(document).ready(function() {
 			onImageUpload: function(files) {
 				let formData = new FormData();
 				for (let i = 0; i < files.length; i++) {
-					console.log(i)
 					formData.append("image", files[i])
 				}
 				$.ajax({
-					url: "/insert.file",
+					url: "/insert.file?isqna=false",
 					method: "post",
 					data: formData,
 					processData: false,
 					contentType: false,
 					dataType: "json",
 				}).done(function(resp) {
-					console.log(resp.legnth)
-					for (let i = 0; i < resp.legnth; i++) {
-						console.log(resp[i])
+					
+					console.log(resp)
+					console.log(resp.length)
+					console.log("A")
+					for(let i =0;i<resp.length;i++){
+						console.log("resp[i]"+resp[i]);
 						let img = $("<img>");
-						console.log(img + "이미지 태ㄱ")
-						img.attr("src", resp[i]);
+						img.attr("src", resp[i]).attr("isimg","true");
+						let imgInfo = $("<input>");
 						console.log(img)
 						$("#summernote").summernote('insertNode', img[0]);
 					}
+					
 				});
 			}
 		}
@@ -82,8 +85,6 @@ $(document).ready(function() {
 			return false;
 		}
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-		//스마트 에디터 값을 텍스트컨텐츠로 전달
-		//var content = document.getElementById("smartEditor").value;
 	})
 });
 
