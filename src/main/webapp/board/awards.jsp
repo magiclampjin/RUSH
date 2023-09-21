@@ -107,11 +107,11 @@ a {
         <div id="container" class="container bColorBlack">
             <div id="title" class="colorWhite">명예의 전당</div>
             <div id="category" class="row g-0 m-0">
-                <div id="leftCategory" class="game col bColorGreen">게임1</div>
-                <div class="game col colorWhite">게임2</div>
-                <div class="game col colorWhite">게임3</div>
-                <div class="game col colorWhite">게임4</div>
-                <div id="rightCategory" class="game col colorWhite">게임5</div>
+                <div id="candy" class="game leftCategory col bColorGreen">캔디 크러쉬</div>
+                <div id="doodle" class="game col colorWhite">두들 점프</div>
+                <div id="flappy" class="game col colorWhite">플래피 버드</div>
+                <div id="kjmax" class="game col colorWhite">KJMAX</div>
+                <div id="kordle" class="game rightCategory col colorWhite">꼬들</div>
             </div>
             <div id="Box row">
                 <div class="line col"></div>

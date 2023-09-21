@@ -19,12 +19,12 @@
     height: 100px;
 }
 
-#leftCategory {
+.leftCategory {
     border: 2px solid #ffffff00;
     border-radius: 15px 0px 0px 15px;
 }
 
-#rightCategory {
+.rightCategory {
     border: 2px solid #ffffff00;
     border-radius: 0px 15px 15px 0px;
 }
