@@ -428,8 +428,14 @@ $(document).ready(function() {
 		nestedCoverMini.append(insertMini).append(cancelMini);
 
 		nestedReply.append(replySeq).append(nestedCover).append(nestedCoverMini);
-
-		$(this).closest(".reply").after(nestedReply);
+	
+		if($(this).closest(".reply").next().hasClass("nestedReplyAll")){
+			$(this).closest(".reply").next().after(nestedReply);
+		}else{
+			$(this).closest(".reply").after(nestedReply);
+		}
+		
+		
 	});
 
 	// 답글작성 취소
@@ -463,9 +469,9 @@ $(document).ready(function() {
 	$(document).on("click", ".nestedReplyPrintBtn", function() {
 		if ($(this).html() == "답글 보기") {
 			$(this).html("답글 닫기");
-
+			
 			let parentReply = $(this).closest(".reply");
-			let nestedReplyAll = $("<div>").attr("id", "nestedReplyAll");
+			let nestedReplyAll = $("<div>").attr("class", "nestedReplyAll");
 			
 			$.ajax({
 				url: "nestedPrint.reply",
@@ -481,7 +487,6 @@ $(document).ready(function() {
 				for (let i = 0; i < resp.length; i++) {
 					let replyTag = $("<div>").attr("class", "col-12 reply nopadding");
 					let arrow = $("<div>").attr("class", "col-1 d-flex justify-content-center align-items-center").html("<i class='fa-solid fa-arrow-turn-up fa-rotate-90 fa-xl'></i>");
-
 
 					let row = $("<div>").attr("class", "row g-0");
 					let col10 = $("<div>").attr("class", "col-9");
@@ -532,14 +537,23 @@ $(document).ready(function() {
 
 					let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");
 					row.append(replyId);
-					parentReply.after(nestedReplyAll.append(replyTag.append(row)));
+					nestedReplyAll.append(replyTag.append(row));
+				/*	if($(this).closest(".reply").next().hasClass("nestedReply")){
+						
+						$(this).closest(".reply").next().after(nestedReplyAll);
+					}else{
+						parentReply.after(nestedReplyAll);
+					}
+					*/
+					parentReply.after(nestedReplyAll);
 				}
 			});
 		} else if ($(this).html() == "답글 닫기") {
-			nestedReplyAll.remove();
-			
+			if($(this).closest(".reply").next().hasClass("nestedReplyAll")){
+				$(this).closest(".reply").next().remove();
+			}
+				
 			$(this).html("답글 보기");
-			
 		}
 	});
 });
