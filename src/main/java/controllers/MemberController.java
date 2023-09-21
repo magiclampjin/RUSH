@@ -38,7 +38,7 @@ public class MemberController extends HttpServlet {
 				boolean agreement = Boolean.parseBoolean(request.getParameter("agree"));
 				
 				dao.insert(new MemberDTO(id, pw, idNumber, name, email, nickName, phone, agreement));
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/member/login.jsp");
 				
 			} else if(cmd.equals("/idCheck.member")) {
 				// 아이디 중복 체크
@@ -81,11 +81,18 @@ public class MemberController extends HttpServlet {
 				boolean isAuthenticated = dao.selectByIdPw(id, pw);
 
 				if(isAuthenticated) { // 로그인에 성공하는 순간
-	               request.getSession().setAttribute("loginID", id);
+	               request.getSession().setAttribute("loginID", id); // 아이디 세션
+	               
+	               String nickName = dao.selectNicknameById(id);
+	               request.getSession().setAttribute("loginNickname", nickName); // 닉네임 세션
+	               
 	            } else {
 	               response.getWriter().append("failed");
 	            }
 				
+			} else if(cmd.equals("/logout.member")) {
+				// 회원 로그아웃
+				request.getSession().invalidate();
 			}
 			
 		}catch(Exception e) {
