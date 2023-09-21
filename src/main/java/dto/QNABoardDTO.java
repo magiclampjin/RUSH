@@ -12,18 +12,22 @@ public class QNABoardDTO {
 	private Timestamp writeDate;
 	private String category;
 	private boolean secret;
-	public QNABoardDTO() {}
+	private int parentRSeq;
 	
-	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, String category,
-			boolean secret) {
+	public QNABoardDTO() {}
+
+	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate,
+			String category, boolean secret, int parentRSeq) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
 		this.nickName = nickName;
 		this.title = title;
 		this.contents = contents;
+		this.writeDate = writeDate;
 		this.category = category;
 		this.secret = secret;
+		this.parentRSeq = parentRSeq;
 	}
 
 	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate,
@@ -115,5 +119,12 @@ public class QNABoardDTO {
 	
 	public String getStringFormat() {
 		return this.timeCal("board");
+	}
+	public int getParentRSeq() {
+		return parentRSeq;
+	}
+
+	public void setParentRSeq(int parentRSeq) {
+		this.parentRSeq = parentRSeq;
 	}
 }
