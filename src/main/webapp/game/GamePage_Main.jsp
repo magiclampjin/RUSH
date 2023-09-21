@@ -128,7 +128,7 @@ div {
 									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<a href="/moveToBestGame.game"><button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button></a>
 								</div>
 							</div>
 						</div>
