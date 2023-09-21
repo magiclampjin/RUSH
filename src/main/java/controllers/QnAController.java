@@ -88,9 +88,13 @@ public class QnAController extends HttpServlet {
 				
 				
 				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
+				int qnaYN= QNABoardDAO.getInstance().answerYN(qnaSeq);
+				int fileYN = QNABoardDAO.getInstance().fileYN(qnaSeq);
 				
 				request.setAttribute("qnalist", list);
 				request.setAttribute("cpage", cpage);
+				request.setAttribute("qnaYN", qnaYN);
+				request.setAttribute("fileYN", fileYN);
 				request.getRequestDispatcher("/qna/qnaWatch.jsp").forward(request, response);
 				
 			} else if(cmd.equals("/update.qna")) {

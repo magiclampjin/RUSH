@@ -168,31 +168,27 @@ a {
 	                                        
 	                                        <div class="replyCnt colorPink fontEnglish">
 											<!-- qnaReply 의 list를 넘겨줘야함 -->
-	                                        <c:forEach var="qnaReply" items="${qnaReply }">
 		                                        <c:choose>
-		                                        	<c:when test="${qna.seq eq qnaReply.seq }">
+		                                        	<c:when test="${qnaYN > 0 }">
 		                                        		답변완료
 		                                        	</c:when>
 		                                        	<c:otherwise>
 		                                        		답변대기
 		                                        	</c:otherwise>
 		                                        </c:choose>
-	                                        </c:forEach>
 	                                        </div>
 	                                    </div>
 	                                    <div class="writer">${qna.nickName }</div>
 	                                    <div class="date fontEnglish">${qna.stringFormat }</div>
 	                                    <div class="file">
-	                                    <c:forEach var="file" items="${file }">
-	                                    	<c:choose>
-	                                        	<c:when test="${file.qna eq true }">
-	                                        		<i class="fa-solid fa-paperclip"></i>
-	                                        	</c:when>
-	                                        	<c:otherwise>
-	                                        		
-	                                        	</c:otherwise>
-	                                        </c:choose>
-	                                    </c:forEach>
+                                    	<c:choose>
+                                        	<c:when test="${fileYN > 0 }">
+                                        		<i class="fa-solid fa-paperclip"></i>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		
+                                        	</c:otherwise>
+                                        </c:choose>
 	                                    </div>
 	                                </div>
 	                                <div class="minBoard">
