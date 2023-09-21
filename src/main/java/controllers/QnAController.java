@@ -48,12 +48,10 @@ public class QnAController extends HttpServlet {
 				System.out.println("ID : "+ mID);
 				System.out.println("Nickname : "+mNickname);
 				
-//				String mID = "ID";
-//				String mNickname = "Nickname";
-				
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
-				String category = multi.getParameter("category");
+				//String category = multi.getParameter("category");
+				String category = "일단 아무거나";
 				System.out.println("title : "+title +" contents : "+contents+" category: "+category);
 				
 				String secret = multi.getParameter("secret");
@@ -86,17 +84,9 @@ public class QnAController extends HttpServlet {
 				// 게시글 출력
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
-				// String id = (String)request.getSession().getAttribute("loginID");
-//				String secret = request.getParameter("secret");
-//				
-//				if(secret.equals("true")) {
-//					if(id==)
-//				}else {
-//					
-//				}
+				
 				
 				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
-				
 				
 				request.setAttribute("qnalist", list);
 				request.setAttribute("cpage", cpage);

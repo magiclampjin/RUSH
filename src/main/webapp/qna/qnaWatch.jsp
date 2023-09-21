@@ -18,7 +18,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="/js/board/post.js"></script>
+<script src="/js/board/qna.js"></script>
 
 <style>
 * {
@@ -318,14 +318,18 @@ a {
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
-										파일없음
+										<span class="colorBlack">없음</span>
 									</c:otherwise>
 								</c:choose>
 							</div>
 							<div class="col-5 col-sm-6 d-flex justify-content-end fw400 fs20">
 								<div class="d-none d-md-flex">
-									<button class="postBtns bColorGreen" id="update">수정</button>
-									<button class="postBtns bColorGreen" id="delete">삭제</button>
+									<c:choose>
+										<c:when test="${ loginID eq qnalist.writer}">
+											<button class="postBtns bColorGreen" id="update">수정</button>
+											<button class="postBtns bColorGreen" id="delete">삭제</button>
+										</c:when>
+									</c:choose>
 									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
 								</div>
 								
