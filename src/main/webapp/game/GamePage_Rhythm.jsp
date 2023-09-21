@@ -118,8 +118,7 @@ a{
     				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
     				divColRank.append(i+1);	
 				}
-				
-				
+								
 				let divColInfo = $("<div>");
 				divColInfo.addClass("col-7 text-white");
 				divColInfo.append(record[i]["nickName"]);

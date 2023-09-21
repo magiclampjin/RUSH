@@ -209,7 +209,7 @@ div {
 						</div>
 						<div class="row mb-5">
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary1">
+								<button type="button" class="btn btn-primary1" id="newGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -231,7 +231,7 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary2">
+								<button type="button" class="btn btn-primary2" id="rhythmGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -275,7 +275,7 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary1">
+								<button type="button" class="btn btn-primary1" id="puzzleGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -334,7 +334,16 @@ div {
 		let category = $("#new").children("span").text();
 		console.log(category);
 		/* location.href = "/moveToCategory?category="; */
-	})
+	});
+	$("#newGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game";
+	});
+	$("#rhythmGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game?category=Rhythm";
+	});
+	$("#puzzleGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game?category=Puzzle";
+	});
 	
 	</script>
 </body>
