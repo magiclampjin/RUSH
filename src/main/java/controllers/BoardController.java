@@ -59,19 +59,28 @@ public class BoardController extends HttpServlet {
 
 	            Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
 	            
-	            
 	            while (fileNames.hasMoreElements()) { // 파일이 존재하는 동안
 	               String fileName = fileNames.nextElement(); // 다음 파일을 불러옴
 	               if (multi.getFile(fileName) != null) {
-	            	   multi.getFile(fileName).toString();
+	            	  
 	                  String ori_name = multi.getOriginalFileName(fileName);
 	                  String sys_name = multi.getFilesystemName(fileName);
-	                  System.out.println("ori"+ori_name);
-	                  System.out.println("sys"+sys_name);
 	                  FileDTO fileDto = new FileDTO(0, parentSeq, ori_name, sys_name, false, false);
 	                  int fileResult = fdao.insert(fileDto);
 	               }
 	            }
+	            
+	            // 세션에 저장해둔 첨부 이미지의 parentSeq를 변경
+	            if(request.getSession().getAttribute("fileSeq")!=null) {
+	            	 List<Integer> fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
+	 	            for(int i =0;i<fileSeq.size();i++) {
+	 	            	fdao.updateParentSeq(parentSeq, fileSeq.get(i));
+	 	            }
+	 	            
+	 	            // 첨부 이미지의 parentSeq를 변경해줬다면 session정보 지우기
+	 	            request.getSession().removeAttribute("fileSeq");
+	            }
+	           
 
 	            if (parentSeq != 0) {
 	               response.sendRedirect("/listing.board?cpage=1&category="+category);
@@ -133,6 +142,7 @@ public class BoardController extends HttpServlet {
 	            } else {
 	               // 검색 키워드가 넘어온 경우
 	            }
+	            // 게시글
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = dao.selectByNoti();
 				
@@ -146,11 +156,22 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 				request.getRequestDispatcher("/board/boardList.jsp").forward(request, response);
 
+				// 게시글을 작성하던 중에 목록으로 넘어오게되면 절대경로에 저장되어있던 이미지 파일과 DB에 parent가 없는 이미지 파일 지우기
+				if(request.getSession().getAttribute("fileSeq")!=null) {
+					List<Integer> fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
+					String uploadPath = request.getServletContext().getRealPath("files");
+					
+					for(int i=0;i<fileSeq.size();i++) {
+						String fileSys_name = fdao.selectSysName(fileSeq.get(i));
+						File filepath = new File(uploadPath+"/"+fileSys_name);
+						filepath.delete();
+						fdao.deleteFile(fileSeq.get(i));
+					}
+					
+				}
 			} else if (cmd.equals("/write.board")) {
 	            String menu = request.getParameter("menu");
-	            System.out.println(menu);
 	            String category = request.getParameter("category");
-	            System.out.println(category);
 	            request.setAttribute("menu", menu);
 	            request.setAttribute("category", category);
 	            request.getRequestDispatcher("/board/boardWrite.jsp").forward(request, response);
