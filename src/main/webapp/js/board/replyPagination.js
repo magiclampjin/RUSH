@@ -22,9 +22,6 @@ $(document).ready(function() {
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
-		console.log(pageTotalCount)
-		console.log(startNavi)
-		console.log(endNavi)
 
 		let needPrev = true;
 		let needNext = true;
@@ -37,16 +34,12 @@ $(document).ready(function() {
 		}
 
 		let pagination = $("#pagination")
-		let searchBy = $("#searchBy").val();
-		let searchByKeyword = $("#searchByKeyword").val();
-		
-
 
 		if (startNavi != 1) {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-left";
-			aTag.href = "/listing.qna?cpage=1&searchBy="+searchBy+"&keyword="+searchByKeyword;
+			aTag.href = "/listing.board?" + "category="+category+"&cpage=1";
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -55,7 +48,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-left";
-			aTag.href = "/listing.qna?cpage=" + (startNavi - 1)+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
+			aTag.href = "/listing.board?category="+category+"&cpage=" + (startNavi - 1);
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -64,7 +57,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			aTag.textContent = i;
 			aTag.className += "colorBlack fontEnglish";
-			aTag.href = "/listing.qna?cpage=" + i+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
+			aTag.href = "/listing.board?category="+category+"&cpage=" + i;
 			if (i == currentPage) {
 				aTag.className = "colorWhite bColorBlue fontEnglish"
 			}
@@ -75,7 +68,7 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-chevron-right";
-			aTag.href = "/listing.qna?cpage=" + (endNavi + 1)+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
+			aTag.href = "/listing.board?category="+category+"&cpage=" + (endNavi + 1);
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
@@ -84,11 +77,9 @@ $(document).ready(function() {
 			let aTag = document.createElement('a');
 			let iTag = document.createElement('i');
 			iTag.className += "fa-solid fa-angles-right";
-			aTag.href = "/listing.qna?cpage="+pageTotalCount+"&searchBy="+searchBy+"&keyword="+searchByKeyword;
+			aTag.href = "/listing.board?category="+category+"&cpage="+pageTotalCount;
 			aTag.appendChild(iTag);
 			pagination.append($(aTag));
 		}
 	}
-})/**
- * 
- */
+})
