@@ -35,6 +35,27 @@ public class ReplyController extends HttpServlet {
 		ReplyDAO dao = ReplyDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gsonDefault = new Gson();
+		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
+			private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
+			private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+			public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
+				long currentTime = System.currentTimeMillis();
+				long writeTime = arg0.getTime();
+				long gapTime = currentTime - writeTime;
+
+				if (gapTime < 60000) {
+					return new JsonPrimitive((gapTime / 1000) + "초 전");
+				} else if (gapTime < 60000 * 60) {
+					return new JsonPrimitive( gapTime / 60000 + " 분 전");
+				} else if (gapTime < 60000 * 60 * 24) {
+					long hour = gapTime / 60000 / 60;
+					long min = ((gapTime / 60000) % 60);
+					return new JsonPrimitive("약 "+hour + "시간 전");
+				} else {
+					return new JsonPrimitive(sdfDay.format(arg0)+"&nbsp;&nbsp;"+sdfTime.format(arg0));
+				}					
+			}
+		}).create();
 		
 		try {
 			if(cmd.equals("/insert.reply")) {
@@ -44,38 +65,15 @@ public class ReplyController extends HttpServlet {
 				String writer = (String) request.getSession().getAttribute("loginID");
 				String nickname = (String) request.getSession().getAttribute("loginNickname");
 				
-				dao.insert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0, null));
-				
+				dao.insert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0, null, 0));
 				
 			} else if(cmd.equals("/load.reply")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				List<ReplyDTO> replys = dao.selectAll(postSeq,loginId);
-				Gson gson = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
-					private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
-					private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
-					public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
-						long currentTime = System.currentTimeMillis();
-						long writeTime = arg0.getTime();
-						long gapTime = currentTime - writeTime;
 
-						if (gapTime < 60000) {
-							return new JsonPrimitive((gapTime / 1000) + "초 전");
-						} else if (gapTime < 60000 * 60) {
-							return new JsonPrimitive( gapTime / 60000 + " 분 전");
-						} else if (gapTime < 60000 * 60 * 24) {
-							long hour = gapTime / 60000 / 60;
-							long min = ((gapTime / 60000) % 60);
-							return new JsonPrimitive("약 "+hour + "시간 전");
-						} else {
-							return new JsonPrimitive(sdfDay.format(arg0)+"&nbsp;&nbsp;"+sdfTime.format(arg0));
-						}					
-					}
-				}).create();
-				
-				response.getWriter().append(gson.toJson(replys));
-
-				
+				pw.append(gsonTs.toJson(replys));
+	
 			} else if(cmd.equals("/update.reply")) {
 				// 댓글 수정
 				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
@@ -100,7 +98,21 @@ public class ReplyController extends HttpServlet {
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				int result = dao.deletetRecommend(replySeq, loginId);
 				pw.append(gsonDefault.toJson(result));
-			} 
+			} else if(cmd.equals("/nestedInsert.reply")) {
+				String writer = (String) request.getSession().getAttribute("loginID");
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				String nickname = (String) request.getSession().getAttribute("loginNickname");
+				String contents = request.getParameter("contents");
+				int replySeq = Integer.parseInt(request.getParameter("replySeq"));	
+				
+				int result = dao.nestedInsert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0, null, replySeq));
+				pw.append(gsonDefault.toJson(result));
+			} else if(cmd.equals("/nestedPrint.reply")) {
+				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
+				String loginId = (String) request.getSession().getAttribute("loginID");
+				List<ReplyDTO> nestedReplys = dao.selectNestedReplys(replySeq, loginId);
+				pw.append(gsonTs.toJson(nestedReplys));
+			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();

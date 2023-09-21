@@ -37,7 +37,22 @@ public class ReplyDAO {
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {
-					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid")));
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid"), rs.getInt("parentRSeq")));
+				}
+				return replys;
+			}
+		}
+	}
+	
+	public List<ReplyDTO> selectNestedReplys(int replySeq, String loginId) throws Exception{
+		String sql = "select * from replyrecList where parentRSeq = ? and (isnull(recid) or recid = ?);";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, replySeq);
+			pstat.setString(2, loginId);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replys = new ArrayList<>();
+				while(rs.next()) {
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid"), rs.getInt("parentRSeq")));
 				}
 				return replys;
 			}
@@ -90,14 +105,15 @@ public class ReplyDAO {
 		}
 	}
 	
-	public void nestedInsert(ReplyDTO reply) throws Exception{
+	public int nestedInsert(ReplyDTO reply) throws Exception{
 		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default, ?);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1,reply.getParentSeq());
 			pstat.setString(2, reply.getWriter());
 			pstat.setString(3, reply.getNickName());
 			pstat.setString(4, reply.getContents());
-			pstat.executeUpdate();
+			pstat.setInt(5, reply.getParentRSeq());
+			return pstat.executeUpdate();
 		}
 	}
 }
