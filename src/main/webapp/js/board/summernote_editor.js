@@ -1,11 +1,29 @@
 $(document).ready(function() {
+	$(".note-icon-caret").remove();
+	console.log($(".dropdown-toggle::after"))
+	$(".dropdown-toggle::after").css("display", "none")
+	
 	$('#summernote').summernote({
 		placeholder: '게시글을 입력해주세요',
 		tabsize: 2,
-		minHeight: 700,
-		maxHeight: 1000,
+		height: 1000,
+		disableResizeEditor: true,
 		focus: true,
 		lang: 'ko-KR',
+		toolbar: [
+			// [groupName, [list of button]]
+			['fontname', ['fontname']],
+			['fontsize', ['fontsize']],
+			['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			['color', ['forecolor', 'color']],
+			['table', ['table']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['insert', ['picture', 'link', 'video']],
+			['view', ['fullscreen', 'help']]
+		],
+		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+		fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
 		callbacks: {
 			onImageUpload: function(files) {
 				let formData = new FormData();
@@ -21,12 +39,12 @@ $(document).ready(function() {
 					dataType: "json",
 				}).done(function(resp) {
 					$("input[name=files]").val("");
-					for(let i =0;i<resp.length;i++){
+					for (let i = 0; i < resp.length; i++) {
 						let img = $("<img>");
 						img.attr("src", resp[i]);
 						$("#summernote").summernote('insertNode', img[0]);
 					}
-					
+
 				});
 			}
 		}
@@ -78,7 +96,7 @@ $(document).ready(function() {
 			return false;
 		}
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-		
+
 	})
 });
 
