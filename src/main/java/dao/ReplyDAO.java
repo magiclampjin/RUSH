@@ -31,14 +31,13 @@ public class ReplyDAO {
 	
 	public List<ReplyDTO> selectAll(int postSeq, String loginId) throws Exception{
 //		String sql = "select * from replyrecList where cbSeq = ? and (isnull(recid) or recid = ?) and parentRSeq is null;";
-		String sql = "select * from replyrecList where cbSeq = ? and parentRSeq is null;";
+		String sql = "select * from replyRecommCnt where cbSeq = ? and parentRSeq is null;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {
-					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid"), rs.getInt("parentRSeq")));
-					System.out.println(rs.getString("rContents"));
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("parentRSeq"),  rs.getInt("recCnt")));
 				}
 				return replys;
 			}
@@ -47,13 +46,13 @@ public class ReplyDAO {
 	
 	public List<ReplyDTO> selectNestedReplys(int replySeq, String loginId) throws Exception{
 //		String sql = "select * from replyrecList where parentRSeq = ? and (isnull(recid) or recid = ?);";
-		String sql = "select * from replyrecList where parentRSeq = ?;";
+		String sql = "select * from replyRecommCnt where parentRSeq = ?;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, replySeq);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {
-					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid"), rs.getInt("parentRSeq")));
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("parentRSeq"),  rs.getInt("recCnt")));
 				}
 				return replys;
 			}
@@ -61,7 +60,7 @@ public class ReplyDAO {
 	}
 	
 	public void insert(ReplyDTO reply) throws Exception{
-		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default, null);";
+		String sql = "insert into reply values(null, ?, ?, ?, ?, default, null);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1,reply.getParentSeq());
 			pstat.setString(2, reply.getWriter());
@@ -107,7 +106,7 @@ public class ReplyDAO {
 	}
 	
 	public int nestedInsert(ReplyDTO reply) throws Exception{
-		String sql = "insert into reply values(null, ?, ?, ?, ?, default, default, ?);";
+		String sql = "insert into reply values(null, ?, ?, ?, ?, default, ?);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1,reply.getParentSeq());
 			pstat.setString(2, reply.getWriter());
