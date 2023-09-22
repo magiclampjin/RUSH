@@ -315,8 +315,7 @@
 	});
 	
 	// 아이디 & 비밀번호 null값 확인
-	
-	$("#login").on("click", function(){
+	function login() {
 		if($("#inputId").val() == "") {
 			alert("아이디를 입력하세요.");
 			$("#inputId").focus();
@@ -347,6 +346,18 @@
               location.href="/index.jsp";
            }
        });
+	};
+	
+	// 로그인 버튼 클릭해서 로그인
+	$("#login").on("click", function(){
+		login();
+	});
+	
+	// enter키 눌러서 로그
+	$(document).on("keyup", function(e){
+		if(e.keyCode == 13) {
+			login();
+		}
 	});
 	
 	
