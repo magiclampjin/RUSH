@@ -30,14 +30,15 @@ public class ReplyDAO {
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 	
 	public List<ReplyDTO> selectAll(int postSeq, String loginId) throws Exception{
-		String sql = "select * from replyrecList where cbSeq = ? and (isnull(recid) or recid = ?) and parentRSeq is null;";
+//		String sql = "select * from replyrecList where cbSeq = ? and (isnull(recid) or recid = ?) and parentRSeq is null;";
+		String sql = "select * from replyrecList where cbSeq = ? and parentRSeq is null;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
-			pstat.setString(2, loginId);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {
 					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getString("mID"), rs.getInt("cbSeq"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("rRecommend"), rs.getString("recid"), rs.getInt("parentRSeq")));
+					System.out.println(rs.getString("rContents"));
 				}
 				return replys;
 			}
@@ -45,10 +46,10 @@ public class ReplyDAO {
 	}
 	
 	public List<ReplyDTO> selectNestedReplys(int replySeq, String loginId) throws Exception{
-		String sql = "select * from replyrecList where parentRSeq = ? and (isnull(recid) or recid = ?);";
+//		String sql = "select * from replyrecList where parentRSeq = ? and (isnull(recid) or recid = ?);";
+		String sql = "select * from replyrecList where parentRSeq = ?;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, replySeq);
-			pstat.setString(2, loginId);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {

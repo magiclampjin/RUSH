@@ -61,7 +61,7 @@ $(document).ready(function() {
 					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
 					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
 
-					if (resp[i].recId !== undefined) {
+					if (resp[i].recId !== undefined ) { //&& resp[i].recId==loginID
 						recommendBtn.addClass("btnClicked");
 					}
 					row.append(replyBtns.append(recommendBtn));

@@ -9,9 +9,9 @@ public class ReplyDTO {
 	private String nickName;
 	private String contents;
 	private Timestamp writeDate;
-	private int recommend;
-	private String recId;
-	private int parentRSeq;
+	private int recommend; //
+	private String recId; //추천한 사람
+	private int parentRSeq; //답글의 원 댓글 번호
 	
 	public ReplyDTO() {}
 	public ReplyDTO(int seq, String writer, int parentSeq, String nickName, String contents, Timestamp writeDate,
