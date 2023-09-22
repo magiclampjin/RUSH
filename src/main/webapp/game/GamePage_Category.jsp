@@ -26,11 +26,10 @@
             height: 200px;
             border-radius : 3%;
         }
-        .gameContainer{
-            max-width: 1300px;
-            width : 1300px;
-            margin: auto;
-        }
+		.gameContainer {
+			max-width: 1300px;
+			margin: auto;
+		}
         a{
 			text-decoration: none;
 		}
@@ -52,7 +51,7 @@
 			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divCol = $("<div>");
-				divCol.addClass("col-xs-12 col-lg-6 col-xl-4 ml45 mr45 mxWidth");
+				divCol.addClass("col-xs-12 col-lg-6 col-xl-4");
 				
 				let divAnker = $("<a>");
 				divAnker.attr("href","/moveToGamePage.game?game="+data[i]["gName"]);
@@ -169,7 +168,7 @@
                     </div>
                 </div>
                 <div class="col-10">
-                    <div class="row g-0 mt-4 mb-5 mxConWidth">
+                    <div class="row g-0 mt-4 mb-5 mxConWidth" id="showGames">
                         <p class="categories fs-2 text-white">
                         	<c:choose>
 								<c:when test="${category == 'Rhythm' }">리듬 게임</c:when>
@@ -178,8 +177,6 @@
 							</c:choose>
                         </p>
     
-                        <div id="showGames">
-                        </div>
                         
                     </div>
                 </div>

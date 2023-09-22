@@ -16,6 +16,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/game/game.css"/>
+<script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
+<script src="/game/js/rhythm.js"></script>
+<script src="/game/js/GameoverScene.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -27,11 +30,11 @@
 	height: 200px;
 }
 
-.game {
+#game {
 	min-width : 579px;
 	max-width: 1030px;
-	width: 100%;
-	height: 579px;
+	width: 750px;
+	height: 750px;
 	background-color: white;
 	margin: auto;
 }
@@ -288,7 +291,28 @@ a{
 							<hr class="border border-primary border-3 opacity-75">
 						</div>
 						<div class="row g-0">
-							<div class="col-12 game">play ground</div>
+							<div class="col-12">
+								<div id="game">
+									
+								</div>
+								<script>
+							        let option = {
+							            type:Phaser.AUTO,
+							            parent : "game",
+							            width : "100%",
+							            height : "100%",
+							            physics : {
+							                default : "arcade",
+							                arcade : {
+							                    gravity : {y:0},
+							                    debug : false
+							                }
+							            },
+							            scene:[rhythm,GameoverScene]
+							        };
+							        let game = new Phaser.Game(option);
+							    </script>								
+							</div>
 						</div>
 						<div class="row g-0">
 							<div class="col-12 d-flex justify-content-center mt150">
@@ -547,6 +571,21 @@ a{
     	$("#arc").on("click",function(){
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
+    	
+    	function setRecord(userScore){
+    		$.ajax({
+                url:"/setGameRecord.game",
+                data:{
+                  mID:'${loginID}',
+                  game:'${game}',
+                  nickName : '${loginNickname}',
+                  score : userScore
+                },
+                type:"post"
+              }).done(function (res){
+                console.log(res);
+              });
+    	}
     </script>
 </body>
 </html>
