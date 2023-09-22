@@ -166,7 +166,15 @@ a {
 						<form action="/insert.board" method="post"
 							enctype="multipart/form-data" id="boardForm">
 							<input type="hidden" value="${category }" name="category">
-							<div class="writeTitle">자유게시글 작성</div>
+							<c:choose>
+								<c:when test="${loginID == 'admin' }">
+									<div class="writeTitle">공지게시글 작성</div>
+								</c:when>
+								<c:otherwise>
+									<div class="writeTitle">자유게시글 작성</div>
+								</c:otherwise>
+							</c:choose>
+
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요" id="title">
 							<div class="fileBox">

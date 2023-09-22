@@ -88,6 +88,7 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/load.board")) {
 				String cpage = request.getParameter("cpage");
+				System.out.println(cpage);
 		        int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
@@ -209,7 +210,7 @@ public class BoardController extends HttpServlet {
 
 				String cpage = request.getParameter("cpage");
 				System.out.println(cpage);
-				int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
+				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				request.getSession().setAttribute("lastPageNum", currentPage);
 
 				List<BoardDTO> list = new ArrayList<>();
@@ -234,18 +235,24 @@ public class BoardController extends HttpServlet {
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountTitle(category, keyword));
 						System.out.println(request.getAttribute("recordTotalCount"));
+						System.out.println("title");
 					} else if (search.equals("writer")) {
 						list = dao.selectByWriter(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountWriter(category, keyword));
 						System.out.println(request.getAttribute("recordTotalCount"));
+						System.out.println("writer");
+						System.out.println(category);
+						System.out.println(search);
+						System.out.println(keyword);
 					} else if (search.equals("content")) {
 						list = dao.selectByContents(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountContents(category, keyword));
 						System.out.println(request.getAttribute("recordTotalCount"));
+						System.out.println("content");
 					}
 
 					request.setAttribute("search", search);

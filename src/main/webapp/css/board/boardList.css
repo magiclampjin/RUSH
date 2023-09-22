@@ -249,7 +249,6 @@ ul.tabs a.current {
 	font-size: 20px;
 }
 
-
 /* board Btn */
 .boardBtn {
 	border: none;
@@ -267,12 +266,11 @@ ul.tabs a.current {
 		padding: 15px 0;
 	}
 	.num {
-	width: 20%;
-}
-
-.title {
-	width: 80%;
-}
+		width: 20%;
+	}
+	.title {
+		width: 80%;
+	}
 	.boardHeader>.writer {
 		display: none;
 	}
@@ -328,6 +326,13 @@ ul.tabs a.current {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+	#pagination>a {
+		width: 25px;
+		height: 25px;
+	}
+	#pagination>a:not(:last-child) {
+		margin-right: 5px;
 	}
 	.search_write {
 		flex-direction: column;
