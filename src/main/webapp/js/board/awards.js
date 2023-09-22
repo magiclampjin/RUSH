@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	let gameArr = ["CandyCrush", "doodle jump", "FlappyBird", "KJMAX", "kkodle"];
+	let gameArr = ["Candy Crush", "doodle jump", "Flappy Bird", "KJMAX", "kkodle"];
 	for(let i = 0; i < 5; i++) {
 		$("#game"+i).attr("id", gameArr[i]);
 	}
@@ -73,7 +73,7 @@ $(document).ready(function() {
 		        }
 		
 		        let idLevDiv = $("<div>");
-		        idLevDiv.addClass("col-9");
+		        idLevDiv.addClass("col-8");
 		
 		        let userId = $("<div>");
 		        userId.attr("id", "userId");
@@ -86,12 +86,12 @@ $(document).ready(function() {
 		        userLevel.html("Lv." + rankerList[i].level);
 		
 		        let score = $("<div>");
-		        score.addClass("col-3");
+		        score.addClass("col-4");
 		        
 		        let scoreAlign = $("<div>");
 		        scoreAlign.attr("id", "score");
-		        scoreAlign.addClass("colorWhite");
-		        scoreAlign.html(rankerList[i].score + "점");
+		        scoreAlign.addClass("pe-0 pe-md-5 colorWhite");
+		        scoreAlign.html(rankerList[i].score + " 점");
 		
 		        idLevDiv.append(userId).append(userLevel);
 		        score.append(scoreAlign);
