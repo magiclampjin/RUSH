@@ -66,6 +66,10 @@ public class MemberController extends HttpServlet {
 				
 			} else if(cmd.equals("/load.member")) {
 				// 마이페이지 (회원 정보 출력)
+				String userID = (String) request.getSession().getAttribute("loginID");
+				MemberDTO user = dao.selectUserInfo(userID);
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
 				
 			} else if(cmd.equals("/update.member")) {
 				// 회원 정보 수정
@@ -95,11 +99,10 @@ public class MemberController extends HttpServlet {
 				String name = request.getParameter("name");
 				String email = request.getParameter("email");
 				
-				boolean ExistId = dao.selectByNameEmail(name, email);
-				if(!ExistId) {
+				String id = dao.selectIdByNameEmail(name, email);
+				if(id == null) {
 					response.getWriter().append("null");
 				} else {
-					String id = dao.selectIdByNameEmail(name, email);
 					response.getWriter().append(id);
 				}
 				
@@ -118,9 +121,7 @@ public class MemberController extends HttpServlet {
 				// 비밀번호 수정
 				String pw = EncryptionUtils.getSHA512(request.getParameter("pw"));
 				String id = request.getParameter("id");
-				String name = request.getParameter("name");
-				String email = request.getParameter("email");
-				dao.updateByPw(pw, id, name, email);
+				dao.updatePwById(pw, id);
 				response.sendRedirect("/member/login.jsp");
 				
 			} else if(cmd.equals("/logout.member")) {
