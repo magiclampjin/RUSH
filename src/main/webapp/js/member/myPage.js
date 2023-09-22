@@ -13,7 +13,7 @@ $(document).ready(function(){
   
   $("#myWrite").on("click",function(){
 		$.ajax({
-			url:"/myWriteList.board",
+			url:"/myWriteList.board?myPage=true",
 			dataType:"json"
 		}).done(function(resp){
 			console.log(resp);
@@ -32,7 +32,7 @@ $(document).ready(function(){
 				
 				let divTitle = $("<div>").attr("class","title");
 				
-					let aTagTitle = $("<a>").attr("href","/load.board?seq="+resp[i].seq);
+					let aTagTitle = $("<a>").attr("href","/load.board?seq="+resp[i].seq+"&myPage=true");
 					let divMainTitle = $("<div>").attr("class","mainTitle");
 					divMainTitle.append(resp[i].title);
 					aTagTitle.append(divMainTitle);
@@ -81,7 +81,7 @@ $(document).ready(function(){
 				let divMinCon = $("<div>").attr("class","minCon");
 					
 					let divMinTitle = $("<div>").attr("class","title");
-						let aTagMin = $("<a>").attr("href","/load.board?seq="+resp[i].seq);
+						let aTagMin = $("<a>").attr("href","/load.board?seq="+resp[i].seq+"&myPage=true");
 							let divMinMainTitle = $("<div>").attr("class","mainTitle");
 							divMinMainTitle.append(resp[i].title);
 						aTagMin.append(divMinMainTitle);

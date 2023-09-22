@@ -97,12 +97,19 @@ $(document).ready(function() {
 	let postSeq = $("#postSeq").val();
 	let search = $("#search").val();
 	let keyword = $("#keyword").val();
+	
+	// url 에서 myPage 값가져올때 사용
+	const urlParams = new URL(location.href).searchParams;
+	const myPage = urlParams.get('myPage');
 
 	// 댓글창 로드
 	$("#replys").html(replyReload(postSeq));
 
 	$(".goList").on("click", function() {
-		if(search == null || search == ""){
+		
+		if(myPage == "true"){
+			location.href="/load.member";
+		}else if(search == null || search == ""){
 			location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
 		}else{
 			location.href = "/listing.board?cpage=" + cpage + "&category=" + category +"&search="+search+"&keyword="+keyword;
