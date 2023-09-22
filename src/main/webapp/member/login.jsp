@@ -215,11 +215,11 @@
 
 	                  <div class="idBox">
 	                     <p id="id" class="fontEnglish">ID</p>
-	                     <input type="text" id="inputId" class="fontEnglish" name="id" placeholder="Enter your ID">
+	                     <input type="text" id="inputId" class="fontEnglish" name="id" value="1" placeholder="Enter your ID">
 	                  </div>
 	                  <div class="pwBox">
 	                     <p id="pw" class="fontEnglish">Password</p>
-	                     <input type="password" id="inputPw" class="fontEnglish" name="pw" placeholder="********">
+	                     <input type="password" id="inputPw" class="fontEnglish" name="pw" value="1" placeholder="********">
 	                  </div>
 	                  <div class="rem_fg">
 	                     <div class="rememberId">
@@ -315,8 +315,7 @@
 	});
 	
 	// 아이디 & 비밀번호 null값 확인
-	
-	$("#login").on("click", function(){
+	function login() {
 		if($("#inputId").val() == "") {
 			alert("아이디를 입력하세요.");
 			$("#inputId").focus();
@@ -347,6 +346,18 @@
               location.href="/index.jsp";
            }
        });
+	};
+	
+	// 로그인 버튼 클릭해서 로그인
+	$("#login").on("click", function(){
+		login();
+	});
+	
+	// enter키 눌러서 로그
+	$(document).on("keyup", function(e){
+		if(e.keyCode == 13) {
+			login();
+		}
 	});
 	
 	

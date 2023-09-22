@@ -87,7 +87,6 @@ div {
 </head>
 <body>
 <script>
-/* <div class="col-xs-12 col-lg-6 col-xl-4"> */
 	window.onload = function(){
 		$.ajax({
 			url:"/getBestGame.game",
@@ -127,8 +126,7 @@ div {
 				</a>
 				<nav class="navbar navbar-expand navbar-light colorWhite">
 					<div class="container-fluid p-0">
-						<div class="collapse navbar-collapse w-100 g-0 m-0"
-							id="navbarNavDropdown">
+						<div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
 							<ul class="navbar-nav row g-0 w-100">
 								<li class="nav-item dropdown col-3 text-end"><a
 									class="nav-link text-white fontEnglish" href="#"
@@ -253,7 +251,7 @@ div {
 								<p class="text-white ml45">게임3</p>
 							</div>
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary3">
+								<button type="button" class="btn btn-primary3" id="arcadeGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
@@ -333,7 +331,6 @@ div {
 	$("#new").on("click",function(){
 		let category = $("#new").children("span").text();
 		console.log(category);
-		/* location.href = "/moveToCategory?category="; */
 	});
 	$("#newGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game";
@@ -343,6 +340,9 @@ div {
 	});
 	$("#puzzleGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game?category=Puzzle";
+	});
+	$("#arcadeGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game?category=Arcade";
 	});
 	
 	</script>

@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+.myPage {
+	width: 100%;
+}
+
+.myPage_guide {
+	max-width: 1300px;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.nicknameInfo {
+	max-width: 1300px;
+	width: 100%;
+	margin: auto;
+	padding: 50px 0px 30px 0px;
+}
+
+.nickname {
+	margin-bottom: 10px;
+	font-size: 40px;
+	font-weight: 900;
+}
+
+.levelBox {
+	display: flex;
+	align-items: center;
+}
+
+.levelBox>.level {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.levelBox>.singDay {
+	font-size: 20px;
+	font-weight: 500;
+	margin-left: 30px;
+}
+
+.memberInfo {
+	width: 100%;
+	padding-top: 80px;
+}
+
+.memberBasicTitle {
+	width: 100%;
+	border-bottom: 2px solid black;
+	font-size: 40px;
+	font-weight: 700;
+	padding-bottom: 30px;
+}
+
+.infoBox {
+	height: 60px;
+	border-bottom: 1px solid black;
+	display: flex;
+	align-items: center;
+}
+
+.infoBox>.infoCagetory {
+	width: 200px;
+}
+
+.modifiedBox {
+	width: 100%;
+	justify-content: end;
+	border: none;
+}
+
+.updateBtn {
+	padding:10px;
+	border-radius: 5px;
+	border: none;
+}
+.deletBtnBox {
+	display:flex;
+	justify-content: end;
+	align-items: center;
+}
+.deleteBtn {
+	padding:5px 10px;
+	border-color: #7d7d7d;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+
+.pwCheckBox{
+	width: 500px;
+	margin: auto;
+}
+
+.pwCheckTitle{
+	font-size: 25px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/*.memberAddBox {
+	width: 1300px;
+	margin: auto;
+}
+
+.tabBox {
+	width: 100%;
+}
+
+.deletBtnBox {
+	width: 400px;
+	margin-left: auto;
+}
+
+.deleteBtn {
+	margin-bottom: 100px;
+	width: 90px;
+	height: 30px;
+	border-color: #7d7d7d;
+	border-radius: 5px;
+}*/
+
+@media ( max-width : 786px) {
+	.nickname {
+		font-size: 30px;
+	}
+	.levelBox>.level {
+		font-size: 20px;
+	}
+	.levelBox>.singDay {
+		font-size: 15px;
+	}
+	.memberBasicTitle {
+		font-size: 30px;
+		padding-bottom: 20px;
+	}
+	.infoBox>.infoCagetory {
+		width: 150px;
+	}
+}
