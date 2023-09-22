@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/member/myPage.css">
 <link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/member/infoModified.js"></script>
-
+<script type="text/javascript" src="/js/member/myPage.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -87,6 +87,7 @@ ul.tabs li.current{
   display: inherit;
   
 }
+#tab-1{overflow: auto;}
 </style>
 </head>
 <body>
@@ -236,30 +237,17 @@ ul.tabs li.current{
 								<div class="recommend">추천</div>
 								<div class="file">파일</div>
 	                        </div>
-					    	<div class="post">
-								<div class="num fontEnglish">번호</div>
-								<div class="title">
-									<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }">
-										<div class="mainTitle">제목</div>
-									</a>
-								<div class="replyCnt colorPink fontEnglish">댓글수</div>
-								</div>
-								<div class="writer">닉네임</div>
-								<div class="date">작성일</div>
-								<div class="view fontEnglish">조회수</div>
-								<div class="recommend fontEnglish">추천수</div>
-								<c:if test="${post.fCount!=0 }">
-									<div class="file">
-										<i class="fa-solid fa-paperclip"></i>
-									</div>
-								</c:if>
+					    	<div class="ppost" id="post">
+						    	
 					    	</div>
+					    	<div id="pagination"></div>
 					    </div>
 					    <div id="tab-2" class="tab-content">tab content2</div>
 					    <div id="tab-3" class="tab-content">tab content3</div>
 					    <div id="tab-4" class="tab-content">tab content4</div>
 					</div>
 				</div>
+				
 
 				<div class="memberInfo">
 					<div class="deletBtnBox">
@@ -269,36 +257,6 @@ ul.tabs li.current{
 				</div>
 			</div>
 		</div>
-
-		<script>
-		$(document).ready(function(){
-			  
-		  $('ul.tabs li').click(function(){
-		    var tab_id = $(this).attr('data-tab');
-
-		    $('ul.tabs li').removeClass('current');
-		    $('.tab-content').removeClass('current');
-
-		    $(this).addClass('current');
-		    $("#"+tab_id).addClass('current');
-		  })
-
-		})
-		
-		$("#myWrite").on("click",function(){
-			$.ajax({
-				url:"/myWriteList.board",
-				dataType:"json"
-			}).done(function(resp){
-				console.log(resp);
-			});
-		});
-			
-		</script>
-
-
-
-
 		<a href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>
