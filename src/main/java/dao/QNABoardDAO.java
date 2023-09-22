@@ -164,5 +164,12 @@ public class QNABoardDAO {
 			}
 	}
 	
-	
+	public void delete(int qnaSeq) throws Exception{
+		String sql ="delete from qna_board where qbSeq = ?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1,qnaSeq);
+			pstat.executeUpdate();
+		}
+	}
 }

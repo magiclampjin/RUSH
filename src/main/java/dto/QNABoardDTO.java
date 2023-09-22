@@ -143,13 +143,11 @@ public class QNABoardDTO {
 		long gapTime = currentTime - writeTime;
 
 		if (gapTime < 60000) {
-			return (gapTime / 1000) + "초 전";
+			return "방금 전";
 		} else if (gapTime < 60000 * 60) {
 			return gapTime / 60000 + " 분 전";
 		} else if (gapTime < 60000 * 60 * 24) {
 			long hour = gapTime / 60000 / 60;
-			long min = ((gapTime / 60000) % 60);
-
 			return "약 "+hour + "시간 전";
 		} else {
 			SimpleDateFormat sdf = null;

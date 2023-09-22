@@ -28,6 +28,7 @@ public class QnAController extends HttpServlet {
 		String cmd = request.getRequestURI();
 		System.out.println("qna cmd: "+cmd);
 		
+		QNABoardDAO dao = QNABoardDAO.getInstance();
 		try {
 			if(cmd.equals("/insert.qna")) {
 				// 게시글 등록
@@ -81,23 +82,47 @@ public class QnAController extends HttpServlet {
 				response.sendRedirect("/listing.qna");
 				
 				
-			} else if(cmd.equals("/load.qna")) {
+			} 
+			
+//			else if(cmd.equals("/load.qna")) {
+//				// 게시글 출력
+//				int cpage = Integer.parseInt(request.getParameter("cpage"));
+//				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
+//				
+//				
+//				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
+//				
+//				request.setAttribute("qnalist", list);
+//				request.setAttribute("cpage", cpage);
+//				request.getRequestDispatcher("/qna/qnaWatch.jsp").forward(request, response);
+//				
+//			} 
+			
+			else if(cmd.equals("/load.qna")) {
 				// 게시글 출력
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
 				
+				QNABoardDTO post = dao.selectPost(qnaSeq);
 				
-				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
-				
-				request.setAttribute("qnalist", list);
+				request.setAttribute("postSeq", qnaSeq);
+				request.setAttribute("post", post);
 				request.setAttribute("cpage", cpage);
-				request.getRequestDispatcher("/qna/qnaWatch.jsp").forward(request, response);
-				
-			} else if(cmd.equals("/update.qna")) {
+				request.getRequestDispatcher("/qna/qnaPost.jsp").forward(request, response);
+			} 
+			
+			else if(cmd.equals("/updateLoad.qna")) {
+				// 게시글 수정 페이지로 이동
+			}
+			else if(cmd.equals("/update.qna")) {
 				// 게시글 수정
 				
 			} else if(cmd.equals("/delete.qna")) {
 				// 게시글 삭제
+				int qnaSeq = Integer.parseInt(request.getParameter("postSeq"));
+				dao.delete(qnaSeq);
+				
+				response.sendRedirect("/listing.qna");
 				
 			} else if(cmd.equals("/listing.qna")) {
 				// 게시판 출력 

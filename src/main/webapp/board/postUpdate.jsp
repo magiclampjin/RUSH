@@ -227,6 +227,20 @@ a {
 								<input class="writebtn bColorGreen" type="submit" value="수정">
 							</div>
 						</form>
+						<script>
+							$("#boardForm").submit(function(){
+								alert("왜 안떠");
+								if(!${loginID}){	
+									return false;
+									if(goLogin){
+										location.href = "/member/login.jsp";
+									}else{
+										location.href = "/index.jsp";
+									}
+									
+								}
+							});
+						</script>
 					</c:otherwise>
 				</c:choose>
 			</div>

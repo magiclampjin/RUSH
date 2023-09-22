@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Q&A 게시판</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardList.css">
@@ -146,7 +146,7 @@ a {
 	                                        	<c:choose>
 		                                        	<c:when test="${qna.secret eq true}">
 		                                        		<c:choose>
-			                                        		<c:when test="${qna.writer == loginID }">
+			                                        		<c:when test="${qna.writer eq loginID || 'admin' eq loginID}">
 			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
 			                                        				<div class="mainTitle">비밀글입니다.</div>
 			                                        			</a>
