@@ -111,11 +111,10 @@ public class MemberController extends HttpServlet {
 				String name = request.getParameter("name");
 				String email = request.getParameter("email");
 				
-				boolean ExistId = dao.selectByNameEmail(name, email);
-				if(!ExistId) {
+				String id = dao.selectIdByNameEmail(name, email);
+				if(id == null) {
 					response.getWriter().append("null");
 				} else {
-					String id = dao.selectIdByNameEmail(name, email);
 					response.getWriter().append(id);
 				}
 				
@@ -134,9 +133,7 @@ public class MemberController extends HttpServlet {
 				// 비밀번호 수정
 				String pw = EncryptionUtils.getSHA512(request.getParameter("pw"));
 				String id = request.getParameter("id");
-				String name = request.getParameter("name");
-				String email = request.getParameter("email");
-				dao.updateByPw(pw, id, name, email);
+				dao.updatePwById(pw, id);
 				response.sendRedirect("/member/login.jsp");
 				
 			} else if(cmd.equals("/logout.member")) {

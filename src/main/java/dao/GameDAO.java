@@ -129,7 +129,7 @@ public class GameDAO {
 	}
 	
 	public List<GameRecordDTO> selectGameRecord(String gName) throws Exception{
-		String sql = "select * from game_record where gName = ? order by grScore desc;";
+		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc;";
 		List<GameRecordDTO> list = new ArrayList<>();
 		try(
 				Connection con = this.getConnection();
@@ -147,12 +147,14 @@ public class GameDAO {
 					String mNickname = rs.getString("mNickname");
 					Timestamp grStartGameTiem = rs.getTimestamp("grStartGameTime");
 					int grScore = rs.getInt("grScore");
+					int level = rs.getInt("level");
 					dto.setSeq(seq);
 					dto.setId(mID);
 					dto.setGameName(gameName);
 					dto.setNickName(mNickname);
 					dto.setStartGameTime(grStartGameTiem);
 					dto.setScore(grScore);
+					dto.setLevel(level);
 					list.add(dto);
 				}
 			}
@@ -171,6 +173,43 @@ public class GameDAO {
 			pstat.setString(3, dto.getNickName());
 			pstat.setInt(4, dto.getScore());
 			return pstat.executeUpdate();
+		}
+	}
+	
+	public List<String> selectGameName() throws Exception {
+		String sql = "select Gname from game";
+		List<String> list = new ArrayList<>();
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			
+			while(rs.next()) {
+				String gName = rs.getString("gName");
+				list.add(gName);
+			}
+			return list;
+		}
+	}
+	
+	public List<GameRecordDTO> selectUserByGame(String gName) throws Exception {
+		String sql = "select * from rankerUser where gName = ? order by grScore desc limit 0, 5";
+		List<GameRecordDTO> list = new ArrayList<>();
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, gName);
+			
+			try(ResultSet rs = pstat.executeQuery();) {
+				while(rs.next()) {
+					String mId = rs.getString("mId");
+					gName = rs.getString("gName");
+					int grScore = rs.getInt("grScore");
+					int mLevel = rs.getInt("mLevel");
+					list.add(new GameRecordDTO(mId, gName, grScore, mLevel));
+				}
+				return list;
+			}
 		}
 	}
 	

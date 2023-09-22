@@ -65,29 +65,59 @@ a{
 				divRow.addClass("row g-0 p-2");
 				
 				let divColRank = $("<div>");
-				divColRank.addClass("col-1 text-white")
-				divColRank.append(i+1);
+				if(i<3){
+					divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center")
+					divColRank.append(i+1);
+				}else{
+					divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center")
+					divColRank.append(i+1);
+				}			
+				
 				
 				let divColInfo = $("<div>");
-				divColInfo.addClass("col-8 col-md-5 d-flex text-white");
+				divColInfo.addClass("col-8 col-md-5 d-flex text-white align-self-center");
+				
+				let divRowInfo = $("<div>");
+				divRowInfo.addClass("row");
+				
+				let divInfoLeft = $("<div>");
+				divInfoLeft.addClass("col-7 align-self-center");
+				
 				let imgDiv = $("<img>");
 				imgDiv.attr("src",data[i]["gImageURL"]);
-				imgDiv.css({
-					width:"200px",
-					height:"150px"
-				});
+				imgDiv.addClass("gamePic");
 				
-				divColInfo.append(imgDiv);
-				divColInfo.append(data[i]["gName"]);
-				divColInfo.append(data[i]["gDeveloper"]);
+				let divInfoRight = $("<div>");
+				divInfoRight.addClass("col-5 align-self-center");
+				
+				let divGameName = $("<p>");
+				divGameName.addClass("text-white fontEnglish");
+				divGameName.append(data[i]["gName"]);
+				
+				let divDevName = $("<p>");
+				divDevName.addClass("text-white fontEnglish");
+				divDevName.append(data[i]["gDeveloper"]);
+				
+				let divPlayInfo =  $("<div>");
+				divPlayInfo.addClass("col-12 d-md-none d-xs-flex text-white fontEnglish fw500");
+				divPlayInfo.append("W 50% M 50%");
+				
+				divInfoLeft.append(imgDiv);
+				divInfoRight.append(divGameName);
+				divInfoRight.append(divDevName);
+				divInfoRight.append(divPlayInfo);
+				
+				
+				divColInfo.append(divInfoLeft);
+				divColInfo.append(divInfoRight);
 				
 				let divColPlayInfo = $("<div>");
-				divColPlayInfo.addClass("col-3 d-none d-md-flex align-item-center text-white");
+				divColPlayInfo.addClass("col-3 d-none d-md-flex text-white fontEnglish fs-3 fw500 align-self-center");
 				divColPlayInfo.append("W 50% M 50%");
 				
 				let divColBtn = $("<div>");
-				divColBtn.addClass("col-3");
-				divColBtn.html("<button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button>");
+				divColBtn.addClass("col-3 align-self-center");
+				divColBtn.html("<a href='/moveToGamePage.game?game="+data[i]["gName"]+"'><button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button></a>");
 				
 				divRow.append(divColRank);
 				divRow.append(divColInfo);
@@ -187,7 +217,7 @@ a{
 					</div>
 					<hr class="colorWhite">
 				</div>
-				<div class="row d-flex justify-content-center align-items-center">
+				<!-- <div class="row d-flex justify-content-center align-items-center">
 					<div class="col-1">
 						<p class="colorPink fontEnligh fs-2">1</p>
 					</div>
@@ -207,9 +237,7 @@ a{
 									<div class="col-12 d-flex d-md-none">
 										<p class="text-white">플레이 정보</p>
 									</div>
-								</div>
-								
-								
+								</div>								
 							</div>
 						</div>
 					</div>
@@ -222,7 +250,7 @@ a{
 					<div class="col-3">
 						<button type="button" class="btn btn-success fontEnglish fw900">PLAY GAME</button>
 					</div>
-				</div>
+				</div> -->
 				<div class="bestCon">
 					
 				</div>

@@ -89,6 +89,15 @@ $(document).ready(function() {
 			pagination.append($(aTag));
 		}
 	}
+	
+	// 검색 카테고리 지정
+	let searchBy = $("#searchBy").val();
+	if(searchBy == ""){
+		searchBy = "title";
+	}
+	$("option[value=\""+searchBy+"\"]").attr("selected", "true");
+	
+	
 })/**
  * 
  */

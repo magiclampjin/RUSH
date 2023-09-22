@@ -168,6 +168,8 @@ a {
 							<input type="hidden" value="${category }" name="category">
 							<input type="hidden" value="${post.seq}" name="postSeq">
 							<input type="hidden" value="${requestScope.cpage}" name="cpage">
+							<input type="hidden" name="search" value="${search}">
+							<input type="hidden" name="keyword" value="${keyword}">
 							<div class="writeTitle">자유게시글 게시글 수정</div>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요" id="title" value="${post.title}">
@@ -207,8 +209,17 @@ a {
 							<textarea id="summernote" class="content" id="content" rows="35"
 								cols="100" placeholder="내용을 입력하세요." name="contents">${post.contents}</textarea>
 							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input
-									class="writebtn bColorGreen" type="button" value="목록으로"></a>
+								<c:choose>
+									<c:when test="${not empty search}">
+										<a href="/listing.board?category=${category }&cpage=${requestScope.cpage}&search=${search}&keyword=${keyword}">
+										<input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:when>
+									<c:otherwise>
+										<a href="/listing.board?category=${category }&cpage=${requestScope.cpage}">
+										<input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:otherwise>
+								</c:choose>
+								
 								<input class="writebtn bColorGreen" type="submit" value="수정">
 							</div>
 						</form>

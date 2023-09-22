@@ -3,6 +3,8 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -20,8 +22,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
 import dao.FileDAO;
+import dao.GameDAO;
 import dto.BoardDTO;
 import dto.FileDTO;
+import dto.GameRecordDTO;
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
@@ -35,6 +39,7 @@ public class BoardController extends HttpServlet {
 
 		BoardDAO dao = BoardDAO.getInstance();
 		FileDAO fdao = FileDAO.getInstance();
+		GameDAO gdao = GameDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
 
@@ -88,7 +93,6 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/load.board")) {
 				String cpage = request.getParameter("cpage");
-				System.out.println(cpage);
 		        int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
@@ -113,9 +117,11 @@ public class BoardController extends HttpServlet {
 
 				List<FileDTO> files = fdao.selectForPost(postSeq);
 				request.setAttribute("files", files);
-				request.setAttribute("search",search);
-				request.setAttribute("keyword",keyword);
-
+				
+				if(search != null) {
+					request.setAttribute("search",search);
+					request.setAttribute("keyword",keyword);
+				}
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/updateLoad.board")) {
@@ -124,6 +130,8 @@ public class BoardController extends HttpServlet {
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				String category = request.getParameter("category");
+				String search = request.getParameter("search");
+				String keyword = request.getParameter("keyword");
 				
 				List<FileDTO> files = fdao.inPostFilesList(postSeq);
 				BoardDTO post = dao.selectPost(postSeq);
@@ -133,6 +141,10 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
 				
+				if(search != null) {
+					request.setAttribute("search",search);
+					request.setAttribute("keyword",keyword);
+				}
 				request.getRequestDispatcher("/board/postUpdate.jsp").forward(request, response);
 				
 
@@ -154,7 +166,11 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				String search = multi.getParameter("search");
+				String keyword = multi.getParameter("keyword");
 
+				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
+				
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
 				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
@@ -183,11 +199,12 @@ public class BoardController extends HttpServlet {
 					request.getSession().removeAttribute("fileSeq");
 				}
 
-				
-				response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage);
-			
-				
-				
+				if(search != null) {
+					response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage+"&search="+search+"&keyword="+keyword);
+				} else {
+					response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage);
+				}
+						
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
@@ -209,7 +226,6 @@ public class BoardController extends HttpServlet {
 				category = (category == null) ? "rhythm" : category;
 
 				String cpage = request.getParameter("cpage");
-				System.out.println(cpage);
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				request.getSession().setAttribute("lastPageNum", currentPage);
 
@@ -234,25 +250,18 @@ public class BoardController extends HttpServlet {
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountTitle(category, keyword));
-						System.out.println(request.getAttribute("recordTotalCount"));
-						System.out.println("title");
+
 					} else if (search.equals("writer")) {
 						list = dao.selectByWriter(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountWriter(category, keyword));
-						System.out.println(request.getAttribute("recordTotalCount"));
-						System.out.println("writer");
-						System.out.println(category);
-						System.out.println(search);
-						System.out.println(keyword);
+
 					} else if (search.equals("content")) {
 						list = dao.selectByContents(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountContents(category, keyword));
-						System.out.println(request.getAttribute("recordTotalCount"));
-						System.out.println("content");
 					}
 
 					request.setAttribute("search", search);
@@ -308,6 +317,21 @@ public class BoardController extends HttpServlet {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
 				pw.append(gson.toJson(result));
+				
+			} else if(cmd.equals("/moveToAwards.board")) {
+				// 명예의 전당으로 이동
+				List<String> list = new ArrayList();
+				list = gdao.selectGameName();
+				request.setAttribute("gNameList", list);
+				request.getRequestDispatcher("/board/awards.jsp").forward(request, response);
+				
+			} else if(cmd.equals("/rankerList.board")) {
+				// 상위 랭커 리스트 가져오기
+				String game = request.getParameter("game");
+				
+				List<GameRecordDTO> rankerList = new ArrayList();
+				rankerList = gdao.selectUserByGame(game);
+				pw.append(gson.toJson(rankerList));
 			}
 
 		} catch (Exception e) {
