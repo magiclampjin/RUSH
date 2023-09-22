@@ -168,7 +168,7 @@ a {
 	                                        
 	                                        <div class="replyCnt colorPink fontEnglish">
 		                                        <c:choose>
-		                                        	<c:when test="${qna.answeryn > '0' }">
+		                                        	<c:when test="${qna.answeryn > 0 }">
 		                                        		답변완료
 		                                        	</c:when>
 		                                        	<c:otherwise>
@@ -181,7 +181,7 @@ a {
 	                                    <div class="date fontEnglish">${qna.stringFormat }</div>
 	                                    <div class="file">
                                     	<c:choose>
-                                        	<c:when test="${qna.fileyn > '0' }">
+                                        	<c:when test="${qna.fileyn > 0 }">
                                         		<i class="fa-solid fa-paperclip"></i>
                                         	</c:when>
                                         	<c:otherwise>
