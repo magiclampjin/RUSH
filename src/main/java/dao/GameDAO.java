@@ -86,6 +86,30 @@ public class GameDAO {
 			return list;
 		}
 	}
+	public List<GameDTO> selectGames() throws Exception {
+		String sql = "select * from game";
+		List<GameDTO> list = new ArrayList<>();
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			while(rs.next()) {
+				GameDTO dto = new GameDTO();
+				String gName = rs.getString("gName");
+				String dev = rs.getString("gDeveloper");
+				String image = rs.getString("gImageURL");
+				String category = rs.getString("gCategory");
+				dto.setgName(gName);
+				dto.setgDeveloper(dev);
+				dto.setgImageURL(image);
+				dto.setgCategory(category);
+				list.add(dto);
+			}
+		}
+		return list;
+	}
+	
 	public List<GameDTO> selectCategoryGame(String category)throws Exception{
 		String sql = "select * from game where gCategory = ?";
 		List<GameDTO> list = new ArrayList<>();
