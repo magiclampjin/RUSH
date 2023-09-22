@@ -152,9 +152,8 @@ public class BoardController extends HttpServlet {
 				// 게시글 수정
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
 				String uploadPath = request.getServletContext().getRealPath("files");
-
-				
 				File filepath = new File(uploadPath);
+				
 				if (!filepath.exists()) {
 					filepath.mkdir();
 				}
@@ -166,9 +165,33 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				// 게시글 수정 시 수정된 파일 DB, realpath에서 삭제
+				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
+				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
+					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteFilePath = new File(uploadPath+"/"+sysname);
+					}	
+				}
+				
+				// 게시글 수정 시 수정된 이미지 DB, realpath에서 삭제
+				String[] deleteImgNameStr = multi.getParameter("deleteImgs").split(":");
+				for(int i=0; i<deleteImgNameStr.length-1; i++) {
+					String sysname = deleteImgNameStr[i+1];
+					
+					sysname = sysname.substring(7);
+					System.out.println(sysname);
+					
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteImgfilepath = new File(uploadPath+"/"+sysname);
+						deleteImgfilepath.delete();
+					}	
+				}					
+				
 				String search = multi.getParameter("search");
 				String keyword = multi.getParameter("keyword");
-
 				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
 				
 				String id = (String) request.getSession().getAttribute("loginID");
