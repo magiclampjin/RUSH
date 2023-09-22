@@ -24,6 +24,7 @@ public class MemberController extends HttpServlet {
 		System.out.println("member cmd: "+cmd);
 		
 		MemberDAO dao = MemberDAO.getInstance();
+		PrintWriter printwriter = response.getWriter();
 		
 		try {
 			if(cmd.equals("/insert.member")) {
@@ -42,26 +43,25 @@ public class MemberController extends HttpServlet {
 				
 			} else if(cmd.equals("/idCheck.member")) {
 				// 아이디 중복 체크
-				PrintWriter pw = response.getWriter();
+				
 				String id = request.getParameter("id");
 
 				boolean result = dao.selectById(id);
 				if(result) {
-					pw.append("used");
+					printwriter.append("used");
 				} else {
-					pw.append("usable");
+					printwriter.append("usable");
 				}
 				
 			} else if(cmd.equals("/nicknameCheck.member")) {
 				// 닉네임 중복 체크
-				PrintWriter pw = response.getWriter();
 				String nickName = request.getParameter("nickname");
 
 				boolean result = dao.selectByNickname(nickName);
 				if(result) {
-					pw.append("used");
+					printwriter.append("used");
 				} else {
-					pw.append("usable");
+					printwriter.append("usable");
 				}
 				
 			} else if(cmd.equals("/load.member")) {
@@ -71,6 +71,18 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("user", user);
 				request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
 				
+			} else if(cmd.equals("/pwCheck.member")) {
+				// 회원 정보 수정 전 비밀번호 확인
+				String id = request.getParameter("userID");
+				String pw = request.getParameter("userPW");
+				System.out.println(pw);
+				
+				boolean result = dao.selectByIdPw(id, pw);
+				if(result) {
+					printwriter.append("true");
+				}else {
+					printwriter.append("false");
+				}
 			} else if(cmd.equals("/update.member")) {
 				// 회원 정보 수정
 				
