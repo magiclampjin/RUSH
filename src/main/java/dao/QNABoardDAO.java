@@ -164,28 +164,5 @@ public class QNABoardDAO {
 			}
 	}
 	
-	public int answerYN(int qnaSeq) throws Exception{
-		String sql = "select answeryn from qnarepfile where qbSeq=?;";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-				
-				pstat.setInt(1, qnaSeq);
-				ResultSet rs = pstat.executeQuery();
-				System.out.println("answerYN : "+rs.getInt(1));
-				return rs.getInt(1);
-			}
-	}
-	
-	public int fileYN(int qnaSeq) throws Exception{
-		String sql = "select fileyn from qnarepfile where qbSeq=?;";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-				
-				pstat.setInt(1, qnaSeq);
-				ResultSet rs = pstat.executeQuery();
-				System.out.println("fileYN : "+rs.getInt(1));
-				return rs.getInt(1);
-			}
-	}
 	
 }
