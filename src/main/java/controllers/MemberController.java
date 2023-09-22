@@ -74,8 +74,7 @@ public class MemberController extends HttpServlet {
 			} else if(cmd.equals("/pwCheck.member")) {
 				// 회원 정보 수정 전 비밀번호 확인
 				String id = request.getParameter("userID");
-				String pw = request.getParameter("userPW");
-				System.out.println(pw);
+				String pw = EncryptionUtils.getSHA512(request.getParameter("userPW"));
 				
 				boolean result = dao.selectByIdPw(id, pw);
 				if(result) {

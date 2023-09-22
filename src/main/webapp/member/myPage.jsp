@@ -144,25 +144,24 @@ a {
 						<div class="infoBox">
 							<div class="infoCagetory">비밀번호</div>
 							<div class="infocon"><i class="fa-solid fa-lock"></i>&nbsp;비밀번호</div>
-							<input type="hidden">
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">닉네임</div>
 							<div class="infocon">${user.nickName }</div>
-							<input type="hidden">
+							<input type="hidden" id="userNick" value="${user.nickName }">
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">휴대전화</div>
 							<div class="infocon">${user.phone }</div>
-							<input type="hidden">
+							<input type="hidden" id="userPhone" value="${user.phone }">
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">이메일</div>
 							<div class="infocon">${user.email }</div>
-							<input type="hidden">
+							<input type="hidden" id="userEmail" value="${user.email }">
 						</div>
 						<div class="infoBox modifiedBox">
-							<input class="updateBtn bColorBlue colorWhite" id="updateBtn"
+							<input class="myPagebtn bColorBlue colorWhite" id="updateBtn"
 								type="button" value="수정하기">
 						</div>
 					</div>

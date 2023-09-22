@@ -173,9 +173,9 @@ public class MemberDTO {
 		String Birth = this.idNumber.substring(0, 6);
 		String century = this.idNumber.substring(6);
 		if (Integer.parseInt(century) < 3) {
-			result = "19" + Birth.substring(0, 3) + "년 " + Birth.substring(2, 4) + "월 " + Birth.substring(4, 6) + "일 생";
+			result = "19" + Birth.substring(0, 2) + "년 " + Birth.substring(2, 4) + "월 " + Birth.substring(4, 6) + "일 생";
 		} else {
-			result = "20" + Birth.substring(0, 3) + "년 " + Birth.substring(2, 4) + "월 " + Birth.substring(4, 6) + "일 생";
+			result = "20" + Birth.substring(0, 2) + "년 " + Birth.substring(2, 4) + "월 " + Birth.substring(4, 6) + "일 생";
 		}
 
 		return result;
