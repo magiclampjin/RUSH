@@ -112,10 +112,10 @@ a {
             		<c:if test="${status.index == 0 }">
             			<div id="game${status.index}" class="game leftCategory col bColorGreen">${gName}</div>
             		</c:if>
-            		<c:if test="${status.index != 0 && status.index != 4 }">
+            		<c:if test="${status.index != 0 && status.index != gNameList.size()-1 }">
             			<div id="game${status.index}" class="game col colorWhite">${gName}</div>
             		</c:if>
-            		<c:if test="${status.index == 4 }">
+            		<c:if test="${status.index == gNameList.size()-1 }">
             			<div id="game${status.index}" class="game rightCategory col colorWhite">${gName}</div>
             		</c:if>
             	</c:forEach>
