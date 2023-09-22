@@ -152,9 +152,8 @@ public class BoardController extends HttpServlet {
 				// 게시글 수정
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
 				String uploadPath = request.getServletContext().getRealPath("files");
-
-				
 				File filepath = new File(uploadPath);
+				
 				if (!filepath.exists()) {
 					filepath.mkdir();
 				}
@@ -166,9 +165,18 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
+				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
+					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteFilePath = new File(uploadPath+"/"+sysname);
+					}	
+				}
+						
+				
 				String search = multi.getParameter("search");
 				String keyword = multi.getParameter("keyword");
-
 				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
 				
 				String id = (String) request.getSession().getAttribute("loginID");

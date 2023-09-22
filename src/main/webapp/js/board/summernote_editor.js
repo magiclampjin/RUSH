@@ -3,6 +3,7 @@ $(document).ready(function() {
 	console.log($(".dropdown-toggle::after"))
 	$(".dropdown-toggle::after").css("display", "none")
 	
+	let deleteImgList = [];
 	$('#summernote').summernote({
 		placeholder: '게시글을 입력해주세요',
 		tabsize: 2,
@@ -50,14 +51,15 @@ $(document).ready(function() {
 			onMediaDelete: function ($target, editor, $editable) {
 	           
             	let deletedImageUrl = $target.attr('src');
-				$.ajax({
+            	deleteImgList.push(deletedImageUrl);
+				/*$.ajax({
 					url: "/deleteFiieName.file",
 					data:{
 						filePath : deletedImageUrl
 					},
 					type:"post",
 					dataType:"json"
-				});
+				});*/
 	              
 	        }
 		}
