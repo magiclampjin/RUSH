@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -54,6 +55,32 @@ public class MemberDAO {
 				return rs.next();
 			}
 		}
+	}
+	
+	public MemberDTO selectUserInfo(String id) throws Exception {
+		String sql = "select * from members where mID = ?";
+
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+
+			try(ResultSet rs = pstat.executeQuery();) {
+				if(rs.next()) {
+					String userid = rs.getString("mID");
+					String idNumber = rs.getString("mIdNumber");
+					String name = rs.getString("mName");
+					String email = rs.getString("mEmail");
+					String nickName = rs.getString("mNickname");
+					String phone = rs.getString("mPhone");
+					int point = rs.getInt("mPoint");
+					int level = rs.getInt("mLevel");
+					Timestamp signupDate = rs.getTimestamp("mSignupDate"); 
+					
+					return new MemberDTO(userid, idNumber, name, email, nickName, phone, point, level, signupDate);
+				}
+			}
+		}
+		return null;
 	}
 	
 	public boolean selectByNickname(String nickName) throws Exception {
@@ -153,4 +180,6 @@ public class MemberDAO {
 			return pstat.executeUpdate();
 		}
 	}
+
+	
 }
