@@ -131,7 +131,9 @@ a {
                             <div class="file">파일</div>
                         </div>
                         <div class="boardMain">
-                        	<c:forEach var="qna" items="${list }">
+                            <c:choose>
+                            	<c:when test="${recordTotalCount !=0 }">
+                            	 	<c:forEach var="qna" items="${list }">
 	                            <div class="post">
 	                                <div class="maxBoard">
 	                                    <div class="num fontEnglish">${qna.seq }</div>
@@ -224,17 +226,43 @@ a {
 			                                        	</a>
 		                                        	</c:otherwise>
 	                                        	</c:choose>
-	                                            <div class="replyCnt colorPink fontEnglish">답변완료</div>
+	                                            <div class="replyCnt colorPink fontEnglish">
+													<c:choose>
+			                                        	<c:when test="${qna.answeryn > 0 }">
+			                                        		답변완료
+			                                        	</c:when>
+			                                        	<c:otherwise>
+			                                        		답변대기
+			                                        	</c:otherwise>
+			                                        </c:choose>
+												</div>
 	                                        </div>
 	                                        <div class="info">
 	                                            <div class="minWriter">${qna.nickName }</div>
 	                                            <div class="minDate fontEnglish">${qna.stringFormat }</div>
-	                                            <div class="minFile"><i class="fa-solid fa-paperclip"></i></div>
+	                                            <div class="minFile">
+	                                            <c:choose>
+		                                        	<c:when test="${qna.fileyn > 0 }">
+		                                        		<i class="fa-solid fa-paperclip"></i>
+		                                        	</c:when>
+		                                        	<c:otherwise>
+		                                        		
+		                                        	</c:otherwise>
+		                                        </c:choose>
+	                                            </div>
 	                                        </div>
 	                                    </div>
 	                                </div>
 	                            </div>
                             </c:forEach>
+                            	</c:when>
+                            	<c:otherwise>
+                            		<div class="noResult">검색 결과가 없습니다.</div>
+                            	</c:otherwise>
+                            </c:choose>
+                         
+                            
+                            
                         </div>
                         <div id="pagination"> </div>
                         <div class="search_write">
@@ -249,7 +277,7 @@ a {
                                         </select>
                                     </div>
                                     <div class="keyword">
-                                        <input type="text" id="keyword" name="keyword">
+                                        <input type="text" id="keyword" name="keyword" value=${param.keyword }>
                                     </div>
                                     <div class="sertchBtn">
                                         <input type="submit" class="boardBtn bColorGreen" value="검색">
