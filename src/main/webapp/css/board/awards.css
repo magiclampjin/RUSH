@@ -1,7 +1,8 @@
 @charset "UTF8";
 
 #container {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 300px;
     height: 1100px;
     margin: auto;
 }
@@ -21,12 +22,12 @@
 
 .leftCategory {
     border: 2px solid #ffffff00;
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 20px 0px 0px 20px;
 }
 
 .rightCategory {
     border: 2px solid #ffffff00;
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 0px 20px 20px 0px;
 }
 
 .game {
@@ -62,6 +63,11 @@
     font-size: 20px;
 }
 
+.scoreAlign {
+	width: 100%;
+	text-align: center;
+}
+
 .scoreBox {
     margin-bottom: 10px;
 }
@@ -69,8 +75,7 @@
 #rank {
     display: flex;
     align-items: center;
-    font-size: 30px;
-    padding-left: 10px;
+    font-weight: 900;
 }
 
 .userInfo {
@@ -87,8 +92,16 @@
 }
 
 #score {
-    display: flex;
-    align-items: center;
+    width: 100%;
+	text-align: right;
     font-size: 20px;
     font-weight: 500;
+}
+
+.pl-10 {
+	padding-left: 10px !important;
+}
+
+.pl-15 {
+	padding-left: 15px !important;
 }

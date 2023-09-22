@@ -331,7 +331,6 @@ public class BoardController extends HttpServlet {
 				
 				List<GameRecordDTO> rankerList = new ArrayList();
 				rankerList = gdao.selectUserByGame(game);
-				System.out.println(rankerList);
 				pw.append(gson.toJson(rankerList));
 			}
 

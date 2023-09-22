@@ -110,13 +110,13 @@ a {
             <div id="category" class="row g-0 m-0">
             	<c:forEach var="gName" items="${gNameList }" varStatus="status">
             		<c:if test="${status.index == 0 }">
-            			<div id="game${status.index}" class="game leftCategory col bColorGreen">${gName}</div>
+            			<div id="game${status.index}" class="game leftCategory col fontEnglish bColorGreen">${gName}</div>
             		</c:if>
             		<c:if test="${status.index != 0 && status.index != gNameList.size()-1 }">
-            			<div id="game${status.index}" class="game col colorWhite">${gName}</div>
+            			<div id="game${status.index}" class="game col fontEnglish colorWhite">${gName}</div>
             		</c:if>
             		<c:if test="${status.index == gNameList.size()-1 }">
-            			<div id="game${status.index}" class="game rightCategory col colorWhite">${gName}</div>
+            			<div id="game${status.index}" class="game rightCategory col fontEnglish colorWhite">${gName}</div>
             		</c:if>
             	</c:forEach>
             </div>
@@ -124,14 +124,16 @@ a {
             <div id="Box row">
                 <div class="line col"></div>
                 <div class="subTitleBox row g-0">
-                    <div class="subTitle col-1 colorWhite">순위</div>
-                    <div class="col-11">
-                        <div class="row">
-                            <div class="subTitle col-8 col-md-9 colorWhite">유저 정보</div>
-                            <div class="subTitle col-2 col-lg-3 colorWhite">점수</div>
-                        </div> 
-                    </div>
-                </div>
+                    <div class="subTitle pl-10 col-2 col-xs-1 col-md-1 col-lg-1 col-xl-1 colorWhite">순위</div>
+                    	<div class="col-10 col-xs-11 col-md-11 col-lg-11 col-xl-11">
+	                    	<div class="row g-0">
+	                    		<div class="subTitle col-9 colorWhite">유저 정보</div>
+		                        <div class="subTitle g-0 p-0 pl-15 col-3">
+		                        	<div class="scoreAlign colorWhite">점수</div>
+		                        </div>	
+	                    	</div>
+                    	</div>
+                	</div>
                 <div class="line col"></div>
                 <div id="ranker">
                 	
