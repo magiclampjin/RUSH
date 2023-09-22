@@ -113,7 +113,7 @@ public class BoardDAO {
 				rs.next();
 				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbCategory"),
 						rs.getString("cbNickname"), rs.getString("cbTitle"), rs.getString("cbContent"),
-						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"), rs.getInt("cbRecommend"));
+						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"));
 			}
 		}
 	}
@@ -330,7 +330,7 @@ public class BoardDAO {
 	}
 	
 	public int insert(BoardDTO dto) throws Exception{
-		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?, default);";
+		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?);";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
 			pstat.setString(1, dto.getWriter());
@@ -347,28 +347,26 @@ public class BoardDAO {
 			
 		}
 	}
-	
-	public String selectNickName(String id) throws Exception{
-		String sql = "select mNickname from members where mID=?";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, id);
-			try(ResultSet rs = pstat.executeQuery()){
-				if (rs.next()) {
-					return rs.getString("mNickname");
-				} else {
-					return null;
-				}
-			}
-		}
-	}
-	
+
 	public void deletePost(int postSeq) throws Exception{
 		String sql = "delete from common_board where cbSeq = ?;";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
 			pstat.executeUpdate();
+		}
+	}
+	
+	public void update(BoardDTO dto) throws Exception{
+		String sql ="update common_board set cbtitle=?, cbcontent=? where cbseq =?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+
+			pstat.setString(1, dto.getTitle());
+			pstat.setString(2, dto.getContents());
+			pstat.setInt(3, dto.getSeq());
+			pstat.executeUpdate();
+		
 		}
 	}
 }

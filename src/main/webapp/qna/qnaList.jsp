@@ -167,9 +167,8 @@ a {
 	                                        	</c:choose>
 	                                        
 	                                        <div class="replyCnt colorPink fontEnglish">
-											<!-- qnaReply 의 list를 넘겨줘야함 -->
 		                                        <c:choose>
-		                                        	<c:when test="${qnaYN > 0 }">
+		                                        	<c:when test="${qna.answeryn > 0 }">
 		                                        		답변완료
 		                                        	</c:when>
 		                                        	<c:otherwise>
@@ -182,7 +181,7 @@ a {
 	                                    <div class="date fontEnglish">${qna.stringFormat }</div>
 	                                    <div class="file">
                                     	<c:choose>
-                                        	<c:when test="${fileYN > 0 }">
+                                        	<c:when test="${qna.fileyn > 0 }">
                                         		<i class="fa-solid fa-paperclip"></i>
                                         	</c:when>
                                         	<c:otherwise>

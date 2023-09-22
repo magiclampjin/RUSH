@@ -82,7 +82,7 @@ $(document).ready(function() {
 	$("#replys").html(replyReload(postSeq));
 
 
-	$("#goList").on("click", function() {
+	$(".goList").on("click", function() {
 		location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
 	});
 
@@ -196,8 +196,13 @@ $(document).ready(function() {
 	});
 
 	// 게시글 삭제
-	$("#delete").on("click", function() {
+	$(".delete").on("click", function() {
 		location.href = "delete.board?postSeq=" + postSeq + "&category=" + category;
+	});
+	
+	// 게시글 수정
+	$(".update").on("click",function(){
+		location.href = "updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
 	});
 
 	// 댓글 삭제
@@ -342,7 +347,7 @@ $(document).ready(function() {
 				if (success == 1)
 					recbtn.removeClass("btnClicked");
 				else {
-					alert("삭제된 댓글입니다.");
+					alert("게시글 또는 댓글이 삭제되었습니다.");
 					replyReload(postSeq);
 				}
 			});
@@ -360,7 +365,7 @@ $(document).ready(function() {
 				if (success == 1)
 					recbtn.addClass("btnClicked");
 				else {
-					alert("삭제된 댓글입니다.");
+					alert("게시글 또는 댓글이 삭제되었습니다.");
 					replyReload(postSeq);
 				}
 			});
@@ -458,7 +463,7 @@ $(document).ready(function() {
 			dataType: "json"
 		}).done(function(success) {
 			if (success != 1)
-				alert("삭제된 댓글입니다.");
+				alert("게시글 또는 댓글이 삭제되었습니다.");
 			nestedReplyParentSeq = null;
 			nestedReplyObj = null;
 			$("#replys").html("");
