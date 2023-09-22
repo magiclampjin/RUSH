@@ -266,7 +266,7 @@ public class BoardDAO {
 	}
 	
 	public int getRecordCountWriter(String category, String keyword) throws Exception {
-		String sql = "select count(*) as count from postinfo where cbNickname = ? and cbTitle like ?;";
+		String sql = "select count(*) as count from postinfo where cbCategory = ? and cbNickname like ?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, category);
@@ -313,7 +313,7 @@ public class BoardDAO {
 	}
 	
 	public int getRecordCountContents(String category, String keyword) throws Exception {
-		String sql = "select count(*) as count from postinfo where cbContent = ? and cbTitle like ?;";
+		String sql = "select count(*) as count from postinfo where cbCategory = ? and cbContent like ?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, category);

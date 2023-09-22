@@ -235,18 +235,24 @@ public class BoardController extends HttpServlet {
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountTitle(category, keyword));
 						System.out.println(request.getAttribute("recordTotalCount"));
+						System.out.println("title");
 					} else if (search.equals("writer")) {
 						list = dao.selectByWriter(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountWriter(category, keyword));
 						System.out.println(request.getAttribute("recordTotalCount"));
+						System.out.println("writer");
+						System.out.println(category);
+						System.out.println(search);
+						System.out.println(keyword);
 					} else if (search.equals("content")) {
 						list = dao.selectByContents(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountContents(category, keyword));
 						System.out.println(request.getAttribute("recordTotalCount"));
+						System.out.println("content");
 					}
 
 					request.setAttribute("search", search);
