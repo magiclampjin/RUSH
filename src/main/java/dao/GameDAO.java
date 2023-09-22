@@ -174,5 +174,21 @@ public class GameDAO {
 		}
 	}
 	
+	public List<String> selectGameName() throws Exception {
+		String sql = "select Gname from game";
+		List<String> list = new ArrayList<>();
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			
+			while(rs.next()) {
+				String gName = rs.getString("gName");
+				list.add(gName);
+			}
+			return list;
+		}
+	}
+	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 }

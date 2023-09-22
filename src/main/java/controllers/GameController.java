@@ -89,7 +89,6 @@ public class GameController extends HttpServlet {
 				List<GameDTO> list = dao.selectCategoryGame(category);
 				PrintWriter out = response.getWriter();
 				out.println(gson.toJson(list));
-				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -20,6 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
 import dao.FileDAO;
+import dao.GameDAO;
 import dto.BoardDTO;
 import dto.FileDTO;
 
@@ -35,6 +36,7 @@ public class BoardController extends HttpServlet {
 
 		BoardDAO dao = BoardDAO.getInstance();
 		FileDAO fdao = FileDAO.getInstance();
+		GameDAO gdao = GameDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
 
@@ -228,6 +230,13 @@ public class BoardController extends HttpServlet {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
 				pw.append(gson.toJson(result));
+				
+			} else if(cmd.equals("/moveToAwards.board")) {
+				// 명예의 전당으로 이동
+				List<String> list = new ArrayList();
+				list = gdao.selectGameName();
+				request.setAttribute("gNameList", list);
+				request.getRequestDispatcher("/board/awards.jsp").forward(request, response);
 			}
 
 		} catch (Exception e) {

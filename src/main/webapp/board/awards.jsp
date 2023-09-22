@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,12 +108,19 @@ a {
         <div id="container" class="container bColorBlack">
             <div id="title" class="colorWhite">명예의 전당</div>
             <div id="category" class="row g-0 m-0">
-                <div id="candy" class="game leftCategory col bColorGreen">캔디 크러쉬</div>
-                <div id="doodle" class="game col colorWhite">두들 점프</div>
-                <div id="flappy" class="game col colorWhite">플래피 버드</div>
-                <div id="kjmax" class="game col colorWhite">KJMAX</div>
-                <div id="kordle" class="game rightCategory col colorWhite">꼬들</div>
+            	<c:forEach var="gName" items="${gNameList }" varStatus="status">
+            		<c:if test="${status.index == 0 }">
+            			<div id="game${status.index}" class="game leftCategory col bColorGreen">${gName}</div>
+            		</c:if>
+            		<c:if test="${status.index != 0 && status.index != 4 }">
+            			<div id="game${status.index}" class="game col colorWhite">${gName}</div>
+            		</c:if>
+            		<c:if test="${status.index == 4 }">
+            			<div id="game${status.index}" class="game rightCategory col colorWhite">${gName}</div>
+            		</c:if>
+            	</c:forEach>
             </div>
+            
             <div id="Box row">
                 <div class="line col"></div>
                 <div class="subTitleBox row g-0">
