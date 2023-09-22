@@ -33,7 +33,7 @@ public class FileController extends HttpServlet {
 
 		response.setContentType("text/html; charset=utf8"); // 한글깨짐방지
 		FileDAO dao = FileDAO.getInstance();
-		PrintWriter pw = response.getWriter();
+		
 		Gson gson = new Gson();
 
 		response.setContentType("text/html; charset=utf8");
@@ -81,7 +81,7 @@ public class FileController extends HttpServlet {
 				// 이미지 첨부 파일을 모두 DB에 저장하고 나면 DB에 저장된 seq를 세션에 모두 등록
 				request.getSession().setAttribute("fileSeq", fileSeq);
 				String result = gson.toJson(fileList);
-				pw.append(result);
+				response.getWriter().append(result);
 				
 
 			} else if(cmd.equals("/download.file")) {
@@ -105,7 +105,24 @@ public class FileController extends HttpServlet {
 				
 			} else if(cmd.equals("/delete.file")) {
 				// 파일 삭제
+				int fileSeq = Integer.parseInt(request.getParameter("fileSeq"));
 				
+				String sysname = dao.selectSysName(fileSeq);
+				int result = dao.deleteFile(fileSeq);
+				if(result == 1) {
+					String uploadPath = request.getServletContext().getRealPath("files");
+					File filepath = new File(uploadPath+"/"+sysname);
+					filepath.delete();
+				}	
+			} else if(cmd.equals("/deleteFiieName.file")) {
+				String sysname = request.getParameter("filePath");
+				sysname = sysname.substring(7);
+				int result = dao.deleteFile(sysname);
+				if(result == 1) {
+					String uploadPath = request.getServletContext().getRealPath("files");
+					File filepath = new File(uploadPath+"/"+sysname);
+					filepath.delete();
+				}	
 			}
 			
 		}catch(Exception e) {

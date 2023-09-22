@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>${post.title}</title>
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/post.css">
@@ -399,31 +399,33 @@ a {
 								<div class="d-none d-md-flex">
 									<c:choose>
 										<c:when test="${ loginID eq post.writer}">
-											<button class="postBtns bColorGreen" id="update">수정</button>
-											<button class="postBtns bColorGreen" id="delete">삭제</button>
+											<button class="postBtns bColorGreen update">수정</button>
+											<button class="postBtns bColorGreen delete">삭제</button>
 										</c:when>
 									</c:choose>
-									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
+									<button class="postBtns bColorBlue colorWhite goList">목록</button>
 								</div>
 
 								<div class="d-md-none">
 									<c:choose>
 										<c:when test="${ loginID eq post.writer}">
-											<button class="postBtnsMini bColorGreen" id="update">
+											<button class="postBtnsMini bColorGreen update">
 												<i class="fa-solid fa-pen-to-square"></i>
 											</button>
-											<button class="postBtnsMini bColorGreen" id="delete">
+											<button class="postBtnsMini bColorGreen delete">
 												<i class="fa-solid fa-trash-can"></i>
 											</button>
 										</c:when>
 									</c:choose>
-									<button class="postBtnsMini bColorBlue colorWhite" id="goList">
+									<button class="postBtnsMini bColorBlue colorWhite goList">
 										<i class="fa-solid fa-bars" style="color: #ffffff;"></i>
 									</button>
 								</div>
 
-								<input type="hidden" id="cpage" value="${cpage}"> <input
-									type="hidden" id="category" value="${category}">
+								<input type="hidden" id="cpage" value="${cpage}"> 
+								<input type="hidden" id="category" value="${category}">
+								<input type="hidden" id="search" value="${search}">
+								<input type="hidden" id="keyword" value="${keyword}">
 							</div>
 						</div>
 					</div>

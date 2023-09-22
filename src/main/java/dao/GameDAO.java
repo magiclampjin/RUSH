@@ -129,7 +129,7 @@ public class GameDAO {
 	}
 	
 	public List<GameRecordDTO> selectGameRecord(String gName) throws Exception{
-		String sql = "select * from game_record where gName = ? order by grScore desc;";
+		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc;";
 		List<GameRecordDTO> list = new ArrayList<>();
 		try(
 				Connection con = this.getConnection();
@@ -147,12 +147,14 @@ public class GameDAO {
 					String mNickname = rs.getString("mNickname");
 					Timestamp grStartGameTiem = rs.getTimestamp("grStartGameTime");
 					int grScore = rs.getInt("grScore");
+					int level = rs.getInt("level");
 					dto.setSeq(seq);
 					dto.setId(mID);
 					dto.setGameName(gameName);
 					dto.setNickName(mNickname);
 					dto.setStartGameTime(grStartGameTiem);
 					dto.setScore(grScore);
+					dto.setLevel(level);
 					list.add(dto);
 				}
 			}

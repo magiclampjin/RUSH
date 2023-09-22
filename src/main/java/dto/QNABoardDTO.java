@@ -12,6 +12,8 @@ public class QNABoardDTO {
 	private Timestamp writeDate;
 	private String category;
 	private boolean secret;
+	private int answeryn;
+	private int fileyn;
 	public QNABoardDTO() {}
 	
 	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, String category,
@@ -38,53 +40,101 @@ public class QNABoardDTO {
 		this.category = category;
 		this.secret = secret;
 	}
+	
+
+	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate,
+			String category, boolean secret, int answeryn, int fileyn) {
+		super();
+		this.seq = seq;
+		this.writer = writer;
+		this.nickName = nickName;
+		this.title = title;
+		this.contents = contents;
+		this.writeDate = writeDate;
+		this.category = category;
+		this.secret = secret;
+		this.answeryn = answeryn;
+		this.fileyn = fileyn;
+	}
+
 	public int getSeq() {
 		return seq;
 	}
+
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
+
 	public String getWriter() {
 		return writer;
 	}
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 	public String getNickName() {
 		return nickName;
 	}
+
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getContents() {
 		return contents;
 	}
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
+
 	public Timestamp getWriteDate() {
 		return writeDate;
 	}
+
 	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
 	}
+
 	public String getCategory() {
 		return category;
 	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 	public boolean isSecret() {
 		return secret;
 	}
+
 	public void setSecret(boolean secret) {
 		this.secret = secret;
+	}
+
+	public int getAnsweryn() {
+		return answeryn;
+	}
+
+	public void setAnsweryn(int answeryn) {
+		this.answeryn = answeryn;
+	}
+
+	public int getFileyn() {
+		return fileyn;
+	}
+
+	public void setFileyn(int fileyn) {
+		this.fileyn = fileyn;
 	}
 
 	public String timeCal(String where) {

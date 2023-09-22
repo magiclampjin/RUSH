@@ -20,7 +20,7 @@ public class BoardDTO {
 	public BoardDTO(){}
 
 	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
-			Timestamp writeDate, int view, int recommend) {
+			Timestamp writeDate, int view) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -30,7 +30,6 @@ public class BoardDTO {
 		this.contents = contents;
 		this.writeDate = writeDate;
 		this.view = view;
-		this.recommend = recommend;
 	}
 	
 	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
