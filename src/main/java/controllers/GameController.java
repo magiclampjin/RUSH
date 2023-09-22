@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,7 @@ public class GameController extends HttpServlet {
 			}else if(cmd.equals("/getRecord.game")) {
 				List<GameRecordDTO> list = new ArrayList<>();
 				String gameName = request.getParameter("gameName");
+				System.out.println("old : "+gameName);
 				list = dao.selectGameRecord(gameName);
 				System.out.println(list.get(0).getGameName());
 				PrintWriter out = response.getWriter();
@@ -89,6 +91,19 @@ public class GameController extends HttpServlet {
 				List<GameDTO> list = dao.selectCategoryGame(category);
 				PrintWriter out = response.getWriter();
 				out.println(gson.toJson(list));
+			}else if(cmd.equals("/getGameList.game")) {
+				List<GameDTO> list = dao.selectGames();
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(list));
+			}else if(cmd.equals("/setGameRecord.game")) {
+				String mID = request.getParameter("mID");
+				String gName = request.getParameter("game");
+				String mNickname = request.getParameter("nickName");
+				int score = Integer.parseInt(request.getParameter("score"));
+				
+				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
+				System.out.println("record result : "+result);
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
