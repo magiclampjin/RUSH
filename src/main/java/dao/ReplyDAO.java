@@ -96,12 +96,28 @@ public class ReplyDAO {
 		}
 	}
 	
-	public int  deletetRecommend(int replySeq, String loginId) throws Exception{
+	public int deletetRecommend(int replySeq, String loginId) throws Exception{
 		String sql = "delete from replyRecommend where rseq = ? and mid = ?;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, replySeq);
 			pstat.setString(2, loginId);
 			return pstat.executeUpdate();
+		}
+	}
+	
+	public int countRecommend(int replySeq) throws Exception{
+		String sql = "select recCnt from replyRecommCnt cbSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, replySeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replys = new ArrayList<>();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}else {
+					return -1;
+				}
+			
+			}
 		}
 	}
 	
