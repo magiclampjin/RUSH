@@ -9,8 +9,18 @@ public class GameRecordDTO {
 	private String nickName;
 	private Timestamp startGameTime;
 	private int score;
+	private int level;
 	
 	public GameRecordDTO() {}
+	
+	public GameRecordDTO(String id, String gameName, int score, int level) {
+		super();
+		this.id = id;
+		this.gameName = gameName;
+		this.score = score;
+		this.level = level;
+	}
+	
 	public GameRecordDTO(int seq, String id, String gameName, String nickName, Timestamp startGameTime, int score) {
 		super();
 		this.seq = seq;
@@ -56,6 +66,10 @@ public class GameRecordDTO {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 }

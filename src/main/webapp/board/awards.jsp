@@ -134,10 +134,12 @@ a {
                 </div>
                 <div class="line col"></div>
                 <div id="ranker">
-                
+                	
                 </div>
             </div>
         </div>
+        
+        <!-- <button style="visibility:hidden" id="defaultList"></button> -->
         
         <a href="#">
             <div class="upArrow bColorPink colorWhite">

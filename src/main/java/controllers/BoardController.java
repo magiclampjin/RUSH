@@ -23,6 +23,7 @@ import dao.FileDAO;
 import dao.GameDAO;
 import dto.BoardDTO;
 import dto.FileDTO;
+import dto.GameRecordDTO;
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
@@ -237,6 +238,15 @@ public class BoardController extends HttpServlet {
 				list = gdao.selectGameName();
 				request.setAttribute("gNameList", list);
 				request.getRequestDispatcher("/board/awards.jsp").forward(request, response);
+				
+			} else if(cmd.equals("/rankerList.board")) {
+				// 상위 랭커 리스트 가져오기
+				String game = request.getParameter("game");
+				
+				List<GameRecordDTO> rankerList = new ArrayList();
+				rankerList = gdao.selectUserByGame(game);
+				System.out.println(rankerList);
+				pw.append(gson.toJson(rankerList));
 			}
 
 		} catch (Exception e) {
