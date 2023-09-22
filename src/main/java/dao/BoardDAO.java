@@ -113,7 +113,7 @@ public class BoardDAO {
 				rs.next();
 				return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbCategory"),
 						rs.getString("cbNickname"), rs.getString("cbTitle"), rs.getString("cbContent"),
-						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"), rs.getInt("cbRecommend"));
+						rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"));
 			}
 		}
 	}
@@ -330,7 +330,7 @@ public class BoardDAO {
 	}
 	
 	public int insert(BoardDTO dto) throws Exception{
-		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?, default);";
+		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?);";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
 			pstat.setString(1, dto.getWriter());

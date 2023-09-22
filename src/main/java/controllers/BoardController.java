@@ -56,7 +56,7 @@ public class BoardController extends HttpServlet {
 
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
-				int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, 0));
+				int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0));
 
 				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
 
@@ -92,6 +92,9 @@ public class BoardController extends HttpServlet {
 
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
 				String category = request.getParameter("category");
+				category = (category == null || category=="") ? "":category;
+				String search = request.getParameter("search");
+				String keyword = request.getParameter("keyword");
 
 				BoardDTO post = dao.selectPost(postSeq);
 
@@ -109,6 +112,8 @@ public class BoardController extends HttpServlet {
 
 				List<FileDTO> files = fdao.selectForPost(postSeq);
 				request.setAttribute("files", files);
+				request.setAttribute("search",search);
+				request.setAttribute("keyword",keyword);
 
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
@@ -151,7 +156,7 @@ public class BoardController extends HttpServlet {
 
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
-				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0, 0));
+				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
 
 				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
 
