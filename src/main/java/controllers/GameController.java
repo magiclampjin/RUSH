@@ -77,6 +77,7 @@ public class GameController extends HttpServlet {
 			}else if(cmd.equals("/getRecord.game")) {
 				List<GameRecordDTO> list = new ArrayList<>();
 				String gameName = request.getParameter("gameName");
+				System.out.println("old : "+gameName);
 				list = dao.selectGameRecord(gameName);
 				System.out.println(list.get(0).getGameName());
 				PrintWriter out = response.getWriter();
