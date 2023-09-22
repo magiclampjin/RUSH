@@ -74,9 +74,8 @@ $(document).ready(function() {
 	}
 
 	let cpage = $("#cpage").val();
-	let category = $("#category").val();
 	let postSeq = $("#postSeq").val();
-	let search = $("#search").val();
+	let searchBy = $("#searchBy").val();
 	let keyword = $("#keyword").val();
 	
 
@@ -84,10 +83,10 @@ $(document).ready(function() {
 	$("#replys").html(replyReload(postSeq));
 
 	$(".goList").on("click", function() {
-		if(search == null || search == ""){
+		if(searchBy == null || searchBy == ""){
 			location.href = "/listing.qna?cpage=" + cpage;
 		}else{
-			location.href = "/listing.qna?cpage=" + cpage +"&search="+search+"&keyword="+keyword;
+			location.href = "/listing.qna?cpage=" + cpage +"&searchBy="+searchBy+"&keyword="+keyword;
 		}
 	});
 	

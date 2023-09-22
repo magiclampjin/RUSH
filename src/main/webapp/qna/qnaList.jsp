@@ -147,7 +147,7 @@ a {
 		                                        	<c:when test="${qna.secret eq true}">
 		                                        		<c:choose>
 			                                        		<c:when test="${qna.writer eq loginID || 'admin' eq loginID}">
-			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}">
 			                                        				<div class="mainTitle">비밀글입니다.</div>
 			                                        			</a>
 			                                        		</c:when>
@@ -162,7 +162,7 @@ a {
 		                                        		</c:choose>
 		                                        	</c:when>
 		                                        	<c:otherwise>
-			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
+			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}">
 			                                        		<div class="mainTitle">${qna.title }</div>
 			                                        	</a>
 		                                        	</c:otherwise>

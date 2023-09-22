@@ -102,12 +102,19 @@ public class QnAController extends HttpServlet {
 				// 게시글 출력
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
-				
+				String keyword = request.getParameter("keyword");
+				String searchBy = request.getParameter("searchBy");
+				System.out.println("load: keyword : "+keyword +", searchBy "+searchBy);
 				QNABoardDTO post = dao.selectPost(qnaSeq);
 				
 				request.setAttribute("postSeq", qnaSeq);
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", cpage);
+		
+				if(searchBy != null)
+					request.setAttribute("searchBy", searchBy);
+				if(keyword != null)
+					request.setAttribute("keyword", keyword);
 				request.getRequestDispatcher("/qna/qnaPost.jsp").forward(request, response);
 			} 
 			
