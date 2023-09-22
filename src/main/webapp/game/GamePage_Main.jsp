@@ -15,9 +15,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/game/game.css"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <style>
 * {
@@ -87,10 +84,9 @@ div {
 </head>
 <body>
 <script>
-/* <div class="col-xs-12 col-lg-6 col-xl-4"> */
 	window.onload = function(){
 		$.ajax({
-			url:"/getBestGame.game",
+			url:"/getGameList.game",
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
@@ -115,6 +111,44 @@ div {
 				divCol.append(divName);
 				
 				$("#newGames").append(divCol);
+				$("#newGames").append(divCol);
+				
+			}
+		});
+		$.ajax({
+			url:"/getGameList.game",
+		}).done(function(res){
+			let data = JSON.parse(res);
+			console.log(data);
+			console.log(data.length);
+			for(let i=0; i<data.length; i++){
+				let divCol = $("<div>");
+				divCol.addClass("col-xs-12 col-lg-6 col-xl-4");
+				
+				let divAnker = $("<a>");
+				divAnker.attr("href","/moveToGamePage.game?game="+data[i]["gName"]);
+				
+				let divImage = $("<img>");
+				divImage.addClass("test ml45 mr45");
+				divImage.attr("src",data[i]["gImageURL"]);
+				divAnker.append(divImage);
+				
+				let divName = $("<p>");
+				divName.addClass("text-white ml45");
+				divName.append(data[i]["gName"]);
+				
+				divCol.append(divAnker);
+				divCol.append(divName);
+				
+				if(data[i]["gCategory"] == 'Rhythm'){
+					$("#rhythmGames").append(divCol);
+				}
+				if(data[i]["gCategory"] == 'Arcade'){
+					$("#arcadeGames").append(divCol);
+				}
+				if(data[i]["gCategory"] == 'Puzzle'){
+					$("#puzzleGames").append(divCol);
+				}
 			}
 		});
 	};
@@ -122,7 +156,7 @@ div {
 	<div class="container-fluid p-0 g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
-				<a href="#">
+				<a href="/index.jsp">
 					<div class="logo fontLogo colorWhite">RUSH</div>
 				</a>
 				<nav class="navbar navbar-expand navbar-light colorWhite">
@@ -136,48 +170,51 @@ div {
 									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
+										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
+										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
 									</ul></li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> AWARDS </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
+									class="nav-link text-white fontEnglish" href="http://localhost/board/awards.jsp"> AWARDS </a>
+									</li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
+									class="nav-link text-white fontEnglish"
+									href="/listing.board?cpage=1" id="navbarDropdownMenuLink"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										BOARD </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
+										<li><a class="dropdown-item"
+											href="/listing.board?cpage=1">자유게시판</a></li>
+										<li><a class="dropdown-item fontEnglish"
+											href="/listing.qna?cpage=1">Q&A</a></li>
+										<li><a class="dropdown-item" href="http://localhost/board/awards.jsp">명예의 전당</a></li>
 									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> LOGIN </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
+								<c:choose>
+									<c:when test="${loginID == null }">
+										<li class="nav-item dropdown col-3 text-end p8"><a
+											class="text-white fontEnglish"
+											href="http://localhost/member/login.jsp"> LOGIN </a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item dropdown col-3 text-end"><a
+											class="nav-link text-white fontEnglish"
+											href="http://localhost/member/login.jsp"
+											id="navbarDropdownMenuLink" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+										</a>
+											<ul class="dropdown-menu p-0"
+												aria-labelledby="navbarDropdownMenuLink">
+												<li><a class="dropdown-item fontEnglish" href="#">MyPage</a></li>
+												<li><a class="dropdown-item fontEnglish" href="http://localhost/logout.member">Log Out</a></li>
+											</ul></li>
+									</c:otherwise>
+								</c:choose>
+
+
+
+								<script type="text/javascript">
+									console.log("${loginID }")
+								</script>
 							</ul>
 						</div>
 					</div>
@@ -196,7 +233,7 @@ div {
 									<button type="button" class="btn btn-dark bColorBlack active" id="new"><span class="fontKorean text-white">최신게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
 									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
-									<a href="/moveToBestGame.game"><button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button></a>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 								</div>
 							</div>
 						</div>
@@ -215,21 +252,11 @@ div {
 							</div>
 						</div>
 
-						<div class="row g-0 mb-5">
+						<div class="row g-0 mb-5" id="rhythmGames">
 							<p class="fs-2 text-white fontKorean">리듬게임</p>
-							<!-- 나중에 jstl 적용? -->
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임1</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임2</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임3</p>
-							</div>
+							
+						</div>
+						<div class="row mb-5">
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary2" id="rhythmGamesMore">
 									<span class="fontKorean">더보기</span>
@@ -237,49 +264,30 @@ div {
 							</div>
 						</div>
 
-						<div class="row g-0 mb-5">
+						<div class="row g-0 mb-5" id="arcadeGames">
 							<p class="fs-2 text-white fontKorean">아케이드 게임</p>
-							<!-- 나중에 jstl 적용? -->
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임1</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임2</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임3</p>
-							</div>
+							
+						</div>
+						<div class="row mb-5">
 							<div class="col-12 d-flex justify-content-center m-">
-								<button type="button" class="btn btn-primary3">
+								<button type="button" class="btn btn-primary3" id="arcadeGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
 						</div>
 
-						<div class="row g-0 mb-5">
+						<div class="row g-0 mb-5" id="puzzleGames">
 							<p class="fs-2 text-white fontKorean">퍼즐게임</p>
-							<!-- 나중에 jstl 적용? -->
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임1</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임2</p>
-							</div>
-							<div class="col-xs-12 col-lg-6 col-xl-4">
-								<div class="test ml45 mr45"></div>
-								<p class="text-white ml45">게임3</p>
-							</div>
+							
+						</div>
+						<div class="row mb-5">
 							<div class="col-12 d-flex justify-content-center m-">
 								<button type="button" class="btn btn-primary1" id="puzzleGamesMore">
 									<span class="fontKorean">더보기</span>
 								</button>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -333,8 +341,17 @@ div {
 	$("#new").on("click",function(){
 		let category = $("#new").children("span").text();
 		console.log(category);
-		/* location.href = "/moveToCategory?category="; */
 	});
+	$("#rhy").on("click",function(){
+		location.href = "/moveToCategory.game?category=Rhythm";
+	});
+	$("#puz").on("click",function(){
+		location.href = "/moveToCategory.game?category=Puzzle";
+	});
+	$("#arc").on("click",function(){
+		location.href = "/moveToCategory.game?category=Arcade";
+	});
+	
 	$("#newGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game";
 	});
@@ -343,6 +360,9 @@ div {
 	});
 	$("#puzzleGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game?category=Puzzle";
+	});
+	$("#arcadeGamesMore").on("click",function(){
+		location.href = "/moveToCategory.game?category=Arcade";
 	});
 	
 	</script>

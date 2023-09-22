@@ -5,36 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH-게시글 수정</title>
+<title>RUSH-마이페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-<!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/board/boardWrite.css">
+<link rel="stylesheet" href="/css/member/myPage.css">
+<script type="text/javascript" src="/js/member/infoModified.js"></script>
 
-<script type="text/javascript" src="/js/board/summernote_editor.js"></script>
-
-<!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-
-<!-- summernote -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<!-- Header Style -> 부트스트랩 속성 제거 -->
 <style>
 * {
 	box-sizing: border-box;
@@ -50,7 +34,6 @@
 
 a {
 	text-decoration: none;
-	color: #111111;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -58,8 +41,16 @@ a {
 	left: auto;
 }
 
-.dropdown-toggle::after {
-	display: none;
+.num, .writer, .date, .file {
+	width: 15%;
+}
+
+.title {
+	width: 40%;
+}
+
+.mainTitle {
+	padding-left: 5px;
 }
 </style>
 </head>
@@ -129,108 +120,91 @@ a {
 				</nav>
 			</div>
 		</div>
-		<div class="boardWrite">
-			<div class="boardWrite_guide">
-				<c:choose>
-					<c:when test="${menu == 'qna'}">
-						<form action="/insert.qna" method="post"
-							enctype="multipart/form-data">
-							<div class="writeTitle">Q&A 작성</div>
-							<input type="text" class="inputTitle" name="title"
-								placeholder="제목을 입력하세요">
-							<div class="fileBox">
-								<input type="button" id="btnAdd" class="writebtn bColorGreen"
-									value="+">
-								</button>
-								<span>파일첨부</span>
-								<div id="fileContainer"></div>
-							</div>
-							<textarea id="summernote" class="content" rows="35" cols="100"
-								placeholder="내용을 입력하세요." name="contents"></textarea>
-							<div class="secretBox">
-								<input id="secret" class="screteChk" type="checkbox"> <input
-									id="secret_hidden" class="screteChk" type="hidden"
-									name="secret" value="false"> <label for="secret"
-									class="colorDarkgray">비밀글 설정하기</label>
-							</div>
-							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input
-									class="writebtn bColorGreen" type="button" value="목록으로"></a>
-								<input class="writebtn bColorGreen" type="submit" value="수정">
-							</div>
 
-						</form>
-						<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
-					</c:when>
-					<c:otherwise>
-						<form action="/update.board" method="post"
-							enctype="multipart/form-data" id="boardForm">
-							<input type="hidden" value="${category }" name="category">
-							<input type="hidden" value="${post.seq}" name="postSeq">
-							<input type="hidden" value="${requestScope.cpage}" name="cpage">
-							<input type="hidden" name="search" value="${search}">
-							<input type="hidden" name="keyword" value="${keyword}">
-							<textarea id="deleteFiles" style="display:none;" name="deleteFiles"></textarea>
-							<textarea id="deleteImgs" style="display:none;" name="deleteImgs"></textarea>
-							<div class="writeTitle">자유게시글 게시글 수정</div>
-							<input type="text" class="inputTitle" name="title"
-								placeholder="제목을 입력하세요" id="title" value="${post.title}">
-							<div class="fileBox">
-								<input type="button" id="btnAdd" class="writebtn bColorGreen"
-									value="+"> <span>파일첨부</span>
-								<div id="fileContainer">
-									<c:choose>
-										<c:when test="${files.size()>0}">
-											<c:forEach var="i" items="${files}" varStatus="status">
-												<div>
-													
-													<input type="file" style="display:none">
-													<span style="display: inline; margin-top: 10px;" id="file${status.index}">${i.originName}</span>
-													<input value="x" type="button" class="del filedel" style="border: none; width: 30px; height: 30px;">
-													<input type="hidden" value="${i.seq}">
-												</div>
-											</c:forEach>
-										</c:when>
-									</c:choose>
-								
-									<script>
-										$(document).on("click", ".filedel", function() {
-											let fileSeq = $(this).next().val();
-											let prev = $("#deleteFiles").html();
-											$("#deleteFiles").html(prev+","+fileSeq);
-											/* $.ajax({
-												url:"/delete.file",
-												data:{
-													fileSeq : fileSeq
-												},
-												type:"post"
-											}); */
-										});
-										
-									</script>
-								</div>
-							</div>
-							<textarea id="summernote" class="content" id="content" rows="35"
-								cols="100" placeholder="내용을 입력하세요." name="contents">${post.contents}</textarea>
-							<div class="writeBox">
-								<c:choose>
-									<c:when test="${not empty search}">
-										<a href="/listing.board?category=${category }&cpage=${requestScope.cpage}&search=${search}&keyword=${keyword}">
-										<input class="writebtn bColorGreen" type="button" value="목록으로"></a>
-									</c:when>
-									<c:otherwise>
-										<a href="/listing.board?category=${category }&cpage=${requestScope.cpage}">
-										<input class="writebtn bColorGreen" type="button" value="목록으로"></a>
-									</c:otherwise>
-								</c:choose>
-								
-								<input class="writebtn bColorGreen" type="submit" value="수정">
-							</div>
-						</form>
-					</c:otherwise>
-				</c:choose>
+		<div class="myPage">
+			<div class="nickNameBox bColorBlack">
+				<div class="nicknameInfo">
+					<div class="nickname colorWhite">${user.nickName } 님</div>
+					<div class="levelBox">
+						<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
+						<div class="singDay colorDarkgray">가입일: ${user.stringFormat }</div>
+					</div>
+				</div>
+			</div>
+			<div class="myPage_guide">
+				<div class="memberInfo">
+					<div class="memberBasicTitle">기본 회원정보</div>
+					<div class="memberInfoBox updateBox">
+						<div class="infoBox">
+							<!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
+							<div class="infoCagetory">아이디</div>
+							<div class="infocon">${user.id }</div>
+							<input type="hidden">
+						</div>
+						<div class="infoBox">
+							<div class="infoCagetory">비밀번호</div>
+							<div class="infocon"><i class="fa-solid fa-lock"></i>&nbsp;비밀번호</div>
+							<input type="hidden">
+						</div>
+						<div class="infoBox">
+							<div class="infoCagetory">닉네임</div>
+							<div class="infocon">${user.nickName }</div>
+							<input type="hidden">
+						</div>
+						<div class="infoBox">
+							<div class="infoCagetory">휴대전화</div>
+							<div class="infocon">${user.phone }</div>
+							<input type="hidden">
+						</div>
+						<div class="infoBox">
+							<div class="infoCagetory">이메일</div>
+							<div class="infocon">${user.email }</div>
+							<input type="hidden">
+						</div>
+						<div class="infoBox modifiedBox">
+							<input class="updateBtn bColorBlue colorWhite" id="updateBtn"
+								type="button" value="수정하기">
+						</div>
+					</div>
+				</div>
+				<div class="memberInfo">
+					<div class="memberBasicTitle">추가 회원정보</div>
+					<div class="memberInfoBox">
+						<div class="infoBox">
+							<div class="infoCagetory">생년월일</div>
+							<div class="infocon">${user.formedBirth }</div>
+						</div>
+						<div class="infoBox">
+							<div class="infoCagetory">성별</div>
+							<div class="infocon">${user.gender }</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="memberInfo">
+					<div class="tabBox">
+						<!-- 탭박스 -->
+					</div>
+				</div>
+
+				<div class="memberInfo">
+					<div class="deletBtnBox">
+						<span>탈퇴를 원하시면 탈퇴버튼을 눌러주세요.</span> <input type="button"
+							class="deleteBtn bColorWhite colorDarkgray" value="회원탈퇴">
+					</div>
+				</div>
 			</div>
 		</div>
+
+
+
+
+
+		<a href="#">
+			<div class="upArrow bColorPink colorWhite">
+				<i class="fa-solid fa-arrow-up-long"></i>
+			</div>
+		</a>
 
 		<div class="footer bColorBlack">
 			<div class="footer_guide">

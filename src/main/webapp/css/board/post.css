@@ -174,3 +174,6 @@
 	padding:20px 15px;
 }
 
+#postContents img{
+	max-width: 100%;
+}

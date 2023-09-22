@@ -22,8 +22,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import constants.Constants; //pagination에 사용 될 상수 저장용
 import dao.BoardDAO;
 import dao.FileDAO;
+import dao.GameDAO;
 import dto.BoardDTO;
 import dto.FileDTO;
+import dto.GameRecordDTO;
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
@@ -37,6 +39,7 @@ public class BoardController extends HttpServlet {
 
 		BoardDAO dao = BoardDAO.getInstance();
 		FileDAO fdao = FileDAO.getInstance();
+		GameDAO gdao = GameDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
 
@@ -149,9 +152,8 @@ public class BoardController extends HttpServlet {
 				// 게시글 수정
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
 				String uploadPath = request.getServletContext().getRealPath("files");
-
-				
 				File filepath = new File(uploadPath);
+				
 				if (!filepath.exists()) {
 					filepath.mkdir();
 				}
@@ -163,9 +165,33 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				// 게시글 수정 시 수정된 파일 DB, realpath에서 삭제
+				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
+				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
+					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteFilePath = new File(uploadPath+"/"+sysname);
+					}	
+				}
+				
+				// 게시글 수정 시 수정된 이미지 DB, realpath에서 삭제
+				String[] deleteImgNameStr = multi.getParameter("deleteImgs").split(":");
+				for(int i=0; i<deleteImgNameStr.length-1; i++) {
+					String sysname = deleteImgNameStr[i+1];
+					
+					sysname = sysname.substring(7);
+					System.out.println(sysname);
+					
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteImgfilepath = new File(uploadPath+"/"+sysname);
+						deleteImgfilepath.delete();
+					}	
+				}					
+				
 				String search = multi.getParameter("search");
 				String keyword = multi.getParameter("keyword");
-
 				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
 				
 				String id = (String) request.getSession().getAttribute("loginID");
@@ -314,6 +340,21 @@ public class BoardController extends HttpServlet {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
 				pw.append(gson.toJson(result));
+				
+			} else if(cmd.equals("/moveToAwards.board")) {
+				// 명예의 전당으로 이동
+				List<String> list = new ArrayList();
+				list = gdao.selectGameName();
+				request.setAttribute("gNameList", list);
+				request.getRequestDispatcher("/board/awards.jsp").forward(request, response);
+				
+			} else if(cmd.equals("/rankerList.board")) {
+				// 상위 랭커 리스트 가져오기
+				String game = request.getParameter("game");
+				
+				List<GameRecordDTO> rankerList = new ArrayList();
+				rankerList = gdao.selectUserByGame(game);
+				pw.append(gson.toJson(rankerList));
 			}
 
 		} catch (Exception e) {

@@ -153,18 +153,9 @@ a {
 										<div class="loud">
 											<i class="fa-solid fa-bullhorn"></i>
 										</div>
-										<c:choose>
-											<c:when test="${keyword == null }">
-												<a
-													href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div
-														class="mainTitle">${noti.title }</div></a>
-											</c:when>
-											<c:otherwise>
-												<a
-													href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&search=${search }&keyword=${keyword }"><div
-														class="mainTitle">${noti.title }</div></a>
-											</c:otherwise>
-										</c:choose>
+										<a
+											href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div
+												class="mainTitle">${noti.title }</div></a>
 
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 									</div>
@@ -186,18 +177,9 @@ a {
 											<div class="loud">
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
-											<c:choose>
-												<c:when test="${keyword == null }">
-													<a
-														href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div
-															class="mainTitle">${noti.title }</div></a>
-												</c:when>
-												<c:otherwise>
-													<a
-														href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&search=${search }&keyword=${keyword }"><div
-															class="mainTitle">${noti.title }</div></a>
-												</c:otherwise>
-											</c:choose>
+											<a
+												href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&category=${category }"><div
+													class="mainTitle">${noti.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 										</div>
 										<div class="info">
@@ -227,18 +209,9 @@ a {
 										<div class="maxBoard">
 											<div class="num fontEnglish">${post.seq }</div>
 											<div class="title">
-												<c:choose>
-													<c:when test="${keyword == null }">
-														<a
-															href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
-																class="mainTitle">${post.title }</div></a>
-													</c:when>
-													<c:otherwise>
-														<a
-															href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }&search=${search }&keyword=${keyword }"><div
-																class="mainTitle">${post.title }</div></a>
-													</c:otherwise>
-												</c:choose>
+												<a
+													href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
+														class="mainTitle">${post.title }</div></a>
 												<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 											</div>
 											<div class="writer">${post.nickName }</div>
@@ -256,19 +229,8 @@ a {
 											<div class="num fontEnglish">${post.seq }</div>
 											<div class="minCon">
 												<div class="title">
-													<c:choose>
-														<c:when test="${keyword == null }">
-															<a
-																href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
-																	class="mainTitle">${post.title }</div></a>
-														</c:when>
-														<c:otherwise>
-															<a
-																href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }&search=${search }&keyword=${keyword }"><div
-																	class="mainTitle">${post.title }</div></a>
-														</c:otherwise>
-													</c:choose>
-
+													<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div
+															class="mainTitle">${post.title }</div></a>
 													<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 												</div>
 												<div class="info">
@@ -305,8 +267,7 @@ a {
 						<div class="write"></div>
 						<div class="search">
 							<form id="searchForm">
-								<input type="hidden" name="cpage" value="1"> <input
-									type="hidden" name="category" value=${category }>
+								<input type="hidden" name="category" value=${category }>
 								<div>
 									<select class="form-select" aria-label="Default select example"
 										name="search">
@@ -341,8 +302,10 @@ a {
 			value="${recordCountPerPage }"> <input type="hidden"
 			id="naviCountPerPage" value="${naviCountPerPage }"> <input
 			type="hidden" id="lastPageNum" value="${lastPageNum }"> <input
-			type="hidden" value=${search } id="search"> <input
-			type="hidden" value=${loginID } id="userID"> <a href="#">
+			type="hidden" value=${search } id="search"> 
+			<input type="hidden" value=${loginID } id="userID">
+			
+			<a href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>
 			</div>

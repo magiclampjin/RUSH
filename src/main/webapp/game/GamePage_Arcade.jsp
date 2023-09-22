@@ -90,6 +90,7 @@ a{
 			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
+				$(".fa-star").removeClass("colorWhite");
 				console.log("active");
 			}else{
 				
@@ -111,35 +112,67 @@ a{
 				divRow.addClass("row g-0 p-2");
 				let divColRank = $("<div>");
 				if(i<3){
-    				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3");
+    				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
     				divColRank.append(i+1);
 				}else{
-    				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
+    				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
     				divColRank.append(i+1);	
 				}
-				
-				
+
+								
 				let divColInfo = $("<div>");
-				divColInfo.addClass("col-7 text-white");
-				divColInfo.append(record[i]["nickName"]);
+				divColInfo.addClass("col-7");
+				
+				let divRowInfo = $("<div>");
+				divRowInfo.addClass("row g-0");
+				let divInfoLeft = $("<div>");
+				divInfoLeft.addClass("col-3");
+				let divInfoRight = $("<div>");
+				divInfoRight.addClass("col-9 text-white align-self-center");
+				let divUserImage = $("<div>");
+				divUserImage.css({
+					width : "80px",
+					height : "80px",
+					backgroundColor : "white",
+					borderRadius : "50%"
+				});
+				
+				
+				divInfoLeft.append(divUserImage);
+				divInfoRight.append(record[i]["nickName"]);
+				divInfoRight.append(" Lv : "+record[i]["level"]);
+				divRowInfo.append(divInfoLeft);
+				divRowInfo.append(divInfoRight);
+				divColInfo.append(divRowInfo);
 				
 				let divColScore = $("<div>");
-				divColScore.addClass("col-4 text-white");
+				divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
 				divColScore.append(record[i]["score"]);
 				
 				divRow.append(divColRank);
 				divRow.append(divColInfo);
 				divRow.append(divColScore);
 				
+				
 				$("#rankCon").append(divRow);
 			}
 		});
+		let category = '${category}';
+		if(category == 'new'){
+			$("#new").addClass("active");
+		}else if(category == 'Rhythm'){
+			$("#rhy").addClass("active");
+		}else if(category == 'Arcade'){
+			$("#arc").addClass("active");
+		}else if(category == 'Puzzle'){
+			$("#puz").addClass("active");
+		}
 	}
 </script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
-				<a href="#">
+				<a href="/index.jsp">
 					<div class="logo fontLogo colorWhite">RUSH</div>
 				</a>
 				<nav class="navbar navbar-expand navbar-light colorWhite">
@@ -153,54 +186,58 @@ a{
 									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
+										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
+										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
 									</ul></li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> AWARDS </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
+									class="nav-link text-white fontEnglish" href="http://localhost/board/awards.jsp"> AWARDS </a>
+									</li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
+									class="nav-link text-white fontEnglish"
+									href="/listing.board?cpage=1" id="navbarDropdownMenuLink"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										BOARD </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
+										<li><a class="dropdown-item"
+											href="/listing.board?cpage=1">자유게시판</a></li>
+										<li><a class="dropdown-item fontEnglish"
+											href="/listing.qna?cpage=1">Q&A</a></li>
+										<li><a class="dropdown-item" href="http://localhost/board/awards.jsp">명예의 전당</a></li>
 									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> LOGIN </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
+								<c:choose>
+									<c:when test="${loginID == null }">
+										<li class="nav-item dropdown col-3 text-end p8"><a
+											class="text-white fontEnglish"
+											href="http://localhost/member/login.jsp"> LOGIN </a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item dropdown col-3 text-end"><a
+											class="nav-link text-white fontEnglish"
+											href="http://localhost/member/login.jsp"
+											id="navbarDropdownMenuLink" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+										</a>
+											<ul class="dropdown-menu p-0"
+												aria-labelledby="navbarDropdownMenuLink">
+												<li><a class="dropdown-item fontEnglish" href="#">MyPage</a></li>
+												<li><a class="dropdown-item fontEnglish" href="http://localhost/logout.member">Log Out</a></li>
+											</ul></li>
+									</c:otherwise>
+								</c:choose>
+
+
+
+								<script type="text/javascript">
+									console.log("${loginID }")
+								</script>
 							</ul>
 						</div>
 					</div>
 				</nav>
 			</div>
 		</div>
+		
 		<div class="container-fluid g-0 bColorBlack">
 			<div class="gameContainer">
 				<div class="row g-0">
@@ -209,10 +246,10 @@ a{
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">리듬게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack active"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="new"><span class="fontKorean text-white">최신게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
 									<!-- js로 넘어가기 -->
 								</div>
 							</div>
@@ -242,6 +279,10 @@ a{
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
+									<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
+										<i class="fa-regular fa-star colorWhite"></i>
+										즐겨찾기
+									</button> -->
 								</div>
 							</div>
 							<hr class="border border-primary border-3 opacity-75">
@@ -396,25 +437,47 @@ a{
     				divRow.addClass("row g-0 p-2");
     				let divColRank = $("<div>");
     				if(i<3){
-        				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3");
+        				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
         				divColRank.append(i+1);
     				}else{
-        				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3");
+        				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
         				divColRank.append(i+1);	
     				}
-    				
-    				
+
+    								
     				let divColInfo = $("<div>");
-    				divColInfo.addClass("col-7 text-white");
-    				divColInfo.append(record[i]["nickName"]);
+    				divColInfo.addClass("col-7");
+    				
+    				let divRowInfo = $("<div>");
+    				divRowInfo.addClass("row g-0");
+    				let divInfoLeft = $("<div>");
+    				divInfoLeft.addClass("col-3");
+    				let divInfoRight = $("<div>");
+    				divInfoRight.addClass("col-9 text-white align-self-center");
+    				let divUserImage = $("<div>");
+    				divUserImage.css({
+    					width : "80px",
+    					height : "80px",
+    					backgroundColor : "white",
+    					borderRadius : "50%"
+    				});
+    				
+    				
+    				divInfoLeft.append(divUserImage);
+    				divInfoRight.append(record[i]["nickName"]);
+    				divInfoRight.append(" Lv : "+record[i]["level"]);
+    				divRowInfo.append(divInfoLeft);
+    				divRowInfo.append(divInfoRight);
+    				divColInfo.append(divRowInfo);
     				
     				let divColScore = $("<div>");
-    				divColScore.addClass("col-4 text-white");
+    				divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
     				divColScore.append(record[i]["score"]);
     				
     				divRow.append(divColRank);
     				divRow.append(divColInfo);
     				divRow.append(divColScore);
+    				
     				
     				$("#rankCon").append(divRow);
     			}
@@ -442,6 +505,7 @@ a{
               	    }).done(function (res){
               	      console.log(res);
               	      location.reload();
+              	      $(".fa-star").addClass("colorWhite");
               	    });
             	}else{
             		console.log("x");
@@ -462,9 +526,27 @@ a{
         	}
         	
         });
-        $("#delfavorite").on("click",function(){
-        	
+        $("#favorite").hover(function(){
+        	if(!$(this).hasClass("active")){
+        		$(".fa-star").removeClass("colorWhite");	
+        	}
+        }, function() {
+        	if(!$(this).hasClass("active")){
+        		$(".fa-star").addClass("colorWhite");	
+        	}
         });
+        $("#new").on("click",function(){
+        	location.href = "/game/GamePage_Main.jsp";
+        });
+        $("#rhy").on("click",function(){
+    		location.href = "/moveToCategory.game?category=Rhythm";
+    	});
+    	$("#puz").on("click",function(){
+    		location.href = "/moveToCategory.game?category=Puzzle";
+    	});
+    	$("#arc").on("click",function(){
+    		location.href = "/moveToCategory.game?category=Arcade";
+    	});
     </script>
 </body>
 </html>
