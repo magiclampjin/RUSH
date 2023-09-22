@@ -59,6 +59,22 @@ public class ReplyDAO {
 		}
 	}
 	
+	// post 내 댓글들의 좋아요 목록 가져오기
+	public List<ReplyDTO> selectReplyRecommCnt(int postSeq, String loginId) throws Exception {
+		String sql = "select * from replyreclist where cbSeq = ? and mid = ? order by rseq;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, postSeq);
+			pstat.setString(2, loginId);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replysRecList = new ArrayList<>();
+				while(rs.next()) {
+					replysRecList.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID")));
+				}
+				return replysRecList;
+			}
+		}
+	}
+	
 	public void insert(ReplyDTO reply) throws Exception{
 		String sql = "insert into reply values(null, ?, ?, ?, ?, default, null);";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
@@ -106,7 +122,7 @@ public class ReplyDAO {
 	}
 	
 	public int countRecommend(int replySeq) throws Exception{
-		String sql = "select recCnt from replyRecommCnt cbSeq =?;";
+		String sql = "select recCnt from replyRecommCnt where rSeq =?;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, replySeq);
 			try(ResultSet rs = pstat.executeQuery();){

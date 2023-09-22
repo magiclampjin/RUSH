@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-
 	function replyReload(postSeq) {
 		$.ajax({
 			url: "/load.reply",
@@ -13,26 +11,28 @@ $(document).ready(function() {
 			let postWriter = $("#postWriterName").val();
 			let loginID = $("#loginID").val();
 			let replys = $("#replys");
-			for (let i = 0; i < resp.length; i++) {
-
+			let replyRecommCnt = resp[1].length -1;
+			let replyRecommCheckIdx = 0;
+			for (let i = 0; i < resp[0].length; i++) {
 				let replyTag = $("<div>").attr("class", "col-12 reply");
 				let row = $("<div>").attr("class", "row g-0");
 				let col10 = $("<div>").attr("class", "col-10");
-				let writerCover = $("<div>").attr("class", "d-flex align-items-end mb10").append($("<div>").attr("class", "writer fw500 fs20").html(resp[i].nickName));
-				if (resp[i].writer == postWriter) {
+				let writerCover = $("<div>").attr("class", "d-flex align-items-end mb10").append($("<div>").attr("class", "writer fw500 fs20").html(resp[0][i].nickName));
+				if (resp[0][i].writer == postWriter) {
 					let isWriterTag = $("<div>").attr("class", "isWriter colorWhite bColorBlue fw400 fs15").html("작성자");
 					writerCover.append(isWriterTag);
 				}
-				let contents = $("<div>").attr("class", "contents fw400 fs20 mb10").html(resp[i].contents).attr("contenteditable", "false");;
-				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate + "&nbsp;&nbsp;"+"추천 "+resp[i].recommend + "&nbsp;&nbsp;");
+				let contents = $("<div>").attr("class", "contents fw400 fs20 mb10").html(resp[0][i].contents).attr("contenteditable", "false");;
+				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[0][i].writeDate + "&nbsp;&nbsp;");
+				let replyRecCnt = $("<span>").html("추천 "+resp[0][i].recommend + "&nbsp;&nbsp;").attr("class","recCnt colorDarkgray");
 				let nestedReplyPrintBtn = $("<a>").attr("class", "nestedReplyPrintBtn colorDarkgray").html("답글 보기");
 				let nestedReplyBtn = $("<a>").attr("class", "nestedReplyBtn colorDarkgray").html("답글 쓰기");
 
-				detailInfo.append(nestedReplyPrintBtn).append(nestedReplyBtn);
+				detailInfo.append(replyRecCnt).append(nestedReplyPrintBtn).append(nestedReplyBtn);
 
 				row.append(col10.append(writerCover).append(contents).append(detailInfo));
 				let replyBtns;
-				if (resp[i].writer == loginID) {
+				if (resp[0][i].writer == loginID) {
 					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
 
 					let btncover = $("<div>").attr("class", "defaultCover");
@@ -61,13 +61,18 @@ $(document).ready(function() {
 					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
 					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
 
-					if (resp[i].recId !== undefined ) { //&& resp[i].recId==loginID
-						recommendBtn.addClass("btnClicked");
+					if(replyRecommCnt > 0){
+						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
+							recommendBtn.addClass("btnClicked");
+							if(replyRecommCheckIdx < replyRecommCnt)
+								replyRecommCheckIdx++;
+						}
 					}
+					
 					row.append(replyBtns.append(recommendBtn));
 				}
 
-				let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");
+				let replyId = $("<input>").attr("type", "hidden").val(resp[0][i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
 			}
@@ -352,12 +357,15 @@ $(document).ready(function() {
 				},
 				type: "post",
 				dataType: "json"
-			}).done(function(success) {
-				if (success == 1)
+			}).done(function(result) {
+				if (result[0] == 1){
 					recbtn.removeClass("btnClicked");
+					recbtn.closest(".reply").find(".recCnt").html("추천 "+result[1]+ "&nbsp;&nbsp;");
+				}
 				else {
 					alert("게시글 또는 댓글이 삭제되었습니다.");
-					replyReload(postSeq);
+					$("#replys").html("");
+					$("#replys").html(replyReload(postSeq));
 				}
 			});
 
@@ -370,12 +378,15 @@ $(document).ready(function() {
 				},
 				type: "post",
 				dataType: "json"
-			}).done(function(success) {
-				if (success == 1)
+			}).done(function(result) {
+				if (result[0] == 1){
 					recbtn.addClass("btnClicked");
+					recbtn.closest(".reply").find(".recCnt").html("추천 "+result[1]+ "&nbsp;&nbsp;");
+				}
 				else {
 					alert("게시글 또는 댓글이 삭제되었습니다.");
-					replyReload(postSeq);
+					$("#replys").html("");
+					$("#replys").html(replyReload(postSeq));
 				}
 			});
 
@@ -552,13 +563,6 @@ $(document).ready(function() {
 					let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");
 					row.append(replyId);
 					nestedReplyAll.append(replyTag.append(row));
-				/*	if($(this).closest(".reply").next().hasClass("nestedReply")){
-						
-						$(this).closest(".reply").next().after(nestedReplyAll);
-					}else{
-						parentReply.after(nestedReplyAll);
-					}
-					*/
 					parentReply.after(nestedReplyAll);
 				}
 			});
