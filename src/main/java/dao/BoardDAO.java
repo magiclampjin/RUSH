@@ -347,15 +347,7 @@ public class BoardDAO {
 			
 		}
 	}
-	
-	/*
-	 * public String selectNickName(String id) throws Exception{ String sql =
-	 * "select mNickname from members where mID=?"; try(Connection con =
-	 * this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
-	 * pstat.setString(1, id); try(ResultSet rs = pstat.executeQuery()){ if
-	 * (rs.next()) { return rs.getString("mNickname"); } else { return null; } } } }
-	 */
-	
+
 	public void deletePost(int postSeq) throws Exception{
 		String sql = "delete from common_board where cbSeq = ?;";
 		try(Connection con = this.getConnection();
