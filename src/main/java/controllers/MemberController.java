@@ -66,6 +66,10 @@ public class MemberController extends HttpServlet {
 				
 			} else if(cmd.equals("/load.member")) {
 				// 마이페이지 (회원 정보 출력)
+				String userID = (String) request.getSession().getAttribute("loginID");
+				MemberDTO user = dao.selectUserInfo(userID);
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
 				
 			} else if(cmd.equals("/update.member")) {
 				// 회원 정보 수정

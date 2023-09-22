@@ -24,7 +24,7 @@ $(document).ready(function() {
 					writerCover.append(isWriterTag);
 				}
 				let contents = $("<div>").attr("class", "contents fw400 fs20 mb10").html(resp[i].contents).attr("contenteditable", "false");;
-				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate + "&nbsp;&nbsp;");
+				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate + "&nbsp;&nbsp;"+"추천 "+resp[i].recommend + "&nbsp;&nbsp;");
 				let nestedReplyPrintBtn = $("<a>").attr("class", "nestedReplyPrintBtn colorDarkgray").html("답글 보기");
 				let nestedReplyBtn = $("<a>").attr("class", "nestedReplyBtn colorDarkgray").html("답글 쓰기");
 
@@ -61,7 +61,7 @@ $(document).ready(function() {
 					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
 					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
 
-					if (resp[i].recId !== undefined) {
+					if (resp[i].recId !== undefined ) { //&& resp[i].recId==loginID
 						recommendBtn.addClass("btnClicked");
 					}
 					row.append(replyBtns.append(recommendBtn));

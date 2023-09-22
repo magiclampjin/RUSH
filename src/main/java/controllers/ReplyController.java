@@ -66,7 +66,7 @@ public class ReplyController extends HttpServlet {
 				String writer = (String) request.getSession().getAttribute("loginID");
 				String nickname = (String) request.getSession().getAttribute("loginNickname");
 				
-				dao.insert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0, null, 0));
+				dao.insert(new ReplyDTO(0, postSeq, writer, nickname, contents, null, 0));
 				
 			} else if(cmd.equals("/load.reply")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
@@ -105,6 +105,8 @@ public class ReplyController extends HttpServlet {
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				int result = dao.deletetRecommend(replySeq, loginId);
 				pw.append(gsonDefault.toJson(result));
+				
+				
 			} else if(cmd.equals("/nestedInsert.reply")) {
 				String writer = (String) request.getSession().getAttribute("loginID");
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
@@ -112,8 +114,9 @@ public class ReplyController extends HttpServlet {
 				String contents = request.getParameter("contents");
 				int replySeq = Integer.parseInt(request.getParameter("replySeq"));	
 				
-				int result = dao.nestedInsert(new ReplyDTO(0, writer, postSeq, nickname, contents, null, 0, null, replySeq));
+				int result = dao.nestedInsert(new ReplyDTO(0, postSeq, writer, nickname, contents, null, replySeq));
 				pw.append(gsonDefault.toJson(result));
+				
 			} else if(cmd.equals("/nestedPrint.reply")) {
 				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
 				String loginId = (String) request.getSession().getAttribute("loginID");
