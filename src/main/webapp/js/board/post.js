@@ -77,13 +77,18 @@ $(document).ready(function() {
 	let cpage = $("#cpage").val();
 	let category = $("#category").val();
 	let postSeq = $("#postSeq").val();
+	let search = $("#search").val();
+	let keyword = $("#keyword").val();
 
 	// 댓글창 로드
 	$("#replys").html(replyReload(postSeq));
 
-
-	$("#goList").on("click", function() {
-		location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
+	$(".goList").on("click", function() {
+		if(search == null || search == ""){
+			location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
+		}else{
+			location.href = "/listing.board?cpage=" + cpage + "&category=" + category +"&search="+search+"&keyword="+keyword;
+		}
 	});
 
 	$("#replyInsertBtn").on("click", function() {
@@ -196,8 +201,17 @@ $(document).ready(function() {
 	});
 
 	// 게시글 삭제
-	$("#delete").on("click", function() {
-		location.href = "delete.board?postSeq=" + postSeq + "&category=" + category;
+	$(".delete").on("click", function() {
+		location.href = "/delete.board?postSeq=" + postSeq + "&category=" + category;
+	});
+	
+	// 게시글 수정
+	$(".update").on("click",function(){
+		if(search == null || search == ""){
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
+		}else{
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&search="+search+"&keyword="+keyword;
+		}
 	});
 
 	// 댓글 삭제
@@ -342,7 +356,7 @@ $(document).ready(function() {
 				if (success == 1)
 					recbtn.removeClass("btnClicked");
 				else {
-					alert("삭제된 댓글입니다.");
+					alert("게시글 또는 댓글이 삭제되었습니다.");
 					replyReload(postSeq);
 				}
 			});
@@ -360,7 +374,7 @@ $(document).ready(function() {
 				if (success == 1)
 					recbtn.addClass("btnClicked");
 				else {
-					alert("삭제된 댓글입니다.");
+					alert("게시글 또는 댓글이 삭제되었습니다.");
 					replyReload(postSeq);
 				}
 			});
@@ -458,7 +472,7 @@ $(document).ready(function() {
 			dataType: "json"
 		}).done(function(success) {
 			if (success != 1)
-				alert("삭제된 댓글입니다.");
+				alert("게시글 또는 댓글이 삭제되었습니다.");
 			nestedReplyParentSeq = null;
 			nestedReplyObj = null;
 			$("#replys").html("");
