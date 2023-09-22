@@ -215,7 +215,7 @@
 
 	                  <div class="idBox">
 	                     <p id="id" class="fontEnglish">ID</p>
-	                     <input type="text" id="inputId" class="fontEnglish" name="id" value="1" placeholder="Enter your ID">
+	                     <input type="text" id="inputId" class="fontEnglish" name="id" placeholder="Enter your ID">
 	                  </div>
 	                  <div class="pwBox">
 	                     <p id="pw" class="fontEnglish">Password</p>

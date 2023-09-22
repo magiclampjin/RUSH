@@ -66,10 +66,10 @@ a{
 				
 				let divColRank = $("<div>");
 				if(i<3){
-					divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center")
+					divColRank.addClass("col-2 colorPink fw900 fontEnglish fs-3 d-flex justify-content-center align-self-center")
 					divColRank.append(i+1);
 				}else{
-					divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center")
+					divColRank.addClass("col-2 text-white fw900 fontEnglish fs-3 d-flex justify-content-center align-self-center")
 					divColRank.append(i+1);
 				}			
 				
@@ -112,11 +112,27 @@ a{
 				divColInfo.append(divInfoRight);
 				
 				let divColPlayInfo = $("<div>");
-				divColPlayInfo.addClass("col-3 d-none d-md-flex text-white fontEnglish fs-3 fw500 align-self-center");
-				divColPlayInfo.append("W 50% M 50%");
+				divColPlayInfo.addClass("col-3 d-none d-md-flex");
+				
+				let letter1 = $("<span>");
+				letter1.addClass("text-white fontEnglish fs-3 fw900 align-self-center");
+				letter1.html("W &nbsp;");
+				let letter2 = $("<span>");
+				letter2.addClass("text-white fontEnglish fs-5 fw500 align-self-center");
+				letter2.html("50%&nbsp;&nbsp;");
+				let letter3 = $("<span>");
+				letter3.addClass("text-white fontEnglish fs-3 fw900 align-self-center");
+				letter3.html("M &nbsp;");
+				let letter4 = $("<span>");
+				letter4.addClass("text-white fontEnglish fs-5 fw500 align-self-center");
+				letter4.html("50% ");
+				divColPlayInfo.append(letter1);
+				divColPlayInfo.append(letter2);
+				divColPlayInfo.append(letter3);
+				divColPlayInfo.append(letter4);
 				
 				let divColBtn = $("<div>");
-				divColBtn.addClass("col-3 align-self-center");
+				divColBtn.addClass("col-2 align-self-center d-flex justify-content-center");
 				divColBtn.html("<a href='/moveToGamePage.game?game="+data[i]["gName"]+"'><button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button></a>");
 				
 				divRow.append(divColRank);
@@ -132,7 +148,7 @@ a{
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
-				<a href="#">
+				<a href="/index.jsp">
 					<div class="logo fontLogo colorWhite">RUSH</div>
 				</a>
 				<nav class="navbar navbar-expand navbar-light colorWhite">
@@ -146,54 +162,58 @@ a{
 									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
+										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
+										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
 									</ul></li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> AWARDS </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
+									class="nav-link text-white fontEnglish" href="http://localhost/board/awards.jsp"> AWARDS </a>
+									</li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
+									class="nav-link text-white fontEnglish"
+									href="/listing.board?cpage=1" id="navbarDropdownMenuLink"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										BOARD </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
+										<li><a class="dropdown-item"
+											href="/listing.board?cpage=1">자유게시판</a></li>
+										<li><a class="dropdown-item fontEnglish"
+											href="/listing.qna?cpage=1">Q&A</a></li>
+										<li><a class="dropdown-item" href="http://localhost/board/awards.jsp">명예의 전당</a></li>
 									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> LOGIN </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
+								<c:choose>
+									<c:when test="${loginID == null }">
+										<li class="nav-item dropdown col-3 text-end p8"><a
+											class="text-white fontEnglish"
+											href="http://localhost/member/login.jsp"> LOGIN </a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item dropdown col-3 text-end"><a
+											class="nav-link text-white fontEnglish"
+											href="http://localhost/member/login.jsp"
+											id="navbarDropdownMenuLink" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+										</a>
+											<ul class="dropdown-menu p-0"
+												aria-labelledby="navbarDropdownMenuLink">
+												<li><a class="dropdown-item fontEnglish" href="#">MyPage</a></li>
+												<li><a class="dropdown-item fontEnglish" href="http://localhost/logout.member">Log Out</a></li>
+											</ul></li>
+									</c:otherwise>
+								</c:choose>
+
+
+
+								<script type="text/javascript">
+									console.log("${loginID }")
+								</script>
 							</ul>
 						</div>
 					</div>
 				</nav>
 			</div>
 		</div>
+		
 		<div class="container-fluid g-0 bColorBlack">
 			<div class="gameContainer p-4">
 				<div class="row">
@@ -203,8 +223,8 @@ a{
 				</div>
 				<div class="row mt40">
 					<hr class="colorWhite">
-					<div class="col-1">
-						<p class="text-white fontKorean">순위</p>
+					<div class="col-2">
+						<p class="text-white fontKorean d-flex justify-content-center">순위</p>
 					</div>
 					<div class="col-8 col-md-5">
 						<p class="text-white fontKorean">게임 정보</p>
@@ -212,7 +232,7 @@ a{
 					<div class="col-3 d-none d-md-flex">
 						<p class="text-white fontKorean">플레이 정보</p>
 					</div>
-					<div class="col-3">
+					<div class="col-2">
 						<p class="text-white fontKorean">게임 바로가기</p>
 					</div>
 					<hr class="colorWhite">
