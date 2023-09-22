@@ -369,4 +369,25 @@ public class BoardDAO {
 		
 		}
 	}
+	
+//	내가쓴 게시물 불러오기
+	public List<BoardDTO> myWriteList(String id) throws Exception{
+		String sql ="select * from common_board where cbID = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<BoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					list.add(new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbCategory"),
+							rs.getString("cbNickname"), rs.getString("cbTitle"), rs.getString("cbContent"),
+							rs.getTimestamp("cbWriteDate"), rs.getInt("cbView")));
+				
+				}
+				return list;
+			}
+			
+		}
+	}
 }

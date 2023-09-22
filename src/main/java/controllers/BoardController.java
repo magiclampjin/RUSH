@@ -333,6 +333,12 @@ public class BoardController extends HttpServlet {
 				rankerList = gdao.selectUserByGame(game);
 				System.out.println(rankerList);
 				pw.append(gson.toJson(rankerList));
+			}else if(cmd.equals("/myWriteList.board")) {
+				String id = (String) request.getSession().getAttribute("loginID");
+				
+				List<BoardDTO> list = dao.getInstance().myWriteList(id);
+				pw.append(gson.toJson(list));
+			
 			}
 
 		} catch (Exception e) {

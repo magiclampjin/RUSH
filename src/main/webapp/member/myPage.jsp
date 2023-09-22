@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/member/myPage.css">
+<link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/member/infoModified.js"></script>
 
 <link
@@ -51,6 +52,40 @@ a {
 
 .mainTitle {
 	padding-left: 5px;
+}
+.tabBox{border:1px solid black; border-radius:5px;}
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none; border-bottom:1px solid black;
+  display:flex;
+}
+ul.tabs li{
+  background: none;
+  color: #222;
+  display: inline-block;
+  padding: 10px 0px;
+  cursor: pointer;
+  width:25%;
+  text-align:center;
+}
+
+ul.tabs li.current{
+  background: #ededed;
+  background-color: #131217;
+  color:#ffffff;
+}
+
+.tab-content{
+  display: none;
+  padding: 15px;
+  height: 600px;
+  margin:0px;
+}
+
+.tab-content.current{
+  display: inherit;
+  
 }
 </style>
 </head>
@@ -184,6 +219,45 @@ a {
 				<div class="memberInfo">
 					<div class="tabBox">
 						<!-- 탭박스 -->
+						<ul class="tabs">
+						    <li class="tab-link current" id="myWrite" data-tab="tab-1">내가 쓴 글</li>
+						    <li class="tab-link" data-tab="tab-2">북마크</li>
+						    <li class="tab-link" data-tab="tab-3">즐겨찾기</li>
+						    <li class="tab-link" data-tab="tab-4">게임기록</li>
+						</ul>
+						
+					    <div id="tab-1" class="tab-content current">
+					    	<div class="boardHeader">
+	                            <div class="num">번호</div>
+								<div class="title">제목</div>
+								<div class="writer">작성자</div>
+								<div class="date">작성일</div>
+								<div class="view">조회</div>
+								<div class="recommend">추천</div>
+								<div class="file">파일</div>
+	                        </div>
+					    	<div class="post">
+								<div class="num fontEnglish">번호</div>
+								<div class="title">
+									<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }">
+										<div class="mainTitle">제목</div>
+									</a>
+								<div class="replyCnt colorPink fontEnglish">댓글수</div>
+								</div>
+								<div class="writer">닉네임</div>
+								<div class="date">작성일</div>
+								<div class="view fontEnglish">조회수</div>
+								<div class="recommend fontEnglish">추천수</div>
+								<c:if test="${post.fCount!=0 }">
+									<div class="file">
+										<i class="fa-solid fa-paperclip"></i>
+									</div>
+								</c:if>
+					    	</div>
+					    </div>
+					    <div id="tab-2" class="tab-content">tab content2</div>
+					    <div id="tab-3" class="tab-content">tab content3</div>
+					    <div id="tab-4" class="tab-content">tab content4</div>
 					</div>
 				</div>
 
@@ -196,6 +270,31 @@ a {
 			</div>
 		</div>
 
+		<script>
+		$(document).ready(function(){
+			  
+		  $('ul.tabs li').click(function(){
+		    var tab_id = $(this).attr('data-tab');
+
+		    $('ul.tabs li').removeClass('current');
+		    $('.tab-content').removeClass('current');
+
+		    $(this).addClass('current');
+		    $("#"+tab_id).addClass('current');
+		  })
+
+		})
+		
+		$("#myWrite").on("click",function(){
+			$.ajax({
+				url:"/myWriteList.board",
+				dataType:"json"
+			}).done(function(resp){
+				console.log(resp);
+			});
+		});
+			
+		</script>
 
 
 
