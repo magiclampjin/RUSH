@@ -88,6 +88,7 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/load.board")) {
 				String cpage = request.getParameter("cpage");
+				System.out.println(cpage);
 		        int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
@@ -209,7 +210,7 @@ public class BoardController extends HttpServlet {
 
 				String cpage = request.getParameter("cpage");
 				System.out.println(cpage);
-				int currentPage = (cpage == null) ? 1 : Integer.parseInt(cpage);
+				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				request.getSession().setAttribute("lastPageNum", currentPage);
 
 				List<BoardDTO> list = new ArrayList<>();
