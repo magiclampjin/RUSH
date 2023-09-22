@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -73,13 +74,23 @@ public class ReplyController extends HttpServlet {
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				List<ReplyDTO> replys = dao.selectAll(postSeq,loginId);
 
+				
+				// 페이지 네이션
 				String replyPage = request.getParameter("replyPage");
 				int currentReplyPage = (replyPage == null) ? 1 : Integer.parseInt(replyPage);
 				request.setAttribute("lastReplyPageNum", currentReplyPage);
 				request.setAttribute("recordCountPerPage", Constants.REPLY_COUNT_PER_PAGE);
 				request.setAttribute("naviCountPerPage", Constants.REPLY_NAVI_COUNT_PER_PAGE);
+				// 여기까지 페이지 네이션
 				
-				pw.append(gsonTs.toJson(replys));
+				
+				List<ReplyDTO> replyRecList = dao.selectReplyRecommCnt(postSeq, loginId);
+				
+				List<Object> result = new ArrayList<>();
+				result.add(replys);
+				result.add(replyRecList);
+				
+				pw.append(gsonTs.toJson(result));
 	
 			} else if(cmd.equals("/update.reply")) {
 				// 댓글 수정
@@ -98,13 +109,23 @@ public class ReplyController extends HttpServlet {
 				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				int result = dao.insertRecommend(replySeq, loginId);
-				pw.append(gsonDefault.toJson(result));
+				int recCnt = dao.countRecommend(replySeq);
+				List<Integer> list = new ArrayList<>();
+				list.add(result);
+				list.add(recCnt);
+				
+				pw.append(gsonDefault.toJson(list));
+				
 			} else if(cmd.equals("/deleteReplyRecommend.reply")) {
 				// 댓글 좋아요 취소
 				int replySeq = Integer.parseInt(request.getParameter("replySeq"));
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				int result = dao.deletetRecommend(replySeq, loginId);
-				pw.append(gsonDefault.toJson(result));
+				int recCnt = dao.countRecommend(replySeq);
+				List<Integer> list = new ArrayList<>();
+				list.add(result);
+				list.add(recCnt);
+				pw.append(gsonDefault.toJson(list));
 				
 				
 			} else if(cmd.equals("/nestedInsert.reply")) {
