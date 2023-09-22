@@ -77,13 +77,18 @@ $(document).ready(function() {
 	let cpage = $("#cpage").val();
 	let category = $("#category").val();
 	let postSeq = $("#postSeq").val();
+	let search = $("#search").val();
+	let keyword = $("#keyword").val();
 
 	// 댓글창 로드
 	$("#replys").html(replyReload(postSeq));
 
-
 	$(".goList").on("click", function() {
-		location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
+		if(search == null || search == ""){
+			location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
+		}else{
+			location.href = "/listing.board?cpage=" + cpage + "&category=" + category +"&search="+search+"&keyword="+keyword;
+		}
 	});
 
 	$("#replyInsertBtn").on("click", function() {
@@ -197,12 +202,16 @@ $(document).ready(function() {
 
 	// 게시글 삭제
 	$(".delete").on("click", function() {
-		location.href = "delete.board?postSeq=" + postSeq + "&category=" + category;
+		location.href = "/delete.board?postSeq=" + postSeq + "&category=" + category;
 	});
 	
 	// 게시글 수정
 	$(".update").on("click",function(){
-		location.href = "updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
+		if(search == null || search == ""){
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
+		}else{
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&search="+search+"&keyword="+keyword;
+		}
 	});
 
 	// 댓글 삭제
