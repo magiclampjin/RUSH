@@ -270,14 +270,14 @@ a {
                             <div class="search">
                                 <form action="/listing.qna">
                                     <div class="category">
-                                        <select id="selectOption" name="searchBy" class="form-select" aria-label="Default select example">
-                                            <option value="qbTitle">제목</option>
+                                        <select name="searchBy" class="form-select" aria-label="Default select example">
+                                            <option value="qbTitle" selected>제목</option>
                                             <option value="mNickname">작성자</option>
                                             <option value="qbContents">내용</option>
                                         </select>
                                     </div>
                                     <div class="keyword">
-                                        <input type="text" id="keyword" name="keyword" value=${param.keyword }>
+                                        <input type="text" id="keyword" name="keyword" value=${keyword }>
                                     </div>
                                     <div class="sertchBtn">
                                         <input type="submit" class="boardBtn bColorGreen" value="검색">
@@ -292,14 +292,18 @@ a {
                     </div>
                 </div>
             </div>
+           
+            <input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
+			<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
+			<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
+			<input type="hidden" id="lastPageNum" value="${lastPageNum }">
+			<input type="hidden" id="searchBy" value="${searchBy }">
+			<input type="hidden" id="searchByKeyword" value="${keyword }">
+			
         </div>
         
-        <input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
-		<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
-		<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
-		<input type="hidden" id="lastPageNum" value="${lastPageNum }">
-		<input type="hidden" id="searchBy" value="${searchBy }">
-		<input type="hidden" id="searchByKeyword" value="${keyword }">
+        
+        
         
         <a href="#">
             <div class="upArrow bColorPink colorWhite">
