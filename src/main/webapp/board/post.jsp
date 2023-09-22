@@ -20,6 +20,14 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/board/post.js"></script>
 
+<%-- <c:choose>
+	<c:when test="${empty loginId}">
+		<script>
+			alert("로그인 후 이용 가능합니다.");
+			
+		</script>
+	</c:when>
+</c:choose> --%>
 <style>
 * {
 	box-sizing: border-box;
@@ -400,6 +408,9 @@ a {
 									<c:choose>
 										<c:when test="${ loginID eq post.writer}">
 											<button class="postBtns bColorGreen update">수정</button>
+											<button class="postBtns bColorGreen delete">삭제</button>
+										</c:when>
+										<c:when test="${loginID eq 'admin' }">
 											<button class="postBtns bColorGreen delete">삭제</button>
 										</c:when>
 									</c:choose>

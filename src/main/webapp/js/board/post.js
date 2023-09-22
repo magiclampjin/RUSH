@@ -58,7 +58,21 @@ $(document).ready(function() {
 					replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 
 					row.append(replyBtns).append(replyBtnsMini);
-				} else {
+				} else if(loginID == "admin"){
+					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
+
+					let btncover = $("<div>").attr("class", "defaultCover");
+					let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
+					replyBtns.append(btncover.append(deleteBtn));
+
+
+					let btncovermini = $("<div>").attr("class", "defaultCover");
+					let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
+					let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+					replyBtnsMini.append(btncovermini.append(deleteBtnMini));
+
+					row.append(replyBtns).append(replyBtnsMini);
+				}else {
 					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
 					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");			
 					row.append(replyBtns.append(recommendBtn));
@@ -71,19 +85,6 @@ $(document).ready(function() {
 					}					
 				}
 				
-				
-				/*if(replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt && typeof temp !== "undefined"){
-					console.log("댓글 번호: "+resp[0][i].seq);
-					console.log("댓글 내용: "+resp[0][i].contents);
-					console.log("좋아요 눌린 댓글 번호: "+resp[1][replyRecommCheckIdx].seq);
-					console.log("좋아요 누른 사람: "+resp[1][replyRecommCheckIdx].recId);
-					console.log("로그인한 사람: "+loginID);
-					console.log("--------------------------");
-					if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
-						temp.addClass("btnClicked");
-						replyRecommCheckIdx++;
-					}
-				}*/
 				let replyId = $("<input>").attr("type", "hidden").val(resp[0][i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
@@ -560,6 +561,20 @@ $(document).ready(function() {
 						let cancelMini = $("<div>").attr("class", "replyCancel bColorGreen fw400 fs17").html("<i class='fa-solid fa-xmark'></i>");
 						let saveMini = $("<div>").attr("class", "replySave bColorGreen fw400 fs17").html("<i class='fa-solid fa-check'></i>");
 						replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
+
+						row.append(replyBtns).append(replyBtnsMini);
+					}  else if(loginID == "admin"){
+						
+						replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
+
+						let btncover = $("<div>").attr("class", "defaultCover");
+						let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
+						replyBtns.append(btncover.append(deleteBtn));
+
+						let btncovermini = $("<div>").attr("class", "defaultCover");
+						let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
+						let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+						replyBtnsMini.append(btncovermini.append(deleteBtnMini));
 
 						row.append(replyBtns).append(replyBtnsMini);
 					} else {
