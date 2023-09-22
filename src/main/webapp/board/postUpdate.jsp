@@ -171,6 +171,7 @@ a {
 							<input type="hidden" name="search" value="${search}">
 							<input type="hidden" name="keyword" value="${keyword}">
 							<textarea id="deleteFiles" style="display:none;" name="deleteFiles"></textarea>
+							<textarea id="deleteImgs" style="display:none;" name="deleteImgs"></textarea>
 							<div class="writeTitle">자유게시글 게시글 수정</div>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요" id="title" value="${post.title}">

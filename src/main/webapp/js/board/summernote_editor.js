@@ -3,7 +3,6 @@ $(document).ready(function() {
 	console.log($(".dropdown-toggle::after"))
 	$(".dropdown-toggle::after").css("display", "none")
 	
-	let deleteImgList = [];
 	$('#summernote').summernote({
 		placeholder: '게시글을 입력해주세요',
 		tabsize: 2,
@@ -51,7 +50,8 @@ $(document).ready(function() {
 			onMediaDelete: function ($target, editor, $editable) {
 	           
             	let deletedImageUrl = $target.attr('src');
-            	deleteImgList.push(deletedImageUrl);
+            	let prev = $("#deleteImgs").html();
+				$("#deleteImgs").html(prev+":"+deletedImageUrl);
 				/*$.ajax({
 					url: "/deleteFiieName.file",
 					data:{
@@ -60,7 +60,6 @@ $(document).ready(function() {
 					type:"post",
 					dataType:"json"
 				});*/
-	              
 	        }
 		}
 	});

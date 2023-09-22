@@ -165,6 +165,7 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				// 게시글 수정 시 수정된 파일 DB, realpath에서 삭제
 				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
 				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
 					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
@@ -173,7 +174,21 @@ public class BoardController extends HttpServlet {
 						File deleteFilePath = new File(uploadPath+"/"+sysname);
 					}	
 				}
-						
+				
+				// 게시글 수정 시 수정된 이미지 DB, realpath에서 삭제
+				String[] deleteImgNameStr = multi.getParameter("deleteImgs").split(":");
+				for(int i=0; i<deleteImgNameStr.length-1; i++) {
+					String sysname = deleteImgNameStr[i+1];
+					
+					sysname = sysname.substring(7);
+					System.out.println(sysname);
+					
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteImgfilepath = new File(uploadPath+"/"+sysname);
+						deleteImgfilepath.delete();
+					}	
+				}					
 				
 				String search = multi.getParameter("search");
 				String keyword = multi.getParameter("keyword");
