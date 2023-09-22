@@ -176,5 +176,42 @@ public class GameDAO {
 		}
 	}
 	
+	public List<String> selectGameName() throws Exception {
+		String sql = "select Gname from game";
+		List<String> list = new ArrayList<>();
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			
+			while(rs.next()) {
+				String gName = rs.getString("gName");
+				list.add(gName);
+			}
+			return list;
+		}
+	}
+	
+	public List<GameRecordDTO> selectUserByGame(String gName) throws Exception {
+		String sql = "select * from rankerUser where gName = ? order by grScore desc limit 0, 5";
+		List<GameRecordDTO> list = new ArrayList<>();
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, gName);
+			
+			try(ResultSet rs = pstat.executeQuery();) {
+				while(rs.next()) {
+					String mId = rs.getString("mId");
+					gName = rs.getString("gName");
+					int grScore = rs.getInt("grScore");
+					int mLevel = rs.getInt("mLevel");
+					list.add(new GameRecordDTO(mId, gName, grScore, mLevel));
+				}
+				return list;
+			}
+		}
+	}
+	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 }
