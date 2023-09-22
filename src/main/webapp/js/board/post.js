@@ -11,8 +11,9 @@ $(document).ready(function() {
 			let postWriter = $("#postWriterName").val();
 			let loginID = $("#loginID").val();
 			let replys = $("#replys");
-			let replyRecommCnt = resp[1].length -1;
+			let replyRecommCnt = resp[1].length;
 			let replyRecommCheckIdx = 0;
+
 			for (let i = 0; i < resp[0].length; i++) {
 				let replyTag = $("<div>").attr("class", "col-12 reply");
 				let row = $("<div>").attr("class", "row g-0");
@@ -59,19 +60,30 @@ $(document).ready(function() {
 					row.append(replyBtns).append(replyBtnsMini);
 				} else {
 					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
-					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
-
-					if(replyRecommCnt > 0){
+					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");			
+					row.append(replyBtns.append(recommendBtn));
+					
+					if(replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt){
 						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
 							recommendBtn.addClass("btnClicked");
-							if(replyRecommCheckIdx < replyRecommCnt)
-								replyRecommCheckIdx++;
+							replyRecommCheckIdx++;
 						}
-					}
-					
-					row.append(replyBtns.append(recommendBtn));
+					}					
 				}
-
+				
+				
+				/*if(replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt && typeof temp !== "undefined"){
+					console.log("댓글 번호: "+resp[0][i].seq);
+					console.log("댓글 내용: "+resp[0][i].contents);
+					console.log("좋아요 눌린 댓글 번호: "+resp[1][replyRecommCheckIdx].seq);
+					console.log("좋아요 누른 사람: "+resp[1][replyRecommCheckIdx].recId);
+					console.log("로그인한 사람: "+loginID);
+					console.log("--------------------------");
+					if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
+						temp.addClass("btnClicked");
+						replyRecommCheckIdx++;
+					}
+				}*/
 				let replyId = $("<input>").attr("type", "hidden").val(resp[0][i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
@@ -552,12 +564,7 @@ $(document).ready(function() {
 						row.append(replyBtns).append(replyBtnsMini);
 					} else {
 						replyBtns = $("<div>").attr("class", "col-2 replyBtns");
-						let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
-
-						if (resp[i].recId !== undefined) {
-							recommendBtn.addClass("btnClicked");
-						}
-						row.append(replyBtns.append(recommendBtn));
+						row.append(replyBtns);
 					}
 
 					let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");
