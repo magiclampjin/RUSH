@@ -247,11 +247,13 @@ public class BoardController extends HttpServlet {
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountTitle(category, keyword));
+
 					} else if (search.equals("writer")) {
 						list = dao.selectByWriter(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountWriter(category, keyword));
+
 					} else if (search.equals("content")) {
 						list = dao.selectByContents(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
