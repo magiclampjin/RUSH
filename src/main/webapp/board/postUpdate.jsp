@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH-게시글 작성</title>
+<title>RUSH-게시글 수정</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
 <!-- 스타일 시트 & js -->
@@ -156,38 +156,71 @@ a {
 							<div class="writeBox">
 								<a href="/listing.board?category=${category }&cpage=1"><input
 									class="writebtn bColorGreen" type="button" value="목록으로"></a>
-								<input class="writebtn bColorGreen" type="submit" value="작성">
+								<input class="writebtn bColorGreen" type="submit" value="수정">
 							</div>
 
 						</form>
 						<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
 					</c:when>
 					<c:otherwise>
-						<form action="/insert.board" method="post"
+						<form action="/update.board" method="post"
 							enctype="multipart/form-data" id="boardForm">
 							<input type="hidden" value="${category }" name="category">
-							<c:choose>
-								<c:when test="${loginID == 'admin' }">
-									<div class="writeTitle">공지게시글 작성</div>
-								</c:when>
-								<c:otherwise>
-									<div class="writeTitle">자유게시글 작성</div>
-								</c:otherwise>
-							</c:choose>
-
+							<input type="hidden" value="${post.seq}" name="postSeq">
+							<input type="hidden" value="${requestScope.cpage}" name="cpage">
+							<input type="hidden" name="search" value="${search}">
+							<input type="hidden" name="keyword" value="${keyword}">
+							<div class="writeTitle">자유게시글 게시글 수정</div>
 							<input type="text" class="inputTitle" name="title"
-								placeholder="제목을 입력하세요" id="title">
+								placeholder="제목을 입력하세요" id="title" value="${post.title}">
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
 									value="+"> <span>파일첨부</span>
-								<div id="fileContainer"></div>
+								<div id="fileContainer">
+									<c:choose>
+										<c:when test="${files.size()>0}">
+											<c:forEach var="i" items="${files}" varStatus="status">
+												<div>
+													
+													<input type="file" style="display:none">
+													<span style="display: inline; margin-top: 10px;" id="file${status.index}">${i.originName}</span>
+													<input value="x" type="button" class="del filedel" style="border: none; width: 30px; height: 30px;">
+													<input type="hidden" value="${i.seq}">
+												</div>
+											</c:forEach>
+										</c:when>
+									</c:choose>
+								
+									<script>
+										$(document).on("click", ".filedel", function() {
+											let fileSeq = $(this).next().val();
+											$.ajax({
+												url:"delete.file",
+												data:{
+													fileSeq : fileSeq
+												},
+												type:"post"
+											});
+										});
+										
+									</script>
+								</div>
 							</div>
 							<textarea id="summernote" class="content" id="content" rows="35"
-								cols="100" placeholder="내용을 입력하세요." name="contents"></textarea>
+								cols="100" placeholder="내용을 입력하세요." name="contents">${post.contents}</textarea>
 							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input
-									class="writebtn bColorGreen" type="button" value="목록으로"></a>
-								<input class="writebtn bColorGreen" type="submit" value="작성">
+								<c:choose>
+									<c:when test="${not empty search}">
+										<a href="/listing.board?category=${category }&cpage=${requestScope.cpage}&search=${search}&keyword=${keyword}">
+										<input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:when>
+									<c:otherwise>
+										<a href="/listing.board?category=${category }&cpage=${requestScope.cpage}">
+										<input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:otherwise>
+								</c:choose>
+								
+								<input class="writebtn bColorGreen" type="submit" value="수정">
 							</div>
 						</form>
 					</c:otherwise>

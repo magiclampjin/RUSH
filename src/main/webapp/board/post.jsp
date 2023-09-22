@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>${post.title}</title>
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/post.css">
@@ -347,27 +347,21 @@ a {
 						<c:when test="${loginID ne post.writer}">
 
 							<div class="col-12 topBtns">
-								<button id="postRec">
-									<i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천
-								</button>
-								<button id="bookmark">
-									<i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크
-								</button>
+								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
 
 								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
 								<c:choose>
 									<c:when test="${not empty postRec}">
 										<script>
-											$("#postRec").attr("class",
-													"btnClicked");
+											$("#postRec").attr("class",	"btnClicked");
 										</script>
 									</c:when>
 								</c:choose>
 								<c:choose>
 									<c:when test="${not empty bookmark}">
 										<script>
-											$("#bookmark").attr("class",
-													"btnClicked");
+											$("#bookmark").attr("class", "btnClicked");
 										</script>
 									</c:when>
 								</c:choose>
@@ -405,34 +399,34 @@ a {
 								<div class="d-none d-md-flex">
 									<c:choose>
 										<c:when test="${ loginID eq post.writer}">
-											<button class="postBtns bColorGreen" id="update">수정</button>
-											<button class="postBtns bColorGreen" id="delete">삭제</button>
+											<button class="postBtns bColorGreen update">수정</button>
+											<button class="postBtns bColorGreen delete">삭제</button>
 										</c:when>
 									</c:choose>
-									<button class="postBtns bColorBlue colorWhite" id="goList">목록</button>
+									<button class="postBtns bColorBlue colorWhite goList">목록</button>
 								</div>
 
 								<div class="d-md-none">
 									<c:choose>
 										<c:when test="${ loginID eq post.writer}">
-											<button class="postBtnsMini bColorGreen" id="update">
+											<button class="postBtnsMini bColorGreen update">
 												<i class="fa-solid fa-pen-to-square"></i>
 											</button>
-											<button class="postBtnsMini bColorGreen" id="delete">
+											<button class="postBtnsMini bColorGreen delete">
 												<i class="fa-solid fa-trash-can"></i>
 											</button>
 										</c:when>
 									</c:choose>
-									<button class="postBtnsMini bColorBlue colorWhite" id="goList">
+									<button class="postBtnsMini bColorBlue colorWhite goList">
 										<i class="fa-solid fa-bars" style="color: #ffffff;"></i>
 									</button>
 								</div>
 
-								<input type="hidden" id="cpage" value="${cpage}"> <input
-									type="hidden" id="category" value="${category}">
-
+								<input type="hidden" id="cpage" value="${cpage}"> 
+								<input type="hidden" id="category" value="${category}">
+								<input type="hidden" id="search" value="${search}">
+								<input type="hidden" id="keyword" value="${keyword}">
 							</div>
-
 						</div>
 					</div>
 					<div class="row g-0">
@@ -452,66 +446,17 @@ a {
 						<div class="col-12">
 							<input type="hidden" id="loginID" value="${loginID}"> <input
 								type="hidden" id="postWriterName" value="${post.writer}">
-							<div class="row g-0 replys mb200 justify-content-end" id="replys">
-							
-			
-	<!-- 						<div class="col-10 nestedReply">
-								<input type="hidden" id="postSeq" value="댓글번호">
-								<div class="col-10" id="nestedReplyInput" contenteditable></div>
-								
-								<div class="d-none d-xl-flex col-xl-2 btnCover nestedCover">
-									<button class="fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyCancel">취소</button>
-									<button class="fw400 fs25 colorDarkgray nestedReplyBtns nestedReplyInsert">등록</button>
-								</div>
-								
-
-								 <div class="col-2 d-xl-none mininested">
-									<button class="fw400 fs25 colorDarkgray nestedReplyCancel">취소</button>
-									<button class="fw400 fs25 colorDarkgray nestedReplyInsert">등록</button>			
-								 </div>
+							<div class="row g-0 replys  justify-content-end" id="replys">
 							</div>
-								 -->
-							
-							
-							
-							
-							
-							
-								<!-- 	<div class="col-12 reply">
-									<div class="d-flex align-items-end mb10">
-										<div class="writer fw500 fs20">writer01</div>
-									</div>
-									<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
-									<div class="replyDetailInfo fw400 fs15 colorDarkgray">
-										2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
-											class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
-									</div>
-								</div>
-								<div class="col-12 nestedReply">
-									<div class="row g-0">
-										<div
-											class="col-1 d-flex justify-content-center align-items-center">
-											<i class="fa-solid fa-arrow-turn-up fa-rotate-90 fa-xl"></i>
-										</div>
-										<div class="col-11">
-											<div class="d-flex align-items-end mb10">
-												<div class="writer fw500 fs20">writer01</div>
-											</div>
-											<div class="contents fw400 fs20 mb10">댓글 내용 영역입니다.</div>
-											<div class="replyDetailInfo fw400 fs15 colorDarkgray">
-												2023.09.17 &nbsp;18:41 &nbsp;<a href="#"
-													class="nestedReplyBtn colorDarkgray">답글 쓰기</a>
-											</div>
-										</div>
-									</div>
-								</div> -->
-							</div>
+							<div id="pagination" class="mb200"></div>
+							<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
+							<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }"> 
+							<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }"> 
+							<input type="hidden" id="lastPageNum" value="${lastPageNum }"> 
 						</div>
 					</div>
 				</div>
 			</div>
-
-
 
 
 			<a href="#">
