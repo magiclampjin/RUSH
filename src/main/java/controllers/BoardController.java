@@ -3,6 +3,8 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -88,7 +90,6 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/load.board")) {
 				String cpage = request.getParameter("cpage");
-				System.out.println(cpage);
 		        int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 
 				int postSeq = Integer.parseInt(request.getParameter("seq"));
@@ -113,9 +114,11 @@ public class BoardController extends HttpServlet {
 
 				List<FileDTO> files = fdao.selectForPost(postSeq);
 				request.setAttribute("files", files);
-				request.setAttribute("search",search);
-				request.setAttribute("keyword",keyword);
-
+				
+				if(search != null) {
+					request.setAttribute("search",search);
+					request.setAttribute("keyword",keyword);
+				}
 				request.getRequestDispatcher("/board/post.jsp").forward(request, response);
 
 			} else if (cmd.equals("/updateLoad.board")) {
@@ -124,6 +127,8 @@ public class BoardController extends HttpServlet {
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				String category = request.getParameter("category");
+				String search = request.getParameter("search");
+				String keyword = request.getParameter("keyword");
 				
 				List<FileDTO> files = fdao.inPostFilesList(postSeq);
 				BoardDTO post = dao.selectPost(postSeq);
@@ -133,6 +138,10 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
 				
+				if(search != null) {
+					request.setAttribute("search",search);
+					request.setAttribute("keyword",keyword);
+				}
 				request.getRequestDispatcher("/board/postUpdate.jsp").forward(request, response);
 				
 
@@ -154,7 +163,11 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				String search = multi.getParameter("search");
+				String keyword = multi.getParameter("keyword");
 
+				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
+				
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
 				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
@@ -183,11 +196,12 @@ public class BoardController extends HttpServlet {
 					request.getSession().removeAttribute("fileSeq");
 				}
 
-				
-				response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage);
-			
-				
-				
+				if(search != null) {
+					response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage+"&search="+search+"&keyword="+keyword);
+				} else {
+					response.sendRedirect("/load.board?seq="+postSeq+"&category=" + category+"&cpage="+cpage);
+				}
+						
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
@@ -209,7 +223,6 @@ public class BoardController extends HttpServlet {
 				category = (category == null) ? "rhythm" : category;
 
 				String cpage = request.getParameter("cpage");
-				System.out.println(cpage);
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				request.getSession().setAttribute("lastPageNum", currentPage);
 
@@ -234,19 +247,16 @@ public class BoardController extends HttpServlet {
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountTitle(category, keyword));
-						System.out.println(request.getAttribute("recordTotalCount"));
 					} else if (search.equals("writer")) {
 						list = dao.selectByWriter(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountWriter(category, keyword));
-						System.out.println(request.getAttribute("recordTotalCount"));
 					} else if (search.equals("content")) {
 						list = dao.selectByContents(category, keyword,
 								currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
 								Constants.RECORD_COUNT_PER_PAGE);
 						request.setAttribute("recordTotalCount", dao.getRecordCountContents(category, keyword));
-						System.out.println(request.getAttribute("recordTotalCount"));
 					}
 
 					request.setAttribute("search", search);

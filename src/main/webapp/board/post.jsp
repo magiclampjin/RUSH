@@ -422,8 +422,10 @@ a {
 									</button>
 								</div>
 
-								<input type="hidden" id="cpage" value="${cpage}"> <input
-									type="hidden" id="category" value="${category}">
+								<input type="hidden" id="cpage" value="${cpage}"> 
+								<input type="hidden" id="category" value="${category}">
+								<input type="hidden" id="search" value="${search}">
+								<input type="hidden" id="keyword" value="${keyword}">
 							</div>
 						</div>
 					</div>
