@@ -21,7 +21,13 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
+
 <!-- summernote -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
 	rel="stylesheet">
@@ -44,11 +50,16 @@
 
 a {
 	text-decoration: none;
+	color: #111111;
 }
 
 .dropdown-menu[data-bs-popper] {
 	right: 0;
 	left: auto;
+}
+
+.dropdown-toggle::after {
+	display: none;
 }
 </style>
 </head>
@@ -160,12 +171,11 @@ a {
 								placeholder="제목을 입력하세요" id="title">
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
-									value="+">
-								<span>파일첨부</span>
+									value="+"> <span>파일첨부</span>
 								<div id="fileContainer"></div>
 							</div>
-							<textarea id="summernote" class="content" id="content" rows="35" cols="100"
-								placeholder="내용을 입력하세요." name="contents"></textarea>
+							<textarea id="summernote" class="content" id="content" rows="35"
+								cols="100" placeholder="내용을 입력하세요." name="contents"></textarea>
 							<div class="writeBox">
 								<a href="/listing.board?category=${category }&cpage=1"><input
 									class="writebtn bColorGreen" type="button" value="목록으로"></a>

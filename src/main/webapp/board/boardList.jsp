@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/boardMainPagination.js"></script>
+<script type="text/javascript" src="/js/board/isUser.js"></script>
 
 <!-- 부트스트랩, fontawesome -->
 <link
@@ -162,9 +163,12 @@ a {
 									<div class="date">${noti.stringFormat }</div>
 									<div class="view fontEnglish">${noti.view }</div>
 									<div class="recommend fontEnglish">${noti.recommend }</div>
-									<div class="file">
-										<i class="fa-solid fa-paperclip"></i>
-									</div>
+									<c:if test="${noti.fCount!=0 }">
+										<div class="file">
+											<i class="fa-solid fa-paperclip"></i>
+										</div>
+									</c:if>
+
 								</div>
 								<div class="minBoard">
 									<div class="num"></div>
@@ -187,50 +191,7 @@ a {
 											<div class="minRecommend fontEnglish colorDarkgray">
 												<i class="fa-regular fa-thumbs-up"></i>&nbsp;${noti.recommend }
 											</div>
-											<div class="minFile">
-												<i class="fa-solid fa-paperclip"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-						<c:forEach var="post" items="${boardList }">
-							<div class="post">
-								<div class="maxBoard">
-									<div class="num fontEnglish">${post.seq }</div>
-									<div class="title">
-										<a
-											href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
-												class="mainTitle">${post.title }</div></a>
-										<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
-									</div>
-									<div class="writer">${post.nickName }</div>
-									<div class="date">${post.stringFormat }</div>
-									<div class="view fontEnglish">${post.view }</div>
-									<div class="recommend fontEnglish">${post.recommend }</div>
-									<div class="file">
-										<i class="fa-solid fa-paperclip"></i>
-									</div>
-								</div>
-								<div class="minBoard">
-									<div class="num fontEnglish">${post.seq }</div>
-									<div class="minCon">
-										<div class="title">
-											<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div
-													class="mainTitle">${post.title }</div></a>
-											<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
-										</div>
-										<div class="info">
-											<div class="minWriter colorDarkgray">${post.nickName }</div>
-											<div class="minDate colorDarkgray">${post.stringFormat }</div>
-											<div class="minView fontEnglish colorDarkgray">
-												<i class="fa-regular fa-eye"></i>&nbsp;${post.view }
-											</div>
-											<div class="minRecommend fontEnglish colorDarkgray">
-												<i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }
-											</div>
-											<c:if test="${post.fCount!=0 }">
+											<c:if test="${noti.fCount!=0 }">
 												<div class="minFile">
 													<i class="fa-solid fa-paperclip"></i>
 												</div>
@@ -240,24 +201,84 @@ a {
 									</div>
 								</div>
 							</div>
-
 						</c:forEach>
+						<c:choose>
+							<c:when test="${recordTotalCount != 0 }">
+								<c:forEach var="post" items="${boardList }">
+									<div class="post">
+										<div class="maxBoard">
+											<div class="num fontEnglish">${post.seq }</div>
+											<div class="title">
+												<a
+													href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
+														class="mainTitle">${post.title }</div></a>
+												<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
+											</div>
+											<div class="writer">${post.nickName }</div>
+											<div class="date">${post.stringFormat }</div>
+											<div class="view fontEnglish">${post.view }</div>
+											<div class="recommend fontEnglish">${post.recommend }</div>
+											<c:if test="${post.fCount!=0 }">
+												<div class="file">
+													<i class="fa-solid fa-paperclip"></i>
+												</div>
+											</c:if>
+
+										</div>
+										<div class="minBoard">
+											<div class="num fontEnglish">${post.seq }</div>
+											<div class="minCon">
+												<div class="title">
+													<a href="/load.board?cpage=${cpage }&seq=${post.seq }"><div
+															class="mainTitle">${post.title }</div></a>
+													<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
+												</div>
+												<div class="info">
+													<div class="minWriter colorDarkgray">${post.nickName }</div>
+													<div class="minDate colorDarkgray">${post.stringFormat }</div>
+													<div class="minView fontEnglish colorDarkgray">
+														<i class="fa-regular fa-eye"></i>&nbsp;${post.view }
+													</div>
+													<div class="minRecommend fontEnglish colorDarkgray">
+														<i class="fa-regular fa-thumbs-up"></i>&nbsp;${post.recommend }
+													</div>
+													<c:if test="${post.fCount!=0 }">
+														<div class="minFile">
+															<i class="fa-solid fa-paperclip"></i>
+														</div>
+													</c:if>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<div class="noResult">검색 결과가 없습니다.</div>
+							</c:otherwise>
+						</c:choose>
+
 
 					</div>
 					<div id="pagination"></div>
 					<div class="search_write">
 						<div class="write"></div>
 						<div class="search">
-							<form action="">
-								<div class="category">
-									<select class="form-select" aria-label="Default select example">
+							<form id="searchForm">
+								<input type="hidden" name="category" value=${category }>
+								<div>
+									<select class="form-select" aria-label="Default select example"
+										name="search">
 										<option value="title" selected>제목</option>
 										<option value="writer">작성자</option>
 										<option value="content">내용</option>
 									</select>
 								</div>
 								<div class="keyword">
-									<input type="text">
+									<input type="text" name="keyword" value="${keyword }"
+										id="keyword">
 								</div>
 								<div class="sertchBtn">
 									<input type="submit" class="boardBtn bColorGreen" value="검색">
@@ -280,8 +301,11 @@ a {
 		<input type="hidden" id="recordCountPerPage"
 			value="${recordCountPerPage }"> <input type="hidden"
 			id="naviCountPerPage" value="${naviCountPerPage }"> <input
-			type="hidden" id="lastPageNum" value="${lastPageNum }"> <a
-			href="#">
+			type="hidden" id="lastPageNum" value="${lastPageNum }"> <input
+			type="hidden" value=${search } id="search"> 
+			<input type="hidden" value=${loginID } id="userID">
+			
+			<a href="#">
 			<div class="upArrow bColorPink colorWhite">
 				<i class="fa-solid fa-arrow-up-long"></i>
 			</div>
