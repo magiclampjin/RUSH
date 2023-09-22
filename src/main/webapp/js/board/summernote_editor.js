@@ -47,19 +47,10 @@ $(document).ready(function() {
 
 				});
 			},
-			onMediaDelete: function ($target, editor, $editable) {
-	           
+			onMediaDelete: function ($target, editor, $editable) {        
             	let deletedImageUrl = $target.attr('src');
             	let prev = $("#deleteImgs").html();
 				$("#deleteImgs").html(prev+":"+deletedImageUrl);
-				/*$.ajax({
-					url: "/deleteFiieName.file",
-					data:{
-						filePath : deletedImageUrl
-					},
-					type:"post",
-					dataType:"json"
-				});*/
 	        }
 		}
 	});
