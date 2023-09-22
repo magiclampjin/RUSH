@@ -11,6 +11,12 @@ public class QnaAnswerDTO {
 	public QnaAnswerDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public QnaAnswerDTO(int parentSeq, String contents) {
+		super();
+		this.parentSeq = parentSeq;
+		this.contents = contents;
+	}
 
 	public QnaAnswerDTO(int seq, int parentSeq, String contents, Timestamp writeDate) {
 		super();

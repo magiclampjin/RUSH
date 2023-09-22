@@ -11,8 +11,6 @@ $(document).ready(function() {
 			let postWriter = $("#postWriterName").val();
 			let loginID = $("#loginID").val();
 			let replys = $("#replys");
-			let replyRecommCnt = resp[1].length;
-			let replyRecommCheckIdx = 0;
 
 			for (let i = 0; i < resp[0].length; i++) {
 				let replyTag = $("<div>").attr("class", "col-12 reply");
@@ -106,12 +104,10 @@ $(document).ready(function() {
 		// 댓글 삽입 시 댓글 수정 취소 시 사용할 백업 내용 삭제
 		replyBackup = null;
 		replyObj = null;
-		nestedReplyParentSeq = null;
-		nestedReplyObj = null;
 
 
 		$.ajax({
-			url: "/insert.reply",
+			url: "/insert.answer",
 			data: {
 				postSeq: postSeq,
 				contents: txt
@@ -172,7 +168,7 @@ $(document).ready(function() {
 
 
 		$.ajax({
-			url: "delete.reply",
+			url: "delete.answer",
 			data: {
 				replySeq: $(this).parent().parent().siblings("#replyId").val()
 			},

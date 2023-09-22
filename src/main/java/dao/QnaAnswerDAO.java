@@ -1,10 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import dto.QnaAnswerDTO;
 
 public class QnaAnswerDAO {
 	
@@ -22,5 +25,12 @@ public class QnaAnswerDAO {
 		return ds.getConnection();
 	}
 
-	
+	public void insert(QnaAnswerDTO dto) throws Exception {
+		String sql ="insert into qna_answer values(null,?,?,defalut);";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, dto.getParentSeq());
+			pstat.setString(2, dto.getContents());
+			pstat.executeUpdate();
+		}
+	}
 }
