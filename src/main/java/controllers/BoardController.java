@@ -103,6 +103,9 @@ public class BoardController extends HttpServlet {
 
 				BoardDTO post = dao.selectPost(postSeq);
 
+				if(post == null) {
+					System.out.println("포스트 삭제됨.. alert창 띄우고 boardList로 이동하게 구현하기");
+				}
 				boolean postRec = dao.checkPostRecommend(postSeq,
 						(String) request.getSession().getAttribute("loginID"));
 				boolean bookmark = dao.checkPostBookmark(postSeq,

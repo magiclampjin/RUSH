@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,62 +21,68 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import constants.Constants;
 import dao.QnaAnswerDAO;
 import dto.QnaAnswerDTO;
 import dto.ReplyDTO;
 
-@WebServlet(".anwser")
+
+@WebServlet("*.answer")
 public class QnaAnswerController extends HttpServlet {
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
+				throws ServletException, IOException {
+			response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
 
-		String cmd = request.getRequestURI();
-		System.out.println("reply cmd: " + cmd);
+			String cmd = request.getRequestURI();
+			System.out.println("reply cmd: " + cmd);
 
-		QnaAnswerDAO dao = QnaAnswerDAO.getInstance();
-		PrintWriter pw = response.getWriter();
-		Gson gsonDefault = new Gson();
-		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
-			private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
-			private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+			QnaAnswerDAO dao = QnaAnswerDAO.getInstance();
+			PrintWriter pw = response.getWriter();
+			Gson gsonDefault = new Gson();
+			Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
+				private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
+				private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");
+				public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
+					long currentTime = System.currentTimeMillis();
+					long writeTime = arg0.getTime();
+					long gapTime = currentTime - writeTime;
 
-			public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
-				long currentTime = System.currentTimeMillis();
-				long writeTime = arg0.getTime();
-				long gapTime = currentTime - writeTime;
-
-				if (gapTime < 60000) {
-					return new JsonPrimitive("방금 전");
-				} else if (gapTime < 60000 * 60) {
-					return new JsonPrimitive(gapTime / 60000 + " 분 전");
-				} else if (gapTime < 60000 * 60 * 24) {
-					long hour = gapTime / 60000 / 60;
-					long min = ((gapTime / 60000) % 60);
-					return new JsonPrimitive("약 " + hour + "시간 전");
-				} else {
-					return new JsonPrimitive(sdfDay.format(arg0) + "&nbsp;&nbsp;" + sdfTime.format(arg0));
+					if (gapTime < 60000) {
+						return new JsonPrimitive("방금 전");
+					} else if (gapTime < 60000 * 60) {
+						return new JsonPrimitive( gapTime / 60000 + " 분 전");
+					} else if (gapTime < 60000 * 60 * 24) {
+						long hour = gapTime / 60000 / 60;
+						long min = ((gapTime / 60000) % 60);
+						return new JsonPrimitive("약 "+hour + "시간 전");
+					} else {
+						return new JsonPrimitive(sdfDay.format(arg0)+"&nbsp;&nbsp;"+sdfTime.format(arg0));
+					}					
 				}
-			}
-		}).create();
+			}).create();
+		
+			try {
+				if (cmd.equals("/insert.answer")) {
+					String contents = request.getParameter("contents");
+					int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+					dao.insert(new QnaAnswerDTO(postSeq, contents));
+				} else if(cmd.equals("/load.answer")) {
+					
+					int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+					List<QnaAnswerDTO> answers = dao.selectAll(postSeq);			
 
-		try {
-			if (cmd.equals("/insert.answer")) {
-				String contents = request.getParameter("contents");
-				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
-				
-				dao.insert(new QnaAnswerDTO(postSeq, contents));
+					if(answers.size() >0)
+						pw.append(gsonTs.toJson(answers));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect("/error.html");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.sendRedirect("/error.html");
 		}
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
+				throws ServletException, IOException {
+			doGet(request, response);
+		}
 
 }

@@ -63,7 +63,7 @@ public class QnAController extends HttpServlet {
 				}
 				// auto_increment로 seq값 생성됨
 				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,checked));
-				System.out.println("부모 번호 : "+parent_seq);
+				
 				
 				Enumeration<String> fileNames = multi.getFileNames();
 				
@@ -104,7 +104,7 @@ public class QnAController extends HttpServlet {
 				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
 				String keyword = request.getParameter("keyword");
 				String searchBy = request.getParameter("searchBy");
-				System.out.println("load: keyword : "+keyword +", searchBy "+searchBy);
+				
 				QNABoardDTO post = dao.selectPost(qnaSeq);
 				
 				request.setAttribute("postSeq", qnaSeq);
@@ -142,7 +142,7 @@ public class QnAController extends HttpServlet {
 				// 검색한 키워드
 				String keyword = request.getParameter("keyword") == null ? "" : request.getParameter("keyword");
 				String searchBy = request.getParameter("searchBy") == null ? "" : request.getParameter("searchBy");
-				System.out.println("keyword : "+keyword +", searchBy "+searchBy);
+				
 				
 				if(keyword.equals("")) { // 찾는 값 없음
 					list = QNABoardDAO.getInstance().selectBy((currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE-1)), (currentPage * Constants.RECORD_COUNT_PER_PAGE));

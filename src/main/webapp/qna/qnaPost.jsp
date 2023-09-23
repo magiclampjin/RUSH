@@ -418,7 +418,7 @@ a {
 					</div>
 					
 					<div class="row g-0">
-						<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
+						<div class="col-12 common fontEnglish fw700 fs35 mb40">답글</div>
 						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
 								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable="false" placeholder="관리자만 작성할 수 있습니다."></div>

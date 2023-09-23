@@ -1,29 +1,30 @@
 $(document).ready(function() {
 	function replyReload(postSeq) {
 		$.ajax({
-			url: "/load.reply",
+			url: "/load.answer",
 			data: {
 				postSeq: postSeq
 			},
 			dataType: "json",
 			type: "post"
 		}).done(function(resp) {
+			
 			let postWriter = $("#postWriterName").val();
 			let loginID = $("#loginID").val();
 			let replys = $("#replys");
 
-			for (let i = 0; i < resp[0].length; i++) {
+			for (let i = 0; i < resp.length; i++) {
 				let replyTag = $("<div>").attr("class", "col-12 reply");
 				let row = $("<div>").attr("class", "row g-0");
 				let col10 = $("<div>").attr("class", "col-10");
-				let writerCover = $("<div>").attr("class", "d-flex align-items-end mb10").append($("<div>").attr("class", "writer fw500 fs20").html(resp[0][i].nickName));
+				let writerCover = $("<div>").attr("class", "d-flex align-items-end mb10").append($("<div>").attr("class", "writer fw500 fs20").html("관리자"));
 
-				let contents = $("<div>").attr("class", "contents fw400 fs20 mb10").html(resp[0][i].contents).attr("contenteditable", "false");;
-				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[0][i].writeDate + "&nbsp;&nbsp;");
+				let contents = $("<div>").attr("class", "contents fw400 fs20 mb10").html(resp[i].contents).attr("contenteditable", "false");;
+				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[i].writeDate + "&nbsp;&nbsp;");
 
 				row.append(col10.append(writerCover).append(contents).append(detailInfo));
 				let replyBtns;
-				if (resp[0][i].writer == loginID) {
+				if (resp[i].writer == loginID) {
 					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
 
 					let btncover = $("<div>").attr("class", "defaultCover");
@@ -64,7 +65,7 @@ $(document).ready(function() {
 					row.append(replyBtns).append(replyBtnsMini);			
 				}
 				
-				let replyId = $("<input>").attr("type", "hidden").val(resp[0][i].seq).attr("id", "replyId");
+				let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
 			}
@@ -95,6 +96,7 @@ $(document).ready(function() {
 
 	$("#replyInsertBtn").on("click", function() {
 		let txt = $("#replyInsertTxt").html();
+
 		if (txt == "" || txt == null) {
 			alert("댓글 내용을 입력하세요.");
 			return false;
