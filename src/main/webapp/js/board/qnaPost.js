@@ -8,8 +8,6 @@ $(document).ready(function() {
 			dataType: "json",
 			type: "post"
 		}).done(function(resp) {
-			
-			let postWriter = $("#postWriterName").val();
 			let loginID = $("#loginID").val();
 			let replys = $("#replys");
 
@@ -63,6 +61,7 @@ $(document).ready(function() {
 	let postSeq = $("#postSeq").val();
 	let searchBy = $("#searchBy").val();
 	let keyword = $("#keyword").val();
+	let menu = $("#menu").val();
 	
 
 	// 댓글창 로드
@@ -116,10 +115,10 @@ $(document).ready(function() {
 	
 	// 게시글 수정
 	$(".update").on("click",function(){
-		if(search == null || search == ""){
-			location.href = "/updateLoad.qna?postSeq=" + postSeq +"&cpage="+cpage;
+		if(searchBy == null || searchBy == ""){
+			location.href = "/updateLoad.qna?postSeq=" + postSeq +"&cpage="+cpage+"&menu=qna";
 		}else{
-			location.href = "/updateLoad.qna?postSeq=" + postSeq +"&cpage="+cpage +"&search="+search+"&keyword="+keyword;
+			location.href = "/updateLoad.qna?postSeq=" + postSeq +"&cpage="+cpage +"&menu=qna"+"&searchBy="+searchBy+"&keyword="+keyword;
 		}
 	});
 

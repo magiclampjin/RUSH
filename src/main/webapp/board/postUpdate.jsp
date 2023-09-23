@@ -133,7 +133,14 @@ a {
 			<div class="boardWrite_guide">
 				<c:choose>
 					<c:when test="${menu == 'qna'}">
-						<form action="/insert.qna" method="post" enctype="multipart/form-data">
+						<form action="/update.qna" method="post" enctype="multipart/form-data">
+							<input type="hidden" value="${category }" name="category">
+							<input type="hidden" value="${post.seq}" name="postSeq">
+							<input type="hidden" value="${requestScope.cpage}" name="cpage">
+							<input type="hidden" name="searchBy" value="${searchBy}">
+							<input type="hidden" name="keyword" value="${keyword}">
+							<textarea id="deleteFiles" style="display:none;" name="deleteFiles"></textarea>
+	       					<textarea id="deleteImgs" style="display:none;" name="deleteImgs"></textarea>
 							<c:choose>
 								<c:when test="${loginID eq 'admin' }">
 									<div class="writeTitle">공지게시글 수정</div>
@@ -142,29 +149,74 @@ a {
 									<div class="writeTitle">Q&A 수정</div>
 								</c:otherwise>
 							</c:choose>
-							<input type="text" class="inputTitle" name="title"
-								placeholder="제목을 입력하세요">
-							<div class="fileBox">
-								<input type="button" id="btnAdd" class="writebtn bColorGreen"
-									value="+">
 								
-								<span>파일첨부</span>
-								<div id="fileContainer"></div>
-							</div>
+							<input type="text" class="inputTitle" name="title"
+								placeholder="제목을 입력하세요" value="${post.title}">
+							 <div class="fileBox">
+					            <input type="button" id="btnAdd" class="writebtn bColorGreen"
+					                value="+"> <span>파일첨부</span>
+					            <div id="fileContainer">
+					                <c:choose>
+					                    <c:when test="${files.size()>0}">
+					                        <c:forEach var="i" items="${files}" varStatus="status">
+					                            <div>
+					                                <input type="file" style="display:none">
+					                                <span style="display: inline; margin-top: 10px;" id="file${status.index}">${i.originName}</span>
+					                                <input value="x" type="button" class="del filedel" style="border: none; width: 30px; height: 30px;">
+					                                <input type="hidden" value="${i.seq}">
+					                            </div>
+					                        </c:forEach>
+					                    </c:when>
+					                </c:choose>
+					            
+					                <script>
+					                    $(document).on("click", ".filedel", function() {
+					                        let fileSeq = $(this).next().val();
+					                        let prev = $("#deleteFiles").html();
+					                        $("#deleteFiles").html(prev+","+fileSeq);
+					                        /* $.ajax({
+					                            url:"/delete.file",
+					                            data:{
+					                                fileSeq : fileSeq
+					                            },
+					                            type:"post"
+					                        }); */
+					                    });
+					                    
+					                </script>
+					            </div>
+					        </div>
 							<textarea id="summernote" class="content" rows="35" cols="100"
-								placeholder="내용을 입력하세요." name="contents"></textarea>
+								placeholder="내용을 입력하세요." name="contents">${post.contents}</textarea>
 							<div class="secretBox">
-								<input id="secret" class="screteChk" type="checkbox"> <input
-									id="secret_hidden" class="screteChk" type="hidden"
-									name="secret" value="false"> <label for="secret"
-									class="colorDarkgray">비밀글 설정하기</label>
+								
+								<c:choose>
+									<c:when test="${post.secret eq false}">
+										<input id="secret" class="screteChk" type="checkbox"> 
+										<input id="secret_hidden" class="screteChk" type="hidden" name="secret" value="false"> 
+										<label for="secret" class="colorDarkgray">비밀글 설정하기</label>
+									</c:when>
+									<c:otherwise>
+										<input id="secret" class="screteChk" type="checkbox" checked> 
+										<input id="secret_hidden" class="screteChk" type="hidden" name="secret" value="true"> 
+										<label for="secret" class="colorDarkgray">비밀글 설정하기</label>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input
-									class="writebtn bColorGreen" type="button" value="목록으로"></a>
-								<input class="writebtn bColorGreen" type="submit" value="수정">
-							</div>
-
+					            <c:choose>
+					                <c:when test="${not empty searchBy}">
+					                    <a href="/listing.qna?category=${category }&cpage=${requestScope.cpage}&searchBy=${searchBy}&keyword=${keyword}">
+					                    <input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+					                </c:when>
+					                <c:otherwise>
+					                    <a href="/listing.qna?category=${category }&cpage=${requestScope.cpage}">
+					                    <input class="writebtn bColorGreen" type="button" value="목록으로"></a>
+					                </c:otherwise>
+					            </c:choose>
+					            
+					            <input class="writebtn bColorGreen" type="submit" value="수정">
+					        </div>
 						</form>
 						<script type="text/javascript" src="/js/board/qnaWriteSecret.js"></script>
 					</c:when>

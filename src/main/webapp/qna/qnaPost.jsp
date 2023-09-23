@@ -411,6 +411,7 @@ a {
 								</div>
 
 								<input type="hidden" id="cpage" value="${cpage}"> 
+								<input type="hidden" id="menu" value="${menu}"> 
 								<input type="hidden" id="searchBy" value="${searchBy}">
 								<input type="hidden" id="keyword" value="${keyword}">
 							</div>

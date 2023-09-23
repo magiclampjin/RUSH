@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -18,6 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import constants.Constants;
 import dao.FileDAO;
 import dao.QNABoardDAO;
+import dto.BoardDTO;
 import dto.FileDTO;
 import dto.QNABoardDTO;
  
@@ -126,10 +129,109 @@ public class QnAController extends HttpServlet {
 			
 			else if(cmd.equals("/updateLoad.qna")) {
 				// 게시글 수정 페이지로 이동
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				String cpage = request.getParameter("cpage");
+				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
+				String category = request.getParameter("category");
+				String menu = request.getParameter("menu");
+				String searchBy = request.getParameter("searchBy");
+				String keyword = request.getParameter("keyword");
+				
+				List<FileDTO> files = fdao.inQnaFilesList(postSeq);
+				QNABoardDTO post = dao.selectPost(postSeq);
+				
+				request.setAttribute("category", category);
+				request.setAttribute("files", files);
+				request.setAttribute("post", post);
+				request.setAttribute("cpage", currentPage);
+				request.setAttribute("menu", menu);
+				if(searchBy != null) {
+					request.setAttribute("searchBy",searchBy);
+					request.setAttribute("keyword",keyword);
+				}
+				request.getRequestDispatcher("/board/postUpdate.jsp").forward(request, response);
+				
 			}
 			else if(cmd.equals("/update.qna")) {
 				// 게시글 수정
+				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
+				String uploadPath = request.getServletContext().getRealPath("files");
+				File filepath = new File(uploadPath);
 				
+				if (!filepath.exists()) {
+					filepath.mkdir();
+				}
+				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8",
+						new DefaultFileRenamePolicy());
+				String cpage = multi.getParameter("cpage");
+//				String category = multi.getParameter("category");
+				int postSeq = Integer.parseInt(multi.getParameter("postSeq"));
+				String title = multi.getParameter("title");
+				String content = multi.getParameter("contents");
+				
+				// 게시글 수정 시 수정된 파일 DB, realpath에서 삭제
+				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
+				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
+					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
+					System.out.println("삭제할 파일: "+sysname);
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteFilePath = new File(uploadPath+"/"+sysname);
+						deleteFilePath.delete();
+					}	
+				}
+				
+				// 게시글 수정 시 수정된 이미지 DB, realpath에서 삭제
+				String[] deleteImgNameStr = multi.getParameter("deleteImgs").split(":");
+				for(int i=0; i<deleteImgNameStr.length-1; i++) {
+					String sysname = deleteImgNameStr[i+1];
+					
+					sysname = sysname.substring(7);
+					
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteImgfilepath = new File(uploadPath+"/"+sysname);
+						deleteImgfilepath.delete();
+					}	
+				}					
+				
+				String searchBy = multi.getParameter("searchBy");
+				String keyword = multi.getParameter("keyword");
+				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
+				
+				String id = (String) request.getSession().getAttribute("loginID");
+				String userNick = (String) request.getSession().getAttribute("loginNickname");
+//				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
+
+				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
+
+				while (fileNames.hasMoreElements()) { // 파일이 존재하는 동안
+					String fileName = fileNames.nextElement(); // 다음 파일을 불러옴
+					if (multi.getFile(fileName) != null) {
+						String ori_name = multi.getOriginalFileName(fileName);
+						String sys_name = multi.getFilesystemName(fileName);
+						FileDTO fileDto = new FileDTO(0, postSeq, ori_name, sys_name, false, true);
+						int fileResult = fdao.insert(fileDto);
+					}
+				}
+
+				// 세션에 저장해둔 첨부 이미지의 parentSeq를 변경
+				if (request.getSession().getAttribute("fileSeq") != null) {
+					List<Integer> fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
+					for (int i = 0; i < fileSeq.size(); i++) {
+						fdao.updateParentSeq(postSeq, fileSeq.get(i));
+					}
+
+					// 첨부 이미지의 parentSeq를 변경해줬다면 session정보 지우기
+					request.getSession().removeAttribute("fileSeq");
+				}
+
+				if(searchBy != null) {
+					response.sendRedirect("/load.qna?seq="+postSeq+"&cpage="+cpage+"&search="+searchBy+"&keyword="+keyword);
+				} else {
+					response.sendRedirect("/load.qna?seq="+postSeq+"&cpage="+cpage);
+				}
+						
 			} else if(cmd.equals("/delete.qna")) {
 				// 게시글 삭제
 				int qnaSeq = Integer.parseInt(request.getParameter("postSeq"));
