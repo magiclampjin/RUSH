@@ -154,8 +154,17 @@ a {
 									class="colorDarkgray">비밀글 설정하기</label>
 							</div>
 							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input
-									class="writebtn bColorGreen" type="button" value="목록으로"></a>
+								<c:choose>
+									<c:when test="${menu eq 'qna'}">
+										<a href="/listing.qna?&cpage=1"><input
+										class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:when>
+									<c:otherwise>
+										<a href="/listing.board?category=${category }&cpage=1"><input
+										class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:otherwise>
+								</c:choose>
+								
 								<input class="writebtn bColorGreen" type="submit" value="작성">
 							</div>
 
