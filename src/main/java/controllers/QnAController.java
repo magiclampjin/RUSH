@@ -18,7 +18,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import constants.Constants;
 import dao.FileDAO;
 import dao.QNABoardDAO;
-import dto.BoardDTO;
 import dto.FileDTO;
 import dto.QNABoardDTO;
  
@@ -29,59 +28,63 @@ public class QnAController extends HttpServlet {
 		System.out.println("qna cmd: "+cmd);
 		
 		QNABoardDAO dao = QNABoardDAO.getInstance();
+		FileDAO fdao = FileDAO.getInstance();
 		try {
 			if(cmd.equals("/insert.qna")) {
 				// 게시글 등록
-				System.out.println("RealPath : "+request.getServletContext().getRealPath(""));
-				String uploadPath = request.getServletContext().getRealPath("files");
+				int maxSize = 1024 * 1024 *10;
 				
+				String uploadPath = request.getServletContext().getRealPath("files");
+				System.out.println(uploadPath);
 				File filesPath = new File(uploadPath);
 				if(!filesPath.exists()) {
 					filesPath.mkdir();
 				}
 				
-				int maxSize = 1024 * 1024 *10;
+				
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf8",new DefaultFileRenamePolicy());
 				
-				// 아직 Session 안해서 일단 String으로 넣어놓음
-				String mID = (String)request.getSession().getAttribute("loginID");
-				String mNickname = (String )request.getSession().getAttribute("loginNickname");
-				System.out.println("ID : "+ mID);
-				System.out.println("Nickname : "+mNickname);
-				
-				String title = multi.getParameter("title");
-				String contents = multi.getParameter("contents");
 				//String category = multi.getParameter("category");
 				String category = "일단 아무거나";
-				System.out.println("title : "+title +" contents : "+contents+" category: "+category);
+				String title = multi.getParameter("title");
+				String contents = multi.getParameter("contents");
 				
-				String secret = multi.getParameter("secret");
-				boolean checked = true;
-				System.out.println("boolean 값 : "+secret);
-				if(secret.equals("false")) {
-					checked = false;
-				}
+				String mID = (String)request.getSession().getAttribute("loginID");
+				String mNickname = (String )request.getSession().getAttribute("loginNickname");
+
+				boolean secret = Boolean.valueOf(multi.getParameter("secret"));
+
 				// auto_increment로 seq값 생성됨
-				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,checked));
+				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,secret));
 				
 				
 				Enumeration<String> fileNames = multi.getFileNames();
-				
-				while(fileNames.hasMoreElements()) {
-					String fileName = fileNames.nextElement();
-					System.out.println("파일 이름 : "+fileName);
-					
-					if(multi.getFile(fileName)!=null) {
+
+				while (fileNames.hasMoreElements()) { // 파일이 존재하는 동안
+					String fileName = fileNames.nextElement(); // 다음 파일을 불러옴
+					if (multi.getFile(fileName) != null) {
+
 						String ori_name = multi.getOriginalFileName(fileName);
 						String sys_name = multi.getFilesystemName(fileName);
-						
-						// 추후에 파일관련 기능 구현되면 파일인지 이미지인지 구분해서 5번쨰 변수 알맞게 수정해주세요!
-						FileDAO.getInstance().insert(new FileDTO(0,parent_seq,ori_name,sys_name,false,true));
+						FileDTO fileDto = new FileDTO(0, parent_seq, ori_name, sys_name, false, true);
+						int fileResult = fdao.insert(fileDto);
 					}
 				}
-				response.sendRedirect("/listing.qna");
-				
-				
+
+				// 세션에 저장해둔 첨부 이미지의 parentSeq를 변경
+				if (request.getSession().getAttribute("fileSeq") != null) {
+					List<Integer> fileSeq = (List<Integer>) request.getSession().getAttribute("fileSeq");
+					for (int i = 0; i < fileSeq.size(); i++) {
+						fdao.updateParentSeq(parent_seq, fileSeq.get(i));
+					}
+
+					// 첨부 이미지의 parentSeq를 변경해줬다면 session정보 지우기
+					request.getSession().removeAttribute("fileSeq");
+				}
+
+				if (parent_seq != 0) {
+					response.sendRedirect("/listing.qna");
+				}		
 			} 
 			
 //			else if(cmd.equals("/load.qna")) {
@@ -115,6 +118,9 @@ public class QnAController extends HttpServlet {
 					request.setAttribute("searchBy", searchBy);
 				if(keyword != null)
 					request.setAttribute("keyword", keyword);
+				
+				List<FileDTO> files = fdao.selectForPost(qnaSeq);
+				request.setAttribute("files", files);
 				request.getRequestDispatcher("/qna/qnaPost.jsp").forward(request, response);
 			} 
 			
@@ -130,6 +136,9 @@ public class QnAController extends HttpServlet {
 				dao.delete(qnaSeq);
 				
 				response.sendRedirect("/listing.qna");
+				
+				
+				
 				
 			} else if(cmd.equals("/listing.qna")) {
 				// 게시판 출력 
@@ -172,7 +181,6 @@ public class QnAController extends HttpServlet {
 				// q&a에서 글쓰기 누를때
 				// q&a 매개변수
 				String menu = request.getParameter("menu");
-				System.out.println("qna : "+menu);
 				request.setAttribute("menu", menu);
 				request.getRequestDispatcher("/board/boardWrite.jsp").forward(request, response);
 			}
