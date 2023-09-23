@@ -24,7 +24,9 @@ $(document).ready(function() {
 
 				row.append(col10.append(writerCover).append(contents).append(detailInfo));
 				let replyBtns;
-				if (resp[i].writer == loginID) {
+		
+				if (loginID=="admin") {
+					
 					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
 
 					let btncover = $("<div>").attr("class", "defaultCover");
@@ -49,22 +51,7 @@ $(document).ready(function() {
 					replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 
 					row.append(replyBtns).append(replyBtnsMini);
-				} else if(loginID == "admin"){
-					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
-
-					let btncover = $("<div>").attr("class", "defaultCover");
-					let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
-					replyBtns.append(btncover.append(deleteBtn));
-
-
-					let btncovermini = $("<div>").attr("class", "defaultCover");
-					let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
-					let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
-					replyBtnsMini.append(btncovermini.append(deleteBtnMini));
-
-					row.append(replyBtns).append(replyBtnsMini);			
 				}
-				
 				let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
