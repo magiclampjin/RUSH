@@ -135,7 +135,14 @@ a {
 					<c:when test="${menu == 'qna'}">
 						<form action="/insert.qna" method="post"
 							enctype="multipart/form-data">
-							<div class="writeTitle">Q&A 작성</div>
+							<c:choose>
+								<c:when test="${loginID eq 'admin' }">
+									<div class="writeTitle">공지게시글 작성</div>
+								</c:when>
+								<c:otherwise>
+									<div class="writeTitle">Q&A 작성</div>
+								</c:otherwise>
+							</c:choose>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요">
 							<div class="fileBox">
