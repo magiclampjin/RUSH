@@ -56,6 +56,14 @@ public class QNABoardDTO {
 		this.answeryn = answeryn;
 		this.fileyn = fileyn;
 	}
+	
+	public QNABoardDTO(int seq, String title, String contents, boolean secret) {
+		super();
+		this.seq = seq;
+		this.title = title;
+		this.contents = contents;
+		this.secret = secret;
+	}
 
 	public int getSeq() {
 		return seq;

@@ -168,6 +168,7 @@ public class QnAController extends HttpServlet {
 				int postSeq = Integer.parseInt(multi.getParameter("postSeq"));
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
+				boolean secret = Boolean.valueOf(multi.getParameter("secret"));
 				
 				// 게시글 수정 시 수정된 파일 DB, realpath에서 삭제
 				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
@@ -201,7 +202,7 @@ public class QnAController extends HttpServlet {
 				
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
-//				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
+				dao.update(new QNABoardDTO(postSeq, title, content, secret));
 
 				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
 
@@ -225,9 +226,11 @@ public class QnAController extends HttpServlet {
 					// 첨부 이미지의 parentSeq를 변경해줬다면 session정보 지우기
 					request.getSession().removeAttribute("fileSeq");
 				}
+				
+//				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
 
 				if(searchBy != null) {
-					response.sendRedirect("/load.qna?seq="+postSeq+"&cpage="+cpage+"&search="+searchBy+"&keyword="+keyword);
+					response.sendRedirect("/load.qna?seq="+postSeq+"&cpage="+cpage+"&searchBy="+searchBy+"&keyword="+keyword);
 				} else {
 					response.sendRedirect("/load.qna?seq="+postSeq+"&cpage="+cpage);
 				}

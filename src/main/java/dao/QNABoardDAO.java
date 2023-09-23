@@ -172,4 +172,16 @@ public class QNABoardDAO {
 			pstat.executeUpdate();
 		}
 	}
+	
+	public void update(QNABoardDTO dto) throws Exception{
+		String sql ="update qna_board set qbtitle=?, qbcontents=?, secret=? where qbSeq=?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1,dto.getTitle());
+			pstat.setString(2, dto.getContents());
+			pstat.setBoolean(3, dto.isSecret());
+			pstat.setInt(4, dto.getSeq());
+			pstat.executeUpdate();
+		}
+	}
 }
