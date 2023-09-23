@@ -233,9 +233,9 @@ $(document).ready(function() {
 	// 게시글 수정
 	$(".update").on("click",function(){
 		if(search == null || search == ""){
-			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&menu=board";
 		}else{
-			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&search="+search+"&keyword="+keyword;
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&menu=board" +"&search="+search+"&keyword="+keyword;
 		}
 	});
 

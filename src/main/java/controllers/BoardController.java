@@ -100,9 +100,12 @@ public class BoardController extends HttpServlet {
 				category = (category == null || category=="") ? "":category;
 				String search = request.getParameter("search");
 				String keyword = request.getParameter("keyword");
-
+				
 				BoardDTO post = dao.selectPost(postSeq);
 
+				if(post == null) {
+					System.out.println("포스트 삭제됨.. alert창 띄우고 boardList로 이동하게 구현하기");
+				}
 				boolean postRec = dao.checkPostRecommend(postSeq,
 						(String) request.getSession().getAttribute("loginID"));
 				boolean bookmark = dao.checkPostBookmark(postSeq,
@@ -110,6 +113,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("category", category);
+
 				if (postRec)
 					request.setAttribute("postRec", postRec);
 				if (bookmark)
@@ -130,6 +134,7 @@ public class BoardController extends HttpServlet {
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				String category = request.getParameter("category");
+				String menu = request.getParameter("menu");
 				String search = request.getParameter("search");
 				String keyword = request.getParameter("keyword");
 				
@@ -140,7 +145,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("files", files);
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
-				
+				request.setAttribute("menu", menu);
 				if(search != null) {
 					request.setAttribute("search",search);
 					request.setAttribute("keyword",keyword);
@@ -172,6 +177,7 @@ public class BoardController extends HttpServlet {
 					int result = fdao.deleteFile(sysname);
 					if(result == 1) {
 						File deleteFilePath = new File(uploadPath+"/"+sysname);
+						deleteFilePath.delete();
 					}	
 				}
 				
@@ -181,7 +187,6 @@ public class BoardController extends HttpServlet {
 					String sysname = deleteImgNameStr[i+1];
 					
 					sysname = sysname.substring(7);
-					System.out.println(sysname);
 					
 					int result = fdao.deleteFile(sysname);
 					if(result == 1) {
@@ -231,6 +236,7 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
+				// 이미지 삭제해야대..
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String category = request.getParameter("category");
 				List<String> filesName = fdao.inPostFilesNameList(postSeq);

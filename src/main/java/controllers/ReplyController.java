@@ -74,7 +74,6 @@ public class ReplyController extends HttpServlet {
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				List<ReplyDTO> replys = dao.selectAll(postSeq,loginId);
 
-				
 				// 페이지 네이션
 				String replyPage = request.getParameter("replyPage");
 				int currentReplyPage = (replyPage == null) ? 1 : Integer.parseInt(replyPage);

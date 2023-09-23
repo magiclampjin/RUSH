@@ -19,7 +19,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="/js/board/post.js"></script>
+<script src="/js/board/qnaPost.js"></script>
 <script type="text/javascript" src="/js/board/isUserInPost.js"></script>
 
 <style>
@@ -268,6 +268,10 @@ a {
 	padding: 10px 0 0 0;
 }
 
+#replyInsertTxt[contenteditable]:empty:before {
+  content: attr(placeholder);
+}
+
 </style>
 </head>
 
@@ -343,34 +347,7 @@ a {
 		<div class="body">
 			<div class="body_guide">
 				<div class="row g-0 mb80">
-					<div class="col-12 common fontEnglish fw700 fs40 mt80">자유게시판</div>
-
-					<!-- 글 작성자 = 로그인 사용자이면 글 추천, 글 북마크 버튼 출력 x -->
-					<c:choose>
-						<c:when test="${loginID ne post.writer}">
-
-							<div class="col-12 topBtns">
-								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
-
-								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
-								<c:choose>
-									<c:when test="${not empty postRec}">
-										<script>
-											$("#postRec").attr("class",	"btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${not empty bookmark}">
-										<script>
-											$("#bookmark").attr("class", "btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-							</div>
-						</c:when>
-					</c:choose>
+					<div class="col-12 common fontEnglish fw700 fs40 mt80">Q&A</div>
 
 					<div class="col-12">
 						<div class="row g-0 post">
@@ -379,9 +356,9 @@ a {
 								</div>
 								<div class="col-12 fontEnglish fw400 fs25 mb10 pl15"
 									id="postWriter">${post.nickName}</div>
-								<div class="col-12 fw400 fs20 colorDarkgray pl15"
-									id="postDetailInfo">${post.formedDate }&nbsp;&nbsp;&nbsp;조회
-									${post.view}</div>
+									<div class="col-12 fw400 fs20 colorDarkgray pl15"
+									id="postDetailInfo">${post.stringFormat }</div>
+									<!--  &nbsp;&nbsp;&nbsp;조회--> 
 								<hr>
 								<div class="col-12 fw400 fs25" id="postContents">${post.contents}</div>
 							</div>
@@ -422,7 +399,6 @@ a {
 												<i class="fa-solid fa-trash-can"></i>
 											</button>
 										</c:when>
-										
 										<c:when test="${loginID eq 'admin' }">
 											<button class="postBtnsMini bColorGreen delete">
 												<i class="fa-solid fa-trash-can"></i>
@@ -435,18 +411,18 @@ a {
 								</div>
 
 								<input type="hidden" id="cpage" value="${cpage}"> 
-								<input type="hidden" id="category" value="${category}">
-								<input type="hidden" id="search" value="${search}">
+								<input type="hidden" id="menu" value="${menu}"> 
+								<input type="hidden" id="searchBy" value="${searchBy}">
 								<input type="hidden" id="keyword" value="${keyword}">
 							</div>
 						</div>
 					</div>
+					
 					<div class="row g-0">
-						<div class="col-12 common fontEnglish fw700 fs35 mb40">댓글</div>
+						<div class="col-12 common fontEnglish fw700 fs35 mb40">답글</div>
 						<div class="col-12 mb30">
 							<div class="row g-0 replyInput">
-								<div class="col-10 col-lg-11" id="replyInsertTxt"
-									contenteditable></div>
+								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable="false" placeholder="관리자만 작성할 수 있습니다."></div>
 								<input type="hidden" id="postSeq" value="${post.seq}">
 								<div class="col-2 col-lg-1 btnCover">
 									<button class="fw400 fs25 colorDarkgray replyInsertBtn"
