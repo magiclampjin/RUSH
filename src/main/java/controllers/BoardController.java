@@ -357,10 +357,16 @@ public class BoardController extends HttpServlet {
 				pw.append(gson.toJson(rankerList));
 			}else if(cmd.equals("/myWriteList.board")) {
 				String id = (String) request.getSession().getAttribute("loginID");
-				
+
 				List<BoardDTO> list = dao.getInstance().myWriteList(id);
 				pw.append(gson.toJson(list));
 			
+			}else if(cmd.equals("/myBookMarkList.board")) {
+				System.out.println("/myBookMarkList.board");
+				String id = (String) request.getSession().getAttribute("loginID");
+				
+				List<BoardDTO> list = dao.getInstance().myBookMarkList(id);
+				pw.append(gson.toJson(list));
 			}
 
 		} catch (Exception e) {

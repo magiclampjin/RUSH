@@ -372,7 +372,7 @@ public class BoardDAO {
 	
 //	내가쓴 게시물 불러오기
 	public List<BoardDTO> myWriteList(String id) throws Exception{
-		String sql ="select * from postinfo where cbID = ?";
+		String sql ="select * from postinfo where cbID = ?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, id);
@@ -392,14 +392,44 @@ public class BoardDAO {
 					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
 					int replyCount = rs.getInt("rCount");
+					
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
 							cbRecommend, fileCount, replyCount));
 				}
 				return list;
 			}
-			
-			
-			
 		}
 	}
+	
+	public List<BoardDTO> myBookMarkList(String id) throws Exception{
+		String sql ="select * from bookmarkView where cbID = ?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<BoardDTO> list = new ArrayList<>();
+				int i = 0;
+				while (rs.next()) {
+					int cbSeq = rs.getInt("cbSeq");
+					String cbID = rs.getString("cbID");
+					String cbNickname = rs.getString("cbNickname");
+					String cbTitle = rs.getString("cbTitle");
+					String cbContent = rs.getString("cbContent");
+					Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
+					int cbView = rs.getInt("cbView");
+					String cbCategory = rs.getString("cbCategory");
+					int cbRecommend = rs.getInt("cbRecommend");
+					int fileCount = rs.getInt("fCount");
+					int replyCount = rs.getInt("rCount");
+					
+					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
+							cbRecommend, fileCount, replyCount));
+				}
+				return list;
+			}
+		}
+	}
+	
+	
 }

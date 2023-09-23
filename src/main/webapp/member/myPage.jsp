@@ -222,7 +222,7 @@ ul.tabs li.current{
 						<!-- 탭박스 -->
 						<ul class="tabs">
 						    <li class="tab-link current" id="myWrite" data-tab="tab-1">내가 쓴 글</li>
-						    <li class="tab-link" data-tab="tab-2">북마크</li>
+						    <li class="tab-link" id="myBookMark" data-tab="tab-2">북마크</li>
 						    <li class="tab-link" data-tab="tab-3">즐겨찾기</li>
 						    <li class="tab-link" data-tab="tab-4">게임기록</li>
 						</ul>
@@ -237,12 +237,25 @@ ul.tabs li.current{
 								<div class="recommend">추천</div>
 								<div class="file">파일</div>
 	                        </div>
-					    	<div class="ppost" id="post">
+					    	<div class="post1" id="post">
 						    	
 					    	</div>
 					    	<div id="pagination"></div>
 					    </div>
-					    <div id="tab-2" class="tab-content">tab content2</div>
+					    <div id="tab-2" class="tab-content">
+							<div class="boardHeader">
+	                            <div class="num">번호</div>
+								<div class="title">제목</div>
+								<div class="writer">작성자</div>
+								<div class="date">작성일</div>
+								<div class="view">조회</div>
+								<div class="recommend">추천</div>
+								<div class="file">파일</div>
+	                        </div>
+	                        <div class="post2" id="post">
+						    	
+					    	</div>
+						</div>
 					    <div id="tab-3" class="tab-content">tab content3</div>
 					    <div id="tab-4" class="tab-content">tab content4</div>
 					</div>
