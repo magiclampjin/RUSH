@@ -133,15 +133,21 @@ a {
 			<div class="boardWrite_guide">
 				<c:choose>
 					<c:when test="${menu == 'qna'}">
-						<form action="/insert.qna" method="post"
-							enctype="multipart/form-data">
-							<div class="writeTitle">Q&A 작성</div>
+						<form action="/insert.qna" method="post" enctype="multipart/form-data">
+							<c:choose>
+								<c:when test="${loginID eq 'admin' }">
+									<div class="writeTitle">공지게시글 수정</div>
+								</c:when>
+								<c:otherwise>
+									<div class="writeTitle">Q&A 수정</div>
+								</c:otherwise>
+							</c:choose>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요">
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
 									value="+">
-								</button>
+								
 								<span>파일첨부</span>
 								<div id="fileContainer"></div>
 							</div>
@@ -172,7 +178,14 @@ a {
 							<input type="hidden" name="keyword" value="${keyword}">
 							<textarea id="deleteFiles" style="display:none;" name="deleteFiles"></textarea>
 							<textarea id="deleteImgs" style="display:none;" name="deleteImgs"></textarea>
-							<div class="writeTitle">자유게시글 게시글 수정</div>
+							<c:choose>
+								<c:when test="${loginID eq 'admin' }">
+									<div class="writeTitle">공지게시글 수정</div>
+								</c:when>
+								<c:otherwise>
+									<div class="writeTitle">자유게시글 게시글 수정</div>
+								</c:otherwise>
+							</c:choose>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요" id="title" value="${post.title}">
 							<div class="fileBox">
@@ -227,7 +240,7 @@ a {
 								<input class="writebtn bColorGreen" type="submit" value="수정">
 							</div>
 						</form>
-						<script>
+<!-- 						<script>
 							$("#boardForm").submit(function(){
 								alert("왜 안떠");
 								if(!${loginID}){	
@@ -240,7 +253,7 @@ a {
 									
 								}
 							});
-						</script>
+						</script> -->
 					</c:otherwise>
 				</c:choose>
 			</div>
