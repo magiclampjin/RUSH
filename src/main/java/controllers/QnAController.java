@@ -133,11 +133,16 @@ public class QnAController extends HttpServlet {
 			} else if(cmd.equals("/delete.qna")) {
 				// 게시글 삭제
 				int qnaSeq = Integer.parseInt(request.getParameter("postSeq"));
+				
+				List<String> filesName = fdao.inQnaFilesNameList(qnaSeq);
+				String uploadPath = request.getServletContext().getRealPath("files");
+				for(String file:filesName) {
+					File filepath = new File(uploadPath+"/"+file);
+					filepath.delete();
+					// 외래키 cascade로 설정하면 DB에서는 게시글 삭제할 때 연쇄적으로 삭제됨. 
+				}
 				dao.delete(qnaSeq);
-				
 				response.sendRedirect("/listing.qna");
-				
-				
 				
 				
 			} else if(cmd.equals("/listing.qna")) {

@@ -234,6 +234,7 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
+				// 이미지 삭제해야대..
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String category = request.getParameter("category");
 				List<String> filesName = fdao.inPostFilesNameList(postSeq);
