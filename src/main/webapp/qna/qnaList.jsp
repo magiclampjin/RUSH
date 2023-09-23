@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/board/boardTab.js"></script>
 <script type="text/javascript" src="/js/board/qnaBoardPagination.js"></script>
+<script type="text/javascript" src="/js/board/isUser.js"></script>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
