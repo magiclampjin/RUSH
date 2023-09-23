@@ -154,7 +154,7 @@ a {
 											<i class="fa-solid fa-bullhorn"></i>
 										</div>
 										<a
-											href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div
+											href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&menu=board"><div
 												class="mainTitle">${noti.title }</div></a>
 
 										<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
@@ -178,7 +178,7 @@ a {
 												<i class="fa-solid fa-bullhorn"></i>
 											</div>
 											<a
-												href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }"><div
+												href="/load.board?cpage=${cpage }&seq=${noti.seq }&category=${category }&menu=board"><div
 													class="mainTitle">${noti.title }</div></a>
 											<div class="replyCnt colorPink fontEnglish">${noti.replyCount }</div>
 										</div>
@@ -210,7 +210,7 @@ a {
 											<div class="num fontEnglish">${post.seq }</div>
 											<div class="title">
 												<a
-													href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
+													href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }&menu=board"><div
 														class="mainTitle">${post.title }</div></a>
 												<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 											</div>
@@ -229,7 +229,7 @@ a {
 											<div class="num fontEnglish">${post.seq }</div>
 											<div class="minCon">
 												<div class="title">
-													<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }"><div
+													<a href="/load.board?cpage=${cpage }&seq=${post.seq }&category=${category }&menu=board"><div
 															class="mainTitle">${post.title }</div></a>
 													<div class="replyCnt colorPink fontEnglish">${post.replyCount }</div>
 												</div>

@@ -143,51 +143,50 @@ a {
 	                                        		<i class="fa-solid fa-lock"></i>
 	                                        	</c:if>
 	                                        </div>
-	                                        	<c:choose>
-	                                        		
-		                                        	<c:when test="${qna.secret eq true}">
-		                                        		<c:choose>
-			                                        		<c:when test="${qna.writer eq loginID || 'admin' eq loginID}">
-				                                        		<c:choose>
-					                                        		<c:when test="${not empty searchBy}">
-					                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}">
+                                        	<c:choose>                                  
+	                                        	<c:when test="${qna.secret eq true}">
+	                                        		<c:choose>
+		                                        		<c:when test="${qna.writer eq loginID || 'admin' eq loginID}">
+			                                        		<c:choose>
+				                                        		<c:when test="${not empty searchBy}">
+				                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}&menu=qna">
+				                                        				<div class="mainTitle">비밀글입니다.</div>
+				                                        			</a>
+		                                        				</c:when>			                                        		
+					                                        	<c:otherwise>
+					                                        		<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&menu=qna">
 					                                        				<div class="mainTitle">비밀글입니다.</div>
 					                                        			</a>
-			                                        				</c:when>			                                        		
-						                                        	<c:otherwise>
-						                                        		<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-						                                        				<div class="mainTitle">비밀글입니다.</div>
-						                                        			</a>
-						                                        	</c:otherwise>
-				                                       		 	</c:choose>
-			                                        		</c:when>
-			                                        		<c:otherwise>
-			                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
-			                                        			<script>
-			                                        				function checkSecret(elem){
-			                                        					alert("비밀글은 글을 작성한 본인만 확인가능합니다.");
-			                                        				}
-			                                        			</script>
-			                                        		</c:otherwise>
-		                                        		</c:choose>
-		                                        	</c:when>
-		                                        	<c:otherwise>
-		                                        		<c:choose>
-			                                        		<c:when test="${not empty searchBy}">
-			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}">
-					                                        		<div class="mainTitle">${qna.title }</div>
-					                                        	</a>
-	                                        				</c:when>			                                        		
-				                                        	<c:otherwise>
-				                                        		<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-					                                        		<div class="mainTitle">${qna.title }</div>
-					                                        	</a>
-				                                        	</c:otherwise>
-		                                       		 	</c:choose>
-			                                        	
-		                                        	</c:otherwise>
-	                                        	</c:choose>
-	                                        
+					                                        	</c:otherwise>
+			                                       		 	</c:choose>
+		                                        		</c:when>
+		                                        		<c:otherwise>
+		                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
+		                                        			<script>
+		                                        				function checkSecret(elem){
+		                                        					alert("비밀글은 글을 작성한 본인만 확인가능합니다.");
+		                                        				}
+		                                        			</script>
+		                                        		</c:otherwise>
+	                                        		</c:choose>
+	                                        	</c:when>
+	                                        	
+	                                        	<c:otherwise>
+	                                        		<c:choose>
+		                                        		<c:when test="${not empty searchBy}">
+		                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}&menu=qna">
+				                                        		<div class="mainTitle">${qna.title }</div>
+				                                        	</a>
+                                        				</c:when>			                                        		
+			                                        	<c:otherwise>
+			                                        		<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&menu=qna">
+				                                        		<div class="mainTitle">${qna.title }</div>
+				                                        	</a>
+			                                        	</c:otherwise>
+	                                       		 	</c:choose>
+		                                        	
+	                                        	</c:otherwise>
+                                        	</c:choose>
 	                                        <div class="replyCnt colorPink fontEnglish">
 		                                        <c:choose>
 		                                        	<c:when test="${qna.answeryn > 0 }">
@@ -225,10 +224,20 @@ a {
 	                                            <c:choose>
 		                                        	<c:when test="${qna.secret eq true}">
 		                                        		<c:choose>
-			                                        		<c:when test="${qna.writer == loginID }">
-			                                        			<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-			                                        				<div class="mainTitle">비밀글입니다.</div>
-			                                        			</a>
+			                                        		<c:when test="${qna.writer eq loginID || 'admin' eq loginID}">
+			                                        		
+                                        			            <c:choose>
+													                <c:when test="${not empty searchBy}">
+													                    <a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}&menu=qna">
+													                        <div class="mainTitle">비밀글입니다.</div>
+													                    </a>
+													                </c:when>			                                        		
+													                <c:otherwise>
+													                    <a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&menu=qna">
+													                            <div class="mainTitle">비밀글입니다.</div>
+													                        </a>
+													                </c:otherwise>
+													            </c:choose>
 			                                        		</c:when>
 			                                        		<c:otherwise>
 			                                        			<div class="mainTitle checkSecret" onclick="checkSecret(this);">비밀글입니다.</div>
@@ -240,10 +249,19 @@ a {
 			                                        		</c:otherwise>
 		                                        		</c:choose>
 		                                        	</c:when>
-		                                        	<c:otherwise>
-			                                        	<a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }">
-			                                        		<div class="mainTitle">${qna.title }</div>
-			                                        	</a>
+		                                        	<c:otherwise>                                      	
+		                                        		<c:choose>
+													        <c:when test="${not empty searchBy}">
+													            <a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&searchBy=${searchBy}&keyword=${keyword}&menu=qna">
+													                <div class="mainTitle">${qna.title }</div>
+													            </a>
+													        </c:when>			                                        		
+													        <c:otherwise>
+													            <a href="/load.qna?cpage=${lastPageNum }&seq=${qna.seq }&menu=qna">
+													                <div class="mainTitle">${qna.title }</div>
+													            </a>
+													        </c:otherwise>
+													    </c:choose>
 		                                        	</c:otherwise>
 	                                        	</c:choose>
 	                                            <div class="replyCnt colorPink fontEnglish">
