@@ -167,5 +167,5 @@ public class BoardDTO {
 	public String getFormedDate() { //post.jsp 용 
 		return this.timeCal("post");
 	}
-	
+
 }
