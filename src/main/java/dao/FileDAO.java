@@ -103,7 +103,21 @@ public class FileDAO {
 	}
 	
 	public List<String> inPostFilesNameList(int parentSeq) throws Exception{
-		String sql = "select fSystemName from file where cbSeq = ? and qna = false and img=false;";
+		String sql = "select fSystemName from file where cbSeq = ? and qna = false;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, parentSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<String> filesName = new ArrayList<>();
+				while(rs.next()) {
+					filesName.add(rs.getString(1));
+				}
+				return filesName;
+			}
+		}
+	}
+	
+	public List<String> inQnaFilesNameList(int parentSeq) throws Exception{
+		String sql = "select fSystemName from file where cbSeq = ? and qna = true;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, parentSeq);
 			try(ResultSet rs = pstat.executeQuery();){
@@ -117,7 +131,21 @@ public class FileDAO {
 	}
 	
 	public List<FileDTO> inPostFilesList(int parentSeq) throws Exception{
-		String sql = "select * from file where cbSeq = ? and qna = false and img=false;";
+		String sql = "select * from file where cbSeq = ? and qna = false;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, parentSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<FileDTO> files = new ArrayList<>();
+				while(rs.next()) {
+					files.add(new FileDTO(rs.getInt("fSeq"), rs.getInt("cbSeq"), rs.getString("fOriginName"), rs.getString("fSystemName"), rs.getBoolean("img"), rs.getBoolean("qna")));
+				}
+				return files;
+			}
+		}
+	}
+	
+	public List<FileDTO> inQnaFilesList(int parentSeq) throws Exception{
+		String sql = "select * from file where cbSeq = ? and qna = true;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, parentSeq);
 			try(ResultSet rs = pstat.executeQuery();){

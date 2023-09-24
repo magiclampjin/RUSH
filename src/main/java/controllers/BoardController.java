@@ -100,9 +100,12 @@ public class BoardController extends HttpServlet {
 				category = (category == null || category=="") ? "":category;
 				String search = request.getParameter("search");
 				String keyword = request.getParameter("keyword");
-
+				
 				BoardDTO post = dao.selectPost(postSeq);
 
+				if(post == null) {
+					System.out.println("포스트 삭제됨.. alert창 띄우고 boardList로 이동하게 구현하기");
+				}
 				boolean postRec = dao.checkPostRecommend(postSeq,
 						(String) request.getSession().getAttribute("loginID"));
 				boolean bookmark = dao.checkPostBookmark(postSeq,
@@ -110,6 +113,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("category", category);
+
 				if (postRec)
 					request.setAttribute("postRec", postRec);
 				if (bookmark)
@@ -130,6 +134,7 @@ public class BoardController extends HttpServlet {
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				String category = request.getParameter("category");
+				String menu = request.getParameter("menu");
 				String search = request.getParameter("search");
 				String keyword = request.getParameter("keyword");
 				
@@ -140,7 +145,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("files", files);
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
-				
+				request.setAttribute("menu", menu);
 				if(search != null) {
 					request.setAttribute("search",search);
 					request.setAttribute("keyword",keyword);
@@ -152,9 +157,8 @@ public class BoardController extends HttpServlet {
 				// 게시글 수정
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
 				String uploadPath = request.getServletContext().getRealPath("files");
-
-				
 				File filepath = new File(uploadPath);
+				
 				if (!filepath.exists()) {
 					filepath.mkdir();
 				}
@@ -166,9 +170,33 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
 				
+				// 게시글 수정 시 수정된 파일 DB, realpath에서 삭제
+				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
+				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
+					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteFilePath = new File(uploadPath+"/"+sysname);
+						deleteFilePath.delete();
+					}	
+				}
+				
+				// 게시글 수정 시 수정된 이미지 DB, realpath에서 삭제
+				String[] deleteImgNameStr = multi.getParameter("deleteImgs").split(":");
+				for(int i=0; i<deleteImgNameStr.length-1; i++) {
+					String sysname = deleteImgNameStr[i+1];
+					
+					sysname = sysname.substring(7);
+					
+					int result = fdao.deleteFile(sysname);
+					if(result == 1) {
+						File deleteImgfilepath = new File(uploadPath+"/"+sysname);
+						deleteImgfilepath.delete();
+					}	
+				}					
+				
 				String search = multi.getParameter("search");
 				String keyword = multi.getParameter("keyword");
-
 				keyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
 				
 				String id = (String) request.getSession().getAttribute("loginID");
@@ -208,6 +236,7 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
+				// 이미지 삭제해야대..
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String category = request.getParameter("category");
 				List<String> filesName = fdao.inPostFilesNameList(postSeq);

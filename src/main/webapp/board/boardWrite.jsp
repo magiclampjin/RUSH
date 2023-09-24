@@ -135,13 +135,19 @@ a {
 					<c:when test="${menu == 'qna'}">
 						<form action="/insert.qna" method="post"
 							enctype="multipart/form-data">
-							<div class="writeTitle">Q&A 작성</div>
+							<c:choose>
+								<c:when test="${loginID eq 'admin' }">
+									<div class="writeTitle">공지게시글 작성</div>
+								</c:when>
+								<c:otherwise>
+									<div class="writeTitle">Q&A 작성</div>
+								</c:otherwise>
+							</c:choose>
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요">
 							<div class="fileBox">
 								<input type="button" id="btnAdd" class="writebtn bColorGreen"
 									value="+">
-								</button>
 								<span>파일첨부</span>
 								<div id="fileContainer"></div>
 							</div>
@@ -154,8 +160,17 @@ a {
 									class="colorDarkgray">비밀글 설정하기</label>
 							</div>
 							<div class="writeBox">
-								<a href="/listing.board?category=${category }&cpage=1"><input
-									class="writebtn bColorGreen" type="button" value="목록으로"></a>
+								<c:choose>
+									<c:when test="${menu eq 'qna'}">
+										<a href="/listing.qna?&cpage=1"><input
+										class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:when>
+									<c:otherwise>
+										<a href="/listing.board?category=${category }&cpage=1"><input
+										class="writebtn bColorGreen" type="button" value="목록으로"></a>
+									</c:otherwise>
+								</c:choose>
+								
 								<input class="writebtn bColorGreen" type="submit" value="작성">
 							</div>
 
