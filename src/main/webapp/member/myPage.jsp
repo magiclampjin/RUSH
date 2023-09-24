@@ -124,7 +124,7 @@ a {
 		<div class="myPage">
 			<div class="nickNameBox bColorBlack">
 				<div class="nicknameInfo">
-					<div class="nickname colorWhite">${user.nickName } 님</div>
+					<div class="nickname colorWhite">${user.nickName }님</div>
 					<div class="levelBox">
 						<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
 						<div class="singDay colorDarkgray">가입일: ${user.stringFormat }</div>
@@ -143,7 +143,9 @@ a {
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">비밀번호</div>
-							<div class="infocon"><i class="fa-solid fa-lock"></i>&nbsp;비밀번호</div>
+							<div class="infocon">
+								<i class="fa-solid fa-lock"></i>&nbsp;비밀번호
+							</div>
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">닉네임</div>
@@ -161,8 +163,12 @@ a {
 							<input type="hidden" id="userEmail" value="${user.email }">
 						</div>
 						<div class="infoBox modifiedBox">
-							<input class="myPagebtn bColorBlue colorWhite" id="updateBtn"
-								type="button" value="수정하기">
+							<div>
+							<input class="myPagebtn bColorBlue colorWhite" id="pwUpdateBtn"
+									type="button" value="비밀번호 수정하기">
+								<input class="myPagebtn bColorBlue colorWhite" id="updateBtn"
+									type="button" value="개인정보 수정하기">
+							</div>
 						</div>
 					</div>
 				</div>

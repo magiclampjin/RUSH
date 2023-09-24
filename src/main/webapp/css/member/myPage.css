@@ -87,6 +87,7 @@
 	display: flex;
 	justify-content: end;
 	align-items: center;
+	margin-bottom: 100px;
 }
 
 .deleteBtn {
@@ -108,23 +109,21 @@
 }
 
 .pwCheckBox input[type="password"] {
-	margin-top: 10px;
+	margin-bottom: 10px;
 	padding: 8px;
 }
 
-.pwCheckBox #pwCheckBtn {
+.pwCheckBox #pwCheckBtn, #pwUpdateBtn {
 	padding: 10px;
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 	border: none;
 	border-radius: 5px;
 }
 
 .phrase {
-    color: red;
-    font-size: 13px;
-    padding-left: 20px;
-
-	}
+	color: red;
+	font-size: 13px;
+}
 
 /*.memberAddBox {
 	width: 1300px;
@@ -157,6 +156,9 @@
 	.levelBox>.singDay {
 		font-size: 15px;
 	}
+	.memberInfoBox {
+		font-size: 13px;
+	}
 	.memberBasicTitle {
 		font-size: 30px;
 		padding-bottom: 20px;
@@ -164,12 +166,7 @@
 	.infoBox>.infoCagetory {
 		width: 150px;
 	}
-	.infoBox>.infocon {
-		width: 150px;
-	}
 	.phrase {
-		color: red;
-		width: calc(100% - 300px);
 		font-size: 8px;
 	}
 }
