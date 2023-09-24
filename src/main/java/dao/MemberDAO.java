@@ -180,4 +180,12 @@ public class MemberDAO {
 		}
 	}
 	
+	public int deleteById(String id) throws Exception{
+		String sql ="delete from members where mId = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			return pstat.executeUpdate();
+		}
+	}
 }

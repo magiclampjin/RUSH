@@ -61,7 +61,7 @@ public class MemberController extends HttpServlet {
 				boolean result = dao.selectByNickname(nickName);
 				System.out.println("result : " + result);
 				if (result) {
-					if (userId != null || userId=="") {
+					if (userId != null || userId == "") {
 						String userNick = dao.selectNicknameById(userId);
 						if (nickName.equals(userNick)) {
 							printwriter.append("myNick");
@@ -100,26 +100,34 @@ public class MemberController extends HttpServlet {
 				String newPhone = request.getParameter("newPhone");
 				String newEmail = request.getParameter("newEmail");
 				System.out.println(newEmail);
-				
+
 				int result = dao.updateInfoById(id, newNick, newPhone, newEmail);
-				if(result != 0) {
+				if (result != 0) {
 					printwriter.append("true");
-				}else {
+				} else {
 					printwriter.append("false");
 				}
-			} else if(cmd.equals("/pwUpdate.member")) {
+			} else if (cmd.equals("/pwUpdate.member")) {
 				String id = request.getParameter("userID");
 				String newPw = EncryptionUtils.getSHA512(request.getParameter("newPW"));
-				
+
 				int result = dao.updatePwById(newPw, id);
-				if(result != 0) {
+				if (result != 0) {
 					printwriter.append("true");
-				}else {
+				} else {
 					printwriter.append("false");
 				}
 			} else if (cmd.equals("/delete.member")) {
 				// 회원 탈퇴 (회원 정보 삭제)
-
+				String id = request.getParameter("userID");
+				System.out.println(id);
+				int result = dao.deleteById(id);
+				if (result != 0) {
+					printwriter.append("true");
+					request.getSession().removeAttribute("loginID");
+				} else {
+					printwriter.append("false");
+				}
 			} else if (cmd.equals("/login.member")) {
 				// 회원 로그인
 				String id = request.getParameter("id");

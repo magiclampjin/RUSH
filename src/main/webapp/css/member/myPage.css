@@ -125,6 +125,215 @@
 	font-size: 13px;
 }
 
+/* 즐겨찾는 게임 */
+.favoriteTabs {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	padding: 0px;
+}
+
+ul.favoriteTabs li {
+	width: calc(100%/ 6);
+	text-align: center;
+	padding: 10px 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	border: 1px solid;
+}
+
+ul.favoriteTabs li:not(:last-child) {
+	border-right: none;
+}
+
+ul.favoriteTabs li:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+ul.favoriteTabs li:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+ul.favoriteTabs li.current {
+	background-color: #ccf423;
+}
+
+.favoriteTab-content {
+	display: none;
+}
+
+.favoriteTab-content.current {
+	display: block;
+}
+
+.favoriteCategory {
+	display: flex;
+	justify-content: end;
+}
+
+.favoriteCategory select {
+	width: 200px;
+}
+
+.favoriteHeader {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	padding: 10px;
+}
+
+.gameInfoBox {
+	width: 80%;
+}
+
+.favoriteHeader .gameLink {
+	margin-right: 15px;
+}
+
+.gamePost {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.gamePost>.gameInfoBox {
+	display: flex;
+}
+
+.gamePost>.gameLink {
+	display: flex;
+	align-items: center;
+}
+
+.gameImg {
+	background-color: #ccf423;
+	width: 200px;
+	height: 150px;
+}
+
+.gameInfo {
+	margin-left: 15px;
+}
+
+.gameInfo .gameTitle {
+	font-size: 25px;
+	font-weight: 700;
+}
+
+.playBtn {
+	padding: 20px;
+	border: none;
+	border-radius: 15px;
+}
+/* 즐겨찾는 게임 */
+
+/* 게임 기록 */
+.recordTabs {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+ul.recordTabs li {
+  width: calc(100% / 6);
+  text-align: center;
+  padding: 10px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid;
+}
+ul.recordTabs li:not(:last-child) {
+  border-right: none;
+}
+
+ul.recordTabs li:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+ul.recordTabs li:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+ul.recordTabs li.current {
+  background-color: #ccf423;
+}
+.recordTab-content {
+  display: none;
+}
+.recordTab-content.current {
+  display: block;
+}
+
+.recordCategory {
+  display: flex;
+  justify-content: end;
+}
+.recordCategory select {
+  width: 200px;
+}
+.recordHeader {
+  display: flex;
+  margin-top: 10px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  padding: 10px;
+}
+.recordBody {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.gameRank {
+  width: 50px;
+  text-align: center;
+}
+.gameScore,
+.gameTime {
+  width: calc(50% - 25px);
+  padding-left: 30px;
+}
+.recordPost {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+.recordPost .gameInfo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: calc(100% - 50px);
+  margin-left: 0px;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.recordPost .gameInfo:before {
+  content: "";
+  position: absolute;
+  left: 0 - translateX(50%);
+  width: 5px;
+  height: 35px;
+  background: #ccf423;
+}
+.recordPost:nth-child(even) .gameInfo {
+  background-color: #7d7d7d30;
+}
+.gameInfo .gameScore {
+  width: 50%;
+}
+
+/* 게임 기록 */
+
 /*.memberAddBox {
 	width: 1300px;
 	margin: auto;
@@ -168,5 +377,13 @@
 	}
 	.phrase {
 		font-size: 8px;
+	}
+	.gameInfoBox {
+		width: 70%;
+	}
+	.gameImg {
+		background-color: #ccf423;
+		width: 150px;
+		height: 100px;
 	}
 }
