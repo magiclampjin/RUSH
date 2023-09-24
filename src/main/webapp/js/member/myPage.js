@@ -46,7 +46,7 @@ $(document).ready(function(){
 					divWriter.append(resp[i].nickName);
 					
 				let divDate = $("<div>").attr("class","date");
-					divDate.append(timeCal(resp[i].writeDate));
+					divDate.html(resp[i].writeDate);
 				
 				let divView = $("<div>").attr("class","view fontEnglish");
 					divView.append(resp[i].view);
@@ -96,7 +96,7 @@ $(document).ready(function(){
 							divMinWriter.append(resp[i].nickName);
 							
 						let divMinDate = $("<div>").attr("class","minDate colorDarkgray");
-							divMinDate.append(timeCal(resp[i].writeDate));
+							divMinDate.html(resp[i].writeDate);
 							
 						let divMinView = $("<div>").attr("class","minView fontEnglish colorDarkgray");
 								let divIconView = $("<i>").attr("class","fa-regular fa-eye");
@@ -172,7 +172,7 @@ function myWriteList(){
 				let divDate = $("<div>").attr("class","date");
 					
 					// 시간
-					divDate.append(timeCal(resp[i].writeDate));
+					divDate.html(resp[i].writeDate);
 				
 				let divView = $("<div>").attr("class","view fontEnglish");
 					divView.append(resp[i].view);
@@ -222,7 +222,7 @@ function myWriteList(){
 							divMinWriter.append(resp[i].nickName);
 							
 						let divMinDate = $("<div>").attr("class","minDate colorDarkgray");
-							divMinDate.append(timeCal(resp[i].writeDate));
+							divMinDate.html(resp[i].writeDate);
 							
 						let divMinView = $("<div>").attr("class","minView fontEnglish colorDarkgray");
 								let divIconView = $("<i>").attr("class","fa-regular fa-eye");
@@ -259,7 +259,7 @@ function myWriteList(){
 			
 		});
 }
-
+/*
 function timeCal(date){
 	const start = new Date(date);
   const end = new Date();
@@ -286,3 +286,4 @@ function timeCal(date){
 }
 
 
+*/

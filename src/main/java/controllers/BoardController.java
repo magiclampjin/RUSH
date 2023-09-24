@@ -3,8 +3,11 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -16,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -42,6 +50,26 @@ public class BoardController extends HttpServlet {
 		GameDAO gdao = GameDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
+		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
+			private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+			public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
+				long currentTime = System.currentTimeMillis();
+				long writeTime = arg0.getTime();
+				long gapTime = currentTime - writeTime;
+
+				if (gapTime < 60000) {
+					return new JsonPrimitive("방금 전");
+				} else if (gapTime < 60000 * 60) {
+					return new JsonPrimitive( gapTime / 60000 + " 분 전");
+				} else if (gapTime < 60000 * 60 * 24) {
+					long hour = gapTime / 60000 / 60;
+					long min = ((gapTime / 60000) % 60);
+					return new JsonPrimitive("약 "+hour + "시간 전");
+				} else {
+					return new JsonPrimitive(sdfDay.format(arg0));
+				}					
+			}
+		}).create();
 
 		try {
 			if (cmd.equals("/insert.board")) {
@@ -364,15 +392,15 @@ public class BoardController extends HttpServlet {
 			}else if(cmd.equals("/myWriteList.board")) {
 				String id = (String) request.getSession().getAttribute("loginID");
 
-				List<BoardDTO> list = dao.getInstance().myWriteList(id);
-				pw.append(gson.toJson(list));
+				List<BoardDTO> list = dao.myWriteList(id);
+				pw.append(gsonTs.toJson(list));
 			
 			}else if(cmd.equals("/myBookMarkList.board")) {
 				System.out.println("/myBookMarkList.board");
 				String id = (String) request.getSession().getAttribute("loginID");
 				
-				List<BoardDTO> list = dao.getInstance().myBookMarkList(id);
-				pw.append(gson.toJson(list));
+				List<BoardDTO> list = dao.myBookMarkList(id);
+				pw.append(gsonTs.toJson(list));
 			}
 
 		} catch (Exception e) {
