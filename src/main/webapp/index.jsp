@@ -235,7 +235,13 @@ a {
 
 					<div class="row g-0 pb180">
 						<div class="d-none col-sm-6 d-md-block">
-							<img class="gameImg" src="/img/img.jpg">
+							<div class="borderAni">
+								<img class="gameImg" src="/img/img.jpg">
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>			
 						</div>
 						<div class="d-none col-sm-6 d-md-block">
 							<div
@@ -250,7 +256,13 @@ a {
 
 						<div
 							class="col-12 d-md-none d-flex align-items-center justify-content-center">
-							<img class="gameImgmini" src="/img/img.jpg">
+							<div class="borderAni">
+								<img class="gameImgmini" src="/img/img.jpg">
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>	
 						</div>
 						<div class="col-12 d-md-none">
 							<div
@@ -278,12 +290,24 @@ a {
 							</div>
 						</div>
 						<div class="d-none col-sm-6 d-md-block">
-							<img class="gameImg" src="/img/img.jpg">
+							<div class="borderAni">
+								<img class="gameImg" src="/img/img.jpg">
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
 						</div>
 
 						<div
 							class="col-12 d-md-none d-flex align-items-center justify-content-center">
-							<img class="gameImgmini" src="/img/img.jpg">
+							<div class="borderAni">
+								<img class="gameImgmini" src="/img/img.jpg">
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>	
 						</div>
 						<div class="col-12 d-md-none">
 							<div
