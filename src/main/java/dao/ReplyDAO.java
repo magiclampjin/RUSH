@@ -30,7 +30,20 @@ public class ReplyDAO {
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 	
 	public List<ReplyDTO> selectAll(int postSeq, String loginId) throws Exception{
-//		String sql = "select * from replyrecList where cbSeq = ? and (isnull(recid) or recid = ?) and parentRSeq is null;";
+		String sql = "select * from replyRecommCnt where cbSeq = ? and parentRSeq is null;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, postSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replys = new ArrayList<>();
+				while(rs.next()) {
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("parentRSeq"),  rs.getInt("recCnt")));
+				}
+				return replys;
+			}
+		}
+	}
+	
+	public List<ReplyDTO> selectByPa(int postSeq, String loginId, int start, int end) throws Exception{
 		String sql = "select * from replyRecommCnt where cbSeq = ? and parentRSeq is null;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
