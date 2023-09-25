@@ -125,7 +125,7 @@ a {
                 <div class="line col"></div>
                 <div class="subTitleBox row g-0">
                     <div class="subTitle pl-10 col-2 col-xs-1 col-md-1 col-lg-1 col-xl-1 colorWhite">순위</div>
-                    	<div class="col-10 col-xs-11 col-md-11 col-lg-11 col-xl-11">
+                    	<div class="col-10 col-xs-11">
 	                    	<div class="row g-0">
 	                    		<div class="subTitle col-9 colorWhite">유저 정보</div>
 		                        <div class="subTitle g-0 p-0 pl-15 col-3">

@@ -62,7 +62,7 @@ $(document).ready(function() {
 		        rank.html(i+1);
 		
 		        let infoDiv = $("<div>");
-		        infoDiv.addClass("col-10 col-xs-11 col-md-11 col-lg-11 col-xl-11 colorWhite");
+		        infoDiv.addClass("recordPost col-10 col-xs-11 colorWhite");
 		
 		        let userInfo = $("<div>");
 		        userInfo.addClass("userInfo g-0 row");
