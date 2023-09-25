@@ -29,7 +29,7 @@ public class ReplyDAO {
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 	
-	public List<ReplyDTO> selectAll(int postSeq, String loginId) throws Exception{
+	public List<ReplyDTO> selectAll(int postSeq) throws Exception{
 		String sql = "select * from replyRecommCnt where cbSeq = ? and parentRSeq is null;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
@@ -43,16 +43,33 @@ public class ReplyDAO {
 		}
 	}
 	
-	public List<ReplyDTO> selectByPa(int postSeq, String loginId, int start, int end) throws Exception{
-		String sql = "select * from replyRecommCnt where cbSeq = ? and parentRSeq is null;";
+	public List<ReplyDTO> selectByPage(int postSeq, int start, int end) throws Exception{
+		String sql = "select * from replyRecommCnt where cbSeq = ? and parentRSeq is null limit ?,?;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replys = new ArrayList<>();
 				while(rs.next()) {
 					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("parentRSeq"),  rs.getInt("recCnt")));
 				}
 				return replys;
+			}
+		}
+	}
+	
+	public int getRecordCount(int postSeq) throws Exception{
+		String sql = "select count(*) from replyRecommCnt where cbSeq = ? and parentRSeq is null;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, postSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				if(rs.next()){
+					return rs.getInt(1);
+				}else {
+					return 0;
+				}
+				
 			}
 		}
 	}
