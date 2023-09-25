@@ -73,9 +73,7 @@ public class ReplyController extends HttpServlet {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String loginId = (String) request.getSession().getAttribute("loginID");
 				String replyCurPage = request.getParameter("replyCurPage");
-				System.out.println("전: "+replyCurPage);
 				int replyCurrentPage = (replyCurPage == null || replyCurPage=="") ? 1 : Integer.parseInt(replyCurPage);
-				System.out.println("후: "+replyCurrentPage);
 				List<ReplyDTO> replys = dao.selectByPage(postSeq, replyCurrentPage * Constants.REPLY_COUNT_PER_PAGE - Constants.REPLY_COUNT_PER_PAGE, Constants.REPLY_COUNT_PER_PAGE);
 
 				List<ReplyDTO> replyRecList = dao.selectReplyRecommCnt(postSeq, loginId);
