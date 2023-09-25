@@ -72,22 +72,21 @@ public class ReplyController extends HttpServlet {
 			} else if(cmd.equals("/load.reply")) {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String loginId = (String) request.getSession().getAttribute("loginID");
-				List<ReplyDTO> replys = dao.selectAll(postSeq,loginId);
+				String replyCurPage = request.getParameter("replyCurPage");
+				System.out.println("전: "+replyCurPage);
+				int replyCurrentPage = (replyCurPage == null || replyCurPage=="") ? 1 : Integer.parseInt(replyCurPage);
+				System.out.println("후: "+replyCurrentPage);
+				List<ReplyDTO> replys = dao.selectByPage(postSeq, replyCurrentPage * Constants.REPLY_COUNT_PER_PAGE - Constants.REPLY_COUNT_PER_PAGE, Constants.REPLY_COUNT_PER_PAGE);
 
-				// 페이지 네이션
-				String replyPage = request.getParameter("replyPage");
-				int currentReplyPage = (replyPage == null) ? 1 : Integer.parseInt(replyPage);
-				request.setAttribute("lastReplyPageNum", currentReplyPage);
-				request.setAttribute("recordCountPerPage", Constants.REPLY_COUNT_PER_PAGE);
-				request.setAttribute("naviCountPerPage", Constants.REPLY_NAVI_COUNT_PER_PAGE);
-				// 여기까지 페이지 네이션
-				
-				
 				List<ReplyDTO> replyRecList = dao.selectReplyRecommCnt(postSeq, loginId);
 				
 				List<Object> result = new ArrayList<>();
 				result.add(replys);
 				result.add(replyRecList);
+				result.add(dao.getRecordCount(postSeq)); // 총 댓글 수
+				result.add(replyCurrentPage); //현재 댓글 페이지
+				result.add(Constants.REPLY_COUNT_PER_PAGE); // 페이지 내 댓글 수
+				result.add(Constants.REPLY_NAVI_COUNT_PER_PAGE); // 페이지 네이션 최대 개수 (1 2 3 4 5로 출력)
 				
 				pw.append(gsonTs.toJson(result));
 	

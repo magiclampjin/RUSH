@@ -177,3 +177,26 @@
 #postContents img{
 	max-width: 100%;
 }
+
+#pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+#pagination>a {
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+}
+
+#pagination>a:not(:last-child) {
+	margin-right: 10px;
+}
+
+#pagination>a:hover:not(a.colorWhite.bColorBlue) {
+	background-color: #5d6ce130;
+}
