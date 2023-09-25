@@ -348,27 +348,30 @@ a {
 					<!-- 글 작성자 = 로그인 사용자이면 글 추천, 글 북마크 버튼 출력 x -->
 					<c:choose>
 						<c:when test="${loginID ne post.writer}">
-
-							<div class="col-12 topBtns">
-								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
-
-								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
-								<c:choose>
-									<c:when test="${not empty postRec}">
-										<script>
-											$("#postRec").attr("class",	"btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${not empty bookmark}">
-										<script>
-											$("#bookmark").attr("class", "btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-							</div>
+							<c:choose>
+								<c:when test="${loginID ne 'admin'}">
+									<div class="col-12 topBtns">
+										<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+										<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+		
+										<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
+										<c:choose>
+											<c:when test="${not empty postRec}">
+												<script>
+													$("#postRec").attr("class",	"btnClicked");
+												</script>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${not empty bookmark}">
+												<script>
+													$("#bookmark").attr("class", "btnClicked");
+												</script>
+											</c:when>
+										</c:choose>
+									</div>
+								</c:when>
+							</c:choose>	
 						</c:when>
 					</c:choose>
 
