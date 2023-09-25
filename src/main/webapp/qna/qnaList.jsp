@@ -325,13 +325,13 @@ a {
 
                             </div>
                             <div class="write">
-                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" class="boardBtn bColorGreen"></a>
+                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" id="writeBtnLink" class="boardBtn bColorGreen"></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-           
+            <input type="hidden" id="userID" value=${loginID }>
             <input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
 			<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }">
 			<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }">
