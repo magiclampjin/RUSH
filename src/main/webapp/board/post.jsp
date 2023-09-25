@@ -20,7 +20,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/board/post.js"></script>
-<script type="text/javascript" src="/js/board/isUserInPost.js"></script>
 
 <style>
 * {
@@ -459,15 +458,12 @@ a {
 						</div>
 
 						<div class="col-12">
-							<input type="hidden" id="loginID" value="${loginID}"> <input
-								type="hidden" id="postWriterName" value="${post.writer}">
+							<input type="hidden" id="loginID" value="${loginID}"> 
+							<input type="hidden" id="postWriterName" value="${post.writer}">
+							
 							<div class="row g-0 replys  justify-content-end" id="replys">
 							</div>
 							<div id="pagination" class="mb200"></div>
-							<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
-							<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }"> 
-							<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }"> 
-							<input type="hidden" id="lastPageNum" value="${lastPageNum }"> 
 						</div>
 					</div>
 				</div>

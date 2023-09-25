@@ -324,7 +324,8 @@ a {
                                 </form>
 
                             </div>
-                           <c:choose>
+                            <c:choose>
+
                             	<c:when test="${loginID ne 'admin'}">
                             		<div class="write">
 		                                <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" id="writeBtnLink" class="boardBtn bColorGreen"></a>
