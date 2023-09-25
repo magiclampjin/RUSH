@@ -11,8 +11,9 @@ $(document).ready(function() {
 			let postWriter = $("#postWriterName").val();
 			let loginID = $("#loginID").val();
 			let replys = $("#replys");
-			let replyRecommCnt = resp[1].length -1;
+			let replyRecommCnt = resp[1].length;
 			let replyRecommCheckIdx = 0;
+
 			for (let i = 0; i < resp[0].length; i++) {
 				let replyTag = $("<div>").attr("class", "col-12 reply");
 				let row = $("<div>").attr("class", "row g-0");
@@ -57,21 +58,33 @@ $(document).ready(function() {
 					replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 
 					row.append(replyBtns).append(replyBtnsMini);
-				} else {
-					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
-					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
+				} else if(loginID == "admin"){
+					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
 
-					if(replyRecommCnt > 0){
+					let btncover = $("<div>").attr("class", "defaultCover");
+					let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
+					replyBtns.append(btncover.append(deleteBtn));
+
+
+					let btncovermini = $("<div>").attr("class", "defaultCover");
+					let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
+					let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+					replyBtnsMini.append(btncovermini.append(deleteBtnMini));
+
+					row.append(replyBtns).append(replyBtnsMini);
+				}else {
+					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
+					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");			
+					row.append(replyBtns.append(recommendBtn));
+					
+					if(replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt){
 						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
 							recommendBtn.addClass("btnClicked");
-							if(replyRecommCheckIdx < replyRecommCnt)
-								replyRecommCheckIdx++;
+							replyRecommCheckIdx++;
 						}
-					}
-					
-					row.append(replyBtns.append(recommendBtn));
+					}					
 				}
-
+				
 				let replyId = $("<input>").attr("type", "hidden").val(resp[0][i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
@@ -84,12 +97,19 @@ $(document).ready(function() {
 	let postSeq = $("#postSeq").val();
 	let search = $("#search").val();
 	let keyword = $("#keyword").val();
+	
+	// url 에서 myPage 값가져올때 사용
+	const urlParams = new URL(location.href).searchParams;
+	const myPage = urlParams.get('myPage');
 
 	// 댓글창 로드
 	$("#replys").html(replyReload(postSeq));
 
 	$(".goList").on("click", function() {
-		if(search == null || search == ""){
+		
+		if(myPage == "true"){
+			location.href="/load.member";
+		}else if(search == null || search == ""){
 			location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
 		}else{
 			location.href = "/listing.board?cpage=" + cpage + "&category=" + category +"&search="+search+"&keyword="+keyword;
@@ -213,9 +233,9 @@ $(document).ready(function() {
 	// 게시글 수정
 	$(".update").on("click",function(){
 		if(search == null || search == ""){
-			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&menu=board";
 		}else{
-			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&search="+search+"&keyword="+keyword;
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&menu=board" +"&search="+search+"&keyword="+keyword;
 		}
 	});
 
@@ -550,14 +570,23 @@ $(document).ready(function() {
 						replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 
 						row.append(replyBtns).append(replyBtnsMini);
+					}  else if(loginID == "admin"){
+						
+						replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
+
+						let btncover = $("<div>").attr("class", "defaultCover");
+						let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
+						replyBtns.append(btncover.append(deleteBtn));
+
+						let btncovermini = $("<div>").attr("class", "defaultCover");
+						let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
+						let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+						replyBtnsMini.append(btncovermini.append(deleteBtnMini));
+
+						row.append(replyBtns).append(replyBtnsMini);
 					} else {
 						replyBtns = $("<div>").attr("class", "col-2 replyBtns");
-						let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").attr("id", "replyRec").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
-
-						if (resp[i].recId !== undefined) {
-							recommendBtn.addClass("btnClicked");
-						}
-						row.append(replyBtns.append(recommendBtn));
+						row.append(replyBtns);
 					}
 
 					let replyId = $("<input>").attr("type", "hidden").val(resp[i].seq).attr("id", "replyId");

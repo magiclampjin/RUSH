@@ -356,3 +356,7 @@ ul.tabs a.current {
 		margin-top: 20px;
 	}
 }
+
+.checkSecret{
+	cursor:pointer;
+}
