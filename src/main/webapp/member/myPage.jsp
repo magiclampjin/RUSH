@@ -98,7 +98,7 @@ ul.tabs li.current {
 	display: inherit;
 }
 
-#tab-1 {
+#tab-1,#tab-2,#tab-3,#tab-4 {
 	overflow: auto;
 }
 </style>
@@ -243,7 +243,7 @@ ul.tabs li.current {
 								쓴 글</li>
 							<li class="tab-link" id="myBookMark" data-tab="tab-2">북마크</li>
 							<li class="tab-link" id="favorites" data-tab="tab-3">즐겨찾기</li>
-							<li class="tab-link" data-tab="tab-4">게임기록</li>
+							<li class="tab-link" id="gameRecord" data-tab="tab-4">게임기록</li>
 						</ul>
 
 						<div id="tab-1" class="tab-content current">
@@ -257,7 +257,6 @@ ul.tabs li.current {
 								<div class="file">파일</div>
 							</div>
 							<div class="post1" id="post"></div>
-							<div id="pagination"></div>
 						</div>
 						<div id="tab-2" class="tab-content">
 							<div class="boardHeader">
@@ -275,75 +274,58 @@ ul.tabs li.current {
 							<div class="favoriteTabBox">
 								<!-- 탭박스 -->
 								<ul class="favoriteTabs">
-									<li class="tab-link current" id="" data-tab="favoriteTab-1">전체rrrrrrr</li>
-									<li class="tab-link" id="" data-tab="favoriteTab-2">게임1</li>
-									<li class="tab-link" id="" data-tab="favoriteTab-3">게임2</li>
-									<li class="tab-link" data-tab="favoriteTab-4">게임3</li>
-									<li class="tab-link" data-tab="favoriteTab-5">게임4</li>
-									<li class="tab-link" data-tab="favoriteTab-6">게임5</li>
+									<li class="tab-link current" id="favoriteAll" data-tab="favoriteTab-1">전체rrrrrrr</li>
+									<li class="tab-link" id="Arcade" data-tab="favoriteTab-2">Arcade</li>
+									<li class="tab-link" id="Puzzle" data-tab="favoriteTab-3">Puzzle</li>
+									<li class="tab-link" id="Rhythm" data-tab="favoriteTab-4">Rhythm</li>
 								</ul>
 								<div class="favoriteCategory">
-									<select class="form-select" aria-label="Default select example"
-										name="favoriteCategory">
-										<option value="title" selected>최신순</option>
-										<option value="writer">인기순</option>
-										<option value="content">이름순</option>
+									<select class="form-select" aria-label="Default select example" 
+									id="selectBox" name="favoriteCategory">
+										<option value="currentOrder" selected>최신순</option>
+										<option value="favoriOrder">인기순</option>
+										<option value="nameOrder">이름순</option>
 									</select>
 								</div>
-								<div id="favoriteTab-1" class="favoriteTab-content current">
+								<div id="favoriteTab-1" class="favoriteTab-content current" >
 									<div class="favoriteHeader">
 										<div class="gameInfoBox">게임 정보</div>
 										<div class="gameLink">게임 바로가기</div>
 									</div>
 									<div class="favoriteBody">
-										<div class="gamePost">
-											<div class="gameInfoBox">
-												<div class="gameImg">게임이미지</div>
-												<div class="gameInfo">
-													<div class="gameTitle">게임1</div>
-													<div class="producer">제작자</div>
-												</div>
-											</div>
-											<div class="gameLink">
-												<a href="#"><input type="button"
-													class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
-											</div>
-										</div>
-										<div class="gamePost">
-											<div class="gameInfoBox">
-												<div class="gameImg">게임이미지</div>
-												<div class="gameInfo">
-													<div class="gameTitle">게임1</div>
-													<div class="producer">제작자</div>
-												</div>
-											</div>
-											<div class="gameLink">
-												<a href="#"><input type="button"
-													class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
-											</div>
-										</div>
-
+										
 									</div>
 								</div>
 								<div id="favoriteTab-2" class="favoriteTab-content">
-									<div class="boardHeader">
-										<div class="num">번호</div>
-										<div class="title">제목</div>
-										<div class="writer">작성자</div>
-										<div class="date">작성일</div>
-										<div class="view">조회</div>
-										<div class="recommend">추천</div>
-										<div class="file">파일</div>
+									<div class="favoriteHeader">
+										<div class="gameInfoBox">게임 정보</div>
+										<div class="gameLink">게임 바로가기</div>
 									</div>
-									<div class="post2" id="post"></div>
+									<div class="favoriteBody">
+										
+
+									</div>
 								</div>
-								<div id="favoriteTab-3" class="favoriteTab-content"></div>
-								<div id="favoriteTab-4" class="favoriteTab-content">tab
-									content4</div>
-								<div id="favoriteTab-5" class="favoriteTab-content">tab
-									content4</div>
-								<div id="favoriteTab-6" class="favoriteTab-content">tab
-									content4</div>
+								<div id="favoriteTab-3" class="favoriteTab-content">
+									<div class="favoriteHeader">
+										<div class="gameInfoBox">게임 정보</div>
+										<div class="gameLink">게임 바로가기</div>
+									</div>
+									<div class="favoriteBody">
+										
+
+									</div>
+								</div>
+								<div id="favoriteTab-4" class="favoriteTab-content">
+									<div class="favoriteHeader">
+										<div class="gameInfoBox">게임 정보</div>
+										<div class="gameLink">게임 바로가기</div>
+									</div>
+									<div class="favoriteBody">
+										
+
+									</div>
+								</div>
 							</div>
 						</div>
 						<div id="tab-4" class="tab-content">
@@ -351,11 +333,11 @@ ul.tabs li.current {
 								<!-- 탭박스 -->
 								<ul class="recordTabs">
 									<li class="tab-link current" id="" data-tab="recordTab-1">전체rrrrrrr</li>
-									<li class="tab-link" id="" data-tab="recordTab-2">게임1</li>
-									<li class="tab-link" id="" data-tab="recordTab-3">게임2</li>
-									<li class="tab-link" data-tab="recordTab-4">게임3</li>
-									<li class="tab-link" data-tab="recordTab-5">게임4</li>
-									<li class="tab-link" data-tab="recordTab-6">게임5</li>
+									<li class="tab-link" id="" data-tab="recordTab-2">Candy Crush</li>
+									<li class="tab-link" id="" data-tab="recordTab-3">Doodle Jump</li>
+									<li class="tab-link" data-tab="recordTab-4">Flappy Bird</li>
+									<li class="tab-link" data-tab="recordTab-5">KJMAX</li>
+									<li class="tab-link" data-tab="recordTab-6">kkodle</li>
 								</ul>
 								<div class="recordCategory">
 									<select class="form-select" aria-label="Default select example"

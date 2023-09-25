@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
+import dto.BoardDTO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
 
@@ -22,9 +23,13 @@ import dto.GameRecordDTO;
 public class GameController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
+		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
+		
 		GameDAO dao = GameDAO.getInstance();
 		Gson gson = new Gson();
 		String cmd = request.getRequestURI();
+		PrintWriter pw = response.getWriter();
 		System.out.println("game cmd: "+cmd);
 		
 		try {
@@ -103,6 +108,76 @@ public class GameController extends HttpServlet {
 				
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
+				
+			}else if(cmd.equals("/myFavoriteGame.game")) {
+
+				System.out.println("/myFavoriteGame.game");
+				String id = (String) request.getSession().getAttribute("loginID");
+				String category = request.getParameter("param");
+				System.out.println("Favo category "+category);
+				
+				List<GameDTO> list = new ArrayList<>();
+				
+				if(category.equals("favoriteAll")) {
+					System.out.println("카테고리없음");
+					list = dao.myFavoriateGame(id);
+					
+				}else {
+					list = dao.myFavoriateGame(id,category);
+				}
+				
+				
+				pw.append(gson.toJson(list));
+				
+			}else if(cmd.equals("/mycurrentOrder.game")) {
+				System.out.println("/mycurrentOrder.game");
+				String id = (String) request.getSession().getAttribute("loginID");
+				String category = request.getParameter("param");
+				System.out.println("Favo category "+category);
+				
+				List<GameDTO> list = new ArrayList<>();
+				
+				if(category.equals("favoriteAll")) {
+					System.out.println("카테고리없음");
+					list = dao.myCurrentOrderGame(id);
+				}else {
+					list = dao.myCurrentOrderGame(id,category);
+				}
+				
+				pw.append(gson.toJson(list));
+				
+			}else if(cmd.equals("/mynameOrderGame.game")) {
+				System.out.println("/mynameOrderGame.game");
+				
+				String id = (String) request.getSession().getAttribute("loginID");
+				String category = request.getParameter("param");
+				
+				List<GameDTO> list = new ArrayList<>();
+				
+				if(category.equals("favoriteAll")) {
+					list = dao.myNameOrderGame(id);
+				}else {
+					list = dao.myNameOrderGame(id,category);
+				}
+				
+				pw.append(gson.toJson(list));
+				
+			}else if(cmd.equals("/myFavoriteOrderGame.game")) {
+				System.out.println("/myFavoriteOrderGame.game");
+				String id = (String) request.getSession().getAttribute("loginID");
+				String category = request.getParameter("param");
+				
+				List<GameDTO> list = new ArrayList<>();
+				
+				if(category.equals("favoriteAll")) {
+					System.out.println("카테고리없음");
+					list = dao.myFavoriteOrderGame(id);
+				}else {
+					list = dao.myFavoriteOrderGame(id,category);
+				}
+				
+				
+				pw.append(gson.toJson(list));
 				
 			}
 		}catch(Exception e) {

@@ -396,7 +396,6 @@ public class BoardController extends HttpServlet {
 				pw.append(gsonTs.toJson(list));
 			
 			}else if(cmd.equals("/myBookMarkList.board")) {
-				System.out.println("/myBookMarkList.board");
 				String id = (String) request.getSession().getAttribute("loginID");
 				
 				List<BoardDTO> list = dao.myBookMarkList(id);

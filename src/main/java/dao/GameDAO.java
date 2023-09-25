@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.BoardDTO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
 
@@ -236,6 +237,191 @@ public class GameDAO {
 			}
 		}
 	}
+	
+
+	// 마이페이지 즐겨찾는 게임
+	public List<GameDTO> myFavoriateGame(String id)throws Exception{
+		String sql = "select * from myFavoriteGame where mID = ?;";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gCategory"),
+							rs.getString("gDeveloper"),rs.getString("gImageURL"),rs.getString("mID")));
+					
+				}
+				
+				return list;
+			}
+		}
+	}
+	
+	public List<GameDTO> myFavoriateGame(String id, String category)throws Exception{
+		String sql = "select * from myFavoriteGame where mID = ? and gCategory = ?";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			pstat.setString(2, category);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gCategory"),
+							rs.getString("gDeveloper"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+			}
+		}
+	}
+	
+	
+	
+	public List<GameDTO> myCurrentOrderGame(String id) throws Exception{
+		String sql = "select * from currentorderview where mID=? order by gfSeq;";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+			}
+		}
+	}
+	
+	public List<GameDTO> myCurrentOrderGame(String id, String category) throws Exception{
+		String sql = "select * from currentorderview where mID=? and gCategory = ? order by gfSeq";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			pstat.setString(2, category);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+			}
+		}
+	}
+	
+	
+	public List<GameDTO> myNameOrderGame(String id) throws Exception{
+		String sql ="select * from myFavoriteGame where mID=? order by gName;";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gCategory"),
+							rs.getString("gDeveloper"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+				
+			}
+			
+		}
+		
+	}
+	
+	public List<GameDTO> myNameOrderGame(String id, String category) throws Exception{
+		String sql ="select * from myFavoriteGame where mID=? and gCategory = ? order by gName";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			pstat.setString(2, category);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gCategory"),
+							rs.getString("gDeveloper"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+				
+			}
+			
+		}
+		
+	}
+	
+	public List<GameDTO> myFavoriteOrderGame(String id) throws Exception{
+		
+		String sql = "select *,(select count(*) from myFavoriteGame where gName=m.gName)cnt "
+				+ "from myFavoriteGame m "
+				+ "where m.mID = ? "
+				+ "order by cnt desc;";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			pstat.setString(1, id);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gCategory"),
+							rs.getString("gDeveloper"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+				
+			}
+			
+		}
+		
+	}
+	
+public List<GameDTO> myFavoriteOrderGame(String id, String category) throws Exception{
+		
+		String sql = "select *,(select count(*) from myFavoriteGame where gName=m.gName)cnt "
+				+ "from myFavoriteGame m "
+				+ "where m.mID = ? and gCategory = ? "
+				+ "order by cnt desc;";
+		
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			pstat.setString(1, id);
+			pstat.setString(2, category);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<GameDTO> list = new ArrayList<>();
+				
+				while(rs.next()) {
+					list.add(new GameDTO(rs.getString("gName"),rs.getString("gCategory"),
+							rs.getString("gDeveloper"),rs.getString("gImageURL"),rs.getString("mID")));
+				}
+				return list;
+				
+			}
+			
+		}
+		
+	}
+	
+	
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 }
