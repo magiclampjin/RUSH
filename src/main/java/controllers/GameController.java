@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
+import dao.MemberDAO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
+import dto.MemberDTO;
+import dto.ReplyDTO;
 
 @WebServlet("*.game")
 public class GameController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
+		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
 		GameDAO dao = GameDAO.getInstance();
+		MemberDAO mdao = MemberDAO.getInstance();
 		Gson gson = new Gson();
 		String cmd = request.getRequestURI();
 		System.out.println("game cmd: "+cmd);
@@ -103,7 +108,15 @@ public class GameController extends HttpServlet {
 				
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
-				
+			}else if(cmd.equals("/test.game")) {
+				List<ReplyDTO> data = dao.selectAll();
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(data));
+			}else if(cmd.equals("/test2.game")) {
+				String id = request.getParameter("id");
+				MemberDTO data = mdao.selectUserInfo(id);
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(data));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
