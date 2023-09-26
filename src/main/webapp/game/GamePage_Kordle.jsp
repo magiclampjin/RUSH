@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>Kordle</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -16,9 +16,10 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/game/game.css"/>
-<script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
-<script src="/game/js/rhythm.js"></script>
-<script src="/game/js/GameoverScene.js"></script>
+
+<!-- 한글 자모 분리 및 조합 -->
+<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+<script src="/game/js/wordleGame.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -30,11 +31,11 @@
 	height: 200px;
 }
 
-#game {
+.game {
 	min-width : 579px;
 	max-width: 1030px;
-	width: 750px;
-	height: 750px;
+	width: 100%;
+	height: 1000px;
 	background-color: white;
 	margin: auto;
 }
@@ -75,20 +76,138 @@ a{
 .bColorBlue {
   background-color: #5d6ce1;
 }
-.btn-dark {
-    background-color: #131217;
-    border-color: #F9F9F9;
-}
+        #gameContainer {
+            margin: auto;
+            width: 500px;
+        }
 
-.btn-dark:hover {
-    background-color: #f393ff;
-    border-color: #F9F9F9;
-    opacity:70%;
-}
-.btn.active{
-	background-color: #f393ff;
-	border-color: #F9F9F9;
-}
+        .containerInputs {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        #gameBoard {
+            margin-top: 10px;
+            position:relative;
+            margin:auto;
+        }
+
+        .line {}
+
+        .cell {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: lightblue;
+            border: 3px solid white;
+            color: white;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #inputBoard {
+            margin-top: 20px;
+            /* border:1px solid black; */
+            justify-content: center;
+        }
+
+
+        .inputLine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line1 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line2 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .btns {
+            width: 14%;
+        }
+
+        .input:hover {
+            background-color: rgba(211, 211, 211, 0.473);
+        }
+
+        .covers {
+        	background-color:#00000080;
+        	position:absolute;
+        	z-index:1;
+			width:100%;
+			height:100%;
+			border-radius:10px;
+			color:white;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:xx-large;
+			font-weight:bold;
+			text-align:center;
+        }
+        
+        #endCover{
+        	display:none;
+        }
+        
+        .gameStartBnts{
+        	padding:13px 25px;
+        	background-color: #00000000;
+        	color: lightblue;
+        	border:3px solid white;
+        	
+        	border-radius:15px;
+        }
+        
+        .gameStartBnts:hover{
+        	background-color: lightblue;
+        	color:white;
+        	border:3px solid lightblue;
+        	transition-duration: 1s;
+        }
+        .btn-dark {
+		    background-color: #131217;
+		    border-color: #F9F9F9;
+		}
+		
+		.btn-dark:hover {
+		    background-color: #f393ff;
+		    border-color: #F9F9F9;
+		    opacity:70%;
+		}
+		.btn.active{
+			background-color: #f393ff;
+			border-color: #F9F9F9;
+		}
+
 </style>
 </head>
 <body>
@@ -304,28 +423,7 @@ a{
 							<hr class="border border-primary border-3 opacity-75">
 						</div>
 						<div class="row g-0">
-							<div class="col-12">
-								<div id="game">
-									
-								</div>
-								<script>
-							        let option = {
-							            type:Phaser.AUTO,
-							            parent : "game",
-							            width : "100%",
-							            height : "100%",
-							            physics : {
-							                default : "arcade",
-							                arcade : {
-							                    gravity : {y:0},
-							                    debug : false
-							                }
-							            },
-							            scene:[rhythm,GameoverScene]
-							        };
-							        let game = new Phaser.Game(option);
-							    </script>								
-							</div>
+							<div class="col-12 game"><div id="gameContainer"></div></div>
 						</div>
 						<div class="row g-0">
 							<div class="col-12 d-flex justify-content-center mt150">
@@ -584,21 +682,6 @@ a{
     	$("#arc").on("click",function(){
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
-    	
-    	function setRecord(userScore){
-    		$.ajax({
-                url:"/setGameRecord.game",
-                data:{
-                  mID:'${loginID}',
-                  game:'${game}',
-                  nickName : '${loginNickname}',
-                  score : userScore
-                },
-                type:"post"
-              }).done(function (res){
-                console.log(res);
-              });
-    	}
     </script>
 </body>
 </html>
