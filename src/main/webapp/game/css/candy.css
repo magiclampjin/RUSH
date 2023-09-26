@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+#container{
+    width: 450px;
+    height: 450px;
+    margin: auto;
+    position: relative;
+}
+#boardCandy{
+    width: 460px;
+    height: 460px;
+    background-color: lightblue;
+    border: 5px solid slategray;
+    border-radius: 10px;
+    display: flex;
+    /* 정렬된 요소들의 총 넓이가 부모 넓이보다 클 때, 이 요소들을 다음 줄에 이어서 정렬 */
+    flex-wrap: wrap;  
+}
+
+#overlay{
+    width: 460px;
+    height: 460px;
+    background-color: #00000050;
+    border-radius: 10px;
+    position: absolute;
+}
+
+#boardCandy img{
+    width: 50px;
+    height: 50px;
+}
+
+.button_container{
+    position: absolute;
+    top: 197px; left: 136px;
+}
+
+#btnRestart,#timeover{
+    display: none;
+}
+  
+.btnCandy {
+border-radius: 10px;
+border: none;
+display: block;
+text-align: center;
+cursor: pointer;
+text-transform: uppercase;
+outline: none;
+overflow: hidden;
+position: relative;
+color: #fff;
+font-weight: 700;
+font-size: 15px;
+background-color: #222;
+padding: 17px 60px;
+margin: 0 auto;
+box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.btnCandy span {
+position: relative; 
+z-index: 1;
+}
+
+.btnCandy:after {
+content: "";
+position: absolute;
+left: 0;
+top: 0;
+height: 490%;
+width: 140%;
+background: #78c7d2;
+-webkit-transition: all .5s ease-in-out;
+transition: all .5s ease-in-out;
+-webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btnCandy:hover:after {
+-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.link {
+font-size: 20px;
+margin-top: 30px;
+}
+
+.link a {
+color: #000;
+font-size: 25px; 
+}

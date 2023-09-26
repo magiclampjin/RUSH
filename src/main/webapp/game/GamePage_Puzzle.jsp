@@ -16,6 +16,20 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/game/game.css"/>
+
+<c:choose>
+	<c:when test="${game eq 'Kordle' }">
+		<!-- 한글 자모 분리 및 조합 & kordle js 파일 -->
+		<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+		<script src="/game/js/wordleGame.js"></script>
+	</c:when>
+	<c:when test="${game eq 'Candy Crush' }">
+		<!-- Candy Crush css 및 js 파일 -->
+		<link rel="stylesheet" href="/game/css/candy.css">
+		<script src="/game/js/candy.js"></script>
+	</c:when>
+</c:choose>
+
 <style>
 * {
 	box-sizing: border-box;
@@ -72,12 +86,152 @@ a{
 .bColorBlue {
   background-color: #5d6ce1;
 }
+.btn-dark {
+    background-color: #131217;
+    border-color: #F9F9F9;
+}
 
+.btn-dark:hover {
+    background-color: #f393ff;
+    border-color: #F9F9F9;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff;
+	border-color: #F9F9F9;
+}
+
+		 #gameContainer {
+            margin: auto;
+            width: 500px;
+        }
+
+        .containerInputs {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        #gameBoard {
+            margin-top: 10px;
+            position:relative;
+            margin:auto;
+        }
+
+        .cell {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: lightblue;
+            border: 3px solid white;
+            color: white;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #inputBoard {
+            margin-top: 20px;
+            /* border:1px solid black; */
+            justify-content: center;
+        }
+
+
+        .inputLine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line1 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line2 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .btns {
+            width: 14%;
+        }
+
+        .input:hover {
+            background-color: rgba(211, 211, 211, 0.473);
+        }
+
+        .covers {
+        	background-color:#00000099;
+        	position:absolute;
+        	z-index:1;
+			width:100%;
+			height:100%;
+			border-radius:10px;
+			color:white;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:xx-large;
+			font-weight:bold;
+			text-align:center;
+        }
+        
+        #endCover{
+        	display:none;
+        }
+        
+        .gameStartBnts{
+        	padding:13px 25px;
+        	background-color: #00000000;
+        	color: lightblue;
+        	border:3px solid white;
+        	
+        	border-radius:15px;
+        }
+        
+        .gameStartBnts:hover{
+        	background-color: lightblue;
+        	color:white;
+        	border:3px solid lightblue;
+        	transition-duration: 1s;
+        }
+        
+        .fw900 {
+		    font-weight: 900;
+		}
+		
+		.ft30{
+			font-size:35pt;
+		}
 </style>
 </head>
 <body>
 <script>
-	window.onload = function(){
+	$(document).ready(function() {
+		console.log("아무거나 ${game}");
+		
+		
 		$.ajax({
 			url:"/checkFavorite.game",
 			data:{
@@ -97,66 +251,68 @@ a{
 			}
 		});
 		$.ajax({
-			url:"/getRecord.game",
-			data:{
-				gameName:"${game}"
-			},
-			type : "post"
-		}).done(function(res){
-			let record = JSON.parse(res);
-			console.log(record);
-			console.log(record[0]["nickName"]);
-			$("#rankCon").text("");
-			for(let i=0; i<record.length; i++){
-				let divRow = $("<div>");
-				divRow.addClass("row g-0 p-2");
-				let divColRank = $("<div>");
-				if(i<3){
-    				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
-    				divColRank.append(i+1);
-				}else{
-    				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
-    				divColRank.append(i+1);	
-				}
+	         url:"/getRecord.game",
+	         data:{
+	            gameName:"${game}"
+	         },
+	         type : "post"
+	      }).done(function(res){
+	    	   
+	    	  console.log("record");
+	         let record = JSON.parse(res);
+	         $("#rankCon").text("");
+	         for(let i=0; i<record.length; i++){
+	            let divRow = $("<div>");
+	            divRow.addClass("row g-0 p-2");
+	            let divColRank = $("<div>");
+	            if(i<3){
+	                divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
+	                divColRank.append(i+1);
+	            }else{
+	                divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
+	                divColRank.append(i+1);   
+	            }
 
-								
-				let divColInfo = $("<div>");
-				divColInfo.addClass("col-7");
-				
-				let divRowInfo = $("<div>");
-				divRowInfo.addClass("row g-0");
-				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-3");
-				let divInfoRight = $("<div>");
-				divInfoRight.addClass("col-9 text-white align-self-center");
-				let divUserImage = $("<div>");
-				divUserImage.css({
-					width : "80px",
-					height : "80px",
-					backgroundColor : "white",
-					borderRadius : "50%"
-				});
-				
-				
-				divInfoLeft.append(divUserImage);
-				divInfoRight.append(record[i]["nickName"]);
-				divInfoRight.append(" Lv : "+record[i]["level"]);
-				divRowInfo.append(divInfoLeft);
-				divRowInfo.append(divInfoRight);
-				divColInfo.append(divRowInfo);
-				
-				let divColScore = $("<div>");
-				divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
-				divColScore.append(record[i]["score"]);
-				
-				divRow.append(divColRank);
-				divRow.append(divColInfo);
-				divRow.append(divColScore);
-				
-				
-				$("#rankCon").append(divRow);
-			}
-		});
+	                        
+	            let divColInfo = $("<div>");
+	            divColInfo.addClass("col-7");
+	            
+	            let divRowInfo = $("<div>");
+	            divRowInfo.addClass("row g-0");
+	            let divInfoLeft = $("<div>");
+	            divInfoLeft.addClass("col-3");
+	            let divInfoRight = $("<div>");
+	            divInfoRight.addClass("col-9 text-white align-self-center");
+	            let divUserImage = $("<div>");
+	            divUserImage.css({
+	               width : "80px",
+	               height : "80px",
+	               backgroundColor : "white",
+	               borderRadius : "50%"
+	            });
+	            
+	            
+	            divInfoLeft.append(divUserImage);
+	            divInfoRight.append(record[i]["nickName"]);
+	            divInfoRight.append(" Lv : "+record[i]["level"]);
+	            divRowInfo.append(divInfoLeft);
+	            divRowInfo.append(divInfoRight);
+	            divColInfo.append(divRowInfo);
+	            
+	            let divColScore = $("<div>");
+	            divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
+	            divColScore.append(record[i]["score"]);
+	            
+	            divRow.append(divColRank);
+	            divRow.append(divColInfo);
+	            divRow.append(divColScore);
+	            
+	            
+	            $("#rankCon").append(divRow);
+	            
+	            console.log(divRow);
+	         }
+	      });
 		let category = '${category}';
 		if(category == 'new'){
 			$("#new").addClass("active");
@@ -167,7 +323,7 @@ a{
 		}else if(category == 'Puzzle'){
 			$("#puz").addClass("active");
 		}
-	}
+	});
 </script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
@@ -288,7 +444,35 @@ a{
 							<hr class="border border-primary border-3 opacity-75">
 						</div>
 						<div class="row g-0">
-							<div class="col-12 game">play ground</div>
+							<div class="col-12 game">
+							<c:choose>
+								<c:when test="${game eq 'Kordle'}">
+									<div id="gameContainer"></div>
+								</c:when>
+								<c:when test="${game eq 'Candy Crush'}">
+									<h1>점수 : <span id="score">0</h1>
+									<h4>
+										제한 시간 <span id="time">30</span>
+									</h4>
+									<div id="container">
+										<div id="overlay">
+											<div class="button_container">
+												<button class="btnCandy" id="btnStart">
+													<span>시작하기</span>
+												</button>
+												<button class="btnCandy" id="btnRestart">
+													<span>다시하기</span>
+												</button>
+												<h3 style="margin: 5px; color: red;">
+													<span id="timeover">Time Over</span>
+												</h3>
+											</div>
+										</div>
+										<div id="boardCandy"></div>
+									</div>
+								</c:when>
+							</c:choose>
+							</div>
 						</div>
 						<div class="row g-0">
 							<div class="col-12 d-flex justify-content-center mt150">
@@ -547,6 +731,7 @@ a{
     	$("#arc").on("click",function(){
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
+    	
     </script>
 </body>
 </html>

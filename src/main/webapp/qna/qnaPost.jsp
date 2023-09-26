@@ -425,8 +425,16 @@ a {
 								<div class="col-10 col-lg-11" id="replyInsertTxt" contenteditable="false" placeholder="관리자만 작성할 수 있습니다."></div>
 								<input type="hidden" id="postSeq" value="${post.seq}">
 								<div class="col-2 col-lg-1 btnCover">
-									<button class="fw400 fs25 colorDarkgray replyInsertBtn"
-										id="replyInsertBtn">등록</button>
+									<c:choose>
+										<c:when test="${loginID eq 'admin'}">
+											<button class="fw400 fs25 colorDarkgray replyInsertBtn"
+											id="replyInsertBtn">등록</button>
+										</c:when>
+										<c:otherwise>
+											<button class="fw400 fs25 colorDarkgray replyInsertBtn"
+											id="replyInsertBtn" disabled>등록</button>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>

@@ -11,21 +11,13 @@ public class GameDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-
-	
-
-
 	public GameDTO(String gName, String gImageURL, String id) {
 		super();
 		this.gName = gName;
 		this.gImageURL = gImageURL;
 		this.id = id;
 	}
-
-
-
-
-
+	
 	public GameDTO(String gName, String gCategory, String gDeveloper, String gImageURL, String id) {
 		super();
 		this.gName = gName;

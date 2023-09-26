@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	
 	let category = "favoriteAll";
+	let gameName = "gameAll";
 
 	$('ul.tabs li').click(function() {
 		var tab_id = $(this).attr('data-tab');
@@ -43,6 +44,35 @@ $(document).ready(function() {
 		category = $(this).html();
 		myFavorite(category);
 	});
+	
+	
+	// 캔디크러쉬 누름
+	$("#Candy").on("click",function(){
+		gameName = $(this).html();
+		myGameRecod(gameName);
+	})
+	// 두들점프 누름
+	$("#Doodle").on("click",function(){
+		gameName = $(this).html();
+		myGameRecod(gameName);
+	})
+	// 플래피버드
+	$("#Flappy").on("click",function(){
+		gameName = $(this).html();
+		myGameRecod(gameName);
+	})
+	//맥스
+	$("#Kjmax").on("click",function(){
+		gameName = $(this).html();
+		myGameRecod(gameName);
+	})
+	// 꼬들
+	$("#kkodle").on("click",function(){
+		gameName = $(this).html();
+		myGameRecod(gameName);
+	})
+	
+	
 
 
 	// 북마크 눌렀을 때
@@ -181,7 +211,7 @@ $(document).ready(function() {
 
 			function currentOrder() {
 				$.ajax({
-					url: "/mycurrentOrder.game",
+					url: "/mycurrentOrder.member",
 					dataType: "json",
 					data :{
 						param : category
@@ -232,7 +262,7 @@ $(document).ready(function() {
 
 			function myFavoriteorder() {
 				$.ajax({
-					url: "/myFavoriteOrderGame.game",
+					url: "/myFavoriteOrderGame.member",
 					dataType: "json",
 					data :{
 						param : category
@@ -281,7 +311,7 @@ $(document).ready(function() {
 			nameOrder();
 			function nameOrder() {
 				$.ajax({
-					url: "/mynameOrderGame.game",
+					url: "/mynameOrderGame.member",
 					dataType: "json",
 					data :{
 						param : category
@@ -328,40 +358,116 @@ $(document).ready(function() {
 				});
 			}
 		}
-
 	})
 	
 	// 게임기록
-	$("#gameRecord").on("click",function(){
-		alert("Test");
-		myGameRecod();
+	$("#gameRecord").one("click",function(){
+		myGameRecod("gameAll");
 	});
+	
+	$("#gameAll").one("click",function(){
+		myGameRecod("gameAll");
+	});
+	
+	$("#selectBoxGame").change(function(){
+		console.log("gName: "+gameName);
+		let value = $(this).val();
+		console.log("select Box  " + value);
+		if(value==""){
+			value="score";
+		}
+		
+		if(value=="score"){
+			$("#recordPost").remove();
+			
+			$.ajax({
+				url:"/myGameScoreOrder.member",
+				dataType:"json",
+				data : {
+					param:gameName
+				}
+			}).done(function(resp){
+				console.log(resp);
+				$(".recordPost").remove();
+				for(let i=0;i<resp.length;i++){
+					
+					let divRecordBody = $(".recordBody");
+					
+					let divRecordPost = $("<div>").attr("class","recordPost");
+						let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
+							divGameRank.html(resp[i].gameName);
+						let divGameInfo = $("<div>").attr("class","gameInfo");
+							let divGameScore = $("<div>").attr("class","gameScore");
+								divGameScore.html(resp[i].score);
+							let divGameTime = $("<div>").attr("class","gameTime");
+								divGameTime.html(resp[i].startGameTime);
+							divGameInfo.append(divGameScore).append(divGameTime);
+							
+						divRecordPost.append(divGameRank).append(divGameInfo);
+					divRecordBody.append(divRecordPost);
+				}
+			})
+			
+		}else if(value="time"){
+			$("#recordPost").remove();
+			
+			$.ajax({
+				url:"/myGameCurrentOrder.member",
+				dataType:"json",
+				data : {
+					param:gameName
+				}
+			}).done(function(resp){
+				console.log(resp);
+				$(".recordPost").remove();
+				for(let i=0;i<resp.length;i++){
+					
+					let divRecordBody = $(".recordBody");
+					
+					let divRecordPost = $("<div>").attr("class","recordPost");
+						let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
+							divGameRank.html(resp[i].gameName);
+						let divGameInfo = $("<div>").attr("class","gameInfo");
+							let divGameScore = $("<div>").attr("class","gameScore");
+								divGameScore.html(resp[i].score);
+							let divGameTime = $("<div>").attr("class","gameTime");
+								divGameTime.html(resp[i].startGameTime);
+							divGameInfo.append(divGameScore).append(divGameTime);
+							
+						divRecordPost.append(divGameRank).append(divGameInfo);
+					divRecordBody.append(divRecordPost);
+				}
+			})
+		}
+	})
 	
 })
 
 
-
 	
-	
-	
-function myGameRecod(){
+function myGameRecod(gameName){
+	console.log("myGameRecod "+gameName);
 		$.ajax({
-			url:"/myGameRecord.game",
-			dataType:"json"
+			url:"/myGameRecord.member",
+			dataType:"json",
+			data : {
+				param:gameName
+			}
 		}).done(function(resp){
 			console.log(resp);
+			$(".recordPost").remove();
 			for(let i=0;i<resp.length;i++){
 				
 				let divRecordBody = $(".recordBody");
 				
 				let divRecordPost = $("<div>").attr("class","recordPost");
-					let divGameRank = $("<div>").attr("class","gameRank");
-						divGameRank.html("등수");
+					let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
+						divGameRank.html(resp[i].gameName);
 					let divGameInfo = $("<div>").attr("class","gameInfo");
 						let divGameScore = $("<div>").attr("class","gameScore");
-							divGameScore.html("점수");
+							divGameScore.html(resp[i].score);
 						let divGameTime = $("<div>").attr("class","gameTime");
-							divGameTime.html("날짜");
+							divGameTime.html(resp[i].startGameTime);
 						divGameInfo.append(divGameScore).append(divGameTime);
 						
 					divRecordPost.append(divGameRank).append(divGameInfo);
@@ -374,7 +480,7 @@ function myGameRecod(){
 // 전체 눌렀을 때
 function myFavorite(category) {
 	$.ajax({
-		url: "/myFavoriteGame.game",
+		url: "/myFavoriteGame.member",
 		dataType: "json",
 		data: {
 			param: category

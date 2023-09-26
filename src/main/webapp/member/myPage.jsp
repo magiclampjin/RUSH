@@ -332,23 +332,23 @@ ul.tabs li.current {
 							<div class="recordTabBox">
 								<!-- 탭박스 -->
 								<ul class="recordTabs">
-									<li class="tab-link current" id="" data-tab="recordTab-1">전체rrrrrrr</li>
-									<li class="tab-link" id="" data-tab="recordTab-2">Candy Crush</li>
-									<li class="tab-link" id="" data-tab="recordTab-3">Doodle Jump</li>
-									<li class="tab-link" data-tab="recordTab-4">Flappy Bird</li>
-									<li class="tab-link" data-tab="recordTab-5">KJMAX</li>
-									<li class="tab-link" data-tab="recordTab-6">kkodle</li>
+									<li class="tab-link current" id="gameAll" data-tab="recordTab-1">전체rrrrrrr</li>
+									<li class="tab-link" id="Candy" data-tab="recordTab-2">Candy Crush</li>
+									<li class="tab-link" id="Doodle" data-tab="recordTab-3">Doodle Jump</li>
+									<li class="tab-link" id="Flappy" data-tab="recordTab-4">Fluppy Bird</li>
+									<li class="tab-link" id="Kjmax" data-tab="recordTab-5">KJMAX</li>
+									<li class="tab-link" id="kkodle" data-tab="recordTab-6">Kordle</li>
 								</ul>
 								<div class="recordCategory">
 									<select class="form-select" aria-label="Default select example"
-										name="recordCategory">
+										id="selectBoxGame" name="recordCategory">
 										<option value="score" selected>점수순</option>
 										<option value="time">최신순</option>
 									</select>
 								</div>
 								<div id="recordTab-1" class="recordTab-content current">
 									<div class="recordHeader">
-										<div class="gameRank">순위</div>
+										<div class="gameRank">게임명</div>
 										<div class="gameScore">점수</div>
 										<div class="gameTime">게임일시</div>
 									</div>
@@ -356,14 +356,56 @@ ul.tabs li.current {
 										
 									</div>
 								</div>
-								<div id="recordTab-2" class="recordTab-content"></div>
-								<div id="recordTab-3" class="recordTab-content"></div>
-								<div id="recordTab-4" class="recordTab-content">tab
-									content4</div>
-								<div id="recordTab-5" class="recordTab-content">tab
-									content4</div>
-								<div id="recordTab-6" class="recordTab-content">tab
-									content4</div>
+								<div id="recordTab-2" class="recordTab-content">
+									<div class="recordHeader">
+										<div class="gameRank">게임명</div>
+										<div class="gameScore">점수</div>
+										<div class="gameTime">게임일시</div>
+									</div>
+									<div class="recordBody">
+										
+									</div>
+								</div>
+								<div id="recordTab-3" class="recordTab-content">
+									<div class="recordHeader">
+										<div class="gameRank">게임명</div>
+										<div class="gameScore">점수</div>
+										<div class="gameTime">게임일시</div>
+									</div>
+									<div class="recordBody">
+										
+									</div>
+								</div>
+								<div id="recordTab-4" class="recordTab-content">
+									<div class="recordHeader">
+										<div class="gameRank">게임명</div>
+										<div class="gameScore">점수</div>
+										<div class="gameTime">게임일시</div>
+									</div>
+									<div class="recordBody">
+										
+									</div>
+								</div>
+								<div id="recordTab-5" class="recordTab-content">
+									<div class="recordHeader">
+										<div class="gameRank">게임명</div>
+										<div class="gameScore">점수</div>
+										<div class="gameTime">게임일시</div>
+									</div>
+									<div class="recordBody">
+										
+									</div>
+								</div>
+								<div id="recordTab-6" class="recordTab-content">
+									<div class="recordHeader">
+										<div class="gameRank">게임명</div>
+										<div class="gameScore">점수</div>
+										<div class="gameTime">게임일시</div>
+									</div>
+									<div class="recordBody">
+										
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

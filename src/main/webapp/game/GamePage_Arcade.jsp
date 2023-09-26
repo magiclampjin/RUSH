@@ -15,7 +15,12 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="stylesheet" href="/css/game/game.css"/>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"
+	integrity="sha512-YQL0GVx/Too3vZjBl9plePRIYsRnd1s8N6QOvXPdZ+JMH2mtRTLQXGUDGjNW6zr1HUgcOIury67IvWe91oeEwQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="/css/game/game.css" />
+<script src="game/js/flappy_bird_scene.js" type="text/javascript"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -28,55 +33,81 @@
 }
 
 .game {
-	min-width : 579px;
+	min-width: 579px;
 	max-width: 1030px;
 	width: 100%;
 	height: 579px;
 	background-color: white;
 	margin: auto;
 }
-a{
+
+#container {
+	margin: auto;
+	width: 288px;
+	height: 512px;
+	margin-top: 150px;
+}
+
+a {
 	text-decoration: none;
 }
 
-.gameContainer { 
+.gameContainer {
 	max-width: 1300px;
 	margin: auto;
 }
-.rankCon{
-	max-width : 1030px;
-	width : 100%;
+
+.rankCon {
+	max-width: 1030px;
+	width: 100%;
 }
-.rankCon{
-	max-width : 1030px;
-	width : 100%;
+
+.devTable th, td {
+	border: 1px solid white;
+	vertical-align: middle;
+	padding: 3px;
 }
-.devTable th,td{
-	border : 1px solid white;
-	vertical-align : middle;
-	padding : 3px;
+
+.devTable th {
+	width: 20%;
 }
-.devTable th{
-	width : 20%;
+
+.devTable td {
+	width: 80%;
 }
-.devTable td{
-	width : 80%;
+
+.devTable {
+	border: 1px solid white;
+	width: 100%;
 }
-.devTable{
-	border : 1px solid white;
-	width : 100%;
-}
-.btn-check-input:checked~.btn.btn-outline-light::before{
+
+.btn-check-input:checked ~.btn.btn-outline-light::before {
 	background-color: #ccf423;
 }
+
 .bColorBlue {
-  background-color: #5d6ce1;
+	background-color: #5d6ce1;
+}
+
+.btn-dark {
+    background-color: #131217;
+    border-color: #F9F9F9;
+}
+
+.btn-dark:hover {
+    background-color: #f393ff;
+    border-color: #F9F9F9;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff;
+	border-color: #F9F9F9;
 }
 
 </style>
 </head>
 <body>
-<script>
+	<script>
 	window.onload = function(){
 		$.ajax({
 			url:"/checkFavorite.game",
@@ -186,12 +217,14 @@ a{
 									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
 									<ul class="dropdown-menu p-0"
 										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
-										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
+										<li><a class="dropdown-item fontEnglish"
+											href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
+										<li><a class="dropdown-item fontEnglish"
+											href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
 									</ul></li>
 								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="http://localhost/board/awards.jsp"> AWARDS </a>
-									</li>
+									class="nav-link text-white fontEnglish"
+									href="http://localhost/board/awards.jsp"> AWARDS </a></li>
 								<li class="nav-item dropdown col-3 text-end"><a
 									class="nav-link text-white fontEnglish"
 									href="/listing.board?cpage=1" id="navbarDropdownMenuLink"
@@ -203,7 +236,8 @@ a{
 											href="/listing.board?cpage=1">자유게시판</a></li>
 										<li><a class="dropdown-item fontEnglish"
 											href="/listing.qna?cpage=1">Q&A</a></li>
-										<li><a class="dropdown-item" href="http://localhost/board/awards.jsp">명예의 전당</a></li>
+										<li><a class="dropdown-item"
+											href="http://localhost/board/awards.jsp">명예의 전당</a></li>
 									</ul></li>
 								<c:choose>
 									<c:when test="${loginID == null }">
@@ -216,12 +250,12 @@ a{
 											class="nav-link text-white fontEnglish"
 											href="http://localhost/member/login.jsp"
 											id="navbarDropdownMenuLink" role="button"
-											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
-										</a>
+											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE </a>
 											<ul class="dropdown-menu p-0"
 												aria-labelledby="navbarDropdownMenuLink">
 												<li><a class="dropdown-item fontEnglish" href="#">MyPage</a></li>
-												<li><a class="dropdown-item fontEnglish" href="http://localhost/logout.member">Log Out</a></li>
+												<li><a class="dropdown-item fontEnglish"
+													href="http://localhost/logout.member">Log Out</a></li>
 											</ul></li>
 									</c:otherwise>
 								</c:choose>
@@ -237,7 +271,7 @@ a{
 				</nav>
 			</div>
 		</div>
-		
+
 		<div class="container-fluid g-0 bColorBlack">
 			<div class="gameContainer">
 				<div class="row g-0">
@@ -246,10 +280,18 @@ a{
 							<div class="col-12 mt-5">
 								<div class="btn-group-vertical" role="group"
 									aria-label="Vertical button group">
-									<button type="button" class="btn btn-dark bColorBlack" id="new"><span class="fontKorean text-white">최신게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack" id="rhy"><span class="fontKorean text-white">리듬게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack" id="arc"><span class="fontKorean text-white">아케이드게임</span></button>
-									<button type="button" class="btn btn-dark bColorBlack" id="puz"><span class="fontKorean text-white">퍼즐게임</span></button>
+									<button type="button" class="btn btn-dark bColorBlack" id="new">
+										<span class="fontKorean text-white">최신게임</span>
+									</button>
+									<button type="button" class="btn btn-dark bColorBlack" id="rhy">
+										<span class="fontKorean text-white">리듬게임</span>
+									</button>
+									<button type="button" class="btn btn-dark bColorBlack" id="arc">
+										<span class="fontKorean text-white">아케이드게임</span>
+									</button>
+									<button type="button" class="btn btn-dark bColorBlack" id="puz">
+										<span class="fontKorean text-white">퍼즐게임</span>
+									</button>
 									<!-- js로 넘어가기 -->
 								</div>
 							</div>
@@ -259,154 +301,262 @@ a{
 						<div class="row g-0">
 							<div class="col-12">
 								<p class="gameCategory fs-5 mb-0 text-white fontKorean">
-								<c:choose>
-									<c:when test="${category == 'Rhythm' }">리듬 게임</c:when>
-									<c:when test="${category == 'Arcade' }">아케이드 게임</c:when>
-									<c:when test="${category == 'Puzzle' }">퍼즐 게임</c:when>
-								</c:choose>
-								
+									<c:choose>
+										<c:when test="${category == 'Rhythm' }">리듬 게임</c:when>
+										<c:when test="${category == 'Arcade' }">아케이드 게임</c:when>
+										<c:when test="${category == 'Puzzle' }">퍼즐 게임</c:when>
+									</c:choose>
+
 								</p>
 							</div>
 						</div>
-						<div class="row g-0">
-							<div class="col-10">
-								<p class="gameName fs-2 mt-0 text-white fontKorean">${game}</p>
-							</div>
-							<div
-								class="col-2 d-flex justify-content-center align-content-bottom">
-								<div>
-									<button type="button" class="btn btn-outline-light" id="favorite">
-										<i class="fa-regular fa-star colorWhite"></i>
-										즐겨찾기
-									</button>
-									<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
+						
+						<c:choose>
+							<c:when test="${game == 'Flappy Bird'}">
+								<div class="row g-0">
+									<div class="col-10">
+										<p class="gameName fs-2 mt-0 text-white fontKorean">${game}</p>
+									</div>
+									<div
+										class="col-2 d-flex justify-content-center align-content-bottom">
+										<div>
+											<button type="button" class="btn btn-outline-light"
+												id="favorite">
+												<i class="fa-regular fa-star colorWhite"></i> 즐겨찾기
+											</button>
+											<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button> -->
+										</div>
+									</div>
+									<hr class="border border-primary border-3 opacity-75">
 								</div>
-							</div>
-							<hr class="border border-primary border-3 opacity-75">
-						</div>
-						<div class="row g-0">
-							<div class="col-12 game">play ground</div>
-						</div>
-						<div class="row g-0">
-							<div class="col-12 d-flex justify-content-center mt150">
-								<div class="btn-group w100p mxWidth1030" role="group"
-									aria-label="Basic radio toggle button group">
-									<input type="radio" class="btn-check" name="btnradio"
-										id="btnradio1" autocomplete="off" checked> <label
-										class="btn btn-outline-light" for="btnradio1">게임 순위</label>
+								<div class="row g-0">
+									<div id="container" class="col-12">
+										<script>
+									        let option = {
+									            type:Phaser.AUTO,
+									            parent:"container",
+									            width:"100%",
+									            height:"100%",
+									            physics:{
+									                default:"arcade",
+									                arcade:{
+									                    gravity:{
+									                        y:300
+									                    },
+									                    debug:false
+									                }
+									            },
+									            scene:{
+									                preload: preload,
+									                create: create,
+									                update: update
+									            }
+									        };
+									
+									        let game = new Phaser.Game(option);
+									    </script>
+									</div>
+								</div>
+								<div class="row g-0">
+									<div class="col-12 d-flex justify-content-center mt150">
+										<div class="btn-group w100p mxWidth1030" role="group"
+											aria-label="Basic radio toggle button group">
+											<input type="radio" class="btn-check" name="btnradio"
+												id="btnradio1" autocomplete="off" checked> <label
+												class="btn btn-outline-light" for="btnradio1">게임 순위</label>
 
-									<input type="radio" class="btn-check" name="btnradio"
-										id="btnradio2" autocomplete="off"> <label
-										class="btn btn-outline-light" for="btnradio2">게임 정보</label>
+											<input type="radio" class="btn-check" name="btnradio"
+												id="btnradio2" autocomplete="off"> <label
+												class="btn btn-outline-light" for="btnradio2">게임 정보</label>
+										</div>
+									</div>
+
+									<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 								</div>
+								<div class="row g-0 mt49">
+									<div class="col-12" id="rank">
+										<div class="rankCon">
+											<hr class="colorWhite">
+											<div class="row g-0 p-2">
+												<div class="col-1">
+													<span class="text-white fontKorean">순위</span>
+												</div>
+												<div class="col-7">
+													<span class="text-white fontKorean">플레이어 정보</span>
+												</div>
+												<div class="col-4">
+													<span class="text-white fontKorean">점수</span>
+												</div>
+											</div>
+											<hr class="colorWhite">
+											<div id="rankCon"></div>
+										</div>
+									</div>
+									<div class="col-12" id="info">
+										<div class="row g-0 w100p">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">게임 설명</p>
+												<hr class="colorBlue border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+											</div>
+										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">조작 방법</p>
+												<hr class="colorGreen border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+											</div>
+										</div>
+							</c:when>
+							<c:otherwise>
+								<div class="row g-0">
+									<div class="col-10">
+										<p class="gameName fs-2 mt-0 text-white fontKorean">${game}</p>
+									</div>
+									<div
+										class="col-2 d-flex justify-content-center align-content-bottom">
+										<div>
+											<button type="button" class="btn btn-outline-light"
+												id="favorite">
+												<i class="fa-regular fa-star colorWhite"></i> 즐겨찾기
+											</button>
+											<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
+										<i class="fa-regular fa-star colorWhite"></i>
+										즐겨찾기
+									</button> -->
+										</div>
+									</div>
+									<hr class="border border-primary border-3 opacity-75">
+								</div>
+								<div class="row g-0">
+									<div class="col-12 game">play ground</div>
+								</div>
+								<div class="row g-0">
+									<div class="col-12 d-flex justify-content-center mt150">
+										<div class="btn-group w100p mxWidth1030" role="group"
+											aria-label="Basic radio toggle button group">
+											<input type="radio" class="btn-check" name="btnradio"
+												id="btnradio1" autocomplete="off" checked> <label
+												class="btn btn-outline-light" for="btnradio1">게임 순위</label>
+
+											<input type="radio" class="btn-check" name="btnradio"
+												id="btnradio2" autocomplete="off"> <label
+												class="btn btn-outline-light" for="btnradio2">게임 정보</label>
+										</div>
+									</div>
+
+									<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
+								</div>
+								<div class="row g-0 mt49">
+									<div class="col-12" id="rank">
+										<div class="rankCon">
+											<hr class="colorWhite">
+											<div class="row g-0 p-2">
+												<div class="col-1">
+													<span class="text-white fontKorean">순위</span>
+												</div>
+												<div class="col-7">
+													<span class="text-white fontKorean">플레이어 정보</span>
+												</div>
+												<div class="col-4">
+													<span class="text-white fontKorean">점수</span>
+												</div>
+											</div>
+											<hr class="colorWhite">
+											<div id="rankCon"></div>
+										</div>
+									</div>
+									<div class="col-12" id="info">
+										<div class="row g-0 w100p">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">게임 설명</p>
+												<hr class="colorBlue border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+											</div>
+										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">조작 방법</p>
+												<hr class="colorGreen border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+											</div>
+										</div>
+							</c:otherwise>
+						</c:choose>
+						
+						<div class="row g-0 w100p mt150">
+							<div class="col-12">
+								<p class="text-white fontKorean fs-2">제작자 정보</p>
+								<hr class="colorPink border-3 opacity-75">
 							</div>
-							
-							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
-						</div>
-						<div class="row g-0 mt49">
-							<div class="col-12" id="rank">
-								<div class="rankCon">
-								<hr class="colorWhite">
-									<div class="row g-0 p-2">
-										<div class="col-1">
-										<span class="text-white fontKorean">순위</span>
-										</div>
-										<div class="col-7">
-											<span class="text-white fontKorean">플레이어 정보</span>
-										</div>
-										<div class="col-4">
-											<span class="text-white fontKorean">점수</span>
-										</div>
-									</div>
-									<hr class="colorWhite">
-									<div id="rankCon">
-									</div>
-								</div>
-							</div>
-							<div class="col-12" id="info">
-								<div class="row g-0 w100p">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">게임 설명</p>
-										<hr class="colorBlue border-3 opacity-75">
-									</div>
-									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
-									</div>				
-								</div>
-								<div class="row g-0 w100p mt150">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">조작 방법</p>
-										<hr class="colorGreen border-3 opacity-75">
-									</div>
-									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
-									</div>				
-								</div>
-								<div class="row g-0 w100p mt150">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">제작자 정보</p>
-										<hr class="colorPink border-3 opacity-75">
-									</div>
-									<div class="col-12">
-										<table class="devTable">
-											<tr>
-												<th class="text-white fontKorean fw900">제작자</th>
-												<td class="text-white fontKorean">제작자이름</td>
-											</tr>
-											<tr>
-												<th class="text-white fontKorean fw900">제작자 소속</th>
-												<td class="text-white fontKorean">공주대학교 SKY팀</td>
-											</tr>
-										</table>
-									</div>
-								</div>
+							<div class="col-12">
+								<table class="devTable">
+									<tr>
+										<th class="text-white fontKorean fw900">제작자</th>
+										<td class="text-white fontKorean">제작자이름</td>
+									</tr>
+									<tr>
+										<th class="text-white fontKorean fw900">제작자 소속</th>
+										<td class="text-white fontKorean">공주대학교 SKY팀</td>
+									</tr>
+								</table>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 
 		</div>
-		<div class="container-fluid g-0">
-			<div class="footer bColorBlack">
-		<div class="footer_guide">
-			<div class="footer_logo fontLogo colorWhite">RUSH</div>
-			<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-				RIGHT RESERVED</div>
-			<div class="footer_contents">
-				<div class="about conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-					<div class="footer_con ">
-						<div class="con colorWhite">팀명 :</div>
-						<div class="encon colorWhite">SKY</div>
+	</div>
+
+	</div>
+	<div class="container-fluid g-0">
+		<div class="footer bColorBlack">
+			<div class="footer_guide">
+				<div class="footer_logo fontLogo colorWhite">RUSH</div>
+				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
+					RIGHT RESERVED</div>
+				<div class="footer_contents">
+					<div class="about conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
+						<div class="footer_con ">
+							<div class="con colorWhite">팀명 :</div>
+							<div class="encon colorWhite">SKY</div>
+						</div>
 					</div>
-				</div>
-				<div class="office conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">OFFICE</div>
-					<div class="footer_con">
-						<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
+					<div class="office conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
+						<div class="footer_con">
+							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
+						</div>
 					</div>
-				</div>
-				<div class="contact conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-					<div class="footer_con fontEnglish">
-						<div class="con fontEnglish colorWhite">a@naver.com</div>
-						<div class="con fontEnglish colorWhite">01012345678</div>
+					<div class="contact conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
+						<div class="footer_con fontEnglish">
+							<div class="con fontEnglish colorWhite">a@naver.com</div>
+							<div class="con fontEnglish colorWhite">01012345678</div>
+						</div>
 					</div>
-				</div>
-				<div class="provision conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">PROVISION</div>
-					<div class="footer_con">
-						<div class="con colorWhite">개인정보 처리방침</div>
-						<div class="con colorWhite">서비스 이용약관</div>
+					<div class="provision conDiv fontEnglish">
+						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
+						<div class="footer_con">
+							<div class="con colorWhite">개인정보 처리방침</div>
+							<div class="con colorWhite">서비스 이용약관</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		<script>
 		$("#rank").css("display","flex");
@@ -547,6 +697,21 @@ a{
     	$("#arc").on("click",function(){
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
+    	
+    	function setRecord(userScore){
+    		$.ajax({
+                url:"/setGameRecord.game",
+                data:{
+                  mID:'${loginID}',
+                  game:'${game}',
+                  nickName : '${loginNickname}',
+                  score : userScore
+                },
+                type:"post"
+              }).done(function (res){
+                console.log(res);
+              });
+    	}
     </script>
 </body>
 </html>
