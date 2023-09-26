@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="/css/board/boardList.css">
 <script type="text/javascript" src="/js/member/infoModified.js"></script>
 <script type="text/javascript" src="/js/member/myPage.js"></script>
+<script type="text/javascript" src="/js/member/secession.js"></script>
+<script type="text/javascript" src="/js/member/favoriteTab.js"></script>
+<script type="text/javascript" src="/js/member/recordTab.js"></script>
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -53,41 +57,50 @@ a {
 .mainTitle {
 	padding-left: 5px;
 }
-.tabBox{border:1px solid black; border-radius:5px;}
-ul.tabs{
-  margin: 0px;
-  padding: 0px;
-  list-style: none; border-bottom:1px solid black;
-  display:flex;
-}
-ul.tabs li{
-  background: none;
-  color: #222;
-  display: inline-block;
-  padding: 10px 0px;
-  cursor: pointer;
-  width:25%;
-  text-align:center;
+
+.tabBox {
+	border: 1px solid black;
+	border-radius: 5px;
 }
 
-ul.tabs li.current{
-  background: #ededed;
-  background-color: #131217;
-  color:#ffffff;
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	border-bottom: 1px solid black;
+	display: flex;
 }
 
-.tab-content{
-  display: none;
-  padding: 15px;
-  height: 600px;
-  margin:0px;
+ul.tabs li {
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 0px;
+	cursor: pointer;
+	width: 25%;
+	text-align: center;
 }
 
-.tab-content.current{
-  display: inherit;
-  
+ul.tabs li.current {
+	background: #ededed;
+	background-color: #131217;
+	color: #ffffff;
 }
-#tab-1{overflow: auto;}
+
+.tab-content {
+	display: none;
+	padding: 15px;
+	height: 600px;
+	margin: 0px;
+}
+
+.tab-content.current {
+	display: inherit;
+}
+
+#tab-1 {
+	overflow: auto;
+}
 </style>
 </head>
 <body>
@@ -160,7 +173,7 @@ ul.tabs li.current{
 		<div class="myPage">
 			<div class="nickNameBox bColorBlack">
 				<div class="nicknameInfo">
-					<div class="nickname colorWhite">${user.nickName } 님</div>
+					<div class="nickname colorWhite">${user.nickName }님</div>
 					<div class="levelBox">
 						<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
 						<div class="singDay colorDarkgray">가입일: ${user.stringFormat }</div>
@@ -175,31 +188,36 @@ ul.tabs li.current{
 							<!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
 							<div class="infoCagetory">아이디</div>
 							<div class="infocon">${user.id }</div>
-							<input type="hidden">
+							<input type="hidden" id="userID" value="${user.id }">
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">비밀번호</div>
-							<div class="infocon"><i class="fa-solid fa-lock"></i>&nbsp;비밀번호</div>
-							<input type="hidden">
+							<div class="infocon">
+								<i class="fa-solid fa-lock"></i>&nbsp;비밀번호
+							</div>
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">닉네임</div>
 							<div class="infocon">${user.nickName }</div>
-							<input type="hidden">
+							<input type="hidden" id="userNick" value="${user.nickName }">
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">휴대전화</div>
 							<div class="infocon">${user.phone }</div>
-							<input type="hidden">
+							<input type="hidden" id="userPhone" value="${user.phone }">
 						</div>
 						<div class="infoBox">
 							<div class="infoCagetory">이메일</div>
 							<div class="infocon">${user.email }</div>
-							<input type="hidden">
+							<input type="hidden" id="userEmail" value="${user.email }">
 						</div>
 						<div class="infoBox modifiedBox">
-							<input class="updateBtn bColorBlue colorWhite" id="updateBtn"
-								type="button" value="수정하기">
+							<div>
+								<input class="myPagebtn bColorBlue colorWhite" id="pwUpdateBtn"
+									type="button" value="비밀번호 수정하기"> <input
+									class="myPagebtn bColorBlue colorWhite" id="updateBtn"
+									type="button" value="개인정보 수정하기">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -221,51 +239,188 @@ ul.tabs li.current{
 					<div class="tabBox">
 						<!-- 탭박스 -->
 						<ul class="tabs">
-						    <li class="tab-link current" id="myWrite" data-tab="tab-1">내가 쓴 글</li>
-						    <li class="tab-link" id="myBookMark" data-tab="tab-2">북마크</li>
-						    <li class="tab-link" data-tab="tab-3">즐겨찾기</li>
-						    <li class="tab-link" data-tab="tab-4">게임기록</li>
+							<li class="tab-link current" id="myWrite" data-tab="tab-1">내가
+								쓴 글</li>
+							<li class="tab-link" id="myBookMark" data-tab="tab-2">북마크</li>
+							<li class="tab-link" id="favorites" data-tab="tab-3">즐겨찾기</li>
+							<li class="tab-link" data-tab="tab-4">게임기록</li>
 						</ul>
-						
-					    <div id="tab-1" class="tab-content current">
-					    	<div class="boardHeader">
-	                            <div class="num">번호</div>
-								<div class="title">제목</div>
-								<div class="writer">작성자</div>
-								<div class="date">작성일</div>
-								<div class="view">조회</div>
-								<div class="recommend">추천</div>
-								<div class="file">파일</div>
-	                        </div>
-					    	<div class="post1" id="post">
-						    	
-					    	</div>
-					    	<div id="pagination"></div>
-					    </div>
-					    <div id="tab-2" class="tab-content">
+
+						<div id="tab-1" class="tab-content current">
 							<div class="boardHeader">
-	                            <div class="num">번호</div>
+								<div class="num">번호</div>
 								<div class="title">제목</div>
 								<div class="writer">작성자</div>
 								<div class="date">작성일</div>
 								<div class="view">조회</div>
 								<div class="recommend">추천</div>
 								<div class="file">파일</div>
-	                        </div>
-	                        <div class="post2" id="post">
-						    	
-					    	</div>
+							</div>
+							<div class="post1" id="post"></div>
+							<div id="pagination"></div>
 						</div>
-					    <div id="tab-3" class="tab-content">tab content3</div>
-					    <div id="tab-4" class="tab-content">tab content4</div>
+						<div id="tab-2" class="tab-content">
+							<div class="boardHeader">
+								<div class="num">번호</div>
+								<div class="title">제목</div>
+								<div class="writer">작성자</div>
+								<div class="date">작성일</div>
+								<div class="view">조회</div>
+								<div class="recommend">추천</div>
+								<div class="file">파일</div>
+							</div>
+							<div class="post2" id="post"></div>
+						</div>
+						<div id="tab-3" class="tab-content">
+							<div class="favoriteTabBox">
+								<!-- 탭박스 -->
+								<ul class="favoriteTabs">
+									<li class="tab-link current" id="" data-tab="favoriteTab-1">전체rrrrrrr</li>
+									<li class="tab-link" id="" data-tab="favoriteTab-2">게임1</li>
+									<li class="tab-link" id="" data-tab="favoriteTab-3">게임2</li>
+									<li class="tab-link" data-tab="favoriteTab-4">게임3</li>
+									<li class="tab-link" data-tab="favoriteTab-5">게임4</li>
+									<li class="tab-link" data-tab="favoriteTab-6">게임5</li>
+								</ul>
+								<div class="favoriteCategory">
+									<select class="form-select" aria-label="Default select example"
+										name="favoriteCategory">
+										<option value="title" selected>최신순</option>
+										<option value="writer">인기순</option>
+										<option value="content">이름순</option>
+									</select>
+								</div>
+								<div id="favoriteTab-1" class="favoriteTab-content current">
+									<div class="favoriteHeader">
+										<div class="gameInfoBox">게임 정보</div>
+										<div class="gameLink">게임 바로가기</div>
+									</div>
+									<div class="favoriteBody">
+										<div class="gamePost">
+											<div class="gameInfoBox">
+												<div class="gameImg">게임이미지</div>
+												<div class="gameInfo">
+													<div class="gameTitle">게임1</div>
+													<div class="producer">제작자</div>
+												</div>
+											</div>
+											<div class="gameLink">
+												<a href="#"><input type="button"
+													class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
+											</div>
+										</div>
+										<div class="gamePost">
+											<div class="gameInfoBox">
+												<div class="gameImg">게임이미지</div>
+												<div class="gameInfo">
+													<div class="gameTitle">게임1</div>
+													<div class="producer">제작자</div>
+												</div>
+											</div>
+											<div class="gameLink">
+												<a href="#"><input type="button"
+													class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div id="favoriteTab-2" class="favoriteTab-content">
+									<div class="boardHeader">
+										<div class="num">번호</div>
+										<div class="title">제목</div>
+										<div class="writer">작성자</div>
+										<div class="date">작성일</div>
+										<div class="view">조회</div>
+										<div class="recommend">추천</div>
+										<div class="file">파일</div>
+									</div>
+									<div class="post2" id="post"></div>
+								</div>
+								<div id="favoriteTab-3" class="favoriteTab-content"></div>
+								<div id="favoriteTab-4" class="favoriteTab-content">tab
+									content4</div>
+								<div id="favoriteTab-5" class="favoriteTab-content">tab
+									content4</div>
+								<div id="favoriteTab-6" class="favoriteTab-content">tab
+									content4</div>
+							</div>
+						</div>
+						<div id="tab-4" class="tab-content">
+							<div class="recordTabBox">
+								<!-- 탭박스 -->
+								<ul class="recordTabs">
+									<li class="tab-link current" id="" data-tab="recordTab-1">전체rrrrrrr</li>
+									<li class="tab-link" id="" data-tab="recordTab-2">게임1</li>
+									<li class="tab-link" id="" data-tab="recordTab-3">게임2</li>
+									<li class="tab-link" data-tab="recordTab-4">게임3</li>
+									<li class="tab-link" data-tab="recordTab-5">게임4</li>
+									<li class="tab-link" data-tab="recordTab-6">게임5</li>
+								</ul>
+								<div class="recordCategory">
+									<select class="form-select" aria-label="Default select example"
+										name="recordCategory">
+										<option value="score" selected>점수순</option>
+										<option value="time">최신순</option>
+									</select>
+								</div>
+								<div id="recordTab-1" class="recordTab-content current">
+									<div class="recordHeader">
+										<div class="gameRank">순위</div>
+										<div class="gameScore">점수</div>
+										<div class="gameTime">게임일시</div>
+									</div>
+									<div class="recordBody">
+										<div class="recordPost">
+											<div class="gameRank">1</div>
+											<div class="gameInfo">
+												<div class="gameScore">40점</div>
+												<div class="gameTime">2023-02-23</div>
+											</div>
+										</div>
+										<div class="recordPost">
+											<div class="gameRank">1</div>
+											<div class="gameInfo">
+												<div class="gameScore">40점</div>
+												<div class="gameTime">2023-02-23</div>
+											</div>
+										</div>
+										<div class="recordPost">
+											<div class="gameRank">1</div>
+											<div class="gameInfo">
+												<div class="gameScore">40점</div>
+												<div class="gameTime">2023-02-23</div>
+											</div>
+										</div>
+										<div class="recordPost">
+											<div class="gameRank">1</div>
+											<div class="gameInfo">
+												<div class="gameScore">40점</div>
+												<div class="gameTime">2023-02-23</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div id="recordTab-2" class="recordTab-content"></div>
+								<div id="recordTab-3" class="recordTab-content"></div>
+								<div id="recordTab-4" class="recordTab-content">tab
+									content4</div>
+								<div id="recordTab-5" class="recordTab-content">tab
+									content4</div>
+								<div id="recordTab-6" class="recordTab-content">tab
+									content4</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				
+
 
 				<div class="memberInfo">
 					<div class="deletBtnBox">
 						<span>탈퇴를 원하시면 탈퇴버튼을 눌러주세요.</span> <input type="button"
-							class="deleteBtn bColorWhite colorDarkgray" value="회원탈퇴">
+							class="deleteBtn bColorWhite colorDarkgray" id="secessionBtn"
+							value="회원탈퇴">
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>Kordle</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -15,9 +15,11 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js" integrity="sha512-YQL0GVx/Too3vZjBl9plePRIYsRnd1s8N6QOvXPdZ+JMH2mtRTLQXGUDGjNW6zr1HUgcOIury67IvWe91oeEwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="/css/game/game.css"/>
-<script src="game/js/flappy_bird_scene.js" type="text/javascript"></script>
+
+<!-- 한글 자모 분리 및 조합 -->
+<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+<script src="/game/js/wordleGame.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -33,17 +35,10 @@
 	min-width : 579px;
 	max-width: 1030px;
 	width: 100%;
-	height: 579px;
+	height: 1000px;
 	background-color: white;
 	margin: auto;
 }
-
-#container {
-    margin: auto;
-    width: 288px;
-    height: 512px;
-}
-
 a{
 	text-decoration: none;
 }
@@ -81,6 +76,123 @@ a{
 .bColorBlue {
   background-color: #5d6ce1;
 }
+        #gameContainer {
+            margin: auto;
+            width: 500px;
+        }
+
+        .containerInputs {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        #gameBoard {
+            margin-top: 10px;
+            position:relative;
+            margin:auto;
+        }
+
+        .line {}
+
+        .cell {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: lightblue;
+            border: 3px solid white;
+            color: white;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #inputBoard {
+            margin-top: 20px;
+            /* border:1px solid black; */
+            justify-content: center;
+        }
+
+
+        .inputLine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line1 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line2 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .btns {
+            width: 14%;
+        }
+
+        .input:hover {
+            background-color: rgba(211, 211, 211, 0.473);
+        }
+
+        .covers {
+        	background-color:#00000080;
+        	position:absolute;
+        	z-index:1;
+			width:100%;
+			height:100%;
+			border-radius:10px;
+			color:white;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:xx-large;
+			font-weight:bold;
+			text-align:center;
+        }
+        
+        #endCover{
+        	display:none;
+        }
+        
+        .gameStartBnts{
+        	padding:13px 25px;
+        	background-color: #00000000;
+        	color: lightblue;
+        	border:3px solid white;
+        	
+        	border-radius:15px;
+        }
+        
+        .gameStartBnts:hover{
+        	background-color: lightblue;
+        	color:white;
+        	border:3px solid lightblue;
+        	transition-duration: 1s;
+        }
 
 </style>
 </head>
@@ -277,9 +389,7 @@ a{
 								</p>
 							</div>
 						</div>
-						<c:choose>
-							<c:when test="${game == 'Flappy Bird'}">
-								<div class="row g-0">
+						<div class="row g-0">
 							<div class="col-10">
 								<p class="gameName fs-2 mt-0 text-white fontKorean">${game}</p>
 							</div>
@@ -299,32 +409,7 @@ a{
 							<hr class="border border-primary border-3 opacity-75">
 						</div>
 						<div class="row g-0">
-							<div id="container" class="col-12">
-								<script>
-							        let option = {
-							            type:Phaser.AUTO,
-							            parent:"container",
-							            width:"100%",
-							            height:"100%",
-							            physics:{
-							                default:"arcade",
-							                arcade:{
-							                    gravity:{
-							                        y:300
-							                    },
-							                    debug:false
-							                }
-							            },
-							            scene:{
-							                preload: preload,
-							                create: create,
-							                update: update
-							            }
-							        };
-							
-							        let game = new Phaser.Game(option);
-							    </script>
-							</div>
+							<div class="col-12 game"><div id="gameContainer"></div></div>
 						</div>
 						<div class="row g-0">
 							<div class="col-12 d-flex justify-content-center mt150">
@@ -381,85 +466,6 @@ a{
 										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
 									</div>				
 								</div>
-							</c:when>
-						</c:choose>
-						<%-- <div class="row g-0">
-							<div class="col-10">
-								<p class="gameName fs-2 mt-0 text-white fontKorean">${game}</p>
-							</div>
-							<div
-								class="col-2 d-flex justify-content-center align-content-bottom">
-								<div>
-									<button type="button" class="btn btn-outline-light" id="favorite">
-										<i class="fa-regular fa-star colorWhite"></i>
-										즐겨찾기
-									</button>
-									<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
-										<i class="fa-regular fa-star colorWhite"></i>
-										즐겨찾기
-									</button> -->
-								</div>
-							</div>
-							<hr class="border border-primary border-3 opacity-75">
-						</div>
-						<div class="row g-0">
-							<div class="col-12 game">play ground</div>
-						</div>
-						<div class="row g-0">
-							<div class="col-12 d-flex justify-content-center mt150">
-								<div class="btn-group w100p mxWidth1030" role="group"
-									aria-label="Basic radio toggle button group">
-									<input type="radio" class="btn-check" name="btnradio"
-										id="btnradio1" autocomplete="off" checked> <label
-										class="btn btn-outline-light" for="btnradio1">게임 순위</label>
-
-									<input type="radio" class="btn-check" name="btnradio"
-										id="btnradio2" autocomplete="off"> <label
-										class="btn btn-outline-light" for="btnradio2">게임 정보</label>
-								</div>
-							</div>
-							
-							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
-						</div>
-						<div class="row g-0 mt49">
-							<div class="col-12" id="rank">
-								<div class="rankCon">
-								<hr class="colorWhite">
-									<div class="row g-0 p-2">
-										<div class="col-1">
-										<span class="text-white fontKorean">순위</span>
-										</div>
-										<div class="col-7">
-											<span class="text-white fontKorean">플레이어 정보</span>
-										</div>
-										<div class="col-4">
-											<span class="text-white fontKorean">점수</span>
-										</div>
-									</div>
-									<hr class="colorWhite">
-									<div id="rankCon">
-									</div>
-								</div>
-							</div>
-							<div class="col-12" id="info">
-								<div class="row g-0 w100p">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">게임 설명</p>
-										<hr class="colorBlue border-3 opacity-75">
-									</div>
-									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
-									</div>				
-								</div>
-								<div class="row g-0 w100p mt150">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">조작 방법</p>
-										<hr class="colorGreen border-3 opacity-75">
-									</div>
-									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
-									</div>				
-								</div> --%>
 								<div class="row g-0 w100p mt150">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">제작자 정보</p>
@@ -662,21 +668,6 @@ a{
     	$("#arc").on("click",function(){
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
-    	
-    	function setRecord(userScore){
-    		$.ajax({
-                url:"/setGameRecord.game",
-                data:{
-                  mID:'${loginID}',
-                  game:'${game}',
-                  nickName : '${loginNickname}',
-                  score : userScore
-                },
-                type:"post"
-              }).done(function (res){
-                console.log(res);
-              });
-    	}
     </script>
 </body>
 </html>

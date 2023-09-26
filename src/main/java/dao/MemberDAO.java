@@ -167,6 +167,25 @@ public class MemberDAO {
 			return pstat.executeUpdate();
 		}
 	}
-
 	
+	public int updateInfoById(String id, String nick, String phone, String email) throws Exception{
+		String sql = "update members set mNickname = ? , mPhone=? , mEmail=? where mId=?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, nick);
+			pstat.setString(2, phone);
+			pstat.setString(3, email);
+			pstat.setString(4, id);
+			return pstat.executeUpdate();
+		}
+	}
+	
+	public int deleteById(String id) throws Exception{
+		String sql ="delete from members where mId = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			return pstat.executeUpdate();
+		}
+	}
 }

@@ -20,7 +20,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/board/post.js"></script>
-<script type="text/javascript" src="/js/board/isUserInPost.js"></script>
 
 <style>
 * {
@@ -348,27 +347,30 @@ a {
 					<!-- 글 작성자 = 로그인 사용자이면 글 추천, 글 북마크 버튼 출력 x -->
 					<c:choose>
 						<c:when test="${loginID ne post.writer}">
-
-							<div class="col-12 topBtns">
-								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
-
-								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
-								<c:choose>
-									<c:when test="${not empty postRec}">
-										<script>
-											$("#postRec").attr("class",	"btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${not empty bookmark}">
-										<script>
-											$("#bookmark").attr("class", "btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-							</div>
+							<c:choose>
+								<c:when test="${loginID ne 'admin'}">
+									<div class="col-12 topBtns">
+										<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+										<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+		
+										<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
+										<c:choose>
+											<c:when test="${not empty postRec}">
+												<script>
+													$("#postRec").attr("class",	"btnClicked");
+												</script>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${not empty bookmark}">
+												<script>
+													$("#bookmark").attr("class", "btnClicked");
+												</script>
+											</c:when>
+										</c:choose>
+									</div>
+								</c:when>
+							</c:choose>	
 						</c:when>
 					</c:choose>
 
@@ -456,15 +458,12 @@ a {
 						</div>
 
 						<div class="col-12">
-							<input type="hidden" id="loginID" value="${loginID}"> <input
-								type="hidden" id="postWriterName" value="${post.writer}">
+							<input type="hidden" id="loginID" value="${loginID}"> 
+							<input type="hidden" id="postWriterName" value="${post.writer}">
+							
 							<div class="row g-0 replys  justify-content-end" id="replys">
 							</div>
 							<div id="pagination" class="mb200"></div>
-							<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
-							<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }"> 
-							<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }"> 
-							<input type="hidden" id="lastPageNum" value="${lastPageNum }"> 
 						</div>
 					</div>
 				</div>
