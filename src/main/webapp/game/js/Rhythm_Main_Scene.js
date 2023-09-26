@@ -27,7 +27,7 @@ class Rhythm_Main_Scene extends Phaser.Scene{
         })
         start_btn.on("pointerdown",()=>{
 			this.scene.stop('Rhythm_Main_Scene');
-            this.scene.start("Scene01");
+            this.scene.start("Scene01",{frame:0, sec:0, point : 0});
         });
     }
     update(){

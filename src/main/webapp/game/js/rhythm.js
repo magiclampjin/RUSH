@@ -21,21 +21,13 @@ class rhythm extends Phaser.Scene{
         //this.load.audio("newjeans","newjeans.mp3");
     }
     
-    init(){
-		this.frame = 0;
-        this.sec = 0;
-        this.leftbtn;
-        this.rightbtn;
-        this.downbtn;
-        this.Judgement = 0;
-        this.jg_point = 0;
-        this.bar = [];
-        this.times = [30,45,60,90,120,180,240];
-        this.speed = 500;
+    init(data){
+		this.frame = data.frame;
+		this.sec = data.sec;
+		this.jg_point = data.point;
 	}
     
     create(){
-
         //this.music = this.sound.add("newjeans",{loop:true});
         //this.music.play();
 
