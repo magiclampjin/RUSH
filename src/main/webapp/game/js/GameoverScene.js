@@ -12,21 +12,19 @@ class GameoverScene extends Phaser.Scene{
 		this.userScore = data.score;
 	}
     create(){
-        this.add.text(this.cameras.main.width/2,this.cameras.main.height/2,"기록하시겠습니까?",{
+        this.add.text(this.cameras.main.width/2,this.cameras.main.height/2,"Game Over",{
             fontSize : "40px",
             fill : "#FFFFFF"
         }).setOrigin(0.5);
-        let record_btn = this.add.text(this.cameras.main.width/2 -100, this.cameras.main.height/2 + 100,"yes", {
+        let record_btn = this.add.text(this.cameras.main.width/2 -100, this.cameras.main.height/2 + 100,"기록하고 메뉴로", {
             fontSize : "30px",
             fill : "#FFFFFF"
         }).setOrigin(0.5).setInteractive().setPadding(15);
 
-        let restart_btn = this.add.text(this.cameras.main.width/2 + 100, this.cameras.main.height/2 + 100,"no", {
+        let restart_btn = this.add.text(this.cameras.main.width/2 + 100, this.cameras.main.height/2 + 100,"메뉴", {
             fontSize : "30px",
             fill : "#FFFFFF"
         }).setOrigin(0.5).setInteractive().setPadding(15);
-
-        this.cursor = this.input.keyboard.createCursorKeys(); 
 
         restart_btn.on("pointerover",()=>{
             restart_btn.setBackgroundColor("gray");
@@ -37,7 +35,9 @@ class GameoverScene extends Phaser.Scene{
             this.game.canvas.style.cursor = "default";
         })
         restart_btn.on("pointerdown",()=>{
-            this.scene.start("Scene01");
+			this.scene.stop('GameoverScene');
+            this.scene.start("Rhythm_Main_Scene");
+            console.log("No 누름");
         });
 
         record_btn.on("pointerover",()=>{
@@ -50,6 +50,7 @@ class GameoverScene extends Phaser.Scene{
         })
         record_btn.on("pointerdown",()=>{
 			setRecord(this.userScore);
+			this.scene.start("Rhythm_Main_Scene");
         });
     }
     update(){

@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="/css/game/game.css"/>
 <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
 <script src="/game/js/rhythm.js"></script>
+<script src="/game/js/Rhythm_Main_Scene.js"></script>
 <script src="/game/js/GameoverScene.js"></script>
 <style>
 * {
@@ -321,7 +322,7 @@ a{
 							                    debug : false
 							                }
 							            },
-							            scene:[rhythm,GameoverScene]
+							            scene:[Rhythm_Main_Scene,rhythm,GameoverScene]
 							        };
 							        let game = new Phaser.Game(option);
 							    </script>								
@@ -589,14 +590,63 @@ a{
     		$.ajax({
                 url:"/setGameRecord.game",
                 data:{
-                  mID:'${loginID}',
                   game:'${game}',
-                  nickName : '${loginNickname}',
                   score : userScore
                 },
                 type:"post"
               }).done(function (res){
+           	  	let record = JSON.parse(res);
                 console.log(res);
+                $("#rankCon").text("");
+    			for(let i=0; i<record.length; i++){
+    				let divRow = $("<div>");
+    				divRow.addClass("row g-0 p-2");
+    				let divColRank = $("<div>");
+    				if(i<3){
+        				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
+        				divColRank.append(i+1);
+    				}else{
+        				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
+        				divColRank.append(i+1);	
+    				}
+
+    								
+    				let divColInfo = $("<div>");
+    				divColInfo.addClass("col-7");
+    				
+    				let divRowInfo = $("<div>");
+    				divRowInfo.addClass("row g-0");
+    				let divInfoLeft = $("<div>");
+    				divInfoLeft.addClass("col-3");
+    				let divInfoRight = $("<div>");
+    				divInfoRight.addClass("col-9 text-white align-self-center");
+    				let divUserImage = $("<div>");
+    				divUserImage.css({
+    					width : "80px",
+    					height : "80px",
+    					backgroundColor : "white",
+    					borderRadius : "50%"
+    				});
+    				
+    				
+    				divInfoLeft.append(divUserImage);
+    				divInfoRight.append(record[i]["nickName"]);
+    				divInfoRight.append(" Lv : "+record[i]["level"]);
+    				divRowInfo.append(divInfoLeft);
+    				divRowInfo.append(divInfoRight);
+    				divColInfo.append(divRowInfo);
+    				
+    				let divColScore = $("<div>");
+    				divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
+    				divColScore.append(record[i]["score"]);
+    				
+    				divRow.append(divColRank);
+    				divRow.append(divColInfo);
+    				divRow.append(divColScore);
+    				
+    				
+    				$("#rankCon").append(divRow);
+    			}
               });
     	}
     </script>
