@@ -154,6 +154,7 @@ public class GameDAO {
 	
 	public List<GameRecordDTO> selectGameRecord(String gName) throws Exception{
 		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc;";
+		System.out.println("selectGameRecord: "+gName);
 		List<GameRecordDTO> list = new ArrayList<>();
 		try(
 				Connection con = this.getConnection();
