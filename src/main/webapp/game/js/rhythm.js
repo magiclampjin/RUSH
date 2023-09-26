@@ -21,8 +21,13 @@ class rhythm extends Phaser.Scene{
         //this.load.audio("newjeans","newjeans.mp3");
     }
     
+    init(data){
+		this.frame = data.frame;
+		this.sec = data.sec;
+		this.jg_point = data.point;
+	}
+    
     create(){
-
         //this.music = this.sound.add("newjeans",{loop:true});
         //this.music.play();
 
@@ -121,7 +126,8 @@ class rhythm extends Phaser.Scene{
         this.frame++;
         if(this.frame%60 == 0){
             this.sec++;
-            if(this.sec == 10){
+            if(this.sec == 15){
+				this.scene.stop('Scene01');
                 this.scene.start("GameoverScene",{score : this.jg_point});
             }
         }

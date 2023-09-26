@@ -41,6 +41,7 @@ div {
 	width : 100%;
 	height : 100%;
 	border-radius : 3%;
+	margin-bottom: 10px;
 }
 
 .gameContainer {
@@ -367,7 +368,7 @@ div {
 	});
 	
 	$("#newGamesMore").on("click",function(){
-		location.href = "/moveToCategory.game";
+		location.href = "/moveToCategory.game?category=New";
 	});
 	$("#rhythmGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game?category=Rhythm";
