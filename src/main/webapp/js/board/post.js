@@ -322,6 +322,46 @@ $(document).ready(function() {
 
 		}
 	});
+	
+	$("#pinNotice").on("click", function() {
+
+		if ($(this).hasClass("btnClicked") === true) { //delete
+			$.ajax({
+				url: "/deletePin.board",
+				data: {
+					postSeq: postSeq
+				},
+				type: "post",
+				dataType: "json"
+			}).done(function(success) {
+				if (success == false)
+					$("#pinNotice").removeClass("btnClicked");
+				else {
+					alert("삭제된 게시글입니다.");
+					location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
+				}
+			});
+
+
+		} else { //insert
+			$.ajax({
+				url: "/insertPin.board",
+				data: {
+					postSeq: postSeq
+				},
+				type: "post",
+				dataType: "json"
+			}).done(function(success) {
+				if (success == true)
+					$("#pinNotice").addClass("btnClicked");
+				else {
+					alert("삭제된 게시글입니다.");
+					location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
+				}
+			});
+
+		}
+	});
 
 	// 게시글 삭제
 	$(".delete").on("click", function() {
