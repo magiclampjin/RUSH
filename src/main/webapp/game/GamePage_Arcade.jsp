@@ -310,6 +310,7 @@ a {
 								</p>
 							</div>
 						</div>
+						
 						<c:choose>
 							<c:when test="${game == 'Flappy Bird'}">
 								<div class="row g-0">
@@ -493,6 +494,7 @@ a {
 										</div>
 							</c:otherwise>
 						</c:choose>
+						
 						<div class="row g-0 w100p mt150">
 							<div class="col-12">
 								<p class="text-white fontKorean fs-2">제작자 정보</p>
