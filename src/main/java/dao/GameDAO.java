@@ -67,6 +67,19 @@ public class GameDAO {
 		}
 	}
 	
+	public String selectDevByGameName(String gName) throws Exception{
+		String sql = "select * from game where gName = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, gName);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getString("gDeveloper");	
+		}
+	}
+	
 	public List<GameDTO> selectBestGame()throws Exception{
 		String sql = "select row_number() over (order by gr.gName desc) as seq, gr.gName, count(*) as count, g.gDeveloper, g.gImageURL from game_record gr,game g where g.gName = gr.gName group by gr.gName order by count desc;";
 		List<GameDTO> list = new ArrayList<>();

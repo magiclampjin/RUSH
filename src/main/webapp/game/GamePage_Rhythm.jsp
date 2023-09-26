@@ -392,7 +392,7 @@ a{
 										<table class="devTable">
 											<tr>
 												<th class="text-white fontKorean fw900">제작자</th>
-												<td class="text-white fontKorean">제작자이름</td>
+												<td class="text-white fontKorean">${dev}</td>
 											</tr>
 											<tr>
 												<th class="text-white fontKorean fw900">제작자 소속</th>

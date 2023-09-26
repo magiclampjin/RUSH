@@ -41,10 +41,12 @@ public class GameController extends HttpServlet {
 			if(cmd.equals("/moveToGamePage.game")) {
 				String gameName = request.getParameter("game");
 				String gameCategory = dao.selectByGameName(gameName);
+				String developer = dao.selectDevByGameName(gameName);
 				System.out.println(gameName);
 				System.out.println(gameCategory);
 				request.setAttribute("game",gameName);
 				request.setAttribute("category",gameCategory);
+				request.setAttribute("dev",developer);
 		
 				request.getRequestDispatcher("/game/GamePage_"+gameCategory+".jsp").forward(request, response);
 				
