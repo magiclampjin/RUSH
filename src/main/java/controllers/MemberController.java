@@ -77,8 +77,14 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/load.member")) {
 				// 마이페이지 (회원 정보 출력)
 				String userID = (String) request.getSession().getAttribute("loginID");
-				MemberDTO user = dao.selectUserInfo(userID);
-				request.setAttribute("user", user);
+				if(!userID.equals("admin")) {
+					MemberDTO user = dao.selectUserInfo(userID);
+					request.setAttribute("user", user);
+				}else if(userID.equals("admin")) {
+					String userNick = dao.selectNicknameById("admin");
+					request.setAttribute("userNick", userNick);
+					System.out.println(userNick);
+				}
 				request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
 
 			} else if (cmd.equals("/pwCheck.member")) {

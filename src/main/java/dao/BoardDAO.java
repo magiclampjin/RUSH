@@ -123,7 +123,7 @@ public class BoardDAO {
 
 	// 공지 게시글 불러오기
 	public List<BoardDTO> selectByNoti() throws Exception {
-		String sql = "select * from postinfo where cbCategory = \"notice\" order by cbSeq desc;";
+		String sql = "select * from postinfo where cbCategory = \"notice\" and cbID = \"admin\" order by cbSeq desc;";
 		List<BoardDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);

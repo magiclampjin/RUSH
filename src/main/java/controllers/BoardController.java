@@ -75,7 +75,6 @@ public class BoardController extends HttpServlet {
 			if (cmd.equals("/insert.board")) {
 				// 게시글 등록
 				int maxSize = 1024 * 1024 * 10; // 업로드 파일 최대 사이즈 10mb로 제한
-
 				String uploadPath = request.getServletContext().getRealPath("files");
 				File filepath = new File(uploadPath);
 				if (!filepath.exists()) {
@@ -89,7 +88,13 @@ public class BoardController extends HttpServlet {
 
 				String id = (String) request.getSession().getAttribute("loginID");
 				String userNick = (String) request.getSession().getAttribute("loginNickname");
-				int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0));
+				int parentSeq;
+				if(id.equals("admin")) {
+					parentSeq = dao.insert(new BoardDTO(0, id, "notice", userNick, title, content, null, 0));
+				}else {
+					parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0));
+				}
+				
 
 				Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
 

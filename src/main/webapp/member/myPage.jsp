@@ -173,159 +173,140 @@ ul.tabs li.current {
 		<div class="myPage">
 			<div class="nickNameBox bColorBlack">
 				<div class="nicknameInfo">
-					<div class="nickname colorWhite">${user.nickName }님</div>
-					<div class="levelBox">
-						<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
-						<div class="singDay colorDarkgray">가입일: ${user.stringFormat }</div>
-					</div>
+					<c:choose>
+						<c:when test="${loginID == 'admin' }">
+							<div class="nickname colorWhite">${userNick }님</div>
+						</c:when>
+						<c:otherwise>
+							<div class="nickname colorWhite">${user.nickName }님</div>
+							<div class="levelBox">
+								<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
+								<div class="singDay colorDarkgray">가입일:
+									${user.stringFormat }</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="myPage_guide">
 				<div class="memberInfo">
 					<div class="memberBasicTitle">기본 회원정보</div>
-					<div class="memberInfoBox updateBox">
-						<div class="infoBox">
-							<!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
-							<div class="infoCagetory">아이디</div>
-							<div class="infocon">${user.id }</div>
-							<input type="hidden" id="userID" value="${user.id }">
-						</div>
-						<div class="infoBox">
-							<div class="infoCagetory">비밀번호</div>
-							<div class="infocon">
-								<i class="fa-solid fa-lock"></i>&nbsp;비밀번호
+					<c:choose>
+						<c:when test="${loginID == 'admin' }">
+							<div class="memberInfoBox updateBox">
+								<div class="infoBox">
+									<!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
+									<div class="infoCagetory">아이디</div>
+									<div class="infocon">${loginID }</div>
+									<input type="hidden" id="userID" value="${loginID }">
+								</div>
+								<div class="infoBox">
+									<div class="infoCagetory">비밀번호</div>
+									<div class="infocon">
+										<i class="fa-solid fa-lock"></i>&nbsp;비밀번호
+									</div>
+								</div>
+								<div class="infoBox modifiedBox">
+									<div>
+										<input class="myPagebtn bColorBlue colorWhite"
+											id="pwUpdateBtn" type="button" value="비밀번호 수정하기">
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="infoBox">
-							<div class="infoCagetory">닉네임</div>
-							<div class="infocon">${user.nickName }</div>
-							<input type="hidden" id="userNick" value="${user.nickName }">
-						</div>
-						<div class="infoBox">
-							<div class="infoCagetory">휴대전화</div>
-							<div class="infocon">${user.phone }</div>
-							<input type="hidden" id="userPhone" value="${user.phone }">
-						</div>
-						<div class="infoBox">
-							<div class="infoCagetory">이메일</div>
-							<div class="infocon">${user.email }</div>
-							<input type="hidden" id="userEmail" value="${user.email }">
-						</div>
-						<div class="infoBox modifiedBox">
-							<div>
-								<input class="myPagebtn bColorBlue colorWhite" id="pwUpdateBtn"
-									type="button" value="비밀번호 수정하기"> <input
-									class="myPagebtn bColorBlue colorWhite" id="updateBtn"
-									type="button" value="개인정보 수정하기">
+						</c:when>
+						<c:otherwise>
+							<div class="memberInfoBox updateBox">
+								<div class="infoBox">
+									<!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
+									<div class="infoCagetory">아이디</div>
+									<div class="infocon">${user.id }</div>
+									<input type="hidden" id="userID" value="${user.id }">
+								</div>
+								<div class="infoBox">
+									<div class="infoCagetory">비밀번호</div>
+									<div class="infocon">
+										<i class="fa-solid fa-lock"></i>&nbsp;비밀번호
+									</div>
+								</div>
+								<div class="infoBox">
+									<div class="infoCagetory">닉네임</div>
+									<div class="infocon">${user.nickName }</div>
+									<input type="hidden" id="userNick" value="${user.nickName }">
+								</div>
+								<div class="infoBox">
+									<div class="infoCagetory">휴대전화</div>
+									<div class="infocon">${user.phone }</div>
+									<input type="hidden" id="userPhone" value="${user.phone }">
+								</div>
+								<div class="infoBox">
+									<div class="infoCagetory">이메일</div>
+									<div class="infocon">${user.email }</div>
+									<input type="hidden" id="userEmail" value="${user.email }">
+								</div>
+								<div class="infoBox modifiedBox">
+									<div>
+										<input class="myPagebtn bColorBlue colorWhite"
+											id="pwUpdateBtn" type="button" value="비밀번호 수정하기"> <input
+											class="myPagebtn bColorBlue colorWhite" id="updateBtn"
+											type="button" value="개인정보 수정하기">
+									</div>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+
+				</div>
+				<c:if test="${loginID != 'admin' }">
+					<div class="memberInfo">
+						<div class="memberBasicTitle">추가 회원정보</div>
+						<div class="memberInfoBox">
+							<div class="infoBox">
+								<div class="infoCagetory">생년월일</div>
+								<div class="infocon">${user.formedBirth }</div>
+							</div>
+							<div class="infoBox">
+								<div class="infoCagetory">성별</div>
+								<div class="infocon">${user.gender }</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="memberInfo">
-					<div class="memberBasicTitle">추가 회원정보</div>
-					<div class="memberInfoBox">
-						<div class="infoBox">
-							<div class="infoCagetory">생년월일</div>
-							<div class="infocon">${user.formedBirth }</div>
-						</div>
-						<div class="infoBox">
-							<div class="infoCagetory">성별</div>
-							<div class="infocon">${user.gender }</div>
-						</div>
-					</div>
-				</div>
+				</c:if>
 
-				<div class="memberInfo">
-					<div class="tabBox">
-						<!-- 탭박스 -->
-						<ul class="tabs">
-							<li class="tab-link current" id="myWrite" data-tab="tab-1">내가
-								쓴 글</li>
-							<li class="tab-link" id="myBookMark" data-tab="tab-2">북마크</li>
-							<li class="tab-link" id="favorites" data-tab="tab-3">즐겨찾기</li>
-							<li class="tab-link" data-tab="tab-4">게임기록</li>
-						</ul>
-
-						<div id="tab-1" class="tab-content current">
-							<div class="boardHeader">
-								<div class="num">번호</div>
-								<div class="title">제목</div>
-								<div class="writer">작성자</div>
-								<div class="date">작성일</div>
-								<div class="view">조회</div>
-								<div class="recommend">추천</div>
-								<div class="file">파일</div>
+				<c:choose>
+					<c:when test="${loginID == 'admin' }">
+						<div class="memberInfo">
+							<div class="memberBasicTitle">작성된 공지글</div>
+							<div class="memberInfoBox">
+							
 							</div>
-							<div class="post1" id="post"></div>
-							<div id="pagination"></div>
 						</div>
-						<div id="tab-2" class="tab-content">
-							<div class="boardHeader">
-								<div class="num">번호</div>
-								<div class="title">제목</div>
-								<div class="writer">작성자</div>
-								<div class="date">작성일</div>
-								<div class="view">조회</div>
-								<div class="recommend">추천</div>
-								<div class="file">파일</div>
-							</div>
-							<div class="post2" id="post"></div>
-						</div>
-						<div id="tab-3" class="tab-content">
-							<div class="favoriteTabBox">
+					</c:when>
+					<c:otherwise>
+						<div class="memberInfo">
+							<div class="tabBox">
 								<!-- 탭박스 -->
-								<ul class="favoriteTabs">
-									<li class="tab-link current" id="" data-tab="favoriteTab-1">전체rrrrrrr</li>
-									<li class="tab-link" id="" data-tab="favoriteTab-2">게임1</li>
-									<li class="tab-link" id="" data-tab="favoriteTab-3">게임2</li>
-									<li class="tab-link" data-tab="favoriteTab-4">게임3</li>
-									<li class="tab-link" data-tab="favoriteTab-5">게임4</li>
-									<li class="tab-link" data-tab="favoriteTab-6">게임5</li>
+								<ul class="tabs">
+									<li class="tab-link current" id="myWrite" data-tab="tab-1">내가
+										쓴 글</li>
+									<li class="tab-link" id="myBookMark" data-tab="tab-2">북마크</li>
+									<li class="tab-link" id="favorites" data-tab="tab-3">즐겨찾기</li>
+									<li class="tab-link" data-tab="tab-4">게임기록</li>
 								</ul>
-								<div class="favoriteCategory">
-									<select class="form-select" aria-label="Default select example"
-										name="favoriteCategory">
-										<option value="title" selected>최신순</option>
-										<option value="writer">인기순</option>
-										<option value="content">이름순</option>
-									</select>
-								</div>
-								<div id="favoriteTab-1" class="favoriteTab-content current">
-									<div class="favoriteHeader">
-										<div class="gameInfoBox">게임 정보</div>
-										<div class="gameLink">게임 바로가기</div>
-									</div>
-									<div class="favoriteBody">
-										<div class="gamePost">
-											<div class="gameInfoBox">
-												<div class="gameImg">게임이미지</div>
-												<div class="gameInfo">
-													<div class="gameTitle">게임1</div>
-													<div class="producer">제작자</div>
-												</div>
-											</div>
-											<div class="gameLink">
-												<a href="#"><input type="button"
-													class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
-											</div>
-										</div>
-										<div class="gamePost">
-											<div class="gameInfoBox">
-												<div class="gameImg">게임이미지</div>
-												<div class="gameInfo">
-													<div class="gameTitle">게임1</div>
-													<div class="producer">제작자</div>
-												</div>
-											</div>
-											<div class="gameLink">
-												<a href="#"><input type="button"
-													class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
-											</div>
-										</div>
 
+								<div id="tab-1" class="tab-content current">
+									<div class="boardHeader">
+										<div class="num">번호</div>
+										<div class="title">제목</div>
+										<div class="writer">작성자</div>
+										<div class="date">작성일</div>
+										<div class="view">조회</div>
+										<div class="recommend">추천</div>
+										<div class="file">파일</div>
 									</div>
+									<div class="post1" id="post"></div>
+									<div id="pagination"></div>
 								</div>
-								<div id="favoriteTab-2" class="favoriteTab-content">
+								<div id="tab-2" class="tab-content">
 									<div class="boardHeader">
 										<div class="num">번호</div>
 										<div class="title">제목</div>
@@ -337,83 +318,152 @@ ul.tabs li.current {
 									</div>
 									<div class="post2" id="post"></div>
 								</div>
-								<div id="favoriteTab-3" class="favoriteTab-content"></div>
-								<div id="favoriteTab-4" class="favoriteTab-content">tab
-									content4</div>
-								<div id="favoriteTab-5" class="favoriteTab-content">tab
-									content4</div>
-								<div id="favoriteTab-6" class="favoriteTab-content">tab
-									content4</div>
-							</div>
-						</div>
-						<div id="tab-4" class="tab-content">
-							<div class="recordTabBox">
-								<!-- 탭박스 -->
-								<ul class="recordTabs">
-									<li class="tab-link current" id="" data-tab="recordTab-1">전체rrrrrrr</li>
-									<li class="tab-link" id="" data-tab="recordTab-2">게임1</li>
-									<li class="tab-link" id="" data-tab="recordTab-3">게임2</li>
-									<li class="tab-link" data-tab="recordTab-4">게임3</li>
-									<li class="tab-link" data-tab="recordTab-5">게임4</li>
-									<li class="tab-link" data-tab="recordTab-6">게임5</li>
-								</ul>
-								<div class="recordCategory">
-									<select class="form-select" aria-label="Default select example"
-										name="recordCategory">
-										<option value="score" selected>점수순</option>
-										<option value="time">최신순</option>
-									</select>
-								</div>
-								<div id="recordTab-1" class="recordTab-content current">
-									<div class="recordHeader">
-										<div class="gameRank">순위</div>
-										<div class="gameScore">점수</div>
-										<div class="gameTime">게임일시</div>
-									</div>
-									<div class="recordBody">
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
+								<div id="tab-3" class="tab-content">
+									<div class="favoriteTabBox">
+										<!-- 탭박스 -->
+										<ul class="favoriteTabs">
+											<li class="tab-link current" id="" data-tab="favoriteTab-1">전체rrrrrrr</li>
+											<li class="tab-link" id="" data-tab="favoriteTab-2">게임1</li>
+											<li class="tab-link" id="" data-tab="favoriteTab-3">게임2</li>
+											<li class="tab-link" data-tab="favoriteTab-4">게임3</li>
+											<li class="tab-link" data-tab="favoriteTab-5">게임4</li>
+											<li class="tab-link" data-tab="favoriteTab-6">게임5</li>
+										</ul>
+										<div class="favoriteCategory">
+											<select class="form-select"
+												aria-label="Default select example" name="favoriteCategory">
+												<option value="title" selected>최신순</option>
+												<option value="writer">인기순</option>
+												<option value="content">이름순</option>
+											</select>
 										</div>
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
+										<div id="favoriteTab-1" class="favoriteTab-content current">
+											<div class="favoriteHeader">
+												<div class="gameInfoBox">게임 정보</div>
+												<div class="gameLink">게임 바로가기</div>
 											</div>
-										</div>
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
-										</div>
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
-										</div>
+											<div class="favoriteBody">
+												<div class="gamePost">
+													<div class="gameInfoBox">
+														<div class="gameImg">게임이미지</div>
+														<div class="gameInfo">
+															<div class="gameTitle">게임1</div>
+															<div class="producer">제작자</div>
+														</div>
+													</div>
+													<div class="gameLink">
+														<a href="#"><input type="button"
+															class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
+													</div>
+												</div>
+												<div class="gamePost">
+													<div class="gameInfoBox">
+														<div class="gameImg">게임이미지</div>
+														<div class="gameInfo">
+															<div class="gameTitle">게임1</div>
+															<div class="producer">제작자</div>
+														</div>
+													</div>
+													<div class="gameLink">
+														<a href="#"><input type="button"
+															class="playBtn bColorGreen fontEnglish" value="Play Game"></a>
+													</div>
+												</div>
 
+											</div>
+										</div>
+										<div id="favoriteTab-2" class="favoriteTab-content">
+											<div class="boardHeader">
+												<div class="num">번호</div>
+												<div class="title">제목</div>
+												<div class="writer">작성자</div>
+												<div class="date">작성일</div>
+												<div class="view">조회</div>
+												<div class="recommend">추천</div>
+												<div class="file">파일</div>
+											</div>
+											<div class="post2" id="post"></div>
+										</div>
+										<div id="favoriteTab-3" class="favoriteTab-content"></div>
+										<div id="favoriteTab-4" class="favoriteTab-content">tab
+											content4</div>
+										<div id="favoriteTab-5" class="favoriteTab-content">tab
+											content4</div>
+										<div id="favoriteTab-6" class="favoriteTab-content">tab
+											content4</div>
 									</div>
 								</div>
-								<div id="recordTab-2" class="recordTab-content"></div>
-								<div id="recordTab-3" class="recordTab-content"></div>
-								<div id="recordTab-4" class="recordTab-content">tab
-									content4</div>
-								<div id="recordTab-5" class="recordTab-content">tab
-									content4</div>
-								<div id="recordTab-6" class="recordTab-content">tab
-									content4</div>
+								<div id="tab-4" class="tab-content">
+									<div class="recordTabBox">
+										<!-- 탭박스 -->
+										<ul class="recordTabs">
+											<li class="tab-link current" id="" data-tab="recordTab-1">전체rrrrrrr</li>
+											<li class="tab-link" id="" data-tab="recordTab-2">게임1</li>
+											<li class="tab-link" id="" data-tab="recordTab-3">게임2</li>
+											<li class="tab-link" data-tab="recordTab-4">게임3</li>
+											<li class="tab-link" data-tab="recordTab-5">게임4</li>
+											<li class="tab-link" data-tab="recordTab-6">게임5</li>
+										</ul>
+										<div class="recordCategory">
+											<select class="form-select"
+												aria-label="Default select example" name="recordCategory">
+												<option value="score" selected>점수순</option>
+												<option value="time">최신순</option>
+											</select>
+										</div>
+										<div id="recordTab-1" class="recordTab-content current">
+											<div class="recordHeader">
+												<div class="gameRank">순위</div>
+												<div class="gameScore">점수</div>
+												<div class="gameTime">게임일시</div>
+											</div>
+											<div class="recordBody">
+												<div class="recordPost">
+													<div class="gameRank">1</div>
+													<div class="gameInfo">
+														<div class="gameScore">40점</div>
+														<div class="gameTime">2023-02-23</div>
+													</div>
+												</div>
+												<div class="recordPost">
+													<div class="gameRank">1</div>
+													<div class="gameInfo">
+														<div class="gameScore">40점</div>
+														<div class="gameTime">2023-02-23</div>
+													</div>
+												</div>
+												<div class="recordPost">
+													<div class="gameRank">1</div>
+													<div class="gameInfo">
+														<div class="gameScore">40점</div>
+														<div class="gameTime">2023-02-23</div>
+													</div>
+												</div>
+												<div class="recordPost">
+													<div class="gameRank">1</div>
+													<div class="gameInfo">
+														<div class="gameScore">40점</div>
+														<div class="gameTime">2023-02-23</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div id="recordTab-2" class="recordTab-content"></div>
+										<div id="recordTab-3" class="recordTab-content"></div>
+										<div id="recordTab-4" class="recordTab-content">tab
+											content4</div>
+										<div id="recordTab-5" class="recordTab-content">tab
+											content4</div>
+										<div id="recordTab-6" class="recordTab-content">tab
+											content4</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					</c:otherwise>
+				</c:choose>
+
 
 
 				<div class="memberInfo">
