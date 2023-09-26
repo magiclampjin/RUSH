@@ -48,8 +48,6 @@ public class GameController extends HttpServlet {
 		
 				request.getRequestDispatcher("/game/GamePage_"+gameCategory+".jsp").forward(request, response);
 				
-				
-				
 			}else if(cmd.equals("/moveToCategory.game")) {
 				String category = request.getParameter("category");
 				request.setAttribute("category", category);
@@ -90,7 +88,6 @@ public class GameController extends HttpServlet {
 				String gameName = request.getParameter("gameName");
 				System.out.println("old : "+gameName);
 				list = dao.selectGameRecord(gameName);
-//				System.out.println(list.get(0).getGameName());
 				// 기록이 없을 때에 대한 처리 필요
 				pw.println(gson.toJson(list));
 			}else if(cmd.equals("/getBestGame.game")) {

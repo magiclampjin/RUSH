@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.BoardDTO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
 import dto.ReplyDTO;
@@ -154,8 +155,7 @@ public class GameDAO {
 	}
 	
 	public List<GameRecordDTO> selectGameRecord(String gName) throws Exception{
-		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc;";
-		System.out.println("selectGameRecord: "+gName);
+		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc limit 10;";
 		List<GameRecordDTO> list = new ArrayList<>();
 		try(
 				Connection con = this.getConnection();
@@ -254,6 +254,27 @@ public class GameDAO {
 				}
 				return replys;
 			}
+		}
+	}
+	
+	public List<BoardDTO> selectAdBoard() throws Exception {
+		String sql = "select * from common_board where cbTitle regexp '광고|무료|증정|http|ㅎ|ㄱ' or cbContent regexp '광고|무료|증정|http|ㅎ|ㄱ';";
+		List<BoardDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
+				int cbSeq = rs.getInt("cbSeq");
+				String cbID = rs.getString("cbID");
+				String cbNickname = rs.getString("cbNickname");
+				String cbTitle = rs.getString("cbTitle");
+				String cbContent = rs.getString("cbContent");
+				Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
+				int cbView = rs.getInt("cbView");
+				String cbCategory = rs.getString("cbCategory");
+				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView));
+			}
+			return list;
 		}
 	}
 }
