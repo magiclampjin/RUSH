@@ -193,6 +193,20 @@ a{
         	border:3px solid lightblue;
         	transition-duration: 1s;
         }
+        .btn-dark {
+		    background-color: #131217;
+		    border-color: #F9F9F9;
+		}
+		
+		.btn-dark:hover {
+		    background-color: #f393ff;
+		    border-color: #F9F9F9;
+		    opacity:70%;
+		}
+		.btn.active{
+			background-color: #f393ff;
+			border-color: #F9F9F9;
+		}
 
 </style>
 </head>
