@@ -20,7 +20,7 @@
 
 <!-- 한글 자모 분리 및 조합 & kordle js 파일 -->
 <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
-<script src="/game/js/wordleGame.js"></script>
+<script src="/game/js/kordleGame.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -173,7 +173,7 @@ a{
         }
 
         .covers {
-        	background-color:#00000080;
+        	background-color:#00000099;
         	position:absolute;
         	z-index:1;
 			width:100%;
@@ -207,10 +207,14 @@ a{
         	border:3px solid lightblue;
         	transition-duration: 1s;
         }
-        .mt50{
-        	margin-top:50px;
-        }
-
+        
+        .fw900 {
+		    font-weight: 900;
+		}
+		
+		.ft30{
+			font-size:35pt;
+		}
 </style>
 </head>
 <body>
@@ -427,11 +431,12 @@ a{
 						</div>
 						<div class="row g-0">
 							<div class="col-12 game">
-							<c:choose>
-								<c:when test="${game eq 'kordle'}">
-									<div id="gameContainer" class="mt50"></div>
-								</c:when>
-							</c:choose>
+								<c:choose>
+									<c:when test="${game eq 'Kordle'}">
+										<div id="gameContainer"></div>
+									</c:when>
+								</c:choose>
+								
 							</div>
 						</div>
 						<div class="row g-0">
