@@ -11,6 +11,7 @@ $(document).ready(function() {
 	$(".game").css("height","800px");
 	
 	function gameInit(){
+		console.log("1");
 		let container = $("#gameContainer").css("margin-top","25px");
 		let gameBoard = $("<div>").attr("class","row g-0").attr("id","gameBoard");
 		let startCover = $("<div>").attr("class","covers").attr("id","startCover");
@@ -22,6 +23,8 @@ $(document).ready(function() {
 		endCover.append(gameReStartBtn);
 		
 		gameBoard.append(startCover).append(endCover);
+		
+		console.log("2");
 		for(let i=0; i<6; i++){
 			let line = $("<div>").attr("class","col-12 line");
 			let row = $("<div>").attr("class","row g-0");
@@ -33,6 +36,8 @@ $(document).ready(function() {
 			gameBoard.append(line);
 			
 		}
+		
+		console.log("3");
 		container.append(gameBoard);
 		
 		let inputString = ["ㅂ","ㅈ","ㄷ","ㄱ","ㅅ","ㅛ","ㅕ","ㅑ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ","ㅣ","확인","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ","지우기"];
@@ -53,6 +58,7 @@ $(document).ready(function() {
 		}
 		container.after(containerInputs.append(inputBoard));
 		
+		console.log("4");
 		$.ajax({
 			url: "/kordleGameStart.game",
 			dataType:"Json"

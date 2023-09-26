@@ -33,6 +33,20 @@
         a{
 			text-decoration: none;
 		}
+		.btn-dark {
+    background-color: #131217;
+    border-color: #F9F9F9;
+}
+
+.btn-dark:hover {
+    background-color: #f393ff;
+    border-color: #F9F9F9;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff;
+	border-color: #F9F9F9;
+}
 </style>
 </head>
 <body>
@@ -51,18 +65,18 @@
 			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divCol = $("<div>");
-				divCol.addClass("col-xs-12 col-lg-6 col-xl-4");
+				divCol.addClass("col-xs-12 col-md-6 col-xl-4");
 				
 				let divAnker = $("<a>");
 				divAnker.attr("href","/moveToGamePage.game?game="+data[i]["gName"]);
 				
 				let divImage = $("<img>");
-				divImage.addClass("test ml45 mr45");
+				divImage.addClass("test");
 				divImage.attr("src",data[i]["gImageURL"]);
 				divAnker.append(divImage);
 				
 				let divName = $("<p>");
-				divName.addClass("text-white ml45");
+				divName.addClass("text-white");
 				divName.append(data[i]["gName"]);
 				
 				divCol.append(divAnker);

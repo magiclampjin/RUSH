@@ -62,11 +62,6 @@ a {
 	width: 100%;
 }
 
-.rankCon {
-	max-width: 1030px;
-	width: 100%;
-}
-
 .devTable th, td {
 	border: 1px solid white;
 	vertical-align: middle;
@@ -93,6 +88,22 @@ a {
 .bColorBlue {
 	background-color: #5d6ce1;
 }
+
+.btn-dark {
+    background-color: #131217;
+    border-color: #F9F9F9;
+}
+
+.btn-dark:hover {
+    background-color: #f393ff;
+    border-color: #F9F9F9;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff;
+	border-color: #F9F9F9;
+}
+
 </style>
 </head>
 <body>

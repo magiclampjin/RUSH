@@ -14,9 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
-import dao.KordleWordDAO;
+import dao.MemberDAO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
+import dto.MemberDTO;
+import dto.ReplyDTO;
+import dao.KordleWordDAO;
 import dto.KordleWordDTO;
 
 @WebServlet("*.game")
@@ -26,6 +29,7 @@ public class GameController extends HttpServlet {
 		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
 		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
 		GameDAO dao = GameDAO.getInstance();
+		MemberDAO mdao = MemberDAO.getInstance();
 		Gson gson = new Gson();
 		String cmd = request.getRequestURI();
 		System.out.println("game cmd: "+cmd);
@@ -41,7 +45,10 @@ public class GameController extends HttpServlet {
 				System.out.println(gameCategory);
 				request.setAttribute("game",gameName);
 				request.setAttribute("category",gameCategory);
+		
 				request.getRequestDispatcher("/game/GamePage_"+gameCategory+".jsp").forward(request, response);
+				
+				
 				
 			}else if(cmd.equals("/moveToCategory.game")) {
 				String category = request.getParameter("category");
@@ -83,7 +90,7 @@ public class GameController extends HttpServlet {
 				String gameName = request.getParameter("gameName");
 				System.out.println("old : "+gameName);
 				list = dao.selectGameRecord(gameName);
-				System.out.println(list.get(0).getGameName());
+//				System.out.println(list.get(0).getGameName());
 				// 기록이 없을 때에 대한 처리 필요
 				pw.println(gson.toJson(list));
 			}else if(cmd.equals("/getBestGame.game")) {
@@ -104,6 +111,15 @@ public class GameController extends HttpServlet {
 				
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
+			}else if(cmd.equals("/test.game")) {
+				List<ReplyDTO> data = dao.selectAll();
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(data));
+			}else if(cmd.equals("/test2.game")) {
+				String id = request.getParameter("id");
+				MemberDTO data = mdao.selectUserInfo(id);
+				PrintWriter out = response.getWriter();
+				out.print(gson.toJson(data));
 			}else if(cmd.equals("/kordleWordCompare.game")) {
 				String noun = request.getParameter("noun");
 				boolean result = kwdao.isExist(noun);

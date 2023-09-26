@@ -77,6 +77,20 @@ a{
 .bColorBlue {
   background-color: #5d6ce1;
 }
+.btn-dark {
+    background-color: #131217;
+    border-color: #F9F9F9;
+}
+
+.btn-dark:hover {
+    background-color: #f393ff;
+    border-color: #F9F9F9;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff;
+	border-color: #F9F9F9;
+}
 
 		 #gameContainer {
             margin: auto;
@@ -193,6 +207,10 @@ a{
         	border:3px solid lightblue;
         	transition-duration: 1s;
         }
+        .mt50{
+        	margin-top:50px;
+        }
+
 </style>
 </head>
 <body>
@@ -224,8 +242,8 @@ a{
 			type : "post"
 		}).done(function(res){
 			let record = JSON.parse(res);
-			console.log(record);
-			console.log(record[0]["nickName"]);
+/* 			console.log(record);
+			console.log(record[0]["nickName"]); */
 			$("#rankCon").text("");
 			for(let i=0; i<record.length; i++){
 				let divRow = $("<div>");
@@ -411,7 +429,7 @@ a{
 							<div class="col-12 game">
 							<c:choose>
 								<c:when test="${game eq 'kordle'}">
-									<div id="gameContainer"></div>
+									<div id="gameContainer" class="mt50"></div>
 								</c:when>
 							</c:choose>
 							</div>
