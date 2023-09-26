@@ -33,11 +33,11 @@ public class TestController extends HttpServlet {
 		
 		
 		try {
-			if(cmd.equals("/test.test")) {
+			if(cmd.equals("/getAdReply.test")) {
 				List<ReplyDTO> data = dao.selectAll();
 				
 				pw.print(gson.toJson(data));
-			}else if(cmd.equals("/test2.test")) {
+			}else if(cmd.equals("/getSearchUser.test")) {
 				String id = request.getParameter("id");
 				MemberDTO data = mdao.selectUserInfo(id);
 				
