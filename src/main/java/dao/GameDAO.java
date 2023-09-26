@@ -11,8 +11,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.BoardDTO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
+import dto.ReplyDTO;
 
 public class GameDAO {
 	private GameDAO() {}
@@ -153,7 +155,7 @@ public class GameDAO {
 	}
 	
 	public List<GameRecordDTO> selectGameRecord(String gName) throws Exception{
-		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc;";
+		String sql = "select gr.*, ul.mLevel as level from game_record gr, userlevel ul where gName = ? and gr.mID = ul.mID order by grScore desc limit 10;";
 		List<GameRecordDTO> list = new ArrayList<>();
 		try(
 				Connection con = this.getConnection();
@@ -238,4 +240,41 @@ public class GameDAO {
 	}
 	
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
+	
+	
+	
+	//ReplyDAO 에 들어갈 비속어 및 광고성 문구 필터링 기능 임시 구현
+	public List<ReplyDTO> selectAll() throws Exception{
+		String sql = "select * from reply where rContents regexp '광고|무료|증정|http|ㅎ|ㄱ';";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replys = new ArrayList<>();
+				while(rs.next()) {
+					replys.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("parentRSeq")));
+				}
+				return replys;
+			}
+		}
+	}
+	
+	public List<BoardDTO> selectAdBoard() throws Exception {
+		String sql = "select * from common_board where cbTitle regexp '광고|무료|증정|http|ㅎ|ㄱ' or cbContent regexp '광고|무료|증정|http|ㅎ|ㄱ';";
+		List<BoardDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
+				int cbSeq = rs.getInt("cbSeq");
+				String cbID = rs.getString("cbID");
+				String cbNickname = rs.getString("cbNickname");
+				String cbTitle = rs.getString("cbTitle");
+				String cbContent = rs.getString("cbContent");
+				Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
+				int cbView = rs.getInt("cbView");
+				String cbCategory = rs.getString("cbCategory");
+				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView));
+			}
+			return list;
+		}
+	}
 }

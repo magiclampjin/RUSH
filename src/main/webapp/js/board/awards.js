@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	let gameArr = ["CandyCrush", "doodle jump", "FlappyBird", "KJMAX", "kkodle"];
+	let gameArr = ["Candy Crush", "doodle jump", "Flappy Bird", "KJMAX", "kordle"];
 	for(let i = 0; i < 5; i++) {
 		$("#game"+i).attr("id", gameArr[i]);
 	}
@@ -52,7 +52,8 @@ $(document).ready(function() {
 		
 		        let rank = $("<div>");
 		        rank.attr("id", "rank");
-		        rank.addClass("col-1 fontEnglish");
+		        rank.css("font-size", "40px");
+		        rank.addClass("pl-15 col-2 col-xs-1 col-md-1 col-lg-1 col-xl-1 fontEnglish");
 		        if(i <= 2) {
 		            rank.addClass("colorPink");
 		        } else {
@@ -61,18 +62,18 @@ $(document).ready(function() {
 		        rank.html(i+1);
 		
 		        let infoDiv = $("<div>");
-		        infoDiv.addClass("col-11");
+		        infoDiv.addClass("recordPost col-10 col-xs-11 colorWhite");
 		
 		        let userInfo = $("<div>");
-		        userInfo.addClass("userInfo row");
+		        userInfo.addClass("userInfo g-0 row");
 		        if(i % 2 == 1) {
 		            userInfo.addClass("bColorBlack");
 		        } else {
-		            userInfo.addClass("bcolorDarkgray");
+		            userInfo.addClass("bcolorDarkgray30");
 		        }
 		
 		        let idLevDiv = $("<div>");
-		        idLevDiv.addClass("col-8 col-md-9");
+		        idLevDiv.addClass("col-8");
 		
 		        let userId = $("<div>");
 		        userId.attr("id", "userId");
@@ -85,11 +86,15 @@ $(document).ready(function() {
 		        userLevel.html("Lv." + rankerList[i].level);
 		
 		        let score = $("<div>");
-		        score.attr("id", "score");
-		        score.addClass("col-2 col-lg-3 colorWhite");
-		        score.html(rankerList[i].score);
+		        score.addClass("col-4");
+		        
+		        let scoreAlign = $("<div>");
+		        scoreAlign.attr("id", "score");
+		        scoreAlign.addClass("pe-0 pe-md-5 colorWhite");
+		        scoreAlign.html(rankerList[i].score + " 점");
 		
 		        idLevDiv.append(userId).append(userLevel);
+		        score.append(scoreAlign);
 		        userInfo.append(idLevDiv).append(score);
 		        infoDiv.append(userInfo);
 		        scoreBox.append(rank).append(infoDiv);

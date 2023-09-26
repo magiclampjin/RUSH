@@ -110,6 +110,7 @@ public class MemberController extends HttpServlet {
 				int result = dao.updateInfoById(id, newNick, newPhone, newEmail);
 				if (result != 0) {
 					printwriter.append("true");
+					request.getSession().setAttribute("loginNickname", newNick); // 닉네임 세션 업데이트
 				} else {
 					printwriter.append("false");
 				}
@@ -130,7 +131,7 @@ public class MemberController extends HttpServlet {
 				int result = dao.deleteById(id);
 				if (result != 0) {
 					printwriter.append("true");
-					request.getSession().removeAttribute("loginID");
+					request.getSession().invalidate();
 				} else {
 					printwriter.append("false");
 				}

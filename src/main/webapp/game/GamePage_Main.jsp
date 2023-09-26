@@ -36,9 +36,12 @@ div {
 
 .test {
 	background-color: white;
-	width: 300px;
-	height: 200px;
+	max-width: 300px;
+	max-height: 200px;
+	width : 100%;
+	height : 100%;
 	border-radius : 3%;
+	margin-bottom: 10px;
 }
 
 .gameContainer {
@@ -79,6 +82,20 @@ div {
     opacity:70%;
 }
 
+.btn-dark {
+    background-color: #131217;
+    border-color: #F9F9F9;
+}
+
+.btn-dark:hover {
+    background-color: #f393ff;
+    border-color: #F9F9F9;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff;
+	border-color: #F9F9F9;
+}
 
 </style>
 </head>
@@ -93,26 +110,24 @@ div {
 			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divCol = $("<div>");
-				divCol.addClass("col-xs-12 col-lg-6 col-xl-4");
+				divCol.addClass("col-xs-12 col-md-6 col-xl-4");
 				
 				let divAnker = $("<a>");
 				divAnker.attr("href","/moveToGamePage.game?game="+data[i]["gName"]);
 				
 				let divImage = $("<img>");
-				divImage.addClass("test ml45 mr45");
+				divImage.addClass("test");
 				divImage.attr("src",data[i]["gImageURL"]);
 				divAnker.append(divImage);
 				
 				let divName = $("<p>");
-				divName.addClass("text-white ml45");
+				divName.addClass("text-white");
 				divName.append(data[i]["gName"]);
 				
 				divCol.append(divAnker);
 				divCol.append(divName);
 				
-				$("#newGames").append(divCol);
-				$("#newGames").append(divCol);
-				
+				$("#newGames").append(divCol);				
 			}
 		});
 		$.ajax({
@@ -123,18 +138,18 @@ div {
 			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divCol = $("<div>");
-				divCol.addClass("col-xs-12 col-lg-6 col-xl-4");
+				divCol.addClass("col-xs-12 col-md-6 col-xl-4");
 				
 				let divAnker = $("<a>");
 				divAnker.attr("href","/moveToGamePage.game?game="+data[i]["gName"]);
 				
 				let divImage = $("<img>");
-				divImage.addClass("test ml45 mr45");
+				divImage.addClass("test");
 				divImage.attr("src",data[i]["gImageURL"]);
 				divAnker.append(divImage);
 				
 				let divName = $("<p>");
-				divName.addClass("text-white ml45");
+				divName.addClass("text-white");
 				divName.append(data[i]["gName"]);
 				
 				divCol.append(divAnker);
@@ -239,7 +254,7 @@ div {
 						</div>
 					</div>
 					<div class="col-10">
-						<div class="row g-0 mt-4" id="newGames">
+						<div class="row g-0 mt-4 p-1" id="newGames">
 							<p class="fs-2 text-white fontKorean">최신게임</p>
 							
 							
@@ -353,7 +368,7 @@ div {
 	});
 	
 	$("#newGamesMore").on("click",function(){
-		location.href = "/moveToCategory.game";
+		location.href = "/moveToCategory.game?category=New";
 	});
 	$("#rhythmGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game?category=Rhythm";
