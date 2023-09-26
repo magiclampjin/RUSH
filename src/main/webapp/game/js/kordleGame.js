@@ -11,20 +11,23 @@ $(document).ready(function() {
 	$(".game").css("height","800px");
 	
 	function gameInit(){
-		console.log("1");
-		let container = $("#gameContainer").css("margin-top","25px");
+		let container = $("#gameContainer");
+
+		container.css("margin-top","25px");
 		let gameBoard = $("<div>").attr("class","row g-0").attr("id","gameBoard");
-		let startCover = $("<div>").attr("class","covers").attr("id","startCover");
+		let startCover = $("<div>").attr("class","covers fontEnglish fw900").attr("id","startCover");
+		let gameTitleName = $("<div>").html("Kordle<br><br>").attr("class","colorWhite ft30");
 		let gameStartBtn = $("<button>").attr("class","gameStartBnts").attr("id","gameStartBtn").html("Start Game");
-		startCover.append(gameStartBtn);
+		startCover.append($("<div>").append(gameTitleName).append(gameStartBtn));
+		
 		
 		let endCover = $("<div>").attr("class","covers").attr("id","endCover");
+		let gameResult = $("<div>").attr("class","colorWhite gameResult ft30");
 		let gameReStartBtn = $("<button>").attr("class","gameStartBnts").attr("id","gameReStartBtn").html("ReStart Game");
-		endCover.append(gameReStartBtn);
-		
+		endCover.append($("<div>").append(gameResult).append(gameReStartBtn));
+			
 		gameBoard.append(startCover).append(endCover);
 		
-		console.log("2");
 		for(let i=0; i<6; i++){
 			let line = $("<div>").attr("class","col-12 line");
 			let row = $("<div>").attr("class","row g-0");
@@ -37,8 +40,8 @@ $(document).ready(function() {
 			
 		}
 		
-		console.log("3");
 		container.append(gameBoard);
+		$(".game").append(container);
 		
 		let inputString = ["ㅂ","ㅈ","ㄷ","ㄱ","ㅅ","ㅛ","ㅕ","ㅑ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ","ㅣ","확인","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ","지우기"];
 		let cellCnt = [8,9,9];
@@ -58,7 +61,6 @@ $(document).ready(function() {
 		}
 		container.after(containerInputs.append(inputBoard));
 		
-		console.log("4");
 		$.ajax({
 			url: "/kordleGameStart.game",
 			dataType:"Json"
@@ -71,6 +73,60 @@ $(document).ready(function() {
 		cnt = 0;
 		$lines = document.getElementsByClassName("line");
 		end = true;
+	}
+	
+	
+	function reloadRecord(record){
+		$("#rankCon").text("");
+		for(let i=0; i<record.length; i++){
+			let divRow = $("<div>");
+			divRow.addClass("row g-0 p-2");
+			let divColRank = $("<div>");
+			if(i<3){
+				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
+				divColRank.append(i+1);
+			}else{
+				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
+				divColRank.append(i+1);	
+			}
+	
+							
+			let divColInfo = $("<div>");
+			divColInfo.addClass("col-7");
+			
+			let divRowInfo = $("<div>");
+			divRowInfo.addClass("row g-0");
+			let divInfoLeft = $("<div>");
+			divInfoLeft.addClass("col-3");
+			let divInfoRight = $("<div>");
+			divInfoRight.addClass("col-9 text-white align-self-center");
+			let divUserImage = $("<div>");
+			divUserImage.css({
+				width : "80px",
+				height : "80px",
+				backgroundColor : "white",
+				borderRadius : "50%"
+			});
+			
+			
+			divInfoLeft.append(divUserImage);
+			divInfoRight.append(record[i]["nickName"]);
+			divInfoRight.append(" Lv : "+record[i]["level"]);
+			divRowInfo.append(divInfoLeft);
+			divRowInfo.append(divInfoRight);
+			divColInfo.append(divRowInfo);
+			
+			let divColScore = $("<div>");
+			divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
+			divColScore.append(record[i]["score"]);
+			
+			divRow.append(divColRank);
+			divRow.append(divColInfo);
+			divRow.append(divColScore);
+			
+			
+			$("#rankCon").append(divRow);
+		}
 	}
 	gameInit();
 	
@@ -117,12 +173,23 @@ $(document).ready(function() {
                    		for(let i=0; i<$($lines).children().length; i++){
                         	$($lines).eq(lineCnt).children().children().eq(i).css("background-color","green");
                         }
+                        $(".gameResult").html("Win<br><br>");
                    		$("#endCover").css("display","flex");
-                    	setTimeout(function(){
-                    		alert("win");
-                    	},0);
                     	end= true;
-                    	 // 엔딩 띄우기
+                    	
+                    	$.ajax({
+							url:"/setGameRecord.game",
+							data:{
+								game: "Kordle",
+								score: 1
+							},
+							dataType:"json",
+							type: "post"
+						}).done(function(record){
+							reloadRecord(record);
+						});
+                    	//점수넣기
+                    	
                     } else{ // 오답일 경우 DB에 있는 내용인지 검사 (실제 존재하는 단어인지 검사 )
                     	$.ajax({
                         	url: "/kordleWordCompare.game",
@@ -166,7 +233,19 @@ $(document).ready(function() {
 	                            if (lineCnt == 6) { // 테스트중이라 3으로 줄임 추후에 6으로 수정할 것. 
 	                                end= true;
 	                                // 게임 엔딩 띄우기
-	                                $("#endCover").css("display","flex");
+	                                $(".gameResult").html("Lose<br><br>");
+									$.ajax({
+										url:"/setGameRecord.game",
+										data:{
+											game: "Kordle",
+											score: 0
+										},
+										dataType:"json",
+										type: "post"
+									}).done(function(record){
+										reloadRecord(record);
+									});
+				                    $("#endCover").css("display","flex");
 	                                setTimeout(function(){
 	                                	if(confirm(oriWord+" (이)라는 단어의 뜻이 궁금하신가요?"))
 	  	                                	window.open("https://www.google.co.kr/search?q="+oriWord);  
