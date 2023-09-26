@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,8 +146,7 @@ a{
 		});
 	}
 </script>
-	<div class="container-fluid g-0">
-		<div class="header bColorBlack">
+	<div class="header bColorBlack">
 			<div class="header_guide">
 				<a href="/index.jsp">
 					<div class="logo fontLogo colorWhite">RUSH</div>
