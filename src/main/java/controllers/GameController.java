@@ -104,13 +104,17 @@ public class GameController extends HttpServlet {
 				List<GameDTO> list = dao.selectGames();
 				pw.print(gson.toJson(list));
 			}else if(cmd.equals("/setGameRecord.game")) {
-				String mID = request.getParameter("mID");
+				String mID = (String) request.getSession().getAttribute("loginID");
 				String gName = request.getParameter("game");
-				String mNickname = request.getParameter("nickName");
+				String mNickname = (String) request.getSession().getAttribute("loginNickname");
 				int score = Integer.parseInt(request.getParameter("score"));
 				
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
+				
+				List<GameRecordDTO> list = dao.selectGameRecord(gName);
+				pw.append(gson.toJson(list));
+				
 			}else if(cmd.equals("/test.game")) {
 				List<ReplyDTO> data = dao.selectAll();
 				PrintWriter out = response.getWriter();
