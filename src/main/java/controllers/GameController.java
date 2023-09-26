@@ -45,11 +45,9 @@ public class GameController extends HttpServlet {
 				System.out.println(gameCategory);
 				request.setAttribute("game",gameName);
 				request.setAttribute("category",gameCategory);
-				if(gameName.equals("Kordle")) {
-					request.getRequestDispatcher("/game/GamePage_"+gameName+".jsp").forward(request, response);
-				}else {
-					request.getRequestDispatcher("/game/GamePage_"+gameCategory+".jsp").forward(request, response);
-				}
+		
+				request.getRequestDispatcher("/game/GamePage_"+gameCategory+".jsp").forward(request, response);
+				
 				
 				
 			}else if(cmd.equals("/moveToCategory.game")) {
