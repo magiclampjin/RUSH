@@ -126,6 +126,7 @@ public class GameController extends HttpServlet {
 				pw.append(gson.toJson(result));
 			}else if(cmd.equals("/kordleGameStart.game")) {
 				KordleWordDTO dap = kwdao.randomWord();
+				System.out.println("kordleGameStart 들어옴.");
 				System.out.println("정답: "+dap.getJamo_word());
 				pw.append(gson.toJson(dap));
 			}

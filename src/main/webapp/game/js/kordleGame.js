@@ -11,20 +11,25 @@ $(document).ready(function() {
 	$(".game").css("height","800px");
 	
 	function gameInit(){
-		console.log("1");
-		let container = $("#gameContainer").css("margin-top","25px");
+		let container = $("#gameContainer");
+		console.log("컨테이너 객체: ")
+		console.log(container);
+		
+		container.css("margin-top","25px");
 		let gameBoard = $("<div>").attr("class","row g-0").attr("id","gameBoard");
-		let startCover = $("<div>").attr("class","covers").attr("id","startCover");
+		let startCover = $("<div>").attr("class","covers fontEnglish fw900").attr("id","startCover");
+		let gameTitleName = $("<div>").html("Kordle<br><br>").attr("class","colorWhite ft30");
 		let gameStartBtn = $("<button>").attr("class","gameStartBnts").attr("id","gameStartBtn").html("Start Game");
-		startCover.append(gameStartBtn);
+		startCover.append($("<div>").append(gameTitleName).append(gameStartBtn));
+		
 		
 		let endCover = $("<div>").attr("class","covers").attr("id","endCover");
+		let gameResult = $("<div>").attr("class","colorWhite gameResult ft30");
 		let gameReStartBtn = $("<button>").attr("class","gameStartBnts").attr("id","gameReStartBtn").html("ReStart Game");
-		endCover.append(gameReStartBtn);
-		
+		endCover.append($("<div>").append(gameResult).append(gameReStartBtn));
+			
 		gameBoard.append(startCover).append(endCover);
 		
-		console.log("2");
 		for(let i=0; i<6; i++){
 			let line = $("<div>").attr("class","col-12 line");
 			let row = $("<div>").attr("class","row g-0");
@@ -37,8 +42,8 @@ $(document).ready(function() {
 			
 		}
 		
-		console.log("3");
 		container.append(gameBoard);
+		$(".game").append(container);
 		
 		let inputString = ["ㅂ","ㅈ","ㄷ","ㄱ","ㅅ","ㅛ","ㅕ","ㅑ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ","ㅣ","확인","ㅋ","ㅌ","ㅊ","ㅍ","ㅠ","ㅜ","ㅡ","지우기"];
 		let cellCnt = [8,9,9];
@@ -58,7 +63,6 @@ $(document).ready(function() {
 		}
 		container.after(containerInputs.append(inputBoard));
 		
-		console.log("4");
 		$.ajax({
 			url: "/kordleGameStart.game",
 			dataType:"Json"
@@ -117,12 +121,13 @@ $(document).ready(function() {
                    		for(let i=0; i<$($lines).children().length; i++){
                         	$($lines).eq(lineCnt).children().children().eq(i).css("background-color","green");
                         }
+                        $(".gameResult").html("Win<br><br>");
                    		$("#endCover").css("display","flex");
-                    	setTimeout(function(){
-                    		alert("win");
-                    	},0);
                     	end= true;
-                    	 // 엔딩 띄우기
+                    	
+                    	
+                    	//점수넣기
+                    	
                     } else{ // 오답일 경우 DB에 있는 내용인지 검사 (실제 존재하는 단어인지 검사 )
                     	$.ajax({
                         	url: "/kordleWordCompare.game",
@@ -166,6 +171,7 @@ $(document).ready(function() {
 	                            if (lineCnt == 6) { // 테스트중이라 3으로 줄임 추후에 6으로 수정할 것. 
 	                                end= true;
 	                                // 게임 엔딩 띄우기
+	                                $(".gameResult").html("Lose<br><br>");
 	                                $("#endCover").css("display","flex");
 	                                setTimeout(function(){
 	                                	if(confirm(oriWord+" (이)라는 단어의 뜻이 궁금하신가요?"))
