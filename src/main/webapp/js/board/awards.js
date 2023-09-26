@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	let gameArr = ["Candy Crush", "doodle jump", "Flappy Bird", "KJMAX", "kkodle"];
+	let gameArr = ["Candy Crush", "doodle jump", "Flappy Bird", "KJMAX", "kordle"];
 	for(let i = 0; i < 5; i++) {
 		$("#game"+i).attr("id", gameArr[i]);
 	}
