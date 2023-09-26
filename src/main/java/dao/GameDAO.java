@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.BoardDTO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
 import dto.ReplyDTO;
@@ -253,6 +254,27 @@ public class GameDAO {
 				}
 				return replys;
 			}
+		}
+	}
+	
+	public List<BoardDTO> selectAdBoard() throws Exception {
+		String sql = "select * from common_board where cbTitle regexp '광고|무료|증정|http|ㅎ|ㄱ' or cbContent regexp '광고|무료|증정|http|ㅎ|ㄱ';";
+		List<BoardDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
+				int cbSeq = rs.getInt("cbSeq");
+				String cbID = rs.getString("cbID");
+				String cbNickname = rs.getString("cbNickname");
+				String cbTitle = rs.getString("cbTitle");
+				String cbContent = rs.getString("cbContent");
+				Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
+				int cbView = rs.getInt("cbView");
+				String cbCategory = rs.getString("cbCategory");
+				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView));
+			}
+			return list;
 		}
 	}
 }

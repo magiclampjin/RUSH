@@ -368,7 +368,7 @@ div {
 	});
 	
 	$("#newGamesMore").on("click",function(){
-		location.href = "/moveToCategory.game";
+		location.href = "/moveToCategory.game?category=New";
 	});
 	$("#rhythmGamesMore").on("click",function(){
 		location.href = "/moveToCategory.game?category=Rhythm";
