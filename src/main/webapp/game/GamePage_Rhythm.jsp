@@ -17,7 +17,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/game/game.css"/>
 <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
-<script src="/game/js/rhythm.js?ver=1"></script>
+<script src="/game/js/rhythm.js?ver=2"></script>
 <script src="/game/js/Rhythm_Main_Scene.js?ver=1"></script>
 <script src="/game/js/GameoverScene.js?ver=1"></script>
 <style>
