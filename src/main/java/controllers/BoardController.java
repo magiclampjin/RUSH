@@ -3,8 +3,11 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -16,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -42,6 +50,26 @@ public class BoardController extends HttpServlet {
 		GameDAO gdao = GameDAO.getInstance();
 		PrintWriter pw = response.getWriter();
 		Gson gson = new Gson();
+		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
+			private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+			public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
+				long currentTime = System.currentTimeMillis();
+				long writeTime = arg0.getTime();
+				long gapTime = currentTime - writeTime;
+
+				if (gapTime < 60000) {
+					return new JsonPrimitive("방금 전");
+				} else if (gapTime < 60000 * 60) {
+					return new JsonPrimitive( gapTime / 60000 + " 분 전");
+				} else if (gapTime < 60000 * 60 * 24) {
+					long hour = gapTime / 60000 / 60;
+					long min = ((gapTime / 60000) % 60);
+					return new JsonPrimitive("약 "+hour + "시간 전");
+				} else {
+					return new JsonPrimitive(sdfDay.format(arg0));
+				}					
+			}
+		}).create();
 
 		try {
 			if (cmd.equals("/insert.board")) {
@@ -100,9 +128,12 @@ public class BoardController extends HttpServlet {
 				category = (category == null || category=="") ? "":category;
 				String search = request.getParameter("search");
 				String keyword = request.getParameter("keyword");
-
+				
 				BoardDTO post = dao.selectPost(postSeq);
 
+				if(post == null) {
+					System.out.println("포스트 삭제됨.. alert창 띄우고 boardList로 이동하게 구현하기");
+				}
 				boolean postRec = dao.checkPostRecommend(postSeq,
 						(String) request.getSession().getAttribute("loginID"));
 				boolean bookmark = dao.checkPostBookmark(postSeq,
@@ -110,6 +141,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("category", category);
+
 				if (postRec)
 					request.setAttribute("postRec", postRec);
 				if (bookmark)
@@ -130,6 +162,7 @@ public class BoardController extends HttpServlet {
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
 				String category = request.getParameter("category");
+				String menu = request.getParameter("menu");
 				String search = request.getParameter("search");
 				String keyword = request.getParameter("keyword");
 				
@@ -140,7 +173,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("files", files);
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
-				
+				request.setAttribute("menu", menu);
 				if(search != null) {
 					request.setAttribute("search",search);
 					request.setAttribute("keyword",keyword);
@@ -172,6 +205,7 @@ public class BoardController extends HttpServlet {
 					int result = fdao.deleteFile(sysname);
 					if(result == 1) {
 						File deleteFilePath = new File(uploadPath+"/"+sysname);
+						deleteFilePath.delete();
 					}	
 				}
 				
@@ -181,7 +215,6 @@ public class BoardController extends HttpServlet {
 					String sysname = deleteImgNameStr[i+1];
 					
 					sysname = sysname.substring(7);
-					System.out.println(sysname);
 					
 					int result = fdao.deleteFile(sysname);
 					if(result == 1) {
@@ -231,6 +264,7 @@ public class BoardController extends HttpServlet {
 
 			} else if (cmd.equals("/delete.board")) {
 				// 게시글 삭제
+				// 이미지 삭제해야대..
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String category = request.getParameter("category");
 				List<String> filesName = fdao.inPostFilesNameList(postSeq);
@@ -355,6 +389,18 @@ public class BoardController extends HttpServlet {
 				List<GameRecordDTO> rankerList = new ArrayList();
 				rankerList = gdao.selectUserByGame(game);
 				pw.append(gson.toJson(rankerList));
+			}else if(cmd.equals("/myWriteList.board")) {
+				String id = (String) request.getSession().getAttribute("loginID");
+
+				List<BoardDTO> list = dao.myWriteList(id);
+				pw.append(gsonTs.toJson(list));
+			
+			}else if(cmd.equals("/myBookMarkList.board")) {
+				System.out.println("/myBookMarkList.board");
+				String id = (String) request.getSession().getAttribute("loginID");
+				
+				List<BoardDTO> list = dao.myBookMarkList(id);
+				pw.append(gsonTs.toJson(list));
 			}
 
 		} catch (Exception e) {

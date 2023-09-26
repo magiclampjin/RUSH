@@ -1,10 +1,103 @@
 $(document).ready(function() {
-	function replyReload(postSeq) {
+
+	function pagination(postSeq, recordTotalCount, replyCurPage, recordCountPerPage, naviCountPerPage) {
+		if (recordTotalCount != 0) {
+			let pagination = $("#pagination");
+			pagination.html("");
+			
+			let pageTotalCount = 0;
+			pageTotalCount = Math.ceil(recordTotalCount / recordCountPerPage);
+
+			// 비정상 접근 차단
+			if (replyCurPage < 1) {
+				replyCurPage = 1;
+			} else if (replyCurPage > pageTotalCount) {
+				replyCurPage = pageTotalCount;
+			}
+
+			let startNavi = Math.floor((replyCurPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+			let endNavi = startNavi + (naviCountPerPage - 1);
+			
+			
+			if (endNavi > pageTotalCount) {
+				endNavi = pageTotalCount;
+			}
+			let needPrev = true;
+			let needNext = true;
+		
+
+			if (startNavi == 1) {
+				needPrev = false;
+			}
+			if (endNavi == pageTotalCount) {
+				needNext = false;
+			}
+
+
+			if (startNavi != 1) {
+				let aTag = $("<a>");
+				let iTag = $("<i class='fa-solid fa-angles-left'></i>");
+				aTag.attr("class","colorBlack fontEnglish");
+				aTag.on("click",function(){
+					$("#replys").html("");
+					replyReload(postSeq,1);
+				});
+				aTag.append(iTag);
+				pagination.append(aTag);
+			}
+
+			if (needPrev) {
+				let aTag = $("<a>");
+				let iTag = $("<i class='fa-solid fa-chevron-left'></i>");
+				aTag.on("click",function(){
+					$("#replys").html("");
+					replyReload(postSeq,(startNavi - 1));
+				});
+				aTag.append(iTag);
+				pagination.append(aTag);
+			}
+
+			for (let i = startNavi; i <= endNavi; i++) {
+				let aTag = $("<a>");
+				aTag.html(i);
+				aTag.attr("class","colorBlack fontEnglish");
+				aTag.on("click",function(){
+					$("#replys").html("");
+					replyReload(postSeq,i);
+				});
+				if (i == replyCurPage) {
+					aTag.addClass("colorWhite bColorBlue fontEnglish");
+				}
+				pagination.append(aTag);
+			}
+
+			if (needNext) {
+				let aTag = $("<a>");
+				let iTag = $("<i class='fa-solid fa-chevron-right'></i>");
+				aTag.on("click",function(){
+					$("#replys").html("");
+					replyReload(postSeq,(endNavi + 1));
+				});
+				aTag.append(iTag);
+				pagination.append(aTag);
+			}
+
+			if (endNavi != pageTotalCount) {
+				let aTag = $("<a>");
+				let iTag = $("<i class='fa-solid fa-angles-right'></i>");
+				aTag.on("click",function(){
+					$("#replys").html("");
+					replyReload(postSeq,pageTotalCount);
+				});
+				aTag.append(iTag);
+				pagination.append(aTag);
+			}
+		}
+	}
+
+	function replyReload(postSeq,replyCurPage) {
 		$.ajax({
-			url: "/load.reply",
-			data: {
-				postSeq: postSeq
-			},
+			url: "/load.reply?replyCurPage="+replyCurPage+"&postSeq=" + postSeq,
 			dataType: "json",
 			type: "post"
 		}).done(function(resp) {
@@ -13,7 +106,11 @@ $(document).ready(function() {
 			let replys = $("#replys");
 			let replyRecommCnt = resp[1].length;
 			let replyRecommCheckIdx = 0;
-
+			let recordTotalCount = resp[2]; // 총 댓글 수
+			let replyCurPage = resp[3]; // 현재 댓글 페이지
+			let recordCountPerPage = resp[4]; // 페이지 내 최대 댓글 수
+			let naviCountPerPage = resp[5]; // 네비게이션 내 최대 페이지 수 ( 1 2 3 4 5 로 출력)
+			
 			for (let i = 0; i < resp[0].length; i++) {
 				let replyTag = $("<div>").attr("class", "col-12 reply");
 				let row = $("<div>").attr("class", "row g-0");
@@ -25,7 +122,7 @@ $(document).ready(function() {
 				}
 				let contents = $("<div>").attr("class", "contents fw400 fs20 mb10").html(resp[0][i].contents).attr("contenteditable", "false");;
 				let detailInfo = $("<div>").attr("class", "replyDetailInfo fw400 fs15 colorDarkgray").html(resp[0][i].writeDate + "&nbsp;&nbsp;");
-				let replyRecCnt = $("<span>").html("추천 "+resp[0][i].recommend + "&nbsp;&nbsp;").attr("class","recCnt colorDarkgray");
+				let replyRecCnt = $("<span>").html("추천 " + resp[0][i].recommend + "&nbsp;&nbsp;").attr("class", "recCnt colorDarkgray");
 				let nestedReplyPrintBtn = $("<a>").attr("class", "nestedReplyPrintBtn colorDarkgray").html("답글 보기");
 				let nestedReplyBtn = $("<a>").attr("class", "nestedReplyBtn colorDarkgray").html("답글 쓰기");
 
@@ -58,36 +155,38 @@ $(document).ready(function() {
 					replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 
 					row.append(replyBtns).append(replyBtnsMini);
+				} else if (loginID == "admin") {
+					replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
+
+					let btncover = $("<div>").attr("class", "defaultCover");
+					let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
+					replyBtns.append(btncover.append(deleteBtn));
+
+
+					let btncovermini = $("<div>").attr("class", "defaultCover");
+					let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
+					let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+					replyBtnsMini.append(btncovermini.append(deleteBtnMini));
+
+					row.append(replyBtns).append(replyBtnsMini);
 				} else {
 					replyBtns = $("<div>").attr("class", "col-2 replyBtns");
-					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");			
+					let recommendBtn = $("<div>").attr("class", "col-2 fw400 fs15 recommendBtn").html("<i class='fa-regular fa-thumbs-up'></i>" + "&nbsp;추천");
 					row.append(replyBtns.append(recommendBtn));
-					
-					if(replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt){
+
+					if (replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt) {
 						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
 							recommendBtn.addClass("btnClicked");
 							replyRecommCheckIdx++;
 						}
-					}					
-				}
-				
-				
-				/*if(replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt && typeof temp !== "undefined"){
-					console.log("댓글 번호: "+resp[0][i].seq);
-					console.log("댓글 내용: "+resp[0][i].contents);
-					console.log("좋아요 눌린 댓글 번호: "+resp[1][replyRecommCheckIdx].seq);
-					console.log("좋아요 누른 사람: "+resp[1][replyRecommCheckIdx].recId);
-					console.log("로그인한 사람: "+loginID);
-					console.log("--------------------------");
-					if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
-						temp.addClass("btnClicked");
-						replyRecommCheckIdx++;
 					}
-				}*/
+				}
+
 				let replyId = $("<input>").attr("type", "hidden").val(resp[0][i].seq).attr("id", "replyId");
 				row.append(replyId);
 				replys.append(replyTag.append(row));
 			}
+			pagination(postSeq, recordTotalCount, replyCurPage, recordCountPerPage, naviCountPerPage);
 		});
 	}
 
@@ -97,14 +196,21 @@ $(document).ready(function() {
 	let search = $("#search").val();
 	let keyword = $("#keyword").val();
 
+	// url 에서 myPage 값가져올때 사용
+	const urlParams = new URL(location.href).searchParams;
+	const myPage = urlParams.get('myPage');
+
 	// 댓글창 로드
-	$("#replys").html(replyReload(postSeq));
+	$("#replys").html(replyReload(postSeq,1));
 
 	$(".goList").on("click", function() {
-		if(search == null || search == ""){
+
+		if (myPage == "true") {
+			location.href = "/load.member";
+		} else if (search == null || search == "") {
 			location.href = "/listing.board?cpage=" + cpage + "&category=" + category;
-		}else{
-			location.href = "/listing.board?cpage=" + cpage + "&category=" + category +"&search="+search+"&keyword="+keyword;
+		} else {
+			location.href = "/listing.board?cpage=" + cpage + "&category=" + category + "&search=" + search + "&keyword=" + keyword;
 		}
 	});
 
@@ -132,7 +238,7 @@ $(document).ready(function() {
 			type: "post"
 		}).done(function() {
 			$("#replys").html("");
-			$("#replys").html(replyReload(postSeq));
+			$("#replys").html(replyReload(postSeq,1));
 		});
 	});
 
@@ -221,13 +327,13 @@ $(document).ready(function() {
 	$(".delete").on("click", function() {
 		location.href = "/delete.board?postSeq=" + postSeq + "&category=" + category;
 	});
-	
+
 	// 게시글 수정
-	$(".update").on("click",function(){
-		if(search == null || search == ""){
-			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage;
-		}else{
-			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category +"&cpage="+cpage +"&search="+search+"&keyword="+keyword;
+	$(".update").on("click", function() {
+		if (search == null || search == "") {
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category + "&cpage=" + cpage + "&menu=board";
+		} else {
+			location.href = "/updateLoad.board?postSeq=" + postSeq + "&category=" + category + "&cpage=" + cpage + "&menu=board" + "&search=" + search + "&keyword=" + keyword;
 		}
 	});
 
@@ -272,7 +378,7 @@ $(document).ready(function() {
 			type: "post"
 		}).done(function() {
 			$("#replys").html("");
-			$("#replys").html(replyReload(postSeq));
+			$("#replys").html(replyReload(postSeq,1));
 		});
 	});
 
@@ -349,7 +455,7 @@ $(document).ready(function() {
 			type: "post"
 		}).done(function() {
 			$("#replys").html("");
-			$("#replys").html(replyReload(postSeq));
+			$("#replys").html(replyReload(postSeq,1));
 			replyBackup = null;
 			replyObj = null;
 		});
@@ -370,14 +476,14 @@ $(document).ready(function() {
 				type: "post",
 				dataType: "json"
 			}).done(function(result) {
-				if (result[0] == 1){
+				if (result[0] == 1) {
 					recbtn.removeClass("btnClicked");
-					recbtn.closest(".reply").find(".recCnt").html("추천 "+result[1]+ "&nbsp;&nbsp;");
+					recbtn.closest(".reply").find(".recCnt").html("추천 " + result[1] + "&nbsp;&nbsp;");
 				}
 				else {
 					alert("게시글 또는 댓글이 삭제되었습니다.");
 					$("#replys").html("");
-					$("#replys").html(replyReload(postSeq));
+					$("#replys").html(replyReload(postSeq,1));
 				}
 			});
 
@@ -391,14 +497,14 @@ $(document).ready(function() {
 				type: "post",
 				dataType: "json"
 			}).done(function(result) {
-				if (result[0] == 1){
+				if (result[0] == 1) {
 					recbtn.addClass("btnClicked");
-					recbtn.closest(".reply").find(".recCnt").html("추천 "+result[1]+ "&nbsp;&nbsp;");
+					recbtn.closest(".reply").find(".recCnt").html("추천 " + result[1] + "&nbsp;&nbsp;");
 				}
 				else {
 					alert("게시글 또는 댓글이 삭제되었습니다.");
 					$("#replys").html("");
-					$("#replys").html(replyReload(postSeq));
+					$("#replys").html(replyReload(postSeq,1));
 				}
 			});
 
@@ -465,14 +571,14 @@ $(document).ready(function() {
 		nestedCoverMini.append(insertMini).append(cancelMini);
 
 		nestedReply.append(replySeq).append(nestedCover).append(nestedCoverMini);
-	
-		if($(this).closest(".reply").next().hasClass("nestedReplyAll")){
+
+		if ($(this).closest(".reply").next().hasClass("nestedReplyAll")) {
 			$(this).closest(".reply").next().after(nestedReply);
-		}else{
+		} else {
 			$(this).closest(".reply").after(nestedReply);
 		}
-		
-		
+
+
 	});
 
 	// 답글작성 취소
@@ -499,17 +605,17 @@ $(document).ready(function() {
 			nestedReplyParentSeq = null;
 			nestedReplyObj = null;
 			$("#replys").html("");
-			$("#replys").html(replyReload(postSeq));
+			$("#replys").html(replyReload(postSeq,1));
 		});
 	});
 
 	$(document).on("click", ".nestedReplyPrintBtn", function() {
 		if ($(this).html() == "답글 보기") {
 			$(this).html("답글 닫기");
-			
+
 			let parentReply = $(this).closest(".reply");
 			let nestedReplyAll = $("<div>").attr("class", "nestedReplyAll");
-			
+
 			$.ajax({
 				url: "nestedPrint.reply",
 				data: {
@@ -519,7 +625,7 @@ $(document).ready(function() {
 				dataType: "json"
 			}).done(function(resp) {
 				let postWriter = $("#postWriterName").val();
-				let loginID = $("#loginID").val();				
+				let loginID = $("#loginID").val();
 
 				for (let i = 0; i < resp.length; i++) {
 					let replyTag = $("<div>").attr("class", "col-12 reply nopadding");
@@ -562,6 +668,20 @@ $(document).ready(function() {
 						replyBtnsMini.append(btncoverforupdatemini.append(saveMini).append(cancelMini));
 
 						row.append(replyBtns).append(replyBtnsMini);
+					} else if (loginID == "admin") {
+
+						replyBtns = $("<div>").attr("class", "col-2 d-none d-md-flex replyBtns");
+
+						let btncover = $("<div>").attr("class", "defaultCover");
+						let deleteBtn = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("삭제");
+						replyBtns.append(btncover.append(deleteBtn));
+
+						let btncovermini = $("<div>").attr("class", "defaultCover");
+						let replyBtnsMini = $("<div>").attr("class", "col-2 d-md-none replyBtns replyBtnsMini");
+						let deleteBtnMini = $("<div>").attr("class", "replyDelete bColorGreen fw400 fs17").html("<i class='fa-solid fa-trash-can'></i>");
+						replyBtnsMini.append(btncovermini.append(deleteBtnMini));
+
+						row.append(replyBtns).append(replyBtnsMini);
 					} else {
 						replyBtns = $("<div>").attr("class", "col-2 replyBtns");
 						row.append(replyBtns);
@@ -574,10 +694,10 @@ $(document).ready(function() {
 				}
 			});
 		} else if ($(this).html() == "답글 닫기") {
-			if($(this).closest(".reply").next().hasClass("nestedReplyAll")){
+			if ($(this).closest(".reply").next().hasClass("nestedReplyAll")) {
 				$(this).closest(".reply").next().remove();
 			}
-				
+
 			$(this).html("답글 보기");
 		}
 	});

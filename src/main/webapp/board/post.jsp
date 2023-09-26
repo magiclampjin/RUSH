@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/post.css">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link
@@ -271,6 +272,7 @@ a {
 
 
 <body>
+	<input id="userID" type="hidden" value="${loginId}">
 	<div class="container-fluid p-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">
@@ -345,27 +347,30 @@ a {
 					<!-- 글 작성자 = 로그인 사용자이면 글 추천, 글 북마크 버튼 출력 x -->
 					<c:choose>
 						<c:when test="${loginID ne post.writer}">
-
-							<div class="col-12 topBtns">
-								<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
-								<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
-
-								<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
-								<c:choose>
-									<c:when test="${not empty postRec}">
-										<script>
-											$("#postRec").attr("class",	"btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-								<c:choose>
-									<c:when test="${not empty bookmark}">
-										<script>
-											$("#bookmark").attr("class", "btnClicked");
-										</script>
-									</c:when>
-								</c:choose>
-							</div>
+							<c:choose>
+								<c:when test="${loginID ne 'admin'}">
+									<div class="col-12 topBtns">
+										<button id="postRec"><i class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;추천</button>
+										<button id="bookmark"><i class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;북마크</button>
+		
+										<!-- 로그인한 유저가 해당 글을 추천 / 북마크 했는 지 여부 판단 -->
+										<c:choose>
+											<c:when test="${not empty postRec}">
+												<script>
+													$("#postRec").attr("class",	"btnClicked");
+												</script>
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${not empty bookmark}">
+												<script>
+													$("#bookmark").attr("class", "btnClicked");
+												</script>
+											</c:when>
+										</c:choose>
+									</div>
+								</c:when>
+							</c:choose>	
 						</c:when>
 					</c:choose>
 
@@ -402,6 +407,9 @@ a {
 											<button class="postBtns bColorGreen update">수정</button>
 											<button class="postBtns bColorGreen delete">삭제</button>
 										</c:when>
+										<c:when test="${loginID eq 'admin' }">
+											<button class="postBtns bColorGreen delete">삭제</button>
+										</c:when>
 									</c:choose>
 									<button class="postBtns bColorBlue colorWhite goList">목록</button>
 								</div>
@@ -412,6 +420,12 @@ a {
 											<button class="postBtnsMini bColorGreen update">
 												<i class="fa-solid fa-pen-to-square"></i>
 											</button>
+											<button class="postBtnsMini bColorGreen delete">
+												<i class="fa-solid fa-trash-can"></i>
+											</button>
+										</c:when>
+										
+										<c:when test="${loginID eq 'admin' }">
 											<button class="postBtnsMini bColorGreen delete">
 												<i class="fa-solid fa-trash-can"></i>
 											</button>
@@ -444,15 +458,12 @@ a {
 						</div>
 
 						<div class="col-12">
-							<input type="hidden" id="loginID" value="${loginID}"> <input
-								type="hidden" id="postWriterName" value="${post.writer}">
+							<input type="hidden" id="loginID" value="${loginID}"> 
+							<input type="hidden" id="postWriterName" value="${post.writer}">
+							
 							<div class="row g-0 replys  justify-content-end" id="replys">
 							</div>
 							<div id="pagination" class="mb200"></div>
-							<input type="hidden" id="recordTotalCount" value="${recordTotalCount }">
-							<input type="hidden" id="recordCountPerPage" value="${recordCountPerPage }"> 
-							<input type="hidden" id="naviCountPerPage" value="${naviCountPerPage }"> 
-							<input type="hidden" id="lastPageNum" value="${lastPageNum }"> 
 						</div>
 					</div>
 				</div>
