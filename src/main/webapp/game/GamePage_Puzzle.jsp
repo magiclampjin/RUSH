@@ -193,10 +193,6 @@ a{
         	border:3px solid lightblue;
         	transition-duration: 1s;
         }
-        .mt50{
-        	margin-top:40px;
-        }
-
 </style>
 </head>
 <body>
@@ -415,7 +411,7 @@ a{
 							<div class="col-12 game">
 							<c:choose>
 								<c:when test="${game eq 'kordle'}">
-									<div id="gameContainer" class="mt50"></div>
+									<div id="gameContainer"></div>
 								</c:when>
 							</c:choose>
 							</div>
