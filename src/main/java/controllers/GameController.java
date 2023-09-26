@@ -178,7 +178,13 @@ public class GameController extends HttpServlet {
 				
 				
 				pw.append(gson.toJson(list));
+			}else if(cmd.equals("/myGameRecord.game")) {
+				System.out.println("/myGameRecord.game");
+				String id = (String) request.getSession().getAttribute("loginID");
 				
+				List<GameDTO> list = new ArrayList<>();
+				
+				list = dao.myGameRecord(id);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

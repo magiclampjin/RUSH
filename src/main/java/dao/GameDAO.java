@@ -11,7 +11,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.BoardDTO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
 
@@ -420,6 +419,28 @@ public List<GameDTO> myFavoriteOrderGame(String id, String category) throws Exce
 		}
 		
 	}
+
+public List<GameDTO> myGameRecord(String id)throws Exception{
+	String sql = "select * from game_record where mID=?;";
+	try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+		
+		pstat.setString(1, id);
+		try(ResultSet rs = pstat.executeQuery();){
+			List<GameDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				
+				list.add(new GameDTO());
+			}
+			return list;
+			
+		}
+		
+		
+	}
+	
+			
+}
 	
 	
 	

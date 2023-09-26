@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 	
 	let category = "favoriteAll";
@@ -332,10 +330,46 @@ $(document).ready(function() {
 		}
 
 	})
+	
+	// 게임기록
+	$("#gameRecord").on("click",function(){
+		alert("Test");
+		myGameRecod();
+	});
+	
+})
+
+
 
 	
+	
+	
+function myGameRecod(){
+		$.ajax({
+			url:"/myGameRecord.game",
+			dataType:"json"
+		}).done(function(resp){
+			console.log(resp);
+			for(let i=0;i<resp.length;i++){
+				
+				let divRecordBody = $(".recordBody");
+				
+				let divRecordPost = $("<div>").attr("class","recordPost");
+					let divGameRank = $("<div>").attr("class","gameRank");
+						divGameRank.html("등수");
+					let divGameInfo = $("<div>").attr("class","gameInfo");
+						let divGameScore = $("<div>").attr("class","gameScore");
+							divGameScore.html("점수");
+						let divGameTime = $("<div>").attr("class","gameTime");
+							divGameTime.html("날짜");
+						divGameInfo.append(divGameScore).append(divGameTime);
+						
+					divRecordPost.append(divGameRank).append(divGameInfo);
+				divRecordBody.append(divRecordPost);
+			}
+		})
+}
 
-})
 
 // 전체 눌렀을 때
 function myFavorite(category) {
@@ -519,14 +553,6 @@ function myWriteList() {
 
 
 }
-
-
-
-
-
-
-
-
 
 
 

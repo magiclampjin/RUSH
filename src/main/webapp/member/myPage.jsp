@@ -353,35 +353,7 @@ ul.tabs li.current {
 										<div class="gameTime">게임일시</div>
 									</div>
 									<div class="recordBody">
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
-										</div>
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
-										</div>
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
-										</div>
-										<div class="recordPost">
-											<div class="gameRank">1</div>
-											<div class="gameInfo">
-												<div class="gameScore">40점</div>
-												<div class="gameTime">2023-02-23</div>
-											</div>
-										</div>
-
+										
 									</div>
 								</div>
 								<div id="recordTab-2" class="recordTab-content"></div>
