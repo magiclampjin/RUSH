@@ -58,7 +58,7 @@
 <script>
 	window.onload = function(){
 		$.ajax({
-			url:"/test.test",
+			url:"/getAdReply.test",
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
@@ -174,7 +174,7 @@
 	$("#select").on("click",function(){
 		let inputid = $("#inputID").val();
 		$.ajax({
-			url:"/test2.test",
+			url:"/getSearchUser.test",
 			data :{
 				id : inputid
 			},
@@ -220,7 +220,7 @@
     	$("#boards").css("display","none");
     	$("#ids").text("");
     	$.ajax({
-			url:"/test.test",
+			url:"/getAdReply.test",
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
@@ -257,11 +257,13 @@
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
 				deleteBtn.addClass("deleteReply");
+				deleteBtn.addClass("btn btn-outline-dark");
 				deleteBtn.text("삭제");
 				
 				let blackBtn = $("<button>");
 				blackBtn.attr("type","button");
-				deleteBtn.addClass("blackUser");
+				blackBtn.addClass("blackUser");
+				blackBtn.addClass("btn btn-outline-dark");
 				blackBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
@@ -285,7 +287,6 @@
 				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(nick+" "+user);
-			});
 		});
     });
     
@@ -305,16 +306,21 @@
 				
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
-				divSeq.attr("name","cbSeq");
-				divSeq.val(data[i]["cbSeq"]);
+				divSeq.attr("name","seq");
+				divSeq.val(data[i]["seq"]);
 				
 				let divColWriter = $("<div>");
 				divColWriter.addClass("col-2 writer");
 				divColWriter.text(data[i]["writer"]);
 				
+				
 				let divColNickname = $("<div>");
 				divColNickname.addClass("col-2 title");
-				divColNickname.text(data[i]["title"]);
+				
+				let boardAnker = $("<a>");
+				boardAnker.attr("href","/load.board?cpage=1&seq="+data[i]["seq"]+"&category="+data[i]["category"]+"&menu=board");
+				boardAnker.text(data[i]["title"]);
+				divColNickname.append(boardAnker);
 
 				let divColContents = $("<div>");
 				divColContents.addClass("col-4 contents");
@@ -326,11 +332,13 @@
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
 				deleteBtn.addClass("deletePost");
+				deleteBtn.addClass("btn btn-outline-dark");
 				deleteBtn.text("삭제");
 				
 				let blackBtn = $("<button>");
 				blackBtn.attr("type","button");
 				blackBtn.addClass("blackUser");
+				blackBtn.addClass("btn btn-outline-dark");
 				blackBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
@@ -353,7 +361,7 @@
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(user);
 			});
-			
+		});	
 		});
     });
 	

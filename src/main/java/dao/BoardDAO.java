@@ -102,6 +102,28 @@ public class BoardDAO {
 		}
 	}
 	
+	public boolean checkNoticePin(int postSeq) throws Exception{
+		String sql = "select pin from common_board where cbSeq = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, postSeq);
+			try (ResultSet rs = pstat.executeQuery();) {
+				if(rs.next())
+					return rs.getBoolean("pin"); // 값이 없음..
+				else //값이 없음
+					return false;
+			}
+		}
+	}
+	
+	public int setNoticePin(int postSeq, boolean pin) throws Exception{
+		String sql = "update common_board set pin = ? where cbSeq = ?;";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setBoolean(1, pin);
+			pstat.setInt(2, postSeq);
+			return pstat.executeUpdate();
+		}
+	}
+	
 	
 	public BoardDTO selectPost(int postSeq) throws Exception { // post.jsp에서 게시글 출력할 떄 사용
 		this.upViewCount(postSeq);
@@ -113,7 +135,7 @@ public class BoardDAO {
 				if(rs.next()) {
 					return new BoardDTO(rs.getInt("cbSeq"), rs.getString("cbID"), rs.getString("cbCategory"),
 							rs.getString("cbNickname"), rs.getString("cbTitle"), rs.getString("cbContent"),
-							rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"));
+							rs.getTimestamp("cbWriteDate"), rs.getInt("cbView"), rs.getBoolean("pin"));
 				}else {
 					return null;
 				}			
@@ -140,8 +162,9 @@ public class BoardDAO {
 				int cbRecommend = rs.getInt("cbRecommend");
 				int fileCount = rs.getInt("fCount");
 				int replyCount = rs.getInt("rCount");
+				boolean pin = rs.getBoolean("pin");
 				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-						cbRecommend, fileCount, replyCount));
+						cbRecommend, fileCount, replyCount, pin));
 			}
 			return list;
 		}
@@ -168,8 +191,9 @@ public class BoardDAO {
 					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
 					int replyCount = rs.getInt("rCount");
+					boolean pin = rs.getBoolean("pin");
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+							cbRecommend, fileCount, replyCount, pin));
 				}
 				return list;
 			}
@@ -213,8 +237,9 @@ public class BoardDAO {
 					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
 					int replyCount = rs.getInt("rCount");
+					boolean pin = rs.getBoolean("pin");
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+							cbRecommend, fileCount, replyCount, pin));
 				}
 				return list;
 			}
@@ -260,8 +285,9 @@ public class BoardDAO {
 					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
 					int replyCount = rs.getInt("rCount");
+					boolean pin = rs.getBoolean("pin");
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+							cbRecommend, fileCount, replyCount, pin));
 				}
 				return list;
 			}
@@ -307,8 +333,9 @@ public class BoardDAO {
 					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
 					int replyCount = rs.getInt("rCount");
+					boolean pin = rs.getBoolean("pin");
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+							cbRecommend, fileCount, replyCount, pin));
 				}
 				return list;
 			}
@@ -333,7 +360,7 @@ public class BoardDAO {
 	}
 	
 	public int insert(BoardDTO dto) throws Exception{
-		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?);";
+		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?, defalut);"; 
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
 			pstat.setString(1, dto.getWriter());
@@ -395,9 +422,10 @@ public class BoardDAO {
 					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
 					int replyCount = rs.getInt("rCount");
+					boolean pin = rs.getBoolean("pin");
 					
 					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+							cbRecommend, fileCount, replyCount, pin));
 				}
 				return list;
 			}
@@ -405,7 +433,7 @@ public class BoardDAO {
 	}
 	
 	public List<BoardDTO> myBookMarkList(String id) throws Exception{
-		String sql ="select * from bookmarkView where cbID = ?;";
+		String sql ="select * from bookmarkView where mID = ?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, id);
@@ -416,23 +444,18 @@ public class BoardDAO {
 				while (rs.next()) {
 					int cbSeq = rs.getInt("cbSeq");
 					String cbID = rs.getString("cbID");
-					String cbNickname = rs.getString("cbNickname");
 					String cbTitle = rs.getString("cbTitle");
-					String cbContent = rs.getString("cbContent");
 					Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
 					int cbView = rs.getInt("cbView");
-					String cbCategory = rs.getString("cbCategory");
-					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
-					int replyCount = rs.getInt("rCount");
 					
-					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+					list.add(new BoardDTO(cbSeq, cbID, cbTitle, cbWriteDate, cbView,fileCount));
 				}
 				return list;
 			}
 		}
 	}
+	
 	
 	
 }

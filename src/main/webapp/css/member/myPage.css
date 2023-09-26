@@ -134,7 +134,7 @@
 }
 
 ul.favoriteTabs li {
-	width: calc(100%/ 6);
+	width: calc(100%/ 4);
 	text-align: center;
 	padding: 10px 5px;
 	overflow: hidden;
@@ -422,7 +422,7 @@ ul.tabs li.current {
 	display: inherit;
 }
 
-#tab-1 {
+#tab-1,#tab-2,#tab-3,#tab-4 {
 	overflow: auto;
 }
 
