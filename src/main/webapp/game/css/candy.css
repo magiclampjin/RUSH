@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
-
+.game{
+	background-image: url("/game/images/background.jpg");
+	backgournd-size : 50%;
+}
 #container{
     width: 450px;
     height: 450px;
@@ -51,7 +54,6 @@ text-transform: uppercase;
 outline: none;
 overflow: hidden;
 position: relative;
-color: #fff;
 font-weight: 700;
 font-size: 15px;
 background-color: #222;
@@ -63,6 +65,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.20);
 .btnCandy span {
 position: relative; 
 z-index: 1;
+color: #fff;
 }
 
 .btnCandy:after {
@@ -92,4 +95,15 @@ margin-top: 30px;
 .link a {
 color: #000;
 font-size: 25px; 
+}
+#timeover{
+	background:#000000;
+	padding:5px;
+	margin: 5px;
+	color:red;
+	text-align :center;
+}
+#scoreBox{
+	text-align :center;
+	
 }

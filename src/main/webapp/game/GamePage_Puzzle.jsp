@@ -450,10 +450,12 @@ a{
 									<div id="gameContainer"></div>
 								</c:when>
 								<c:when test="${game eq 'Candy Crush'}">
-									<h1>점수 : <span id="score">0</h1>
-									<h4>
-										제한 시간 <span id="time">30</span>
-									</h4>
+									<div id="scoreBox">
+										<h2 class="fontKorean">점수 : <span id="score">0</h2>
+										<h4 class="fontKorean">
+											제한 시간 <span id="time">30</span>
+										</h4>
+									</div>
 									<div id="container">
 										<div id="overlay">
 											<div class="button_container">
@@ -463,8 +465,8 @@ a{
 												<button class="btnCandy" id="btnRestart">
 													<span>다시하기</span>
 												</button>
-												<h3 style="margin: 5px; color: red;">
-													<span id="timeover">Time Over</span>
+												<h3>
+													<span class="md-fontEnglish" id="timeover">Time Over</span>
 												</h3>
 											</div>
 										</div>
