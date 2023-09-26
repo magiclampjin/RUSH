@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
+import dto.BoardDTO;
 import dao.MemberDAO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
@@ -28,12 +29,13 @@ public class GameController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
 		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
+
 		GameDAO dao = GameDAO.getInstance();
 		MemberDAO mdao = MemberDAO.getInstance();
 		Gson gson = new Gson();
 		String cmd = request.getRequestURI();
-		System.out.println("game cmd: "+cmd);
 		PrintWriter pw = response.getWriter();
+		System.out.println("game cmd: "+cmd);
 		
 		KordleWordDAO kwdao = KordleWordDAO.getInstance();
 		
@@ -110,7 +112,7 @@ public class GameController extends HttpServlet {
 				
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
-				
+
 				List<GameRecordDTO> list = dao.selectGameRecord(gName);
 				pw.append(gson.toJson(list));
 				

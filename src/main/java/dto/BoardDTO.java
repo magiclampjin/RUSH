@@ -18,6 +18,20 @@ public class BoardDTO {
 	
 
 	public BoardDTO(){}
+	
+	
+
+	public BoardDTO(int seq, String writer, String title, Timestamp writeDate, int view, int fCount) {
+		super();
+		this.seq = seq;
+		this.writer = writer;
+		this.title = title;
+		this.writeDate = writeDate;
+		this.view = view;
+		this.fCount = fCount;
+	}
+
+
 
 	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
 			Timestamp writeDate, int view) {

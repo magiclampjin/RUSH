@@ -405,7 +405,7 @@ public class BoardDAO {
 	}
 	
 	public List<BoardDTO> myBookMarkList(String id) throws Exception{
-		String sql ="select * from bookmarkView where cbID = ?;";
+		String sql ="select * from bookmarkView where mID = ?;";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, id);
@@ -416,23 +416,18 @@ public class BoardDAO {
 				while (rs.next()) {
 					int cbSeq = rs.getInt("cbSeq");
 					String cbID = rs.getString("cbID");
-					String cbNickname = rs.getString("cbNickname");
 					String cbTitle = rs.getString("cbTitle");
-					String cbContent = rs.getString("cbContent");
 					Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
 					int cbView = rs.getInt("cbView");
-					String cbCategory = rs.getString("cbCategory");
-					int cbRecommend = rs.getInt("cbRecommend");
 					int fileCount = rs.getInt("fCount");
-					int replyCount = rs.getInt("rCount");
 					
-					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount));
+					list.add(new BoardDTO(cbSeq, cbID, cbTitle, cbWriteDate, cbView,fileCount));
 				}
 				return list;
 			}
 		}
 	}
+	
 	
 	
 }
