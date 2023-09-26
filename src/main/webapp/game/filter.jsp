@@ -39,6 +39,19 @@
 		max-height:600px;
 		overflow:auto;
 	}
+	input[type="radio"]{
+    display: none;
+}
+
+	input[type="radio"]:checked + .btn {
+	    color: #fff;
+	    background: #ff60bd!important;
+	}
+	
+	input[type="radio"]:hover + .btn {
+	  color: #fff;
+	  background-color: red;
+	}
 </style>
 </head>
 <body>
@@ -82,11 +95,13 @@
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
 				deleteBtn.addClass("deleteReply");
+				deleteBtn.addClass("btn btn-outline-dark");
 				deleteBtn.text("삭제");
 				
 				let blackBtn = $("<button>");
 				blackBtn.attr("type","button");
 				blackBtn.addClass("blackUser");
+				blackBtn.addClass("btn btn-outline-dark");
 				blackBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
@@ -116,7 +131,7 @@
 	};
 </script>
 	<div class="container">
-		<div class="row g-0">
+		<div class="row g-0 p-2">
 			<div class="col-6">
 					<div class="row g-0">
 						<div class="col-12 d-flex justify-content-center">
@@ -147,7 +162,7 @@
 			<div class="col-6">
 				<div>
 					<input type="text" name="id" id="inputID">
-					<button type="button" id="select">search</button>
+					<button type="button" class="btn btn-lignt" id="select">search</button>
 				</div>
 				<div id="replies">
 				
