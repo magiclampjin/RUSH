@@ -15,6 +15,7 @@
 <script type="text/javascript" src="/js/member/secession.js"></script>
 <script type="text/javascript" src="/js/member/favoriteTab.js"></script>
 <script type="text/javascript" src="/js/member/recordTab.js"></script>
+<script type="text/javascript" src="/js/member/adminPagination.js"></script>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -46,61 +47,11 @@ a {
 	left: auto;
 }
 
-.num, .writer, .date, .file {
+/*.num, .writer, .date, .file {
 	width: 15%;
-}
+}*/
 
-.title {
-	width: 40%;
-}
 
-.mainTitle {
-	padding-left: 5px;
-}
-
-.tabBox {
-	border: 1px solid black;
-	border-radius: 5px;
-}
-
-ul.tabs {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-	border-bottom: 1px solid black;
-	display: flex;
-}
-
-ul.tabs li {
-	background: none;
-	color: #222;
-	display: inline-block;
-	padding: 10px 0px;
-	cursor: pointer;
-	width: 25%;
-	text-align: center;
-}
-
-ul.tabs li.current {
-	background: #ededed;
-	background-color: #131217;
-	color: #ffffff;
-}
-
-.tab-content {
-	display: none;
-	padding: 15px;
-	height: 600px;
-	margin: 0px;
-}
-
-.tab-content.current {
-	display: inherit;
-}
-
-#tab-1 {
-	overflow: auto;
-}
 </style>
 </head>
 <body>
@@ -276,8 +227,18 @@ ul.tabs li.current {
 					<c:when test="${loginID == 'admin' }">
 						<div class="memberInfo">
 							<div class="memberBasicTitle">작성된 공지글</div>
-							<div class="memberInfoBox">
-							
+							<div class="memberInfoBox adminBoard">
+								<div class="boardHeader">
+									<div class="num">번호</div>
+									<div class="title">제목</div>
+									<div class="writer">작성자</div>
+									<div class="date">작성일</div>
+									<div class="view">조회</div>
+									<div class="recommend">추천</div>
+									<div class="file">파일</div>
+								</div>
+								<div class="adminBoardBody"></div>
+								<div id="adminPagination"></div>
 							</div>
 						</div>
 					</c:when>

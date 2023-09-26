@@ -140,7 +140,6 @@ function myWriteList(){
 			url:"/myWriteList.board?myPage=true",
 			dataType:"json"
 		}).done(function(resp){
-			console.log(resp);
 			
 			let div = $(".post1");
 			

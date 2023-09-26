@@ -235,101 +235,112 @@ ul.favoriteTabs li.current {
 
 /* 게임 기록 */
 .recordTabs {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 0px;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	padding: 0px;
 }
 
 ul.recordTabs li {
-  width: calc(100% / 6);
-  text-align: center;
-  padding: 10px 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  border: 1px solid;
+	width: calc(100%/ 6);
+	text-align: center;
+	padding: 10px 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	border: 1px solid;
 }
+
 ul.recordTabs li:not(:last-child) {
-  border-right: none;
+	border-right: none;
 }
 
 ul.recordTabs li:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
+
 ul.recordTabs li:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 ul.recordTabs li.current {
-  background-color: #ccf423;
+	background-color: #ccf423;
 }
+
 .recordTab-content {
-  display: none;
+	display: none;
 }
+
 .recordTab-content.current {
-  display: block;
+	display: block;
 }
 
 .recordCategory {
-  display: flex;
-  justify-content: end;
+	display: flex;
+	justify-content: end;
 }
+
 .recordCategory select {
-  width: 200px;
+	width: 200px;
 }
+
 .recordHeader {
-  display: flex;
-  margin-top: 10px;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  padding: 10px;
+	display: flex;
+	margin-top: 10px;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	padding: 10px;
 }
+
 .recordBody {
-  margin-top: 10px;
-  padding: 10px;
+	margin-top: 10px;
+	padding: 10px;
 }
 
 .gameRank {
-  width: 50px;
-  text-align: center;
+	width: 50px;
+	text-align: center;
 }
-.gameScore,
-.gameTime {
-  width: calc(50% - 25px);
-  padding-left: 30px;
+
+.gameScore, .gameTime {
+	width: calc(50% - 25px);
+	padding-left: 30px;
 }
+
 .recordPost {
-  display: flex;
-  align-items: center;
-  height: 60px;
+	display: flex;
+	align-items: center;
+	height: 60px;
 }
+
 .recordPost .gameInfo {
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: calc(100% - 50px);
-  margin-left: 0px;
-  height: 100%;
-  border-radius: 20px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: calc(100% - 50px);
+	margin-left: 0px;
+	height: 100%;
+	border-radius: 20px;
 }
 
 .recordPost .gameInfo:before {
-  content: "";
-  position: absolute;
-  left: 0 - translateX(50%);
-  width: 5px;
-  height: 35px;
-  background: #ccf423;
+	content: "";
+	position: absolute;
+	left: 0- translateX(50%);
+	width: 5px;
+	height: 35px;
+	background: #ccf423;
 }
+
 .recordPost:nth-child(even) .gameInfo {
-  background-color: #7d7d7d30;
+	background-color: #7d7d7d30;
 }
+
 .gameInfo .gameScore {
-  width: 50%;
+	width: 50%;
 }
 
 /* 게임 기록 */
@@ -355,6 +366,89 @@ ul.recordTabs li.current {
 	border-color: #7d7d7d;
 	border-radius: 5px;
 }*/
+.adminBoard>.boardHeader {
+	border-bottom: 2px solid;
+	padding: 15px 0px;
+}
+
+.mainTitle {
+	padding-left: 5px;
+}
+
+/*.title {
+	width: 40%;
+}*/
+.title {
+	padding-left: 20px;
+}
+
+.tabBox {
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	border-bottom: 1px solid black;
+	display: flex;
+}
+
+ul.tabs li {
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 0px;
+	cursor: pointer;
+	width: 25%;
+	text-align: center;
+}
+
+ul.tabs li.current {
+	background: #ededed;
+	background-color: #131217;
+	color: #ffffff;
+}
+
+.tab-content {
+	display: none;
+	padding: 15px;
+	height: 600px;
+	margin: 0px;
+}
+
+.tab-content.current {
+	display: inherit;
+}
+
+#tab-1 {
+	overflow: auto;
+}
+
+#adminPagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+#adminPagination>a {
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+}
+
+#adminPagination>a:not(:last-child) {
+	margin-right: 10px;
+}
+
+#adminPagination>a:hover:not(a.colorWhite.bColorBlue) {
+	background-color: #5d6ce130;
+}
+
 @media ( max-width : 786px) {
 	.nickname {
 		font-size: 30px;
@@ -385,5 +479,15 @@ ul.recordTabs li.current {
 		background-color: #ccf423;
 		width: 150px;
 		height: 100px;
+	}
+	.adminBoard>.boardHeader>.title {
+		width: 80%;
+	}
+	.mainTitle {
+		padding-left: 0px;
+	}
+	#adminPagination>a {
+		width: 20px;
+		height: 20px;
 	}
 }
