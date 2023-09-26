@@ -698,20 +698,6 @@ a {
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
     	
-    	function setRecord(userScore){
-    		$.ajax({
-                url:"/setGameRecord.game",
-                data:{
-                  mID:'${loginID}',
-                  game:'${game}',
-                  nickName : '${loginNickname}',
-                  score : userScore
-                },
-                type:"post"
-              }).done(function (res){
-                console.log(res);
-              });
-    	}
     </script>
 </body>
 </html>

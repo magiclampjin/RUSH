@@ -94,8 +94,6 @@ function startGame() {
         }
         boardCandy.push(row);
     }
-
-    console.log(boardCandy);
 }
 
 function endGame(){
