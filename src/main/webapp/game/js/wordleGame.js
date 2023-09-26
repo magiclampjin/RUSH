@@ -8,9 +8,10 @@ let oriWord; // 자모 결함된 정답
 
 
 $(document).ready(function() {
+	$(".game").css("height","800px");
 	
 	function gameInit(){
-		let container = $("#gameContainer");
+		let container = $("#gameContainer").css("margin-top","25px");
 		let gameBoard = $("<div>").attr("class","row g-0").attr("id","gameBoard");
 		let startCover = $("<div>").attr("class","covers").attr("id","startCover");
 		let gameStartBtn = $("<button>").attr("class","gameStartBnts").attr("id","gameStartBtn").html("Start Game");
@@ -53,7 +54,7 @@ $(document).ready(function() {
 		container.after(containerInputs.append(inputBoard));
 		
 		$.ajax({
-			url: "/gameStart.kordlegame",
+			url: "/kordleGameStart.game",
 			dataType:"Json"
 		}).done(function(resp){
 			dap = resp.jamo_word;
@@ -118,7 +119,7 @@ $(document).ready(function() {
                     	 // 엔딩 띄우기
                     } else{ // 오답일 경우 DB에 있는 내용인지 검사 (실제 존재하는 단어인지 검사 )
                     	$.ajax({
-                        	url: "/comp.kordlegame",
+                        	url: "/kordleWordCompare.game",
                         	dataType:"Json",
                         	data:{
                         		noun : lineTxt
