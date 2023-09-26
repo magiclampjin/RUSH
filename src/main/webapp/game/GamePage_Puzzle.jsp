@@ -16,6 +16,11 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/game/game.css"/>
+
+
+<!-- 한글 자모 분리 및 조합 & kordle js 파일 -->
+<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+<script src="/game/js/wordleGame.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -72,6 +77,125 @@ a{
 .bColorBlue {
   background-color: #5d6ce1;
 }
+
+		 #gameContainer {
+            margin: auto;
+            width: 500px;
+        }
+
+        .containerInputs {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        #gameBoard {
+            margin-top: 10px;
+            position:relative;
+            margin:auto;
+        }
+
+        .cell {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: lightblue;
+            border: 3px solid white;
+            color: white;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #inputBoard {
+            margin-top: 20px;
+            /* border:1px solid black; */
+            justify-content: center;
+        }
+
+
+        .inputLine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line1 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line2 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .input {
+            width: 8.5%;
+            height: 70px;
+            border: 0px;
+            background-color: lightgray;
+            font-size: large;
+            font-weight: bold;
+            margin: 0px 3px 10px 3px;
+        }
+
+        .line3 .btns {
+            width: 14%;
+        }
+
+        .input:hover {
+            background-color: rgba(211, 211, 211, 0.473);
+        }
+
+        .covers {
+        	background-color:#00000080;
+        	position:absolute;
+        	z-index:1;
+			width:100%;
+			height:100%;
+			border-radius:10px;
+			color:white;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:xx-large;
+			font-weight:bold;
+			text-align:center;
+        }
+        
+        #endCover{
+        	display:none;
+        }
+        
+        .gameStartBnts{
+        	padding:13px 25px;
+        	background-color: #00000000;
+        	color: lightblue;
+        	border:3px solid white;
+        	
+        	border-radius:15px;
+        }
+        
+        .gameStartBnts:hover{
+        	background-color: lightblue;
+        	color:white;
+        	border:3px solid lightblue;
+        	transition-duration: 1s;
+        }
+        .mt50{
+        	margin-top:40px;
+        }
 
 </style>
 </head>
@@ -288,7 +412,13 @@ a{
 							<hr class="border border-primary border-3 opacity-75">
 						</div>
 						<div class="row g-0">
-							<div class="col-12 game">play ground</div>
+							<div class="col-12 game">
+							<c:choose>
+								<c:when test="${game eq 'kordle'}">
+									<div id="gameContainer" class="mt50"></div>
+								</c:when>
+							</c:choose>
+							</div>
 						</div>
 						<div class="row g-0">
 							<div class="col-12 d-flex justify-content-center mt150">
