@@ -317,17 +317,28 @@ a{
 				}
 				
 				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-2");
+				divInfoLeft.addClass("col-2 align-self-center");
 				let divInfoRight = $("<div>");
 				divInfoRight.addClass("col-7 text-white align-self-center");
 				let divUserImage = $("<div>");
 				divUserImage.css({
-					width : "70px",
-					height : "70px",
+					maxWidth : "70px",
+					maxHeight : "70px",
+					width : "100%",
 					backgroundColor : "white",
 					borderRadius : "50%",
-					marginLeft : "10px"
+					marginLeft : "10px",
+					marginRight : "20px"
 				});
+				
+				let divImage = $("<img>");
+				divImage.attr("src","/img/user.png");
+				divImage.css({
+					width : "100%",
+					height : "100%"
+				});
+				
+				divUserImage.append(divImage);
 				
 				let divColScore = $("<div>");
 				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
@@ -682,17 +693,28 @@ a{
     				}
     				
     				let divInfoLeft = $("<div>");
-    				divInfoLeft.addClass("col-2");
+    				divInfoLeft.addClass("col-2 align-self-center");
     				let divInfoRight = $("<div>");
     				divInfoRight.addClass("col-7 text-white align-self-center");
     				let divUserImage = $("<div>");
     				divUserImage.css({
-    					width : "70px",
-    					height : "70px",
+    					maxWidth : "70px",
+    					maxHeight : "70px",
+    					width : "100%",
     					backgroundColor : "white",
     					borderRadius : "50%",
-    					marginLeft : "10px"
+    					marginLeft : "10px",
+    					marginRight : "20px"
     				});
+    				
+    				let divImage = $("<img>");
+    				divImage.attr("src","/img/user.png");
+    				divImage.css({
+    					width : "100%",
+    					height : "100%"
+    				});
+    				
+    				divUserImage.append(divImage);
     				
     				let divColScore = $("<div>");
     				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");

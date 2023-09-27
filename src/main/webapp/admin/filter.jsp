@@ -76,6 +76,7 @@
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
 				divSeq.attr("name","seq");
+				divSeq.addClass("replySeq");
 				divSeq.val(data[i]["seq"]);
 				
 				let divParSeq = $("<input>");
@@ -123,17 +124,36 @@
 				$("#ids").append(divRow);
 			}
 			$(".deleteReply").on("click",function(){
-				let nick = $(this).parent().siblings(".nickName").text();
-				let cont = $(this).parent().siblings(".contents").text();
-				console.log(nick+" / "+cont);
+				let seq = $(this).parent().siblings(".replySeq").val();
+				console.log(seq);
+				$.ajax({
+					url:"/delete.reply",
+					data : {
+						replySeq : seq
+					},
+					type : "post"
+				}).done(function(res){
+					location.reload();
+				});
 			});
 			$(".blackUser").on("click",function(){
 				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(nick+" "+user);
+				$.ajax({
+					url:"/setBlackList.test",
+					data : {
+						mID : user
+					}
+				}).done(function(res){
+					if(res==0){
+						alert("블랙리스트 실패");
+					}else{
+						alert("블랙리스트 성공");
+					}
+				});
 			});
-		});
-		
+		})
 	};
 </script>
 	<div class="container">
@@ -218,6 +238,20 @@
 			divRow.append(divBtn);
 			
 			$("#replies").append(divRow);
+			
+			$(".deleteUser").on("click",function(){
+				let mID = $(this).parent().siblings(".writer").text();
+				console.log(mID);
+				$.ajax({
+					url:"/deleteUser.test",
+					data : {
+						userID : mID
+					},
+					type : "post"
+				}).done(function(res){
+					location.reload();
+				});
+			});
 		});
 	});
 	$("#btnradio1").on("click",function(){
@@ -238,6 +272,7 @@
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
 				divSeq.attr("name","seq");
+				divSeq.addClass("replySeq");
 				divSeq.val(data[i]["seq"]);
 				
 				let divParSeq = $("<input>");
@@ -285,14 +320,35 @@
 				$("#ids").append(divRow);
 			}
 			$(".deleteReply").on("click",function(){
-				let nick = $(this).parent().siblings(".nickName").text();
-				let cont = $(this).parent().siblings(".contents").text();
-				console.log(nick+" / "+cont);
+				let seq = $(this).parent().siblings(".replySeq").val();
+				console.log(seq);
+				$.ajax({
+					url:"/delete.reply",
+					data : {
+						replySeq : seq
+					},
+					type : "post"
+				}).done(function(res){
+					location.reload();
+				});
 			});
 			$(".blackUser").on("click",function(){
 				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(nick+" "+user);
+				$.ajax({
+					url:"/setBlackList.test",
+					data : {
+						mID : user
+					}
+				}).done(function(res){
+					if(res==0){
+						alert("블랙리스트 실패");
+					}else{
+						alert("블랙리스트 성공");
+					}
+				});
+			});
 		});
     });
     
@@ -313,7 +369,14 @@
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
 				divSeq.attr("name","seq");
+				divSeq.addClass("postSeq");
 				divSeq.val(data[i]["seq"]);
+				
+				let divCategory = $("<input>");
+				divCategory.attr("type","hidden");
+				divCategory.attr("name","category");
+				divCategory.addClass("category");
+				divCategory.val(data[i]["category"]);
 				
 				let divColWriter = $("<div>");
 				divColWriter.addClass("col-2 writer center");
@@ -351,6 +414,7 @@
 				divBtn.append(blackBtn);
 				
 				divRow.append(divSeq);
+				divRow.append(divCategory);
 				divRow.append(divColWriter);
 				divRow.append(divColTitle);
 				divRow.append(divColContents);
@@ -359,15 +423,41 @@
 				$("#boards").append(divRow);
 			}
 			$(".deletePost").on("click",function(){
-				let writer = $(this).parent().siblings(".writer").text();
-				let cont = $(this).parent().siblings(".title").text();
-				console.log(writer+" / "+cont);
+				let postSeq = $(this).parent().siblings(".postSeq").val();
+				let category = $(this).parent().siblings(".category").val();
+				console.log(postSeq);
+				$.ajax({
+					url:"/deletePost.test",
+					data : {
+						postSeq : postSeq,
+						category : category
+					}
+				}).done(function(res){
+					if(res==0){
+						alert("게시글 삭제 실패");
+					}else{
+						alert("게시글 삭제 성공");
+					}
+				});
 			});
 			$(".blackUser").on("click",function(){
+				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
-				console.log(user);
+				console.log(nick+" "+user);
+				$.ajax({
+					url:"/setBlackList.test",
+					data : {
+						mID : user
+					}
+				}).done(function(res){
+					if(res==0){
+						alert("블랙리스트 실패");
+					}else{
+						alert("블랙리스트 성공");
+					}
+				});
 			});
-		});	
+			
 		});
     });
 	
