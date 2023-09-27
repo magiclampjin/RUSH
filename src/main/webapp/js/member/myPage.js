@@ -83,7 +83,9 @@ $(document).ready(function() {
 		}).done(function(resp) {
 			console.log(resp);
 			
-			$(".post").remove();
+			let div = $(".post2");
+			
+			
 
 			for (let i = 0; i < resp.length; i++) {
 
