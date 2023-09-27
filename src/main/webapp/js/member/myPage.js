@@ -400,7 +400,17 @@ $(document).ready(function() {
                      divGameRank.html(resp[i].gameName);
                   let divGameInfo = $("<div>").attr("class","gameInfo");
                      let divGameScore = $("<div>").attr("class","gameScore");
-                        divGameScore.html(resp[i].score);
+                     
+                     if(resp[i].gameName == "Kordle"){
+							if(resp[i].score == 0){
+								divGameScore.html("틀림");
+							}else{
+								divGameScore.html("맞춤");
+							}
+						}else{
+							 divGameScore.html(resp[i].score);
+					}
+                     
                      let divGameTime = $("<div>").attr("class","gameTime");
                         divGameTime.html(resp[i].startGameTime);
                      divGameInfo.append(divGameScore).append(divGameTime);
@@ -430,7 +440,16 @@ $(document).ready(function() {
                      divGameRank.html(resp[i].gameName);
                   let divGameInfo = $("<div>").attr("class","gameInfo");
                      let divGameScore = $("<div>").attr("class","gameScore");
-                        divGameScore.html(resp[i].score);
+                     
+                     if(resp[i].gameName == "Kordle"){
+							if(resp[i].score == 0){
+								divGameScore.html("틀림");
+							}else{
+								divGameScore.html("맞춤");
+							}
+						}else{
+							 divGameScore.html(resp[i].score);
+						}
                      let divGameTime = $("<div>").attr("class","gameTime");
                         divGameTime.html(resp[i].startGameTime);
                      divGameInfo.append(divGameScore).append(divGameTime);
@@ -466,7 +485,16 @@ function myGameRecod(gameName){
                   divGameRank.html(resp[i].gameName);
                let divGameInfo = $("<div>").attr("class","gameInfo");
                   let divGameScore = $("<div>").attr("class","gameScore");
-                     divGameScore.html(resp[i].score);
+                  
+                  if(resp[i].gameName == "Kordle"){
+						if(resp[i].score == 0){
+							divGameScore.html("틀림");
+						}else{
+							divGameScore.html("맞춤");
+						}
+					}else{
+						 divGameScore.html(resp[i].score);
+					}
                   let divGameTime = $("<div>").attr("class","gameTime");
                      divGameTime.html(resp[i].startGameTime);
                   divGameInfo.append(divGameScore).append(divGameTime);
