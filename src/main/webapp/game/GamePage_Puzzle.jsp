@@ -522,44 +522,110 @@ a{
 									</div>
 								</div>
 							</div>
-							<div class="col-12" id="info">
-								<div class="row g-0 w100p">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">게임 설명</p>
-										<hr class="colorBlue border-3 opacity-75">
+							
+							
+							<c:choose>
+								<c:when test="${game eq 'Kordle' }">
+									<!--  kordle 게임 설명 -->
+									<div class="col-12" id="info">
+										<div class="row g-0 w100p">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">게임 설명</p>
+												<hr class="colorBlue border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+											</div>				
+										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">조작 방법</p>
+												<hr class="colorGreen border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+											</div>				
+										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">제작자 정보</p>
+												<hr class="colorPink border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<table class="devTable">
+													<tr>
+														<th class="text-white fontKorean fw900">제작자</th>
+														<td class="text-white fontKorean">${dev}</td>
+													</tr>
+													<tr>
+														<th class="text-white fontKorean fw900">제작자 소속</th>
+														<td class="text-white fontKorean">공주대학교 SKY팀</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 									</div>
-									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
-									</div>				
-								</div>
-								<div class="row g-0 w100p mt150">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">조작 방법</p>
-										<hr class="colorGreen border-3 opacity-75">
+								</c:when>
+								<c:when test="${game eq 'Candy Crush' }">
+									<!-- Candy Crush 게임 설명 -->
+									<div class="col-12" id="info">
+										<div class="row g-0 w100p">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">게임 설명</p>
+												<hr class="colorBlue border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">
+													30초라는 제한 시간 내에 가장 많은 캔디를 크러쉬 해주세요
+												</p>
+											</div>				
+										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">조작 방법</p>
+												<hr class="colorGreen border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<p class="text-white fontKorean">
+													<div style="margin-bottom:5px;">
+														<img src="/game/images/Candy1.png">
+														<span class="text-white fontKorean">가로, 세로로 3개 이상 같은 캔디를 맞춰주세요.</span>
+													</div>
+													<div>
+														<img src="/game/images/Candy2.png">
+														<span class="text-white fontKorean">캔디가 터질 때마다 30점씩 획득할 수 있습니다.</span>
+													</div>
+													
+													
+												</p>
+											</div>				
+										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">제작자 정보</p>
+												<hr class="colorPink border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<table class="devTable">
+													<tr>
+														<th class="text-white fontKorean fw900">제작자</th>
+														<td class="text-white fontKorean">${dev}</td>
+													</tr>
+													<tr>
+														<th class="text-white fontKorean fw900">제작자 소속</th>
+														<td class="text-white fontKorean">공주대학교 SKY팀</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 									</div>
-									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
-									</div>				
-								</div>
-								<div class="row g-0 w100p mt150">
-									<div class="col-12">
-										<p class="text-white fontKorean fs-2">제작자 정보</p>
-										<hr class="colorPink border-3 opacity-75">
-									</div>
-									<div class="col-12">
-										<table class="devTable">
-											<tr>
-												<th class="text-white fontKorean fw900">제작자</th>
-												<td class="text-white fontKorean">${dev}</td>
-											</tr>
-											<tr>
-												<th class="text-white fontKorean fw900">제작자 소속</th>
-												<td class="text-white fontKorean">공주대학교 SKY팀</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
+								</c:when>
+							</c:choose>
+							
+							
+							
+							
+							
 						</div>
 					</div>
 
