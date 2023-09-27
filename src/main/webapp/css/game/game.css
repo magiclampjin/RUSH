@@ -12,7 +12,12 @@
 }
 
 /* GamePage css  */
-
+.ml20{
+	margin-left : 20px;
+}
+.pl20{
+	padding-left : 20px;
+}
 .ml45{
 	margin-left : 45px;
 }

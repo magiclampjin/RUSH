@@ -39,18 +39,24 @@
 		max-height:600px;
 		overflow:auto;
 	}
-	input[type="radio"]{
-    display: none;
-}
+	input[type="radio"] + .btn{
+		color : #131217;
+		backgrond-color : #7D7D7D;
+	}
 
 	input[type="radio"]:checked + .btn {
-	    color: #fff;
-	    background: #ff60bd!important;
+	    color: #F9F9F9;
+	    background: #131217!important;
 	}
 	
 	input[type="radio"]:hover + .btn {
-	  color: #fff;
-	  background-color: red;
+	  color: #F9F9F9;
+	  background-color: #131217;
+	}
+	.center{
+		display:flex;
+		justify-content : center;
+		align-items : center;
 	}
 </style>
 </head>
@@ -78,19 +84,19 @@
 				divParSeq.val(data[i]["parentSeq"]);
 				
 				let divColWriter = $("<div>");
-				divColWriter.addClass("col-2 writer");
+				divColWriter.addClass("col-2 writer center");
 				divColWriter.text(data[i]["writer"]);
 				
 				let divColNickname = $("<div>");
-				divColNickname.addClass("col-2 nickName");
+				divColNickname.addClass("col-2 nickName center");
 				divColNickname.text(data[i]["nickName"]);
 
 				let divColContents = $("<div>");
-				divColContents.addClass("col-4 contents");
+				divColContents.addClass("col-4 contents center");
 				divColContents.text(data[i]["contents"]);
 				
 				let divBtn = $("<div>");
-				divBtn.addClass("col-4");
+				divBtn.addClass("col-4 center");
 				
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
@@ -162,7 +168,7 @@
 			<div class="col-6">
 				<div>
 					<input type="text" name="id" id="inputID">
-					<button type="button" class="btn btn-lignt" id="select">search</button>
+					<button type="button" class="btn btn-ouline-dark" id="select">search</button>
 				</div>
 				<div id="replies">
 				
@@ -185,23 +191,23 @@
 			divRow.addClass("row g-0");
 			
 			let divColID = $("<div>");
-			divColID.addClass("col-3 writer");
+			divColID.addClass("col-3 writer center");
 			divColID.text(data["id"]);
 			
 			let divColNickname = $("<div>");
-			divColNickname.addClass("col-3 nickName");
+			divColNickname.addClass("col-2 nickName center");
 			divColNickname.text(data["name"]);
 
 			let divColEmail = $("<div>");
-			divColEmail.addClass("col-4 email");
+			divColEmail.addClass("col-4 email center");
 			divColEmail.text(data["email"]);
 			
 			let divBtn = $("<div>");
-			divBtn.addClass("col-2");
+			divBtn.addClass("col-3 center");
 			
 			let deleteBtn = $("<button>");
 			deleteBtn.attr("type","button");
-			deleteBtn.addClass("deleteUser");
+			deleteBtn.addClass("btn btn-outline-dark deleteUser");
 			deleteBtn.text("회원 삭제");
 			
 			divBtn.append(deleteBtn);
@@ -240,19 +246,19 @@
 				divParSeq.val(data[i]["parentSeq"]);
 				
 				let divColWriter = $("<div>");
-				divColWriter.addClass("col-2 writer");
+				divColWriter.addClass("col-2 writer center");
 				divColWriter.text(data[i]["writer"]);
 				
 				let divColNickname = $("<div>");
-				divColNickname.addClass("col-2 nickName");
+				divColNickname.addClass("col-2 nickName center");
 				divColNickname.text(data[i]["nickName"]);
 
 				let divColContents = $("<div>");
-				divColContents.addClass("col-4 contents");
+				divColContents.addClass("col-4 contents center");
 				divColContents.text(data[i]["contents"]);
 				
 				let divBtn = $("<div>");
-				divBtn.addClass("col-4");
+				divBtn.addClass("col-4 center");
 				
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
@@ -310,24 +316,24 @@
 				divSeq.val(data[i]["seq"]);
 				
 				let divColWriter = $("<div>");
-				divColWriter.addClass("col-2 writer");
+				divColWriter.addClass("col-2 writer center");
 				divColWriter.text(data[i]["writer"]);
 				
 				
-				let divColNickname = $("<div>");
-				divColNickname.addClass("col-2 title");
+				let divColTitle = $("<div>");
+				divColTitle.addClass("col-2 title center");
 				
 				let boardAnker = $("<a>");
 				boardAnker.attr("href","/load.board?cpage=1&seq="+data[i]["seq"]+"&category="+data[i]["category"]+"&menu=board");
 				boardAnker.text(data[i]["title"]);
-				divColNickname.append(boardAnker);
+				divColTitle.append(boardAnker);
 
 				let divColContents = $("<div>");
-				divColContents.addClass("col-4 contents");
-				divColContents.text(data[i]["contents"]);
+				divColContents.addClass("col-4 contents center");
+				divColContents.html(data[i]["contents"]);
 				
 				let divBtn = $("<div>");
-				divBtn.addClass("col-4");
+				divBtn.addClass("col-4 center");
 				
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
@@ -346,7 +352,7 @@
 				
 				divRow.append(divSeq);
 				divRow.append(divColWriter);
-				divRow.append(divColNickname);
+				divRow.append(divColTitle);
 				divRow.append(divColContents);
 				divRow.append(divBtn);
 				
