@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.GameDTO;
 import dto.MemberDTO;
 
 public class MemberDAO {
@@ -186,6 +189,21 @@ public class MemberDAO {
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, id);
 			return pstat.executeUpdate();
+		}
+	}
+	
+	public List<GameDTO> selectGameRanking() throws Exception{
+		String sql ="select gName,count(*) playCount from game_record group by gName;";
+		List<GameDTO> list = new ArrayList<>();
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();){
+			while(rs.next()) {
+				String gName = rs.getString("gName");
+				int playCount = rs.getInt("playCount");
+				list.add(new GameDTO(gName, playCount));
+			}
+			return list;
 		}
 	}
 }

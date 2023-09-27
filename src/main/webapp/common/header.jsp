@@ -81,18 +81,41 @@ a {
 										href="http://localhost/member/login.jsp"> LOGIN </a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="nav-item dropdown col-3 text-end"><a
-										class="nav-link text-white fontEnglish"
-										href="http://localhost/load.member"
-										id="navbarDropdownMenuLink" role="button"
-										data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE </a>
-										<ul class="dropdown-menu p-0"
-											aria-labelledby="navbarDropdownMenuLink">
-											<li><a class="dropdown-item fontEnglish"
-												href="http://localhost/load.member">MyPage</a></li>
-											<li><a class="dropdown-item fontEnglish"
-												href="http://localhost/logout.member">Log Out</a></li>
-										</ul></li>
+									<c:choose>
+										<c:when test="${loginID == 'admin' }">
+											<li class="nav-item dropdown col-3 text-end"><a
+												class="nav-link text-white fontEnglish"
+												href="http://localhost/load.member"
+												id="navbarDropdownMenuLink" role="button"
+												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+											</a>
+												<ul class="dropdown-menu p-0"
+													aria-labelledby="navbarDropdownMenuLink">
+													<li><a class="dropdown-item fontEnglish"
+														href="http://localhost/load.member">MyPage</a></li>
+														<li><a class="dropdown-item fontEnglish"
+														href="http://localhost/member/adminDashBoard.jsp">DashBoard</a></li>
+													<li><a class="dropdown-item fontEnglish"
+														href="http://localhost/logout.member">Log Out</a></li>
+												</ul></li>
+										</c:when>
+										<c:otherwise>
+											<li class="nav-item dropdown col-3 text-end"><a
+												class="nav-link text-white fontEnglish"
+												href="http://localhost/load.member"
+												id="navbarDropdownMenuLink" role="button"
+												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+											</a>
+												<ul class="dropdown-menu p-0"
+													aria-labelledby="navbarDropdownMenuLink">
+													<li><a class="dropdown-item fontEnglish"
+														href="http://localhost/load.member">MyPage</a></li>
+													<li><a class="dropdown-item fontEnglish"
+														href="http://localhost/logout.member">Log Out</a></li>
+												</ul></li>
+										</c:otherwise>
+									</c:choose>
+
 								</c:otherwise>
 							</c:choose>
 
@@ -107,6 +130,6 @@ a {
 			</nav>
 		</div>
 	</header>
-	
+
 </body>
 </html>

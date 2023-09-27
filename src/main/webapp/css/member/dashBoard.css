@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+.body {
+	width: 100%;
+}
+
+.body_guide {
+	max-width: 1300px;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.chartDiv {
+	margin-top: 80px;
+}
+
+.chartDivTitle {
+	width: 100%;
+	border-bottom: 2px solid black;
+	font-size: 40px;
+	font-weight: 700;
+	padding-bottom: 30px;
+}
+
+.chartCon {
+	display: flex;
+	width: 100%;
+}
+
+.chartCon:last-child{
+	margin-bottom: 200px;
+}
+.chartBox {
+	width: 100%;
+}
+
+.twoDiv>.chartBox {
+	position: relative;
+	width: 50%;
+}
+
+.twoDiv>.chartBox:not(:first-child):before{
+	content: "";
+	position: absolute;
+	left: -2px;
+	top: 5%;
+	width: 4px;
+	height: 90%;
+	background: #7d7d7d30;
+}
+.recordPost .gameInfo:before {
+	content: "";
+	position: absolute;
+	left: 0- translateX(50%);
+	width: 5px;
+	height: 35px;
+	background: #ccf423;
+}
+
+
+.chartTitle {
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+	font-weight: 700;
+}
+
+@media ( max-width : 786px) {
+	.chartCon {
+		flex-direction: column;
+	}
+	.chartBox {
+		width: 100%;
+	}
+}

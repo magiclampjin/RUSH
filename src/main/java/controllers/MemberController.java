@@ -354,6 +354,11 @@ public class MemberController extends HttpServlet {
 			    }
 			    printwriter.append(gson.toJson(list));
 				
+			} else if(cmd.equals("/gameRank.member")) {
+				List<GameDTO> gameRank = dao.selectGameRanking();
+				
+				printwriter.append(gson.toJson(gameRank));
+				//request.getRequestDispatcher("/member/adminDashBoard.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
