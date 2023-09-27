@@ -44,8 +44,6 @@ public class GameController extends HttpServlet {
 				String gameName = request.getParameter("game");
 				String gameCategory = dao.selectByGameName(gameName);
 				String developer = dao.selectDevByGameName(gameName);
-				System.out.println(gameName);
-				System.out.println(gameCategory);
 				request.setAttribute("game",gameName);
 				request.setAttribute("category",gameCategory);
 				request.setAttribute("dev",developer);
@@ -63,10 +61,8 @@ public class GameController extends HttpServlet {
 				int result = dao.insertFavorite(gameName, mID);
 				PrintWriter out = response.getWriter();
 				if(result>0) {
-					System.out.println("즐겨찾기 성공");
 					out.println("o");
 				}else {
-					System.out.println("즐겨찾기 실패");
 					out.println("x");
 				}
 			}else if(cmd.equals("/moveToBestGame.game")) {
@@ -81,18 +77,18 @@ public class GameController extends HttpServlet {
 				String gameName = request.getParameter("gameName");
 				int result = dao.deleteFavorite(gameName, mID);
 				if(result>0) {
-					System.out.println("즐겨찾기제거 성공");
 					pw.println("o");
 				}else {
-					System.out.println("즐겨찾기제거 실패");
 					pw.println("x");
 				}
 			}else if(cmd.equals("/getRecord.game")) {
 				List<GameRecordDTO> list = new ArrayList<>();
 				String gameName = request.getParameter("gameName");
-				System.out.println("old : "+gameName);
-				list = dao.selectGameRecord(gameName);
-				// 기록이 없을 때에 대한 처리 필요
+				if(gameName.equals("Kordle")){
+					list = dao.selectKordleGameRecord();
+				}else {
+					list = dao.selectGameRecord(gameName);
+				}
 				pw.println(gson.toJson(list));
 			}else if(cmd.equals("/getBestGame.game")) {
 				List<GameDTO> list = dao.selectBestGame();
@@ -113,7 +109,12 @@ public class GameController extends HttpServlet {
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
 
-				List<GameRecordDTO> list = dao.selectGameRecord(gName);
+				List<GameRecordDTO> list = new ArrayList<>();
+				if(gName.equals("Kordle")){
+					list = dao.selectKordleGameRecord();
+				}else {
+					list = dao.selectGameRecord(gName);
+				}
 				pw.append(gson.toJson(list));
 				
 			}else if(cmd.equals("/test.game")) {
@@ -131,7 +132,6 @@ public class GameController extends HttpServlet {
 				pw.append(gson.toJson(result));
 			}else if(cmd.equals("/kordleGameStart.game")) {
 				KordleWordDTO dap = kwdao.randomWord();
-				System.out.println("kordleGameStart 들어옴.");
 				System.out.println("정답: "+dap.getJamo_word());
 				pw.append(gson.toJson(dap));
 			}
