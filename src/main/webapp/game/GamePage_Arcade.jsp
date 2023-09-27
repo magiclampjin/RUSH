@@ -152,21 +152,34 @@ a {
 
 								
 				let divColInfo = $("<div>");
-				divColInfo.addClass("col-7");
+				divColInfo.addClass("col-11");
 				
 				let divRowInfo = $("<div>");
-				divRowInfo.addClass("row g-0");
+				divRowInfo.addClass("row g-0 p-1");
+				if(i%2==0){
+					divRowInfo.addClass("bcolorDarkgray30");
+					divRowInfo.css({
+						borderRadius : "5px"
+					});	
+				}
+				
+				
 				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-3");
+				divInfoLeft.addClass("col-2");
 				let divInfoRight = $("<div>");
-				divInfoRight.addClass("col-9 text-white align-self-center");
+				divInfoRight.addClass("col-5 text-white align-self-center");
 				let divUserImage = $("<div>");
 				divUserImage.css({
-					width : "80px",
-					height : "80px",
+					width : "70px",
+					height : "70px",
 					backgroundColor : "white",
 					borderRadius : "50%"
 				});
+				
+				let divColScore = $("<div>");
+				divColScore.addClass("col-5 text-white fontEnglish fw500 fs-4 align-self-center");
+				divColScore.append(record[i]["score"]);
+				
 				
 				
 				divInfoLeft.append(divUserImage);
@@ -174,15 +187,14 @@ a {
 				divInfoRight.append(" Lv : "+record[i]["level"]);
 				divRowInfo.append(divInfoLeft);
 				divRowInfo.append(divInfoRight);
+				divRowInfo.append(divColScore);
 				divColInfo.append(divRowInfo);
 				
-				let divColScore = $("<div>");
-				divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
-				divColScore.append(record[i]["score"]);
+				
 				
 				divRow.append(divColRank);
 				divRow.append(divColInfo);
-				divRow.append(divColScore);
+				//divRow.append(divColScore);
 				
 				
 				$("#rankCon").append(divRow);
