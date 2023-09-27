@@ -173,19 +173,14 @@ ul.tabs li.current {
 		<div class="myPage">
 			<div class="nickNameBox bColorBlack">
 				<div class="nicknameInfo">
-					<c:choose>
-						<c:when test="${loginID == 'admin' }">
-							<div class="nickname colorWhite">${userNick }님</div>
-						</c:when>
-						<c:otherwise>
-							<div class="nickname colorWhite">${user.nickName }님</div>
-							<div class="levelBox">
-								<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
-								<div class="singDay colorDarkgray">가입일:
-									${user.stringFormat }</div>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					<div class="nickname colorWhite">${loginNickname }님</div>
+					<c:if test="${loginID != 'admin' }">
+						<div class="levelBox">
+							<div class="level colorWhite fontEnglish">Lv. ${user.level }</div>
+							<div class="singDay colorDarkgray">가입일: ${user.stringFormat }</div>
+						</div>
+					</c:if>
+
 				</div>
 			</div>
 			<div class="myPage_guide">
@@ -286,6 +281,7 @@ ul.tabs li.current {
 									<div class="view">조회</div>
 									<div class="recommend">추천</div>
 									<div class="file">파일</div>
+									<div class="pin">고정</div>
 								</div>
 								<div class="adminBoardBody"></div>
 								<div id="adminPagination"></div>

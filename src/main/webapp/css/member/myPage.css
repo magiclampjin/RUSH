@@ -366,11 +366,6 @@ ul.recordTabs li.current {
 	border-color: #7d7d7d;
 	border-radius: 5px;
 }*/
-.adminBoard>.boardHeader {
-	border-bottom: 2px solid;
-	padding: 15px 0px;
-}
-
 .mainTitle {
 	padding-left: 5px;
 }
@@ -422,8 +417,17 @@ ul.tabs li.current {
 	display: inherit;
 }
 
-#tab-1,#tab-2,#tab-3,#tab-4 {
+#tab-1, #tab-2, #tab-3, #tab-4 {
 	overflow: auto;
+}
+
+.adminBoard>.boardHeader {
+	border-bottom: 2px solid;
+	padding: 15px 0px;
+}
+
+.adminBoard .title {
+	width: 34%;
 }
 
 #adminPagination {
@@ -447,6 +451,10 @@ ul.tabs li.current {
 
 #adminPagination>a:hover:not(a.colorWhite.bColorBlue) {
 	background-color: #5d6ce130;
+}
+
+.adminBoard .pin {
+	width: 8%;
 }
 
 @media ( max-width : 786px) {
@@ -483,6 +491,9 @@ ul.tabs li.current {
 	.adminBoard>.boardHeader>.title {
 		width: 80%;
 	}
+	.adminBoard>.boardHeader>.pin {
+		display: none;
+	}
 	.mainTitle {
 		padding-left: 0px;
 	}
@@ -490,4 +501,14 @@ ul.tabs li.current {
 		width: 20px;
 		height: 20px;
 	}
+	.title {
+		padding-left: 0px;
+	}
+	.minBoard .file {
+		width: auto;
+	}
+	.minBoard .pin {
+		width: auto;
+	}
+	
 }

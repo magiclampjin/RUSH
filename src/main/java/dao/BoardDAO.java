@@ -145,7 +145,7 @@ public class BoardDAO {
 
 	// 공지 게시글 불러오기
 	public List<BoardDTO> selectByNoti() throws Exception {
-		String sql = "select * from postinfo where cbCategory = \"notice\" and cbID = \"admin\" order by cbSeq desc;";
+		String sql = "select * from postinfo where cbCategory = \"notice\" and cbID = \"admin\" and pin = true order by cbSeq desc;";
 		List<BoardDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -214,9 +214,15 @@ public class BoardDAO {
 			}
 		}
 	}
-	
-	public List<BoardDTO> selectByTitle(String category, String keyword, int start, int count) throws Exception{
-		String sql = "select *  from postinfo where cbCategory = ? and cbTitle like ? order by cbSeq desc limit ?, ?;";
+	public List<BoardDTO> selectBySearchKeyword(String category, String search, String keyword, int start, int count) throws Exception{
+		String sql = null;
+		if(search.equals("title")) {
+			sql = "select *  from postinfo where cbCategory = ? and cbTitle like ? order by cbSeq desc limit ?, ?;";
+		}else if (search.equals("writer")) {
+			sql = "select *  from postinfo where cbCategory = ? and cbNickname like ? order by cbSeq desc limit ?, ?;";
+		}else if (search.equals("content")) {
+			sql = "select *  from postinfo where cbCategory = ? and cbContent like ? order by cbSeq desc limit ?, ?;";
+		}
 		List<BoardDTO> list = new ArrayList<>();
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
@@ -245,9 +251,16 @@ public class BoardDAO {
 			}
 		}
 	}
-	
-	public int getRecordCountTitle(String category, String keyword) throws Exception {
-		String sql = "select count(*) as count from postinfo where cbCategory = ? and cbTitle like ?;";
+
+	public int getRecordCountSearchKeyword(String category, String search, String keyword)throws Exception{
+		String sql = null;
+		if(search.equals("title")) {
+			sql = "select count(*) as count from postinfo where cbCategory = ? and cbTitle like ?;";
+		}else if (search.equals("writer")) {
+			sql = "select count(*) as count from postinfo where cbCategory = ? and cbNickname like ?;";
+		}else if (search.equals("content")) {
+			sql = "select count(*) as count from postinfo where cbCategory = ? and cbContent like ?;";
+		}
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, category);
@@ -259,108 +272,11 @@ public class BoardDAO {
 					return 0;
 				}
 			}
-			
-		}
-	}
-	
-	public List<BoardDTO> selectByWriter(String category, String keyword, int start, int count) throws Exception{
-		String sql = "select *  from postinfo where cbCategory = ? and cbNickname like ? order by cbSeq desc limit ?, ?;";
-		List<BoardDTO> list = new ArrayList<>();
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, category);
-			pstat.setString(2, "%"+keyword+"%");
-			pstat.setInt(3, start);
-			pstat.setInt(4, count);
-			try(ResultSet rs = pstat.executeQuery();){
-				while(rs.next()){
-					int cbSeq = rs.getInt("cbSeq");
-					String cbID = rs.getString("cbID");
-					String cbNickname = rs.getString("cbNickname");
-					String cbTitle = rs.getString("cbTitle");
-					String cbContent = rs.getString("cbContent");
-					Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
-					int cbView = rs.getInt("cbView");
-					String cbCategory = rs.getString("cbCategory");
-					int cbRecommend = rs.getInt("cbRecommend");
-					int fileCount = rs.getInt("fCount");
-					int replyCount = rs.getInt("rCount");
-					boolean pin = rs.getBoolean("pin");
-					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount, pin));
-				}
-				return list;
-			}
-		}
-	}
-	
-	public int getRecordCountWriter(String category, String keyword) throws Exception {
-		String sql = "select count(*) as count from postinfo where cbCategory = ? and cbNickname like ?;";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, category);
-			pstat.setString(2, "%"+keyword+"%");
-			try(ResultSet rs = pstat.executeQuery()){
-				if (rs.next()) {
-					return rs.getInt("count");
-				} else {
-					return 0;
-				}
-			}
-			
-		}
-	}
-	
-	public List<BoardDTO> selectByContents(String category, String keyword, int start, int count) throws Exception{
-		String sql = "select *  from postinfo where cbCategory = ? and cbContent like ? order by cbSeq desc limit ?, ?;";
-		List<BoardDTO> list = new ArrayList<>();
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, category);
-			pstat.setString(2, "%"+keyword+"%");
-			pstat.setInt(3, start);
-			pstat.setInt(4, count);
-			try(ResultSet rs = pstat.executeQuery();){
-				while(rs.next()){
-					int cbSeq = rs.getInt("cbSeq");
-					String cbID = rs.getString("cbID");
-					String cbNickname = rs.getString("cbNickname");
-					String cbTitle = rs.getString("cbTitle");
-					String cbContent = rs.getString("cbContent");
-					Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
-					int cbView = rs.getInt("cbView");
-					String cbCategory = rs.getString("cbCategory");
-					int cbRecommend = rs.getInt("cbRecommend");
-					int fileCount = rs.getInt("fCount");
-					int replyCount = rs.getInt("rCount");
-					boolean pin = rs.getBoolean("pin");
-					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView,
-							cbRecommend, fileCount, replyCount, pin));
-				}
-				return list;
-			}
-		}
-	}
-	
-	public int getRecordCountContents(String category, String keyword) throws Exception {
-		String sql = "select count(*) as count from postinfo where cbCategory = ? and cbContent like ?;";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, category);
-			pstat.setString(2, "%"+keyword+"%");
-			try(ResultSet rs = pstat.executeQuery()){
-				if (rs.next()) {
-					return rs.getInt("count");
-				} else {
-					return 0;
-				}
-			}
-			
 		}
 	}
 	
 	public int insert(BoardDTO dto) throws Exception{
-		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?, defalut);"; 
+		String sql ="insert into common_board values (default, ?, ?, ?, ?, default, default, ?, default);"; 
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
 			pstat.setString(1, dto.getWriter());
