@@ -13,11 +13,12 @@ class rhythm extends Phaser.Scene{
         this.bar = [];
         this.times = [30,45,60,90,120,180,240];
         this.speed = 500;
+        this.hp = 5;
     }
     preload(){
         this.load.image("note","/game/img/bluenote.png");
         this.load.image("gear","/game/img/gear.png");
-        this.load.image("bar","/game/img/bar.png");
+        this.load.image("bar","/game/img/bar.png");       
         this.load.audio("newjeans","/game/sound/newjeans.mp3");
         this.load.audio("snare","/game/sound/hit_snare.wav");
         this.load.audio("temb","/game/sound/hit_temburine.wav");
@@ -28,6 +29,7 @@ class rhythm extends Phaser.Scene{
 		this.frame = data.frame;
 		this.sec = data.sec;
 		this.jg_point = data.point;
+		this.hp = data.hp;
 	}
    
     create(){
@@ -45,6 +47,8 @@ class rhythm extends Phaser.Scene{
         });
 
         this.Judgement = this.add.text(350,50,"판정");
+        
+        this.hp_text = this.add.text(600,50,"체력 : "+this.hp);
         
         this.cursor = this.input.keyboard.createCursorKeys(); 
 
@@ -157,8 +161,10 @@ class rhythm extends Phaser.Scene{
         }, null, this);
 
         this.physics.add.overlap(BottomBoundary, this.boxes,function(boundary, box){
+			this.hp--;
+			this.hp_text.setText("체력 : "+this.hp);
             box.destroy();
-        });
+        },null,this);
 
         this.physics.add.overlap(JudgeLine1, this.bar, function(line, bar){
             bar.destroy();
@@ -169,12 +175,19 @@ class rhythm extends Phaser.Scene{
         this.frame++;
         if(this.frame%60 == 0){
             this.sec++;
-            if(this.sec == 15){
+            if(this.sec == 120){
 				this.music.stop();
 				this.scene.stop('Scene01');
                 this.scene.start("GameoverScene",{score : this.jg_point});
             }
         }
+        
+        if(this.hp < 0){
+				this.music.stop();
+				this.scene.stop('Scene01');
+                this.scene.start("GameoverScene",{score : this.jg_point});
+		}
+				
         if(this.frame%120 == 0){
             let bar = this.physics.add.sprite(362,0,"bar");
             bar.setImmovable();
