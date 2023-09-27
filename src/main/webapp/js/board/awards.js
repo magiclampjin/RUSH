@@ -39,6 +39,8 @@ $(document).ready(function() {
               game: game
            },
         }).done(function(rankerList){
+	
+			console.log(rankerList);
            // 상위 5개 추출
            let listNum = 5
           	if(rankerList.length < listNum) {
@@ -53,16 +55,16 @@ $(document).ready(function() {
 		        let rank = $("<div>");
 		        rank.attr("id", "rank");
 		        rank.css("font-size", "40px");
-		        rank.addClass("pl-15 col-2 col-xs-1 col-md-1 col-lg-1 col-xl-1 fontEnglish");
+		        rank.addClass("pl-0 pl-md-15 col-1 fontEnglish");
 		        if(i <= 2) {
 		            rank.addClass("colorPink");
 		        } else {
 		            rank.addClass("colorWhite");
 		        }
-		        rank.html(i+1);
+		        rank.html(rankerList[i].ranker);
 		
 		        let infoDiv = $("<div>");
-		        infoDiv.addClass("recordPost col-10 col-xs-11 colorWhite");
+		        infoDiv.addClass("recordPost col-11 colorWhite");
 		
 		        let userInfo = $("<div>");
 		        userInfo.addClass("userInfo g-0 row");
@@ -73,12 +75,12 @@ $(document).ready(function() {
 		        }
 		
 		        let idLevDiv = $("<div>");
-		        idLevDiv.addClass("col-8");
+		        idLevDiv.addClass("col-8 pl-15");
 		
 		        let userId = $("<div>");
-		        userId.attr("id", "userId");
+		        userId.attr("id", "userNickname");
 		        userId.addClass("colorWhite");
-		        userId.html(rankerList[i].id);
+		        userId.html(rankerList[i].nickName);
 		
 		        let userLevel = $("<div>");
 		        userLevel.attr("id", "userLevel");
@@ -90,7 +92,7 @@ $(document).ready(function() {
 		        
 		        let scoreAlign = $("<div>");
 		        scoreAlign.attr("id", "score");
-		        scoreAlign.addClass("pe-0 pe-md-5 colorWhite");
+		        scoreAlign.addClass("pe-0 pe-md-5 colorWhite fontEnglish");
 		        scoreAlign.html(rankerList[i].score + " 점");
 		
 		        idLevDiv.append(userId).append(userLevel);
