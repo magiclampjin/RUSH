@@ -231,6 +231,7 @@ public class GameDAO {
 		}
 	}
 	
+	// 명예의 전당 출력
 	public List<GameRecordDTO> selectUserByGame(String gName) throws Exception {
 		String sql = "select * from rankerUser where gName = ? order by grScore desc limit 0, 5";
 		List<GameRecordDTO> list = new ArrayList<>();
