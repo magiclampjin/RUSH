@@ -18,7 +18,10 @@ class rhythm extends Phaser.Scene{
         this.load.image("note","/game/img/bluenote.png");
         this.load.image("gear","/game/img/gear.png");
         this.load.image("bar","/game/img/bar.png");
-        //this.load.audio("newjeans","newjeans.mp3");
+        this.load.audio("newjeans","/game/sound/newjeans.mp3");
+        this.load.audio("snare","/game/sound/hit_snare.wav");
+        this.load.audio("temb","/game/sound/hit_temburine.wav");
+        this.load.spritesheet("hit","game/img/hitfx.png",{frameWidth:200, frameHeight:200});
     }
     
     init(data){
@@ -26,10 +29,20 @@ class rhythm extends Phaser.Scene{
 		this.sec = data.sec;
 		this.jg_point = data.point;
 	}
-    
+   
     create(){
-        //this.music = this.sound.add("newjeans",{loop:true});
-        //this.music.play();
+		let snare = this.sound.add("snare");
+		let temb = this.sound.add("temb");
+        
+        this.music = this.sound.add("newjeans",{loop:true});
+        this.music.play();
+        
+        this.anims.create({
+            key : "run",
+            frames:this.anims.generateFrameNumbers("hit",{start:0, end:7}),
+            frameRate : 40,
+            repeat:-1
+        });
 
         this.Judgement = this.add.text(350,50,"판정");
         
@@ -65,11 +78,19 @@ class rhythm extends Phaser.Scene{
 
 
         this.physics.add.overlap(JudgeLine1, this.boxes, function(line,box){
-            
+            let hit_effect =  this.physics.add.sprite(160,this.cameras.main.height-220, 'hit');
+            hit_effect.setVisible(false);
             console.log(this.jg_point);
+            
             if(this.aKey.isDown){
                 this.jg_point++;
+            	snare.play();    
                 this.boxes.forEach(element => {
+					hit_effect.setVisible(true);
+			        hit_effect.play("run");
+			        this.time.delayedCall(200, () => {
+	                    hit_effect.setVisible(false);
+	                });
                     box.destroy();
                     this.Judgement.setText(this.jg_point);
                 });
@@ -78,9 +99,17 @@ class rhythm extends Phaser.Scene{
         }, null, this);
 
         this.physics.add.overlap(JudgeLine2, this.boxes, function(line,box){
+			let hit_effect =  this.physics.add.sprite(265,this.cameras.main.height-220, 'hit');
+            hit_effect.setVisible(false);
             if(this.sKey.isDown){
                 this.jg_point++;
+                temb.play();
                 this.boxes.forEach(element => {
+					hit_effect.setVisible(true);
+			        hit_effect.play("run");
+			        this.time.delayedCall(200, () => {
+	                    hit_effect.setVisible(false);
+	                });
                     box.destroy();
                     this.Judgement.setText(this.jg_point);
                 });
@@ -88,11 +117,18 @@ class rhythm extends Phaser.Scene{
         }, null, this);
 
         this.physics.add.overlap(JudgeLine3, this.boxes, function(line,box){
-            
+            let hit_effect =  this.physics.add.sprite(370,this.cameras.main.height-220, 'hit');
+            hit_effect.setVisible(false);
             console.log(this.jg_point);
             if(this.kKey.isDown){
                 this.jg_point++;
+                temb.play();
                 this.boxes.forEach(element => {
+					hit_effect.setVisible(true);
+			        hit_effect.play("run");
+			        this.time.delayedCall(200, () => {
+	                    hit_effect.setVisible(false);
+	                });
                     box.destroy();
                     this.Judgement.setText(this.jg_point);
                 });
@@ -101,11 +137,18 @@ class rhythm extends Phaser.Scene{
         }, null, this);
 
         this.physics.add.overlap(JudgeLine4, this.boxes, function(line,box){
-            
             console.log(this.jg_point);
+            let hit_effect =  this.physics.add.sprite(475,this.cameras.main.height-220, 'hit');
+            hit_effect.setVisible(false);
             if(this.lKey.isDown){
                 this.jg_point++;
+                snare.play();
                 this.boxes.forEach(element => {
+					hit_effect.setVisible(true);
+			        hit_effect.play("run");
+			        this.time.delayedCall(200, () => {
+	                    hit_effect.setVisible(false);
+	                });	
                     box.destroy();
                     this.Judgement.setText(this.jg_point);
                 });
@@ -127,6 +170,7 @@ class rhythm extends Phaser.Scene{
         if(this.frame%60 == 0){
             this.sec++;
             if(this.sec == 15){
+				this.music.stop();
 				this.scene.stop('Scene01');
                 this.scene.start("GameoverScene",{score : this.jg_point});
             }

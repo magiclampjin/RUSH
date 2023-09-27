@@ -281,7 +281,7 @@
 	<script>
 	
 	// 사진 랜덤
-	let images = ["/assets/bg_img1.jpg", "/assets/bg_img2.jpg", "/assets/bg_img3.jpg", "/assets/bg_img4.jpg"];
+	let images = ["/board/assets/bg_img1.jpg", "/board/assets/bg_img2.jpg", "/board/assets/bg_img3.jpg", "/board/assets/bg_img4.jpg"];
 	let image = images[Math.floor(Math.random() * images.length)];
 	let finalImage = $("<img>");
 	finalImage.attr("src", image);

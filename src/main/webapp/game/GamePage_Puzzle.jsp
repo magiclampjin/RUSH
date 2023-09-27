@@ -21,7 +21,7 @@
 	<c:when test="${game eq 'Kordle' }">
 		<!-- 한글 자모 분리 및 조합 & kordle js 파일 -->
 		<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
-		<script src="/game/js/wordleGame.js"></script>
+		<script src="/game/js/kordleGame.js"></script>
 	</c:when>
 	<c:when test="${game eq 'Candy Crush' }">
 		<!-- Candy Crush css 및 js 파일 -->
@@ -540,7 +540,7 @@ a{
 										<table class="devTable">
 											<tr>
 												<th class="text-white fontKorean fw900">제작자</th>
-												<td class="text-white fontKorean">제작자이름</td>
+												<td class="text-white fontKorean">${dev}</td>
 											</tr>
 											<tr>
 												<th class="text-white fontKorean fw900">제작자 소속</th>

@@ -138,6 +138,7 @@ public class BoardController extends HttpServlet {
 						(String) request.getSession().getAttribute("loginID"));
 				boolean bookmark = dao.checkPostBookmark(postSeq,
 						(String) request.getSession().getAttribute("loginID"));
+				boolean pin = dao.checkNoticePin(postSeq);
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
 				request.setAttribute("category", category);
@@ -146,6 +147,8 @@ public class BoardController extends HttpServlet {
 					request.setAttribute("postRec", postRec);
 				if (bookmark)
 					request.setAttribute("bookmark", bookmark);
+				if (pin)
+					request.setAttribute("pin",pin);
 
 				List<FileDTO> files = fdao.selectForPost(postSeq);
 				request.setAttribute("files", files);
@@ -374,6 +377,17 @@ public class BoardController extends HttpServlet {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				int result = dao.deletePostBookmark(postSeq, (String) request.getSession().getAttribute("loginID"));
 				pw.append(gson.toJson(result));
+				
+			} else if (cmd.equals("/insertPin.board")) {
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				int result = dao.setNoticePin(postSeq, true);
+				if(result == 1)
+					pw.append(gson.toJson(true));
+			} else if (cmd.equals("/deletePin.board")) {
+				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
+				int result = dao.setNoticePin(postSeq, false);
+				if(result == 1)
+					pw.append(gson.toJson(false));
 				
 			} else if(cmd.equals("/moveToAwards.board")) {
 				// 명예의 전당으로 이동

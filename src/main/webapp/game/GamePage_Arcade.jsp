@@ -504,7 +504,7 @@ a {
 								<table class="devTable">
 									<tr>
 										<th class="text-white fontKorean fw900">제작자</th>
-										<td class="text-white fontKorean">제작자이름</td>
+										<td class="text-white fontKorean">${dev}</td>
 									</tr>
 									<tr>
 										<th class="text-white fontKorean fw900">제작자 소속</th>
@@ -698,20 +698,6 @@ a {
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
     	
-    	function setRecord(userScore){
-    		$.ajax({
-                url:"/setGameRecord.game",
-                data:{
-                  mID:'${loginID}',
-                  game:'${game}',
-                  nickName : '${loginNickname}',
-                  score : userScore
-                },
-                type:"post"
-              }).done(function (res){
-                console.log(res);
-              });
-    	}
     </script>
 </body>
 </html>
