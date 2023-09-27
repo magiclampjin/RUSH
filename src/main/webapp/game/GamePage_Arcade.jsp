@@ -107,6 +107,10 @@ a {
 	position: relative;
 }
 
+.h80{
+	height : 80px;
+}
+
 .recordPost:before {
   content: "";
   position: absolute;
@@ -185,45 +189,25 @@ a {
 				divColInfo.addClass("col-11");
 				
 				let divRowInfo = $("<div>");
-				divRowInfo.addClass("row g-0 p-1 recordPost");
+				divRowInfo.addClass("row g-0 p-1 recordPost h80");
 				if(i%2==0){
 					divRowInfo.addClass("bcolorDarkgray30");
 					divRowInfo.css({
-						borderRadius : "5px"
+						borderRadius : "10px"
 					});	
 				}
 				
 				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-2 align-self-center");
+				divInfoLeft.addClass("col-1 align-self-center");
 				let divInfoRight = $("<div>");
-				divInfoRight.addClass("col-7 text-white align-self-center");
-				let divUserImage = $("<div>");
-				divUserImage.css({
-					maxWidth : "70px",
-					maxHeight : "70px",
-					width : "100%",
-					backgroundColor : "white",
-					borderRadius : "50%",
-					marginLeft : "10px",
-					marginRight : "20px"
-				});
-				
-				let divImage = $("<img>");
-				divImage.attr("src","/img/user.png");
-				divImage.css({
-					width : "100%",
-					height : "100%"
-				});
-				
-				divUserImage.append(divImage);
-				
+				divInfoRight.addClass("col-9 text-white align-self-center");
+								
 				let divColScore = $("<div>");
-				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
+				divColScore.addClass("col-2 text-white fontEnglish fw500 fs-4 align-self-center pl20");
 				divColScore.append(record[i]["score"]+" 점");
 				
 				
 				
-				divInfoLeft.append(divUserImage);
 				divInfoRight.append(record[i]["nickName"]);
 				divInfoRight.append(" Lv : "+record[i]["level"]);
 				divRowInfo.append(divInfoLeft);
@@ -486,7 +470,7 @@ a {
 									</button> -->
 										</div>
 									</div>
-									<hr class="border border-primary border-3 opacity-75">
+									<hr class="colorPink border-3 opacity-100">
 								</div>
 								<div class="row g-0">
 									<div class="col-12 game">play ground</div>
@@ -510,19 +494,19 @@ a {
 								<div class="row g-0 mt49">
 									<div class="col-12" id="rank">
 										<div class="rankCon">
-											<hr class="colorWhite">
-											<div class="row g-0 p-2">
-												<div class="col-1">
+											<div class="line col"></div>
+												<div class="row g-0 p-2">
+													<div class="col-1">
 													<span class="text-white fontKorean">순위</span>
+													</div>
+													<div class="col-9">
+														<span class="text-white fontKorean">유저 정보</span>
+													</div>
+													<div class="col-2">
+														<span class="text-white fontKorean">점수</span>
+													</div>
 												</div>
-												<div class="col-7">
-													<span class="text-white fontKorean">플레이어 정보</span>
-												</div>
-												<div class="col-4">
-													<span class="text-white fontKorean">점수</span>
-												</div>
-											</div>
-											<hr class="colorWhite">
+											<div class="line col"></div>
 											<div id="rankCon"></div>
 										</div>
 									</div>
@@ -652,45 +636,25 @@ a {
     				divColInfo.addClass("col-11");
     				
     				let divRowInfo = $("<div>");
-    				divRowInfo.addClass("row g-0 p-1 recordPost");
+    				divRowInfo.addClass("row g-0 p-1 recordPost h80");
     				if(i%2==0){
     					divRowInfo.addClass("bcolorDarkgray30");
     					divRowInfo.css({
-    						borderRadius : "5px"
+    						borderRadius : "10px"
     					});	
     				}
     				
     				let divInfoLeft = $("<div>");
-    				divInfoLeft.addClass("col-2 align-self-center");
+    				divInfoLeft.addClass("col-1 align-self-center");
     				let divInfoRight = $("<div>");
-    				divInfoRight.addClass("col-7 text-white align-self-center");
-    				let divUserImage = $("<div>");
-    				divUserImage.css({
-    					maxWidth : "70px",
-    					maxHeight : "70px",
-    					width : "100%",
-    					backgroundColor : "white",
-    					borderRadius : "50%",
-    					marginLeft : "10px",
-    					marginRight : "20px"
-    				});
-    				
-    				let divImage = $("<img>");
-    				divImage.attr("src","/img/user.png");
-    				divImage.css({
-    					width : "100%",
-    					height : "100%"
-    				});
-    				
-    				divUserImage.append(divImage);
-    				
+    				divInfoRight.addClass("col-9 text-white align-self-center");
+    								
     				let divColScore = $("<div>");
-    				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
+    				divColScore.addClass("col-2 text-white fontEnglish fw500 fs-4 align-self-center pl20");
     				divColScore.append(record[i]["score"]+" 점");
     				
     				
     				
-    				divInfoLeft.append(divUserImage);
     				divInfoRight.append(record[i]["nickName"]);
     				divInfoRight.append(" Lv : "+record[i]["level"]);
     				divRowInfo.append(divInfoLeft);
