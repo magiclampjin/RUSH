@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	let gameArr = ["Candy Crush", "doodle jump", "Flappy Bird", "KJMAX", "kordle"];
+	let gameArr = ["Candy Crush", "Doodle Jump", "Flappy Bird", "KJMAX", "Kordle"];
 	for(let i = 0; i < 5; i++) {
 		$("#game"+i).attr("id", gameArr[i]);
 	}
@@ -12,7 +12,7 @@ $(document).ready(function() {
     $(document).on("click", ".game", function(){
 		$(".scoreBox").remove();
 	
-		let selectGame = "CandyCrush";
+		//let selectGame = "CandyCrush";
 	
 		game = $(this).attr("id");
 		console.log(game);
@@ -21,6 +21,15 @@ $(document).ready(function() {
         $(this).removeClass("colorWhite");
         $(this).addClass("bColorGreen");
         $(this).addClass("colorBlack");
+        
+        if(game == "Kordle"){
+			$(".subTitleScore").html("");
+        	$(".subTitleScore").html("연속 정답 수");
+		}else{
+			$(".subTitleScore").html("");
+        	$(".subTitleScore").html("점수");
+		}
+        
 
         $(".game").not($(this)).removeClass("bColorGreen");
         $(".game").not($(this)).removeClass("colorBlack");
@@ -93,7 +102,14 @@ $(document).ready(function() {
 		        let scoreAlign = $("<div>");
 		        scoreAlign.attr("id", "score");
 		        scoreAlign.addClass("pe-0 pe-md-5 colorWhite fontEnglish");
-		        scoreAlign.html(rankerList[i].score + " 점");
+		      
+		       
+		        if(rankerList[i].gameName == 'Kordle'){
+					scoreAlign.html(rankerList[i].score + " 개");
+				} else {
+					scoreAlign.html(rankerList[i].score + " 점");
+				}
+		        
 		
 		        idLevDiv.append(userId).append(userLevel);
 		        score.append(scoreAlign);
