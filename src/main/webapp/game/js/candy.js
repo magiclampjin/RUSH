@@ -97,7 +97,7 @@ function startGame() {
 }
 
 function endGame(){
-    $("#overlay").css("height","100%");
+    $("#overlay").css("height","460px");
     $("#btnRestart").css("display","block");
     $("#timeover").css("display","block");  
     
