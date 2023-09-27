@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/common/style.jsp" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,6 +110,10 @@ a {
 	position: relative;
 }
 
+.h80{
+	height : 80px;
+}
+
 .recordPost:before {
   content: "";
   position: absolute;
@@ -185,45 +192,25 @@ a {
 				divColInfo.addClass("col-11");
 				
 				let divRowInfo = $("<div>");
-				divRowInfo.addClass("row g-0 p-1 recordPost");
+				divRowInfo.addClass("row g-0 p-1 recordPost h80");
 				if(i%2==0){
 					divRowInfo.addClass("bcolorDarkgray30");
 					divRowInfo.css({
-						borderRadius : "5px"
+						borderRadius : "10px"
 					});	
 				}
 				
 				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-2 align-self-center");
+				divInfoLeft.addClass("col-1 align-self-center");
 				let divInfoRight = $("<div>");
-				divInfoRight.addClass("col-7 text-white align-self-center");
-				let divUserImage = $("<div>");
-				divUserImage.css({
-					maxWidth : "70px",
-					maxHeight : "70px",
-					width : "100%",
-					backgroundColor : "white",
-					borderRadius : "50%",
-					marginLeft : "10px",
-					marginRight : "20px"
-				});
-				
-				let divImage = $("<img>");
-				divImage.attr("src","/img/user.png");
-				divImage.css({
-					width : "100%",
-					height : "100%"
-				});
-				
-				divUserImage.append(divImage);
-				
+				divInfoRight.addClass("col-9 text-white align-self-center");
+								
 				let divColScore = $("<div>");
-				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
+				divColScore.addClass("col-2 text-white fontEnglish fw500 fs-4 align-self-center pl20");
 				divColScore.append(record[i]["score"]+" 점");
 				
 				
 				
-				divInfoLeft.append(divUserImage);
 				divInfoRight.append(record[i]["nickName"]);
 				divInfoRight.append(" Lv : "+record[i]["level"]);
 				divRowInfo.append(divInfoLeft);
@@ -255,74 +242,7 @@ a {
 </script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
-			<div class="header_guide">
-				<a href="/index.jsp">
-					<div class="logo fontLogo colorWhite">RUSH</div>
-				</a>
-				<nav class="navbar navbar-expand navbar-light colorWhite">
-					<div class="container-fluid p-0">
-						<div class="collapse navbar-collapse w-100 g-0 m-0"
-							id="navbarNavDropdown">
-							<ul class="navbar-nav row g-0 w-100">
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish"
-											href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
-										<li><a class="dropdown-item fontEnglish"
-											href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
-									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish"
-									href="http://localhost/board/awards.jsp"> AWARDS </a></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish"
-									href="/listing.board?cpage=1" id="navbarDropdownMenuLink"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										BOARD </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item"
-											href="/listing.board?cpage=1">자유게시판</a></li>
-										<li><a class="dropdown-item fontEnglish"
-											href="/listing.qna?cpage=1">Q&A</a></li>
-										<li><a class="dropdown-item"
-											href="http://localhost/board/awards.jsp">명예의 전당</a></li>
-									</ul></li>
-								<c:choose>
-									<c:when test="${loginID == null }">
-										<li class="nav-item dropdown col-3 text-end p8"><a
-											class="text-white fontEnglish"
-											href="http://localhost/member/login.jsp"> LOGIN </a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="nav-item dropdown col-3 text-end"><a
-											class="nav-link text-white fontEnglish"
-											href="http://localhost/member/login.jsp"
-											id="navbarDropdownMenuLink" role="button"
-											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE </a>
-											<ul class="dropdown-menu p-0"
-												aria-labelledby="navbarDropdownMenuLink">
-												<li><a class="dropdown-item fontEnglish" href="#">MyPage</a></li>
-												<li><a class="dropdown-item fontEnglish"
-													href="http://localhost/logout.member">Log Out</a></li>
-											</ul></li>
-									</c:otherwise>
-								</c:choose>
-
-
-
-								<script type="text/javascript">
-									console.log("${loginID }")
-								</script>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
+			<%@ include file="/common/header.jsp" %> 
 		</div>
 
 		<div class="container-fluid g-0 bColorBlack">
@@ -486,7 +406,7 @@ a {
 									</button> -->
 										</div>
 									</div>
-									<hr class="border border-primary border-3 opacity-75">
+									<hr class="colorPink border-3 opacity-100">
 								</div>
 								<div class="row g-0">
 									<div class="col-12 game">play ground</div>
@@ -510,19 +430,19 @@ a {
 								<div class="row g-0 mt49">
 									<div class="col-12" id="rank">
 										<div class="rankCon">
-											<hr class="colorWhite">
-											<div class="row g-0 p-2">
-												<div class="col-1">
+											<div class="line col"></div>
+												<div class="row g-0 p-2">
+													<div class="col-1">
 													<span class="text-white fontKorean">순위</span>
+													</div>
+													<div class="col-9">
+														<span class="text-white fontKorean">유저 정보</span>
+													</div>
+													<div class="col-2">
+														<span class="text-white fontKorean">점수</span>
+													</div>
 												</div>
-												<div class="col-7">
-													<span class="text-white fontKorean">플레이어 정보</span>
-												</div>
-												<div class="col-4">
-													<span class="text-white fontKorean">점수</span>
-												</div>
-											</div>
-											<hr class="colorWhite">
+											<div class="line col"></div>
 											<div id="rankCon"></div>
 										</div>
 									</div>
@@ -576,40 +496,7 @@ a {
 	</div>
 	<div class="container-fluid g-0">
 		<div class="footer bColorBlack">
-			<div class="footer_guide">
-				<div class="footer_logo fontLogo colorWhite">RUSH</div>
-				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-					RIGHT RESERVED</div>
-				<div class="footer_contents">
-					<div class="about conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-						<div class="footer_con ">
-							<div class="con colorWhite">팀명 :</div>
-							<div class="encon colorWhite">SKY</div>
-						</div>
-					</div>
-					<div class="office conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
-						<div class="footer_con">
-							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-						</div>
-					</div>
-					<div class="contact conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-						<div class="footer_con fontEnglish">
-							<div class="con fontEnglish colorWhite">a@naver.com</div>
-							<div class="con fontEnglish colorWhite">01012345678</div>
-						</div>
-					</div>
-					<div class="provision conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
-						<div class="footer_con">
-							<div class="con colorWhite">개인정보 처리방침</div>
-							<div class="con colorWhite">서비스 이용약관</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<%@include file="/common/footer.jsp"%> 
 		</div>
 		<script>
 		$("#rank").css("display","flex");
@@ -652,45 +539,25 @@ a {
     				divColInfo.addClass("col-11");
     				
     				let divRowInfo = $("<div>");
-    				divRowInfo.addClass("row g-0 p-1 recordPost");
+    				divRowInfo.addClass("row g-0 p-1 recordPost h80");
     				if(i%2==0){
     					divRowInfo.addClass("bcolorDarkgray30");
     					divRowInfo.css({
-    						borderRadius : "5px"
+    						borderRadius : "10px"
     					});	
     				}
     				
     				let divInfoLeft = $("<div>");
-    				divInfoLeft.addClass("col-2 align-self-center");
+    				divInfoLeft.addClass("col-1 align-self-center");
     				let divInfoRight = $("<div>");
-    				divInfoRight.addClass("col-7 text-white align-self-center");
-    				let divUserImage = $("<div>");
-    				divUserImage.css({
-    					maxWidth : "70px",
-    					maxHeight : "70px",
-    					width : "100%",
-    					backgroundColor : "white",
-    					borderRadius : "50%",
-    					marginLeft : "10px",
-    					marginRight : "20px"
-    				});
-    				
-    				let divImage = $("<img>");
-    				divImage.attr("src","/img/user.png");
-    				divImage.css({
-    					width : "100%",
-    					height : "100%"
-    				});
-    				
-    				divUserImage.append(divImage);
-    				
+    				divInfoRight.addClass("col-9 text-white align-self-center");
+    								
     				let divColScore = $("<div>");
-    				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
+    				divColScore.addClass("col-2 text-white fontEnglish fw500 fs-4 align-self-center pl20");
     				divColScore.append(record[i]["score"]+" 점");
     				
     				
     				
-    				divInfoLeft.append(divUserImage);
     				divInfoRight.append(record[i]["nickName"]);
     				divInfoRight.append(" Lv : "+record[i]["level"]);
     				divRowInfo.append(divInfoLeft);
