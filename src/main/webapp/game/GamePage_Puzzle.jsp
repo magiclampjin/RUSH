@@ -262,56 +262,66 @@ a{
 	         let record = JSON.parse(res);
 	         $("#rankCon").text("");
 	         for(let i=0; i<record.length; i++){
-	            let divRow = $("<div>");
-	            divRow.addClass("row g-0 p-2");
-	            let divColRank = $("<div>");
-	            if(i<3){
-	                divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
-	                divColRank.append(i+1);
-	            }else{
-	                divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
-	                divColRank.append(i+1);   
-	            }
+					let divRow = $("<div>");
+					divRow.addClass("row g-0 p-2");
+					let divColRank = $("<div>");
+					if(i<3){
+	    				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
+	    				divColRank.append(i+1);
+					}else{
+	    				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
+	    				divColRank.append(i+1);	
+					}
 
-	                        
-	            let divColInfo = $("<div>");
-	            divColInfo.addClass("col-7");
-	            
-	            let divRowInfo = $("<div>");
-	            divRowInfo.addClass("row g-0");
-	            let divInfoLeft = $("<div>");
-	            divInfoLeft.addClass("col-3");
-	            let divInfoRight = $("<div>");
-	            divInfoRight.addClass("col-9 text-white align-self-center");
-	            let divUserImage = $("<div>");
-	            divUserImage.css({
-	               width : "80px",
-	               height : "80px",
-	               backgroundColor : "white",
-	               borderRadius : "50%"
-	            });
-	            
-	            
-	            divInfoLeft.append(divUserImage);
-	            divInfoRight.append(record[i]["nickName"]);
-	            divInfoRight.append(" Lv : "+record[i]["level"]);
-	            divRowInfo.append(divInfoLeft);
-	            divRowInfo.append(divInfoRight);
-	            divColInfo.append(divRowInfo);
-	            
-	            let divColScore = $("<div>");
-	            divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
-	            divColScore.append(record[i]["score"]);
-	            
-	            divRow.append(divColRank);
-	            divRow.append(divColInfo);
-	            divRow.append(divColScore);
-	            
-	            
-	            $("#rankCon").append(divRow);
-	            
-	            console.log(divRow);
-	         }
+									
+					let divColInfo = $("<div>");
+					divColInfo.addClass("col-11");
+					
+					let divRowInfo = $("<div>");
+					divRowInfo.addClass("row g-0 p-1");
+					if(i%2==0){
+						divRowInfo.addClass("bcolorDarkgray30");
+						divRowInfo.css({
+							borderRadius : "5px"
+						});	
+					}
+					
+					
+					let divInfoLeft = $("<div>");
+					divInfoLeft.addClass("col-2");
+					let divInfoRight = $("<div>");
+					divInfoRight.addClass("col-5 text-white align-self-center");
+					let divUserImage = $("<div>");
+					divUserImage.css({
+						width : "70px",
+						height : "70px",
+						backgroundColor : "white",
+						borderRadius : "50%"
+					});
+					
+					let divColScore = $("<div>");
+					divColScore.addClass("col-5 text-white fontEnglish fw500 fs-4 align-self-center");
+					divColScore.append(record[i]["score"]);
+					
+					
+					
+					divInfoLeft.append(divUserImage);
+					divInfoRight.append(record[i]["nickName"]);
+					divInfoRight.append(" Lv : "+record[i]["level"]);
+					divRowInfo.append(divInfoLeft);
+					divRowInfo.append(divInfoRight);
+					divRowInfo.append(divColScore);
+					divColInfo.append(divRowInfo);
+					
+					
+					
+					divRow.append(divColRank);
+					divRow.append(divColInfo);
+					//divRow.append(divColScore);
+					
+					
+					$("#rankCon").append(divRow);
+				}
 	      });
 		let category = '${category}';
 		if(category == 'new'){

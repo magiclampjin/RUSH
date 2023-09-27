@@ -1,664 +1,659 @@
 $(document).ready(function() {
-	
-	let category = "favoriteAll";
-	let gameName = "gameAll";
-
-	$('ul.tabs li').click(function() {
-		var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#" + tab_id).addClass('current');
-	})
-
-	// 내가 쓴 글 눌렀을 때 -> 처음에 나와야하니까..
-	myWriteList();
-
-	// 즐겨찾기 눌렀을 때
-	$("#favorites").on("click", function() {
-		myFavorite("favoriteAll");
-	})
-	
-	// 전체 눌렀을 때
-	$("#favoriteAll").on("click", function() {
-		category = "favoriteAll";
-		myFavorite(category);
-	});
-
-	// 아케이드 눌렀을 때
-	$("#Arcade").on("click", function() {
-
-		category = $(this).html();
-		myFavorite(category);
-
-	});
-	// 퍼즐 눌렀을때
-	$("#Puzzle").on("click", function() {
-		category = $(this).html();
-		myFavorite(category);
-	});
-	// 리듬 눌렀을때
-	$("#Rhythm").on("click", function() {
-		category = $(this).html();
-		myFavorite(category);
-	});
-	
-	
-	// 캔디크러쉬 누름
-	$("#Candy").on("click",function(){
-		gameName = $(this).html();
-		myGameRecod(gameName);
-	})
-	// 두들점프 누름
-	$("#Doodle").on("click",function(){
-		gameName = $(this).html();
-		myGameRecod(gameName);
-	})
-	// 플래피버드
-	$("#Flappy").on("click",function(){
-		gameName = $(this).html();
-		myGameRecod(gameName);
-	})
-	//맥스
-	$("#Kjmax").on("click",function(){
-		gameName = $(this).html();
-		myGameRecod(gameName);
-	})
-	// 꼬들
-	$("#kkodle").on("click",function(){
-		gameName = $(this).html();
-		myGameRecod(gameName);
-	})
-	
-	
-
-
-	// 북마크 눌렀을 때
-	$("#myBookMark").on("click", function() {
-		$.ajax({
-			url: "/myBookMarkList.board?myPage=true",
-			dataType: "json"
-		}).done(function(resp) {
-			console.log(resp);
-			
-			let div = $(".post2");
-			
-			
-
-			for (let i = 0; i < resp.length; i++) {
-
-				let divPost = $("<div>").attr("class", "post");
-
-				let maxBoard = $("<div>").attr("class", "maxBoard");
-
-				let divNum = $("<div>").attr("class", "num fontEnglish");
-				divNum.append(resp[i].seq);
-
-				let divTitle = $("<div>").attr("class", "title");
-
-				let aTagTitle = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
-				let divMainTitle = $("<div>").attr("class", "mainTitle");
-				divMainTitle.append(resp[i].title);
-				aTagTitle.append(divMainTitle);
+   
+   let category = "favoriteAll";
+   let gameName = "gameAll";
+
+   $('ul.tabs li').click(function() {
+      var tab_id = $(this).attr('data-tab');
+
+      $('ul.tabs li').removeClass('current');
+      $('.tab-content').removeClass('current');
+
+      $(this).addClass('current');
+      $("#" + tab_id).addClass('current');
+   })
+
+   // 내가 쓴 글 눌렀을 때 -> 처음에 나와야하니까..
+   myWriteList();
+
+   // 즐겨찾기 눌렀을 때
+   $("#favorites").on("click", function() {
+      myFavorite("favoriteAll");
+   })
+   
+   // 전체 눌렀을 때
+   $("#favoriteAll").on("click", function() {
+      category = "favoriteAll";
+      myFavorite(category);
+   });
+
+   // 아케이드 눌렀을 때
+   $("#Arcade").on("click", function() {
+
+      category = $(this).html();
+      myFavorite(category);
+
+   });
+   // 퍼즐 눌렀을때
+   $("#Puzzle").on("click", function() {
+      category = $(this).html();
+      myFavorite(category);
+   });
+   // 리듬 눌렀을때
+   $("#Rhythm").on("click", function() {
+      category = $(this).html();
+      myFavorite(category);
+   });
+   
+   
+   // 캔디크러쉬 누름
+   $("#Candy").on("click",function(){
+      gameName = $(this).html();
+      myGameRecod(gameName);
+   })
+   // 두들점프 누름
+   $("#Doodle").on("click",function(){
+      gameName = $(this).html();
+      myGameRecod(gameName);
+   })
+   // 플래피버드
+   $("#Flappy").on("click",function(){
+      gameName = $(this).html();
+      myGameRecod(gameName);
+   })
+   //맥스
+   $("#Kjmax").on("click",function(){
+      gameName = $(this).html();
+      myGameRecod(gameName);
+   })
+   // 꼬들
+   $("#Kordle").on("click",function(){
+      gameName = $(this).html();
+      myGameRecod(gameName);
+   })
+   
+   
+
+
+   // 북마크 눌렀을 때
+   $("#myBookMark").on("click", function() {
+      $.ajax({
+         url: "/myBookMarkList.board?myPage=true",
+         dataType: "json"
+      }).done(function(resp) {
+         console.log(resp);
+         $(".post").remove();
+         
+         let div = $(".post2");
+
+         for (let i = 0; i < resp.length; i++) {
+
+            let divPost = $("<div>").attr("class", "post");
+
+            let maxBoard = $("<div>").attr("class", "maxBoard");
+
+            let divNum = $("<div>").attr("class", "num fontEnglish");
+            divNum.append(resp[i].seq);
+
+            let divTitle = $("<div>").attr("class", "title");
+
+            let aTagTitle = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
+            let divMainTitle = $("<div>").attr("class", "mainTitle");
+            divMainTitle.append(resp[i].title);
+            aTagTitle.append(divMainTitle);
 
-				let divReplyCnt = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
-				divReplyCnt.append(resp[i].rCount);
+            let divReplyCnt = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
+            divReplyCnt.append(resp[i].rCount);
 
-				divTitle.append(aTagTitle);
-				divTitle.append(divReplyCnt);
+            divTitle.append(aTagTitle);
+            divTitle.append(divReplyCnt);
 
-				let divWriter = $("<div>").attr("class", "writer");
-				divWriter.append(resp[i].nickName);
+            let divWriter = $("<div>").attr("class", "writer");
+            divWriter.append(resp[i].nickName);
 
-				let divDate = $("<div>").attr("class", "date");
-				divDate.html(resp[i].writeDate);
+            let divDate = $("<div>").attr("class", "date");
+            divDate.html(resp[i].writeDate);
 
-				let divView = $("<div>").attr("class", "view fontEnglish");
-				divView.append(resp[i].view);
+            let divView = $("<div>").attr("class", "view fontEnglish");
+            divView.append(resp[i].view);
 
-				let divRecommend = $("<div>").attr("class", "recommend forEnglish");
-				divRecommend.append(resp[i].recommend);
+            let divRecommend = $("<div>").attr("class", "recommend forEnglish");
+            divRecommend.append(resp[i].recommend);
 
 
 
-				maxBoard.append(divNum).append(divTitle).append(divWriter).append(divDate).append(divView).append(divRecommend);
+            maxBoard.append(divNum).append(divTitle).append(divWriter).append(divDate).append(divView).append(divRecommend);
 
 
-				if (resp[i].fCount > 0) {
-					let divFile = $("<div>").attr("class", "file");
-					let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
-					divFile.append(iconFile);
-					maxBoard.append(divFile);
-				} else {
-					let divFile = $("<div>").attr("class", "file");
-					maxBoard.append(divFile);
-				}
+            if (resp[i].fCount > 0) {
+               let divFile = $("<div>").attr("class", "file");
+               let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
+               divFile.append(iconFile);
+               maxBoard.append(divFile);
+            } else {
+               let divFile = $("<div>").attr("class", "file");
+               maxBoard.append(divFile);
+            }
 
 
-				divPost.append(maxBoard);
+            divPost.append(maxBoard);
 
-				let minBoard = $("<div>").attr("class", "minBoard");
+            let minBoard = $("<div>").attr("class", "minBoard");
 
-				let divMinNum = $("<div>").attr("class", "num");
-				divMinNum.append(resp[i].seq);
+            let divMinNum = $("<div>").attr("class", "num");
+            divMinNum.append(resp[i].seq);
 
-				let divMinCon = $("<div>").attr("class", "minCon");
+            let divMinCon = $("<div>").attr("class", "minCon");
 
-				let divMinTitle = $("<div>").attr("class", "title");
-				let aTagMin = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
-				let divMinMainTitle = $("<div>").attr("class", "mainTitle");
-				divMinMainTitle.append(resp[i].title);
-				aTagMin.append(divMinMainTitle);
+            let divMinTitle = $("<div>").attr("class", "title");
+            let aTagMin = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
+            let divMinMainTitle = $("<div>").attr("class", "mainTitle");
+            divMinMainTitle.append(resp[i].title);
+            aTagMin.append(divMinMainTitle);
 
-				let divMinReply = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
-				divMinReply.append(resp[i].recommend);
+            let divMinReply = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
+            divMinReply.append(resp[i].recommend);
 
-				divMinTitle.append(aTagMin);
-				divMinTitle.append(divMinReply);
+            divMinTitle.append(aTagMin);
+            divMinTitle.append(divMinReply);
 
-				let divMinInfo = $("<div>").attr("class", "info");
-				let divMinWriter = $("<div>").attr("class", "minWriter colorDarkgray");
-				divMinWriter.append(resp[i].nickName);
+            let divMinInfo = $("<div>").attr("class", "info");
+            let divMinWriter = $("<div>").attr("class", "minWriter colorDarkgray");
+            divMinWriter.append(resp[i].nickName);
 
-				let divMinDate = $("<div>").attr("class", "minDate colorDarkgray");
-				divMinDate.html(resp[i].writeDate);
+            let divMinDate = $("<div>").attr("class", "minDate colorDarkgray");
+            divMinDate.html(resp[i].writeDate);
 
-				let divMinView = $("<div>").attr("class", "minView fontEnglish colorDarkgray");
-				let divIconView = $("<i>").attr("class", "fa-regular fa-eye");
-				divMinView.append(divIconView).append("&nbsp;").append(resp[i].view);
+            let divMinView = $("<div>").attr("class", "minView fontEnglish colorDarkgray");
+            let divIconView = $("<i>").attr("class", "fa-regular fa-eye");
+            divMinView.append(divIconView).append("&nbsp;").append(resp[i].view);
 
-				let divMinRecommend = $("<div>").attr("class", "minRecommend fontEnglish colorDarkgray");
-				let divIconRec = $("<i>").attr("class", "fa-regular fa-thumbs-up");
+            let divMinRecommend = $("<div>").attr("class", "minRecommend fontEnglish colorDarkgray");
+            let divIconRec = $("<i>").attr("class", "fa-regular fa-thumbs-up");
 
-				divMinRecommend.append(divIconRec).append("&nbsp;").append(resp[i].rCount);
+            divMinRecommend.append(divIconRec).append("&nbsp;").append(resp[i].rCount);
 
-				divMinInfo.append(divMinWriter).append(divMinDate).append(divMinView).append(divMinRecommend);
+            divMinInfo.append(divMinWriter).append(divMinDate).append(divMinView).append(divMinRecommend);
 
-				//			파일개수는 나중에
-				if (resp[i].fCount > 0) {
-					let divFile = $("<div>").attr("class", "file");
-					let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
-					divFile.append(iconFile);
-					divMinInfo.append(divFile);
-				} else {
-					let divFile = $("<div>").attr("class", "file");
-					divMinInfo.append(divFile);
-				}
+            //         파일개수는 나중에
+            if (resp[i].fCount > 0) {
+               let divFile = $("<div>").attr("class", "file");
+               let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
+               divFile.append(iconFile);
+               divMinInfo.append(divFile);
+            } else {
+               let divFile = $("<div>").attr("class", "file");
+               divMinInfo.append(divFile);
+            }
 
 
-				divMinCon.append(divMinTitle).append(divMinInfo);
+            divMinCon.append(divMinTitle).append(divMinInfo);
 
-				minBoard.append(divMinNum).append(divMinCon);
+            minBoard.append(divMinNum).append(divMinCon);
 
-				divPost.append(minBoard);
+            divPost.append(minBoard);
 
-				div.append(divPost);
-			}
+            div.append(divPost);
+         }
 
-		});
-	});
+      });
+   });
 
-	// 즐겨찾기 안에 selectBox option
-	$("#selectBox").change(function() {
-		console.log("cat: "+category);
-		let value = $(this).val();
-		console.log("select Box  " + value);
-		if (value == "") {
-			value = "currentOrder";
-		}
-		if (value == "currentOrder") {
-			currentOrder();
-			$(".gamePost").remove();
+   // 즐겨찾기 안에 selectBox option
+   $("#selectBox").change(function() {
+      
+      let value = $(this).val();
+      
+      if (value == "") {
+         value = "currentOrder";
+      }
+      if (value == "currentOrder") {
+         currentOrder();
+         $(".gamePost").remove();
 
-			function currentOrder() {
-				$.ajax({
-					url: "/mycurrentOrder.member",
-					dataType: "json",
-					data :{
-						param : category
-					}
-				}).done(function(resp) {
-					for (let i = 0; i < resp.length; i++) {
+         function currentOrder() {
+            $.ajax({
+               url: "/mycurrentOrder.member",
+               dataType: "json",
+               data :{
+                  param : category
+               }
+            }).done(function(resp) {
+               for (let i = 0; i < resp.length; i++) {
 
-						let divBody = $(".favoriteBody");
+                  let divBody = $(".favoriteBody");
 
-						let divGamePost = $("<div>").attr("class", "gamePost");
-						let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
+                  let divGamePost = $("<div>").attr("class", "gamePost");
+                  let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
 
-						let divGameImag = $("<div>").attr("class", "gameImg");
-						let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-						console.log(resp[i].gImageURL);
-						divGameImag.append(imgGame);
+                  let divGameImag = $("<div>").attr("class", "gameImg");
+                  let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
+                  console.log(resp[i].gImageURL);
+                  divGameImag.append(imgGame);
 
-						let divGameInfo = $("<div>").attr("class", "gameInfo");
-						let divGameTitle = $("<div>").attr("class", "gameTitle");
-						divGameTitle.html(resp[i].gName);
-						let divProducer = $("<div>").attr("class", "producer");
-						divProducer.html(resp[i].gDeveloper);
-						divGameInfo.append(divGameTitle).append(divProducer);
+                  let divGameInfo = $("<div>").attr("class", "gameInfo");
+                  let divGameTitle = $("<div>").attr("class", "gameTitle");
+                  divGameTitle.html(resp[i].gName);
+                  let divProducer = $("<div>").attr("class", "producer");
+                  divProducer.html(resp[i].gDeveloper);
+                  divGameInfo.append(divGameTitle).append(divProducer);
 
-						divGameInfoBox.append(divGameImag).append(divGameInfo);
+                  divGameInfoBox.append(divGameImag).append(divGameInfo);
 
 
-						let divGameLink = $("<div>").attr("class", "gameLink");
-						let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
-						let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
+                  let divGameLink = $("<div>").attr("class", "gameLink");
+                  let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
+                  let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
 
-						aTagGameLink.append(inputGameBtn);
+                  aTagGameLink.append(inputGameBtn);
 
-						divGameLink.append(aTagGameLink);
+                  divGameLink.append(aTagGameLink);
 
-						divGamePost.append(divGameInfoBox).append(divGameLink);
+                  divGamePost.append(divGameInfoBox).append(divGameLink);
 
-						divBody.append(divGamePost);
+                  divBody.append(divGamePost);
 
 
-					}
-				});
-			}
+               }
+            });
+         }
 
-		} else if (value == "favoriOrder") {
-			myFavoriteorder();
-			$(".gamePost").remove();
+      } else if (value == "favoriOrder") {
+         myFavoriteorder();
+         $(".gamePost").remove();
 
-			function myFavoriteorder() {
-				$.ajax({
-					url: "/myFavoriteOrderGame.member",
-					dataType: "json",
-					data :{
-						param : category
-					}
-				}).done(function(resp) {
+         function myFavoriteorder() {
+            $.ajax({
+               url: "/myFavoriteOrderGame.member",
+               dataType: "json",
+               data :{
+                  param : category
+               }
+            }).done(function(resp) {
 
-					for (let i = 0; i < resp.length; i++) {
+               for (let i = 0; i < resp.length; i++) {
 
-						let divBody = $(".favoriteBody");
+                  let divBody = $(".favoriteBody");
 
-						let divGamePost = $("<div>").attr("class", "gamePost");
-						let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
+                  let divGamePost = $("<div>").attr("class", "gamePost");
+                  let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
 
-						let divGameImag = $("<div>").attr("class", "gameImg");
-						let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-						console.log(resp[i].gImageURL);
-						divGameImag.append(imgGame);
+                  let divGameImag = $("<div>").attr("class", "gameImg");
+                  let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
+                  console.log(resp[i].gImageURL);
+                  divGameImag.append(imgGame);
 
-						let divGameInfo = $("<div>").attr("class", "gameInfo");
-						let divGameTitle = $("<div>").attr("class", "gameTitle");
-						divGameTitle.html(resp[i].gName);
-						let divProducer = $("<div>").attr("class", "producer");
-						divProducer.html(resp[i].gDeveloper);
-						divGameInfo.append(divGameTitle).append(divProducer);
+                  let divGameInfo = $("<div>").attr("class", "gameInfo");
+                  let divGameTitle = $("<div>").attr("class", "gameTitle");
+                  divGameTitle.html(resp[i].gName);
+                  let divProducer = $("<div>").attr("class", "producer");
+                  divProducer.html(resp[i].gDeveloper);
+                  divGameInfo.append(divGameTitle).append(divProducer);
 
-						divGameInfoBox.append(divGameImag).append(divGameInfo);
+                  divGameInfoBox.append(divGameImag).append(divGameInfo);
 
 
-						let divGameLink = $("<div>").attr("class", "gameLink");
-						let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
-						let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
+                  let divGameLink = $("<div>").attr("class", "gameLink");
+                  let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
+                  let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
 
-						aTagGameLink.append(inputGameBtn);
+                  aTagGameLink.append(inputGameBtn);
 
-						divGameLink.append(aTagGameLink);
+                  divGameLink.append(aTagGameLink);
 
-						divGamePost.append(divGameInfoBox).append(divGameLink);
+                  divGamePost.append(divGameInfoBox).append(divGameLink);
 
-						divBody.append(divGamePost);
+                  divBody.append(divGamePost);
 
 
-					}
-				});
-			}
-		} else if (value == "nameOrder") {
-			nameOrder();
-			function nameOrder() {
-				$.ajax({
-					url: "/mynameOrderGame.member",
-					dataType: "json",
-					data :{
-						param : category
-					}
-				}).done(function(resp) {
-					$(".gamePost").remove();
-
-					for (let i = 0; i < resp.length; i++) {
-
-						let divBody = $(".favoriteBody");
-
-						let divGamePost = $("<div>").attr("class", "gamePost");
-						let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
-
-						let divGameImag = $("<div>").attr("class", "gameImg");
-						let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-						console.log(resp[i].gImageURL);
-						divGameImag.append(imgGame);
-
-						let divGameInfo = $("<div>").attr("class", "gameInfo");
-						let divGameTitle = $("<div>").attr("class", "gameTitle");
-						divGameTitle.html(resp[i].gName);
-						let divProducer = $("<div>").attr("class", "producer");
-						divProducer.html(resp[i].gDeveloper);
-						divGameInfo.append(divGameTitle).append(divProducer);
-
-						divGameInfoBox.append(divGameImag).append(divGameInfo);
-
-
-						let divGameLink = $("<div>").attr("class", "gameLink");
-						let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
-						let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
-
-						aTagGameLink.append(inputGameBtn);
-
-						divGameLink.append(aTagGameLink);
-
-						divGamePost.append(divGameInfoBox).append(divGameLink);
-
-						divBody.append(divGamePost);
-
-
-					}
-				});
-			}
-		}
-	})
-	
-	// 게임기록
-	$("#gameRecord").one("click",function(){
-		myGameRecod("gameAll");
-	});
-	
-	$("#gameAll").one("click",function(){
-		myGameRecod("gameAll");
-	});
-	
-	$("#selectBoxGame").change(function(){
-		console.log("gName: "+gameName);
-		let value = $(this).val();
-		console.log("select Box  " + value);
-		if(value==""){
-			value="score";
-		}
-		
-		if(value=="score"){
-			$("#recordPost").remove();
-			
-			$.ajax({
-				url:"/myGameScoreOrder.member",
-				dataType:"json",
-				data : {
-					param:gameName
-				}
-			}).done(function(resp){
-				console.log(resp);
-				$(".recordPost").remove();
-				for(let i=0;i<resp.length;i++){
-					
-					let divRecordBody = $(".recordBody");
-					
-					let divRecordPost = $("<div>").attr("class","recordPost");
-						let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
-							divGameRank.html(resp[i].gameName);
-						let divGameInfo = $("<div>").attr("class","gameInfo");
-							let divGameScore = $("<div>").attr("class","gameScore");
-								divGameScore.html(resp[i].score);
-							let divGameTime = $("<div>").attr("class","gameTime");
-								divGameTime.html(resp[i].startGameTime);
-							divGameInfo.append(divGameScore).append(divGameTime);
-							
-						divRecordPost.append(divGameRank).append(divGameInfo);
-					divRecordBody.append(divRecordPost);
-				}
-			})
-			
-		}else if(value="time"){
-			$("#recordPost").remove();
-			
-			$.ajax({
-				url:"/myGameCurrentOrder.member",
-				dataType:"json",
-				data : {
-					param:gameName
-				}
-			}).done(function(resp){
-				console.log(resp);
-				$(".recordPost").remove();
-				for(let i=0;i<resp.length;i++){
-					
-					let divRecordBody = $(".recordBody");
-					
-					let divRecordPost = $("<div>").attr("class","recordPost");
-						let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
-							divGameRank.html(resp[i].gameName);
-						let divGameInfo = $("<div>").attr("class","gameInfo");
-							let divGameScore = $("<div>").attr("class","gameScore");
-								divGameScore.html(resp[i].score);
-							let divGameTime = $("<div>").attr("class","gameTime");
-								divGameTime.html(resp[i].startGameTime);
-							divGameInfo.append(divGameScore).append(divGameTime);
-							
-						divRecordPost.append(divGameRank).append(divGameInfo);
-					divRecordBody.append(divRecordPost);
-				}
-			})
-		}
-	})
-	
+               }
+            });
+         }
+      } else if (value == "nameOrder") {
+         nameOrder();
+         function nameOrder() {
+            $.ajax({
+               url: "/mynameOrderGame.member",
+               dataType: "json",
+               data :{
+                  param : category
+               }
+            }).done(function(resp) {
+               $(".gamePost").remove();
+
+               for (let i = 0; i < resp.length; i++) {
+
+                  let divBody = $(".favoriteBody");
+
+                  let divGamePost = $("<div>").attr("class", "gamePost");
+                  let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
+
+                  let divGameImag = $("<div>").attr("class", "gameImg");
+                  let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
+                  console.log(resp[i].gImageURL);
+                  divGameImag.append(imgGame);
+
+                  let divGameInfo = $("<div>").attr("class", "gameInfo");
+                  let divGameTitle = $("<div>").attr("class", "gameTitle");
+                  divGameTitle.html(resp[i].gName);
+                  let divProducer = $("<div>").attr("class", "producer");
+                  divProducer.html(resp[i].gDeveloper);
+                  divGameInfo.append(divGameTitle).append(divProducer);
+
+                  divGameInfoBox.append(divGameImag).append(divGameInfo);
+
+
+                  let divGameLink = $("<div>").attr("class", "gameLink");
+                  let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
+                  let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
+
+                  aTagGameLink.append(inputGameBtn);
+
+                  divGameLink.append(aTagGameLink);
+
+                  divGamePost.append(divGameInfoBox).append(divGameLink);
+
+                  divBody.append(divGamePost);
+
+
+               }
+            });
+         }
+      }
+   })
+   
+   // 게임기록
+   $("#gameRecord").on("click",function(){
+      myGameRecod("gameAll");
+   });
+   
+   $("#gameAll").on("click",function(){
+      myGameRecod("gameAll");
+   });
+   
+   $("#selectBoxGame").change(function(){
+      
+      let value = $(this).val();
+      
+      if(value==""){
+         value="score";
+      }
+      
+      if(value=="score"){
+         $("#recordPost").remove();
+         
+         $.ajax({
+            url:"/myGameScoreOrder.member",
+            dataType:"json",
+            data : {
+               param:gameName
+            }
+         }).done(function(resp){
+            
+            $(".recordPost").remove();
+            for(let i=0;i<resp.length;i++){
+               
+               let divRecordBody = $(".recordBody");
+               
+               let divRecordPost = $("<div>").attr("class","recordPost");
+                  let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
+                     divGameRank.html(resp[i].gameName);
+                  let divGameInfo = $("<div>").attr("class","gameInfo");
+                     let divGameScore = $("<div>").attr("class","gameScore");
+                        divGameScore.html(resp[i].score);
+                     let divGameTime = $("<div>").attr("class","gameTime");
+                        divGameTime.html(resp[i].startGameTime);
+                     divGameInfo.append(divGameScore).append(divGameTime);
+                     
+                  divRecordPost.append(divGameRank).append(divGameInfo);
+               divRecordBody.append(divRecordPost);
+            }
+         })
+         
+      }else if(value="time"){
+         $("#recordPost").remove();
+         
+         $.ajax({
+            url:"/myGameCurrentOrder.member",
+            dataType:"json",
+            data : {
+               param:gameName
+            }
+         }).done(function(resp){
+            $(".recordPost").remove();
+            for(let i=0;i<resp.length;i++){
+               
+               let divRecordBody = $(".recordBody");
+               
+               let divRecordPost = $("<div>").attr("class","recordPost");
+                  let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
+                     divGameRank.html(resp[i].gameName);
+                  let divGameInfo = $("<div>").attr("class","gameInfo");
+                     let divGameScore = $("<div>").attr("class","gameScore");
+                        divGameScore.html(resp[i].score);
+                     let divGameTime = $("<div>").attr("class","gameTime");
+                        divGameTime.html(resp[i].startGameTime);
+                     divGameInfo.append(divGameScore).append(divGameTime);
+                     
+                  divRecordPost.append(divGameRank).append(divGameInfo);
+               divRecordBody.append(divRecordPost);
+            }
+         })
+      }
+   })
+   
 })
 
 
-	
+   
 function myGameRecod(gameName){
-	console.log("myGameRecod "+gameName);
-		$.ajax({
-			url:"/myGameRecord.member",
-			dataType:"json",
-			data : {
-				param:gameName
-			}
-		}).done(function(resp){
-			console.log(resp);
-			$(".recordPost").remove();
-			for(let i=0;i<resp.length;i++){
-				
-				let divRecordBody = $(".recordBody");
-				
-				let divRecordPost = $("<div>").attr("class","recordPost");
-					let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
-						divGameRank.html(resp[i].gameName);
-					let divGameInfo = $("<div>").attr("class","gameInfo");
-						let divGameScore = $("<div>").attr("class","gameScore");
-							divGameScore.html(resp[i].score);
-						let divGameTime = $("<div>").attr("class","gameTime");
-							divGameTime.html(resp[i].startGameTime);
-						divGameInfo.append(divGameScore).append(divGameTime);
-						
-					divRecordPost.append(divGameRank).append(divGameInfo);
-				divRecordBody.append(divRecordPost);
-			}
-		})
+   console.log("myGameRecod "+gameName);
+      $.ajax({
+         url:"/myGameRecord.member",
+         dataType:"json",
+         data : {
+            param:gameName
+         }
+      }).done(function(resp){
+
+         $(".recordPost").remove();
+         for(let i=0;i<resp.length;i++){
+            
+            let divRecordBody = $(".recordBody");
+            
+            let divRecordPost = $("<div>").attr("class","recordPost");
+               let divGameRank = $("<div>").attr("class","gameRank fontEnglish");
+                  divGameRank.html(resp[i].gameName);
+               let divGameInfo = $("<div>").attr("class","gameInfo");
+                  let divGameScore = $("<div>").attr("class","gameScore");
+                     divGameScore.html(resp[i].score);
+                  let divGameTime = $("<div>").attr("class","gameTime");
+                     divGameTime.html(resp[i].startGameTime);
+                  divGameInfo.append(divGameScore).append(divGameTime);
+                  
+               divRecordPost.append(divGameRank).append(divGameInfo);
+            divRecordBody.append(divRecordPost);
+         }
+      })
 }
 
 
 // 전체 눌렀을 때
 function myFavorite(category) {
-	$.ajax({
-		url: "/myFavoriteGame.member",
-		dataType: "json",
-		data: {
-			param: category
-		}
-	}).done(function(resp) {
+   $.ajax({
+      url: "/myFavoriteGame.member",
+      dataType: "json",
+      data: {
+         param: category
+      }
+   }).done(function(resp) {
 
-		console.log(resp);
+      $(".gamePost").remove();
 
-		$(".gamePost").remove();
+      for (let i = 0; i < resp.length; i++) {
 
-		for (let i = 0; i < resp.length; i++) {
+         let divBody = $(".favoriteBody");
 
-			let divBody = $(".favoriteBody");
+         let divGamePost = $("<div>").attr("class", "gamePost");
+         let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
 
-			let divGamePost = $("<div>").attr("class", "gamePost");
-			let divGameInfoBox = $("<div>").attr("class", "gameInfoBox");
+         let divGameImag = $("<div>").attr("class", "gameImg");
+         let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
+         console.log(resp[i].gImageURL);
+         divGameImag.append(imgGame);
 
-			let divGameImag = $("<div>").attr("class", "gameImg");
-			let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-			console.log(resp[i].gImageURL);
-			divGameImag.append(imgGame);
+         let divGameInfo = $("<div>").attr("class", "gameInfo");
+         let divGameTitle = $("<div>").attr("class", "gameTitle");
+         divGameTitle.html(resp[i].gName);
+         let divProducer = $("<div>").attr("class", "producer");
+         divProducer.html(resp[i].gDeveloper);
+         divGameInfo.append(divGameTitle).append(divProducer);
 
-			let divGameInfo = $("<div>").attr("class", "gameInfo");
-			let divGameTitle = $("<div>").attr("class", "gameTitle");
-			divGameTitle.html(resp[i].gName);
-			let divProducer = $("<div>").attr("class", "producer");
-			divProducer.html(resp[i].gDeveloper);
-			divGameInfo.append(divGameTitle).append(divProducer);
-
-			divGameInfoBox.append(divGameImag).append(divGameInfo);
+         divGameInfoBox.append(divGameImag).append(divGameInfo);
 
 
-			let divGameLink = $("<div>").attr("class", "gameLink");
-			let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
-			let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
+         let divGameLink = $("<div>").attr("class", "gameLink");
+         let aTagGameLink = $("<a>").attr("href", "/moveToGamePage.game?game=" + resp[i].gName + "&");
+         let inputGameBtn = $("<input>").attr("type", "button").attr("class", "playBtn bColorGreen fontEnglish").val("Play Game");
 
-			aTagGameLink.append(inputGameBtn);
+         aTagGameLink.append(inputGameBtn);
 
-			divGameLink.append(aTagGameLink);
+         divGameLink.append(aTagGameLink);
 
-			divGamePost.append(divGameInfoBox).append(divGameLink);
+         divGamePost.append(divGameInfoBox).append(divGameLink);
 
-			divBody.append(divGamePost);
+         divBody.append(divGamePost);
 
 
-		}
-	});
+      }
+   });
 }
 
 
 
 // 내가 쓴글 눌렀을 때 실행
 function myWriteList() {
-	$.ajax({
-		url: "/myWriteList.board?myPage=true",
-		dataType: "json"
-	}).done(function(resp) {
-		console.log(resp);
+   $.ajax({
+      url: "/myWriteList.board?myPage=true",
+      dataType: "json"
+   }).done(function(resp) {
+      
+      $(".post").remove();
 
-		let div = $(".post1");
+      let div = $(".post1");
 
-		for (let i = 0; i < resp.length; i++) {
+      for (let i = 0; i < resp.length; i++) {
 
-			let divPost = $("<div>").attr("class", "post");
+         let divPost = $("<div>").attr("class", "post");
 
-			let maxBoard = $("<div>").attr("class", "maxBoard");
+         let maxBoard = $("<div>").attr("class", "maxBoard");
 
-			let divNum = $("<div>").attr("class", "num fontEnglish");
-			divNum.append(resp[i].seq);
+         let divNum = $("<div>").attr("class", "num fontEnglish");
+         divNum.append(resp[i].seq);
 
-			let divTitle = $("<div>").attr("class", "title");
+         let divTitle = $("<div>").attr("class", "title");
 
-			let aTagTitle = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
-			let divMainTitle = $("<div>").attr("class", "mainTitle");
-			divMainTitle.append(resp[i].title);
-			aTagTitle.append(divMainTitle);
+         let aTagTitle = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
+         let divMainTitle = $("<div>").attr("class", "mainTitle");
+         divMainTitle.append(resp[i].title);
+         aTagTitle.append(divMainTitle);
 
-			let divReplyCnt = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
-			divReplyCnt.append(resp[i].rCount);
+         let divReplyCnt = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
+         divReplyCnt.append(resp[i].rCount);
 
-			divTitle.append(aTagTitle);
-			divTitle.append(divReplyCnt);
+         divTitle.append(aTagTitle);
+         divTitle.append(divReplyCnt);
 
-			let divWriter = $("<div>").attr("class", "writer");
-			divWriter.append(resp[i].nickName);
+         let divWriter = $("<div>").attr("class", "writer");
+         divWriter.append(resp[i].nickName);
 
-			let divDate = $("<div>").attr("class", "date");
+         let divDate = $("<div>").attr("class", "date");
 
-			// 시간
-			divDate.html(resp[i].writeDate);
+         // 시간
+         divDate.html(resp[i].writeDate);
 
-			let divView = $("<div>").attr("class", "view fontEnglish");
-			divView.append(resp[i].view);
+         let divView = $("<div>").attr("class", "view fontEnglish");
+         divView.append(resp[i].view);
 
-			let divRecommend = $("<div>").attr("class", "recommend forEnglish");
-			divRecommend.append(resp[i].recommend);
+         let divRecommend = $("<div>").attr("class", "recommend forEnglish");
+         divRecommend.append(resp[i].recommend);
 
-
-
-			maxBoard.append(divNum).append(divTitle).append(divWriter).append(divDate).append(divView).append(divRecommend);
-
-
-			if (resp[i].fCount > 0) {
-				let divFile = $("<div>").attr("class", "file");
-				let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
-				divFile.append(iconFile);
-				maxBoard.append(divFile);
-			} else {
-				let divFile = $("<div>").attr("class", "file");
-				maxBoard.append(divFile);
-			}
+         maxBoard.append(divNum).append(divTitle).append(divWriter).append(divDate).append(divView).append(divRecommend);
 
 
-			divPost.append(maxBoard);
-
-			let minBoard = $("<div>").attr("class", "minBoard");
-
-			let divMinNum = $("<div>").attr("class", "num");
-			divMinNum.append(resp[i].seq);
-
-			let divMinCon = $("<div>").attr("class", "minCon");
-
-			let divMinTitle = $("<div>").attr("class", "title");
-			let aTagMin = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
-			let divMinMainTitle = $("<div>").attr("class", "mainTitle");
-			divMinMainTitle.append(resp[i].title);
-			aTagMin.append(divMinMainTitle);
-
-			let divMinReply = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
-			divMinReply.append(resp[i].recommend);
-
-			divMinTitle.append(aTagMin);
-			divMinTitle.append(divMinReply);
-
-			let divMinInfo = $("<div>").attr("class", "info");
-			let divMinWriter = $("<div>").attr("class", "minWriter colorDarkgray");
-			divMinWriter.append(resp[i].nickName);
-
-			let divMinDate = $("<div>").attr("class", "minDate colorDarkgray");
-			divMinDate.html(resp[i].writeDate);
-
-			let divMinView = $("<div>").attr("class", "minView fontEnglish colorDarkgray");
-			let divIconView = $("<i>").attr("class", "fa-regular fa-eye");
-			divMinView.append(divIconView).append("&nbsp;").append(resp[i].view);
-
-			let divMinRecommend = $("<div>").attr("class", "minRecommend fontEnglish colorDarkgray");
-			let divIconRec = $("<i>").attr("class", "fa-regular fa-thumbs-up");
-
-			divMinRecommend.append(divIconRec).append("&nbsp;").append(resp[i].rCount);
-
-			divMinInfo.append(divMinWriter).append(divMinDate).append(divMinView).append(divMinRecommend);
-
-			//			파일개수는 나중에
-			if (resp[i].fCount > 0) {
-				let divFile = $("<div>").attr("class", "file");
-				let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
-				divFile.append(iconFile);
-				divMinInfo.append(divFile);
-			} else {
-				let divFile = $("<div>").attr("class", "file");
-				divMinInfo.append(divFile);
-			}
+         if (resp[i].fCount > 0) {
+            let divFile = $("<div>").attr("class", "file");
+            let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
+            divFile.append(iconFile);
+            maxBoard.append(divFile);
+         } else {
+            let divFile = $("<div>").attr("class", "file");
+            maxBoard.append(divFile);
+         }
 
 
-			divMinCon.append(divMinTitle).append(divMinInfo);
+         divPost.append(maxBoard);
 
-			minBoard.append(divMinNum).append(divMinCon);
+         let minBoard = $("<div>").attr("class", "minBoard");
 
-			divPost.append(minBoard);
+         let divMinNum = $("<div>").attr("class", "num");
+         divMinNum.append(resp[i].seq);
 
-			div.append(divPost);
-		}
+         let divMinCon = $("<div>").attr("class", "minCon");
+
+         let divMinTitle = $("<div>").attr("class", "title");
+         let aTagMin = $("<a>").attr("href", "/load.board?seq=" + resp[i].seq + "&myPage=true");
+         let divMinMainTitle = $("<div>").attr("class", "mainTitle");
+         divMinMainTitle.append(resp[i].title);
+         aTagMin.append(divMinMainTitle);
+
+         let divMinReply = $("<div>").attr("class", "replyCnt colorPink fontEnglish");
+         divMinReply.append(resp[i].recommend);
+
+         divMinTitle.append(aTagMin);
+         divMinTitle.append(divMinReply);
+
+         let divMinInfo = $("<div>").attr("class", "info");
+         let divMinWriter = $("<div>").attr("class", "minWriter colorDarkgray");
+         divMinWriter.append(resp[i].nickName);
+
+         let divMinDate = $("<div>").attr("class", "minDate colorDarkgray");
+         divMinDate.html(resp[i].writeDate);
+
+         let divMinView = $("<div>").attr("class", "minView fontEnglish colorDarkgray");
+         let divIconView = $("<i>").attr("class", "fa-regular fa-eye");
+         divMinView.append(divIconView).append("&nbsp;").append(resp[i].view);
+
+         let divMinRecommend = $("<div>").attr("class", "minRecommend fontEnglish colorDarkgray");
+         let divIconRec = $("<i>").attr("class", "fa-regular fa-thumbs-up");
+
+         divMinRecommend.append(divIconRec).append("&nbsp;").append(resp[i].rCount);
+
+         divMinInfo.append(divMinWriter).append(divMinDate).append(divMinView).append(divMinRecommend);
+
+         //         파일개수는 나중에
+         if (resp[i].fCount > 0) {
+            let divFile = $("<div>").attr("class", "file");
+            let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
+            divFile.append(iconFile);
+            divMinInfo.append(divFile);
+         } else {
+            let divFile = $("<div>").attr("class", "file");
+            divMinInfo.append(divFile);
+         }
 
 
-	});
+         divMinCon.append(divMinTitle).append(divMinInfo);
+
+         minBoard.append(divMinNum).append(divMinCon);
+
+         divPost.append(minBoard);
+
+         div.append(divPost);
+      }
+
+
+   });
 
 
 }
@@ -667,26 +662,26 @@ function myWriteList() {
 
 /*
 function timeCal(date){
-	const start = new Date(date);
+   const start = new Date(date);
   const end = new Date();
 
   const diff = (end - start) / 1000;
   
   const times = [
-	{ name: ' 년', milliSeconds: 60 * 60 * 24 * 365 },
-	{ name: ' 개월', milliSeconds: 60 * 60 * 24 * 30 },
-	{ name: ' 일', milliSeconds: 60 * 60 * 24 },
-	{ name: ' 시간', milliSeconds: 60 * 60 },
-	{ name: ' 분', milliSeconds: 60 },
+   { name: ' 년', milliSeconds: 60 * 60 * 24 * 365 },
+   { name: ' 개월', milliSeconds: 60 * 60 * 24 * 30 },
+   { name: ' 일', milliSeconds: 60 * 60 * 24 },
+   { name: ' 시간', milliSeconds: 60 * 60 },
+   { name: ' 분', milliSeconds: 60 },
   ];
 
   for (const value of times) {
-	const betweenTime = Math.floor(diff / value.milliSeconds);
-	console.log("betweenTime "+betweenTime);
+   const betweenTime = Math.floor(diff / value.milliSeconds);
+   console.log("betweenTime "+betweenTime);
 
-	if (betweenTime > 0) {
-	  return `${betweenTime}${value.name} 전`;
-	}
+   if (betweenTime > 0) {
+     return `${betweenTime}${value.name} 전`;
+   }
   }
   return '방금 전';
 }

@@ -22,8 +22,12 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import commons.EncryptionUtils;
-import dao.GameDAO;
+
+import constants.Constants;
+import dao.BoardDAO;
 import dao.MemberDAO;
+import dto.BoardDTO;
+import dao.GameDAO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
 import dto.MemberDTO;
@@ -40,6 +44,7 @@ public class MemberController extends HttpServlet {
 		System.out.println("member cmd: " + cmd);
 
 		MemberDAO dao = MemberDAO.getInstance();
+		BoardDAO bdao = BoardDAO.getInstance();
 		PrintWriter printwriter = response.getWriter();
 		Gson gson = new Gson();
 		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
@@ -113,10 +118,34 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/load.member")) {
 				// 마이페이지 (회원 정보 출력)
 				String userID = (String) request.getSession().getAttribute("loginID");
-				MemberDTO user = dao.selectUserInfo(userID);
-				request.setAttribute("user", user);
+				if (!userID.equals("admin")) {
+					MemberDTO user = dao.selectUserInfo(userID);
+					request.setAttribute("user", user);
+				} else if (userID.equals("admin")) {
+					String userNick = dao.selectNicknameById("admin");
+					request.setAttribute("userNick", userNick);
+				}
 				request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
 
+			} else if (cmd.equals("/adminBoard.member")) {
+				String notiCpage = request.getParameter("notiCpage");
+				int notiCurrentPage = (notiCpage == null || notiCpage == "") ? 1 : Integer.parseInt(notiCpage);// 현재
+																												// 공지
+				System.out.println(notiCpage); // 게시글
+				// 페이지
+				List<BoardDTO> notiList = new ArrayList<>();
+				notiList = bdao.selectByCategory("notice",
+						notiCurrentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
+						Constants.RECORD_COUNT_PER_PAGE);
+				int recordTotalCount = bdao.getRecordCount("notice");
+
+				List<Object> result = new ArrayList<>();
+				result.add(notiList);
+				result.add(recordTotalCount);// 총 공지 게시글 수
+				result.add(notiCurrentPage);// 현재 공지 게시글 페이지
+				result.add(Constants.RECORD_COUNT_PER_PAGE);// 페이지 내 게시글 수
+				result.add(Constants.NAVI_COUNT_PER_PAGE); //// 페이지 네이션 최대 개수
+				printwriter.append(gsonTs.toJson(result));
 			} else if (cmd.equals("/pwCheck.member")) {
 				// 회원 정보 수정 전 비밀번호 확인
 				String id = request.getParameter("userID");
