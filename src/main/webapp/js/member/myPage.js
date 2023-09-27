@@ -466,7 +466,7 @@ $(document).ready(function() {
 
    
 function myGameRecod(gameName){
-   console.log("myGameRecod "+gameName);
+	console.log("myGameRecod의 "+gameName);
       $.ajax({
          url:"/myGameRecord.member",
          dataType:"json",
@@ -508,6 +508,7 @@ function myGameRecod(gameName){
 
 // 전체 눌렀을 때
 function myFavorite(category) {
+	console.log("myFavorite의 "+category);
    $.ajax({
       url: "/myFavoriteGame.member",
       dataType: "json",

@@ -323,12 +323,9 @@ ul.tabs li.current {
                               <ul class="recordTabs">
                                  <li class="tab-link current" id="gameAll"
                                     data-tab="recordTab-1">전체</li>
-                                 <li class="tab-link" id="Candy" data-tab="recordTab-2">Candy
-                                    Crush</li>
-                                 <li class="tab-link" id="Doodle" data-tab="recordTab-3">Doodle
-                                    Jump</li>
-                                 <li class="tab-link" id="Flappy" data-tab="recordTab-4">Fluppy
-                                    Bird</li>
+                                 <li class="tab-link" id="Candy" data-tab="recordTab-2">Candy Crush</li>
+                                 <li class="tab-link" id="Doodle" data-tab="recordTab-3">Doodle Jump</li>
+                                 <li class="tab-link" id="Flappy" data-tab="recordTab-4">Fluppy Bird</li>
                                  <li class="tab-link" id="Kjmax" data-tab="recordTab-5">KJMAX</li>
                                  <li class="tab-link" id="Kordle" data-tab="recordTab-6">Kordle</li>
                               </ul>

@@ -324,7 +324,7 @@ public class MemberController extends HttpServlet {
 			    	list = GameDAO.getInstance().myGameRecord(id,gName);
 			    }
 			    
-			    printwriter.append(gson.toJson(list));
+			    printwriter.append(gsonTs.toJson(list));
 			}else if(cmd.equals("/myGameScoreOrder.member")) {
 				
 				System.out.println("/myGameScoreOrder.member");
@@ -338,7 +338,7 @@ public class MemberController extends HttpServlet {
 			    }else {
 			    	list = GameDAO.getInstance().myGameScoreOrder(id,gName);
 			    }
-			    printwriter.append(gson.toJson(list));
+			    printwriter.append(gsonTs.toJson(list));
 			}else if(cmd.equals("/myGameCurrentOrder.member")) {
 				
 				System.out.println("/myGameCurrentOrder.member");
@@ -352,7 +352,7 @@ public class MemberController extends HttpServlet {
 			    }else {
 			    	list = GameDAO.getInstance().myGameCurrentOrder(id,gName);
 			    }
-			    printwriter.append(gson.toJson(list));
+			    printwriter.append(gsonTs.toJson(list));
 				
 			} else if(cmd.equals("/gameRank.member")) {
 				List<GameDTO> gameRank = dao.selectGameRanking();
