@@ -47,9 +47,9 @@
                     <div class="subTitle pl-10 col-2 col-xs-1 col-md-1 col-lg-1 col-xl-1 colorWhite">순위</div>
                     	<div class="col-10 col-xs-11">
 	                    	<div class="row g-0">
-	                    		<div class="subTitle col-9 colorWhite">유저 정보</div>
-		                        <div class="subTitle g-0 p-0 pl-15 col-3">
-		                        	<div class="scoreAlign colorWhite">점수</div>
+	                    		<div class="subTitle col-8 col-md-9 colorWhite">유저 정보</div>
+		                        <div class="subTitle g-0 p-0 pl-15 col-4 col-md-3">                    
+		                        	<div class="scoreAlign colorWhite subTitleScore">점수</div>
 		                        </div>	
 	                    	</div>
                     	</div>

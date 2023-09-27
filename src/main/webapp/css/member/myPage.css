@@ -329,8 +329,8 @@ ul.recordTabs li.current {
 .recordPost .gameInfo:before {
 	content: "";
 	position: absolute;
-	left: 0- translateX(50%);
-	width: 5px;
+	left:-2px;
+	width: 4px;
 	height: 35px;
 	background: #ccf423;
 }
@@ -509,6 +509,7 @@ ul.tabs li.current {
 	}
 	.minBoard .pin {
 		width: auto;
+		margin-left: 0px;
 	}
 	
 }
