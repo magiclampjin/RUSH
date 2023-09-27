@@ -89,7 +89,14 @@ public class BoardController extends HttpServlet {
 
             String id = (String) request.getSession().getAttribute("loginID");
             String userNick = (String) request.getSession().getAttribute("loginNickname");
-            int parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0));
+            
+            int parentSeq;
+            if(id.equals("admin")) {
+            	 parentSeq = dao.insert(new BoardDTO(0, id, "notice", userNick, title, content, null, 0, false));
+            }else {
+            	 parentSeq = dao.insert(new BoardDTO(0, id, category, userNick, title, content, null, 0, false));
+            }
+           
 
             Enumeration<String> fileNames = multi.getFileNames(); // 보내진 파일들 이름의 리스트
 
@@ -304,26 +311,9 @@ public class BoardController extends HttpServlet {
 
             } else {
                // 검색 키워드가 넘어온 경우
-               // 제목으로 검색
-               if (search.equals("title")) {
-                  list = dao.selectByTitle(category, keyword,
-                        currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
+            	list = dao.selectBySearchKeyword(category, search, keyword, currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
                         Constants.RECORD_COUNT_PER_PAGE);
-                  request.setAttribute("recordTotalCount", dao.getRecordCountTitle(category, keyword));
-
-               } else if (search.equals("writer")) {
-                  list = dao.selectByWriter(category, keyword,
-                        currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
-                        Constants.RECORD_COUNT_PER_PAGE);
-                  request.setAttribute("recordTotalCount", dao.getRecordCountWriter(category, keyword));
-
-               } else if (search.equals("content")) {
-                  list = dao.selectByContents(category, keyword,
-                        currentPage * Constants.RECORD_COUNT_PER_PAGE - Constants.RECORD_COUNT_PER_PAGE,
-                        Constants.RECORD_COUNT_PER_PAGE);
-                  request.setAttribute("recordTotalCount", dao.getRecordCountContents(category, keyword));
-               }
-
+            	request.setAttribute("recordTotalCount", dao.getRecordCountSearchKeyword(category, search, keyword));
                request.setAttribute("search", search);
                request.setAttribute("keyword", keyword);
 

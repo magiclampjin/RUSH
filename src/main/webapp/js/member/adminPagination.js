@@ -144,13 +144,20 @@ $(document).ready(function() {
 
 				if (resp[0][i].fCount > 0) {
 					let divFile = $("<div>").attr("class", "file");
-					let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
+					let iconFile = $("<i>").attr("class", "fa-solid fa-paperclip");
 					divFile.append(iconFile);
 					maxBoard.append(divFile);
 				} else {
 					let divFile = $("<div>").attr("class", "file");
 					maxBoard.append(divFile);
 				}
+				
+				let divPin = $("<div>").attr("class","pin");
+				if(resp[0][i].pin == true){
+					let iconPin = $("<i>").attr("class","fa-solid fa-thumbtack");
+					divPin.append(iconPin);
+				}
+				maxBoard.append(divPin);
 
 				divPost.append(maxBoard);
 
@@ -192,14 +199,22 @@ $(document).ready(function() {
 				divMinInfo.append(divMinWriter).append(divMinDate).append(divMinView).append(divMinRecommend);
 
 				if (resp[0][i].fCount > 0) {
-					let divFile = $("<div>").attr("class", "file");
+					let divFile = $("<div>").attr("class", "file").css("margin-left","20px");
 					let iconFile = $("<div>").attr("class", "fa-solid fa-paperclip");
 					divFile.append(iconFile);
 					divMinInfo.append(divFile);
 				} else {
-					let divFile = $("<div>").attr("class", "file");
+					let divFile = $("<div>").attr("class", "file").css("margin-left","0px")
 					divMinInfo.append(divFile);
 				}
+				
+				let minPin = $("<div>").attr("class","pin");
+				if(resp[0][i].pin == true){
+					minPin.css("margin-left","20px");
+					let iconPin = $("<i>").attr("class","fa-solid fa-thumbtack");
+					minPin.append(iconPin);
+				}
+				divMinInfo.append(minPin);
 
 
 				divMinCon.append(divMinTitle).append(divMinInfo);
