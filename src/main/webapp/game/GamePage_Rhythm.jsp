@@ -19,7 +19,7 @@
 <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
 <script src="/game/js/rhythm.js?ver=2"></script>
 <script src="/game/js/Rhythm_Main_Scene.js?ver=1"></script>
-<script src="/game/js/GameoverScene.js?ver=1"></script>
+<script src="/game/js/GameoverScene.js?ver=2"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -138,21 +138,36 @@ a{
 
 								
 				let divColInfo = $("<div>");
-				divColInfo.addClass("col-7");
+				divColInfo.addClass("col-11");
 				
 				let divRowInfo = $("<div>");
-				divRowInfo.addClass("row g-0");
+				divRowInfo.addClass("row g-0 p-1");
+				if(i%2==0){
+					divRowInfo.addClass("bcolorDarkgray30");
+					divRowInfo.css({
+						borderRadius : "5px"
+					});	
+				}
+				
+				let div
+				
+				
 				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-3");
+				divInfoLeft.addClass("col-2");
 				let divInfoRight = $("<div>");
-				divInfoRight.addClass("col-9 text-white align-self-center");
+				divInfoRight.addClass("col-5 text-white align-self-center");
 				let divUserImage = $("<div>");
 				divUserImage.css({
-					width : "80px",
-					height : "80px",
+					width : "70px",
+					height : "70px",
 					backgroundColor : "white",
 					borderRadius : "50%"
 				});
+				
+				let divColScore = $("<div>");
+				divColScore.addClass("col-5 text-white fontEnglish fw500 fs-4 align-self-center");
+				divColScore.append(record[i]["score"]);
+				
 				
 				
 				divInfoLeft.append(divUserImage);
@@ -160,15 +175,14 @@ a{
 				divInfoRight.append(" Lv : "+record[i]["level"]);
 				divRowInfo.append(divInfoLeft);
 				divRowInfo.append(divInfoRight);
+				divRowInfo.append(divColScore);
 				divColInfo.append(divRowInfo);
 				
-				let divColScore = $("<div>");
-				divColScore.addClass("col-4 text-white fontEnglish fw500 fs-4 align-self-center");
-				divColScore.append(record[i]["score"]);
+				
 				
 				divRow.append(divColRank);
 				divRow.append(divColInfo);
-				divRow.append(divColScore);
+				//divRow.append(divColScore);
 				
 				
 				$("#rankCon").append(divRow);
@@ -371,7 +385,9 @@ a{
 										<hr class="colorBlue border-3 opacity-75">
 									</div>
 									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+										<p class="text-white fontKorean">
+											리듬에 맞춰 내려오는 노트를 제거하는 게임입니다.
+										</p>
 									</div>				
 								</div>
 								<div class="row g-0 w100p mt150">
@@ -380,7 +396,11 @@ a{
 										<hr class="colorGreen border-3 opacity-75">
 									</div>
 									<div class="col-12">
-										<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+										<img src="/game/img/key.png" />
+										
+										<p class="text-white fontKorean">
+											키보드의 A S K L 키를 사용합니다.
+										</p>
 									</div>				
 								</div>
 								<div class="row g-0 w100p mt150">

@@ -4,15 +4,17 @@ class Rhythm_Main_Scene extends Phaser.Scene{
             key:"Rhythm_Main_Scene"});
         }
     preload(){
-
+		this.load.image("logo","/game/img/kjlogo.png");
+		this.load.image("start","/game/img/start.png");
     }
     create(){
-        this.add.text(this.cameras.main.width/2,this.cameras.main.height/2,"버튼을 눌러 게임을 시작",{
-            fontSize : "40px",
-            fill : "#FFFFFF"
-        }).setOrigin(0.5);
+        this.logo = this.add.sprite(this.cameras.main.width/2,this.cameras.main.height/2 - 100,"logo");
+        this.logo.setOrigin(0.5);
+        
+        this.logo = this.add.sprite(this.cameras.main.width/2,this.cameras.main.height/2,"start");
+        this.logo.setOrigin(0.5);
 
-        let start_btn = this.add.text(this.cameras.main.width/2 , this.cameras.main.height/2 + 100,"게임 시작", {
+        let start_btn = this.add.text(this.cameras.main.width/2 , this.cameras.main.height/2 + 100,"Start!", {
             fontSize : "30px",
             fill : "#FFFFFF"
         }).setOrigin(0.5).setInteractive().setPadding(15);
@@ -27,7 +29,7 @@ class Rhythm_Main_Scene extends Phaser.Scene{
         })
         start_btn.on("pointerdown",()=>{
 			this.scene.stop('Rhythm_Main_Scene');
-            this.scene.start("Scene01",{frame:0, sec:0, point : 0});
+            this.scene.start("Scene01",{frame:0, sec:0, point : 0, hp : 5});
         });
     }
     update(){
