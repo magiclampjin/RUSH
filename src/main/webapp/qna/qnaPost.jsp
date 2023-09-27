@@ -77,7 +77,7 @@ a {
 }
 
 .mt80 {
-	margin-top: 80px;
+	margin-top: 80px !important;
 }
 
 .mt10 {
@@ -129,8 +129,8 @@ a {
 }
 
 .postTop {
-	min-height: 190px;
-	padding: 25px 15px;
+	min-height: 190px !important; 
+	padding: 25px 15px !important;
 }
 
 #postContents {
@@ -155,7 +155,7 @@ a {
 }
 
 .reply{
-	padding: 15px 0px 0px 15px;
+	padding: 15px 0px 0px 15px !important;
 }
 
 .reply, .nestedReply{
