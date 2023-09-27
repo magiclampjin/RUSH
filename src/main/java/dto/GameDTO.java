@@ -6,9 +6,15 @@ public class GameDTO {
 	private String gDeveloper;
 	private String gImageURL;
 	private String id;
+	private int playCount;
 	
 	public GameDTO() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public GameDTO(String gName, int playCount) {
+		this.gName = gName;
+		this.playCount = playCount;
 	}
 	
 	public GameDTO(String gName, String gImageURL, String id) {
