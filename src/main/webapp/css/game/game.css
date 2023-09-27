@@ -7,12 +7,65 @@
 * {
     box-sizing: border-box;
 }
+
+.btn-primary1 {
+    background-color: #f393ff!important;
+    border-color: #131217!important;
+}
+
+.btn-primary1:hover {
+    background-color: #f393ff!important;
+    border-color: #131217!important;
+    opacity:70%;
+}
+
+.btn-primary2 {
+    background-color: #5d6ce1!important;
+    border-color: #131217!important;
+}
+
+.btn-primary2:hover {
+    background-color: #5d6ce1!important;
+    border-color: #131217!important;
+    opacity:70%;
+}
+
+.btn-primary3 {
+    background-color: #ccf423!important;
+    border-color: #131217!important;
+}
+
+.btn-primary3:hover {
+    background-color: #ccf423!important;
+    border-color: #131217!important;
+    opacity:70%;
+}
+
+.btn-dark {
+    background-color: #131217!important;
+    border-color: #F9F9F9!important;
+}
+
+.btn-dark:hover {
+    background-color: #f393ff!important;
+    border-color: #F9F9F9!important;
+    opacity:70%;
+}
+.btn.active{
+	background-color: #f393ff!important;
+	border-color: #F9F9F9!important;
+}
+
 .fontKorean {
     font-family: 'Noto Sans KR', sans-serif;
 }
-
 /* GamePage css  */
-
+.ml20{
+	margin-left : 20px;
+}
+.pl20{
+	padding-left : 20px;
+}
 .ml45{
 	margin-left : 45px;
 }
