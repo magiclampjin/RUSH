@@ -82,7 +82,8 @@ $(document).ready(function() {
 			dataType: "json"
 		}).done(function(resp) {
 			console.log(resp);
-			let div = $(".post2");
+			
+			$(".post").remove();
 
 			for (let i = 0; i < resp.length; i++) {
 

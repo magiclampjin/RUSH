@@ -274,7 +274,7 @@ ul.tabs li.current {
 							<div class="favoriteTabBox">
 								<!-- 탭박스 -->
 								<ul class="favoriteTabs">
-									<li class="tab-link current" id="favoriteAll" data-tab="favoriteTab-1">전체rrrrrrr</li>
+									<li class="tab-link current" id="favoriteAll" data-tab="favoriteTab-1">전체</li>
 									<li class="tab-link" id="Arcade" data-tab="favoriteTab-2">Arcade</li>
 									<li class="tab-link" id="Puzzle" data-tab="favoriteTab-3">Puzzle</li>
 									<li class="tab-link" id="Rhythm" data-tab="favoriteTab-4">Rhythm</li>
@@ -332,7 +332,7 @@ ul.tabs li.current {
 							<div class="recordTabBox">
 								<!-- 탭박스 -->
 								<ul class="recordTabs">
-									<li class="tab-link current" id="gameAll" data-tab="recordTab-1">전체rrrrrrr</li>
+									<li class="tab-link current" id="gameAll" data-tab="recordTab-1">전체</li>
 									<li class="tab-link" id="Candy" data-tab="recordTab-2">Candy Crush</li>
 									<li class="tab-link" id="Doodle" data-tab="recordTab-3">Doodle Jump</li>
 									<li class="tab-link" id="Flappy" data-tab="recordTab-4">Fluppy Bird</li>
