@@ -2,6 +2,11 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +14,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
 import commons.EncryptionUtils;
+import dao.GameDAO;
 import dao.MemberDAO;
+import dto.GameDTO;
+import dto.GameRecordDTO;
 import dto.MemberDTO;
 
 @WebServlet("*.member")
@@ -26,6 +41,27 @@ public class MemberController extends HttpServlet {
 
 		MemberDAO dao = MemberDAO.getInstance();
 		PrintWriter printwriter = response.getWriter();
+		Gson gson = new Gson();
+		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
+			private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+			public JsonElement serialize(Timestamp arg0, Type arg1, JsonSerializationContext arg2) {
+				long currentTime = System.currentTimeMillis();
+				long writeTime = arg0.getTime();
+				long gapTime = currentTime - writeTime;
+
+				if (gapTime < 60000) {
+					return new JsonPrimitive("방금 전");
+				} else if (gapTime < 60000 * 60) {
+					return new JsonPrimitive( gapTime / 60000 + " 분 전");
+				} else if (gapTime < 60000 * 60 * 24) {
+					long hour = gapTime / 60000 / 60;
+					long min = ((gapTime / 60000) % 60);
+					return new JsonPrimitive("약 "+hour + "시간 전");
+				} else {
+					return new JsonPrimitive(sdfDay.format(arg0));
+				}					
+			}
+		}).create();
 
 		try {
 			if (cmd.equals("/insert.member")) {
@@ -180,7 +216,116 @@ public class MemberController extends HttpServlet {
 				// 회원 로그아웃
 				request.getSession().invalidate();
 			}
+			/////////////////////////////////////////////////////////
+			else if(cmd.equals("/myFavoriteGame.member")) {
 
+			    System.out.println("/myFavoriteGame.member");
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String category = request.getParameter("param");
+			    System.out.println("Favo category "+category);
+			    
+			    List<GameDTO> list = new ArrayList<>();
+			    
+			    if(category.equals("favoriteAll")) {
+			        list = GameDAO.getInstance().myFavoriateGame(id);
+			        
+			    }else {
+			        list = GameDAO.getInstance().myFavoriateGame(id,category);
+			    }
+			    
+			    
+			    printwriter.append(gson.toJson(list));
+			    
+			}else if(cmd.equals("/mycurrentOrder.member")) {
+			    System.out.println("/mycurrentOrder.member");
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String category = request.getParameter("param");
+			    System.out.println("Favo category "+category);
+			    
+			    List<GameDTO> list = new ArrayList<>();
+			    
+			    if(category.equals("favoriteAll")) {
+			        list = GameDAO.getInstance().myCurrentOrderGame(id);
+			    }else {
+			        list = GameDAO.getInstance().myCurrentOrderGame(id,category);
+			    }
+			    
+			    printwriter.append(gson.toJson(list));
+			    
+			}else if(cmd.equals("/mynameOrderGame.member")) {
+			    System.out.println("/mynameOrderGame.member");
+			    
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String category = request.getParameter("param");
+			    
+			    List<GameDTO> list = new ArrayList<>();
+			    
+			    if(category.equals("favoriteAll")) {
+			        list = GameDAO.getInstance().myNameOrderGame(id);
+			    }else {
+			        list = GameDAO.getInstance().myNameOrderGame(id,category);
+			    }
+			    
+			    printwriter.append(gson.toJson(list));
+			    
+			}else if(cmd.equals("/myFavoriteOrderGame.member")) {
+			    System.out.println("/myFavoriteOrderGame.member");
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String category = request.getParameter("param");
+			    
+			    List<GameDTO> list = new ArrayList<>();
+			    
+			    if(category.equals("favoriteAll")) {
+			        list = GameDAO.getInstance().myFavoriteOrderGame(id);
+			    }else {
+			        list = GameDAO.getInstance().myFavoriteOrderGame(id,category);
+			    }
+			    printwriter.append(gson.toJson(list));
+			    
+			}else if(cmd.equals("/myGameRecord.member")) {
+			    System.out.println("/myGameRecord.member");
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String gName = request.getParameter("param");
+			    
+			    List<GameRecordDTO> list = new ArrayList<>();
+			    
+			    if(gName.equals("gameAll")) {
+			    	 list = GameDAO.getInstance().myGameRecord(id);
+			    }else {
+			    	list = GameDAO.getInstance().myGameRecord(id,gName);
+			    }
+			    
+			    printwriter.append(gson.toJson(list));
+			}else if(cmd.equals("/myGameScoreOrder.member")) {
+				
+				System.out.println("/myGameScoreOrder.member");
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String gName = request.getParameter("param");
+				
+			    List<GameRecordDTO> list = new ArrayList<>();
+			    
+			    if(gName.equals("gameAll")) {
+			    	 list = GameDAO.getInstance().myGameScoreOrder(id);
+			    }else {
+			    	list = GameDAO.getInstance().myGameScoreOrder(id,gName);
+			    }
+			    printwriter.append(gson.toJson(list));
+			}else if(cmd.equals("/myGameCurrentOrder.member")) {
+				
+				System.out.println("/myGameCurrentOrder.member");
+			    String id = (String) request.getSession().getAttribute("loginID");
+			    String gName = request.getParameter("param");
+				
+			    List<GameRecordDTO> list = new ArrayList<>();
+			    
+			    if(gName.equals("gameAll")) {
+			    	 list = GameDAO.getInstance().myGameCurrentOrder(id);
+			    }else {
+			    	list = GameDAO.getInstance().myGameCurrentOrder(id,gName);
+			    }
+			    printwriter.append(gson.toJson(list));
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/error.html");

@@ -15,9 +15,24 @@ public class BoardDTO {
 	private int recommend;
 	private int fCount;
 	private int rCount;
+	private boolean pin;
 	
 
 	public BoardDTO(){}
+	
+	
+
+	public BoardDTO(int seq, String writer, String title, Timestamp writeDate, int view, int fCount) {
+		super();
+		this.seq = seq;
+		this.writer = writer;
+		this.title = title;
+		this.writeDate = writeDate;
+		this.view = view;
+		this.fCount = fCount;
+	}
+
+
 
 	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
 			Timestamp writeDate, int view) {
@@ -32,8 +47,24 @@ public class BoardDTO {
 		this.view = view;
 	}
 	
+	// post.jsp 게시글 내 출력용
 	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
-			Timestamp writeDate, int view, int recommend, int fCount, int rCount) {
+			Timestamp writeDate, int view, boolean pin) {
+		super();
+		this.seq = seq;
+		this.writer = writer;
+		this.category = category;
+		this.nickName = nickName;
+		this.title = title;
+		this.contents = contents;
+		this.writeDate = writeDate;
+		this.view = view;
+		this.pin = pin;
+	}
+	
+	// boardList 게시글 목록 출력용
+	public BoardDTO(int seq, String writer, String category, String nickName, String title, String contents,
+			Timestamp writeDate, int view, int recommend, int fCount, int rCount, boolean pin) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -46,6 +77,7 @@ public class BoardDTO {
 		this.recommend = recommend;
 		this.fCount = fCount;
 		this.rCount = rCount;
+		this.pin = pin;
 	}
 
 	public int getSeq() {

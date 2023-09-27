@@ -372,6 +372,22 @@ a {
 								</c:when>
 							</c:choose>	
 						</c:when>
+						<c:otherwise>
+								<c:choose>
+									<c:when test="${loginID eq 'admin'}">
+										<div class="col-12 topBtns">
+											<button id="pinNotice"><i class="fa-solid fa-thumbtack"></i>&nbsp;&nbsp;고정</button>	
+											<c:choose>
+												<c:when test="${not empty pin}">
+													<script>
+														$("#pinNotice").attr("class", "btnClicked");
+													</script>
+												</c:when>
+											</c:choose>
+										</div>
+									</c:when>
+								</c:choose>
+						</c:otherwise>
 					</c:choose>
 
 					<div class="col-12">
