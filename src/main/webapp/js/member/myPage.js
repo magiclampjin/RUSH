@@ -67,7 +67,7 @@ $(document).ready(function() {
       myGameRecod(gameName);
    })
    // 꼬들
-   $("#kkodle").on("click",function(){
+   $("#Kordle").on("click",function(){
       gameName = $(this).html();
       myGameRecod(gameName);
    })
@@ -82,6 +82,8 @@ $(document).ready(function() {
          dataType: "json"
       }).done(function(resp) {
          console.log(resp);
+         $(".post").remove();
+         
          let div = $(".post2");
 
          for (let i = 0; i < resp.length; i++) {
@@ -199,9 +201,9 @@ $(document).ready(function() {
 
    // 즐겨찾기 안에 selectBox option
    $("#selectBox").change(function() {
-      console.log("cat: "+category);
+      
       let value = $(this).val();
-      console.log("select Box  " + value);
+      
       if (value == "") {
          value = "currentOrder";
       }
@@ -361,18 +363,18 @@ $(document).ready(function() {
    })
    
    // 게임기록
-   $("#gameRecord").one("click",function(){
+   $("#gameRecord").on("click",function(){
       myGameRecod("gameAll");
    });
    
-   $("#gameAll").one("click",function(){
+   $("#gameAll").on("click",function(){
       myGameRecod("gameAll");
    });
    
    $("#selectBoxGame").change(function(){
-      console.log("gName: "+gameName);
+      
       let value = $(this).val();
-      console.log("select Box  " + value);
+      
       if(value==""){
          value="score";
       }
@@ -387,7 +389,7 @@ $(document).ready(function() {
                param:gameName
             }
          }).done(function(resp){
-            console.log(resp);
+            
             $(".recordPost").remove();
             for(let i=0;i<resp.length;i++){
                
@@ -398,7 +400,17 @@ $(document).ready(function() {
                      divGameRank.html(resp[i].gameName);
                   let divGameInfo = $("<div>").attr("class","gameInfo");
                      let divGameScore = $("<div>").attr("class","gameScore");
-                        divGameScore.html(resp[i].score);
+                     
+                     if(resp[i].gameName == "Kordle"){
+							if(resp[i].score == 0){
+								divGameScore.html("틀림");
+							}else{
+								divGameScore.html("맞춤");
+							}
+						}else{
+							 divGameScore.html(resp[i].score);
+					}
+                     
                      let divGameTime = $("<div>").attr("class","gameTime");
                         divGameTime.html(resp[i].startGameTime);
                      divGameInfo.append(divGameScore).append(divGameTime);
@@ -418,7 +430,6 @@ $(document).ready(function() {
                param:gameName
             }
          }).done(function(resp){
-            console.log(resp);
             $(".recordPost").remove();
             for(let i=0;i<resp.length;i++){
                
@@ -429,7 +440,16 @@ $(document).ready(function() {
                      divGameRank.html(resp[i].gameName);
                   let divGameInfo = $("<div>").attr("class","gameInfo");
                      let divGameScore = $("<div>").attr("class","gameScore");
-                        divGameScore.html(resp[i].score);
+                     
+                     if(resp[i].gameName == "Kordle"){
+							if(resp[i].score == 0){
+								divGameScore.html("틀림");
+							}else{
+								divGameScore.html("맞춤");
+							}
+						}else{
+							 divGameScore.html(resp[i].score);
+						}
                      let divGameTime = $("<div>").attr("class","gameTime");
                         divGameTime.html(resp[i].startGameTime);
                      divGameInfo.append(divGameScore).append(divGameTime);
@@ -454,7 +474,7 @@ function myGameRecod(gameName){
             param:gameName
          }
       }).done(function(resp){
-         console.log(resp);
+
          $(".recordPost").remove();
          for(let i=0;i<resp.length;i++){
             
@@ -465,7 +485,16 @@ function myGameRecod(gameName){
                   divGameRank.html(resp[i].gameName);
                let divGameInfo = $("<div>").attr("class","gameInfo");
                   let divGameScore = $("<div>").attr("class","gameScore");
-                     divGameScore.html(resp[i].score);
+                  
+                  if(resp[i].gameName == "Kordle"){
+						if(resp[i].score == 0){
+							divGameScore.html("틀림");
+						}else{
+							divGameScore.html("맞춤");
+						}
+					}else{
+						 divGameScore.html(resp[i].score);
+					}
                   let divGameTime = $("<div>").attr("class","gameTime");
                      divGameTime.html(resp[i].startGameTime);
                   divGameInfo.append(divGameScore).append(divGameTime);
@@ -486,8 +515,6 @@ function myFavorite(category) {
          param: category
       }
    }).done(function(resp) {
-
-      console.log(resp);
 
       $(".gamePost").remove();
 
@@ -538,7 +565,8 @@ function myWriteList() {
       url: "/myWriteList.board?myPage=true",
       dataType: "json"
    }).done(function(resp) {
-      console.log(resp);
+      
+      $(".post").remove();
 
       let div = $(".post1");
 
@@ -577,8 +605,6 @@ function myWriteList() {
 
          let divRecommend = $("<div>").attr("class", "recommend forEnglish");
          divRecommend.append(resp[i].recommend);
-
-
 
          maxBoard.append(divNum).append(divTitle).append(divWriter).append(divDate).append(divView).append(divRecommend);
 
