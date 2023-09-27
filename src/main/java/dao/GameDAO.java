@@ -233,7 +233,7 @@ public class GameDAO {
 	
 	// 명예의 전당 출력
 	public List<GameRecordDTO> selectUserByGame(String gName) throws Exception {
-		String sql = "select * from hof where gName = ? order by maxscore desc limit 5;";
+		String sql = "select *, dense_rank() over(order by maxscore desc) ranker from hof where gName = ? order by maxscore desc limit 5";
 		List<GameRecordDTO> list = new ArrayList<>();
 		
 		try(Connection con = this.getConnection();
@@ -242,11 +242,12 @@ public class GameDAO {
 			
 			try(ResultSet rs = pstat.executeQuery();) {
 				while(rs.next()) {
-					String mId = rs.getString("mId");
-					gName = rs.getString("gName");
+					String mNickname = rs.getString("mnickname");
+					gName = rs.getString("gname");
 					int grScore = rs.getInt("maxscore");
-					int mLevel = rs.getInt("mLevel");
-					list.add(new GameRecordDTO(mId, gName, grScore, mLevel));
+					int mLevel = rs.getInt("mlevel");
+					int grRanker = rs.getInt("ranker");
+					list.add(new GameRecordDTO(mNickname, gName, grScore, mLevel, grRanker));
 				}
 				return list;
 			}

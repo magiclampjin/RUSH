@@ -39,6 +39,8 @@ $(document).ready(function() {
               game: game
            },
         }).done(function(rankerList){
+	
+			console.log(rankerList);
            // 상위 5개 추출
            let listNum = 5
           	if(rankerList.length < listNum) {
@@ -59,7 +61,7 @@ $(document).ready(function() {
 		        } else {
 		            rank.addClass("colorWhite");
 		        }
-		        rank.html(i+1);
+		        rank.html(rankerList[i].ranker);
 		
 		        let infoDiv = $("<div>");
 		        infoDiv.addClass("recordPost col-11 colorWhite");
@@ -76,9 +78,9 @@ $(document).ready(function() {
 		        idLevDiv.addClass("col-8 pl-15");
 		
 		        let userId = $("<div>");
-		        userId.attr("id", "userId");
+		        userId.attr("id", "userNickname");
 		        userId.addClass("colorWhite");
-		        userId.html(rankerList[i].id);
+		        userId.html(rankerList[i].nickName);
 		
 		        let userLevel = $("<div>");
 		        userLevel.attr("id", "userLevel");
