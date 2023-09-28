@@ -27,7 +27,7 @@
 }
 
 a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 .dropdown-menu[data-bs-popper] {

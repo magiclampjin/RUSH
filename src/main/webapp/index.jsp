@@ -22,15 +22,15 @@
 
 <style>
 .p8 {
-	padding: 8px;
+	padding: 8px !important;
 }
 
 .w700 {
-	width: 700px;
+	width: 700p !important;
 }
 
 .w1300 {
-	max-width: 1300px;
+	max-width: 1300px !important;
 }
 
 .body_guide {
@@ -41,67 +41,67 @@
 }
 
 .mt200 {
-	margin-top: 200px;
+	margin-top: 200px !important;
 }
 
 .mt100 {
-	margin-top: 100px;
+	margin-top: 100px !important;
 }
 
 .mb200 {
-	margin-bottom: 200px;
+	margin-bottom: 200px !important;
 }
 
 .mb100 {
-	margin-bottom: 100px;
+	margin-bottom: 100px !important;
 }
 
 .mb80 {
-	margin-bottom: 80px;
+	margin-bottom: 80px !important;
 }
 
 .mb50 {
-	margin-bottom: 50px;
+	margin-bottom: 50px !important;
 }
 
 .mb30 {
-	margin-bottom: 30px;
+	margin-bottom: 30px !important;
 }
 
 .mb20 {
-	margin-bottom: 20px;
+	margin-bottom: 20px !important;
 }
 
 .mb10 {
-	margin-bottom: 10px;
+	margin-bottom: 10px !important;
 }
 
 .mlr20 {
-	margin: 0px 20px;
+	margin: 0px 20px !important;
 }
 
 .ml15 {
-	margin-left: 15px;
+	margin-left: 15px !important;
 }
 
 .pl70 {
-	padding-left: 70px;
+	padding-left: 70px !important;
 }
 
 .pr70 {
-	padding-right: 70px;
+	padding-right: 70px !important;
 }
 
 .plr50 {
-	padding: 0px 50px;
+	padding: 0px 50px !important;
 }
 
 .w49 {
-	width: 49%;
+	width: 49% !important;
 }
 
 .gameDesc {
-	padding: 0px 50px;
+	padding: 0px 50px  !important;
 }
 </style>
 </head>
