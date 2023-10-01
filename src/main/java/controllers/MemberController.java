@@ -45,6 +45,7 @@ public class MemberController extends HttpServlet {
 
 		MemberDAO dao = MemberDAO.getInstance();
 		BoardDAO bdao = BoardDAO.getInstance();
+		GameDAO gdao = GameDAO.getInstance();
 		PrintWriter printwriter = response.getWriter();
 		Gson gson = new Gson();
 		Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
@@ -355,7 +356,7 @@ public class MemberController extends HttpServlet {
 			    printwriter.append(gsonTs.toJson(list));
 				
 			} else if(cmd.equals("/gameRank.member")) {
-				List<GameDTO> gameRank = dao.selectGameRanking();
+				List<GameDTO> gameRank = gdao.selectGameRanking();
 				
 				printwriter.append(gson.toJson(gameRank));
 				//request.getRequestDispatcher("/member/adminDashBoard.jsp").forward(request, response);

@@ -105,7 +105,7 @@ public class GameController extends HttpServlet {
 				String gName = request.getParameter("game");
 				String mNickname = (String) request.getSession().getAttribute("loginNickname");
 				int score = Integer.parseInt(request.getParameter("score"));
-				
+				System.out.println(score);
 				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
 				System.out.println("record result : "+result);
 
