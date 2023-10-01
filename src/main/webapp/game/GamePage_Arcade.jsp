@@ -23,7 +23,23 @@
 	integrity="sha512-YQL0GVx/Too3vZjBl9plePRIYsRnd1s8N6QOvXPdZ+JMH2mtRTLQXGUDGjNW6zr1HUgcOIury67IvWe91oeEwQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="/css/game/game.css" />
-<script src="game/js/flappy_bird_scene.js" type="text/javascript"></script>
+
+<c:choose>
+	<c:when test="${game eq 'Flappy Bird' }">
+		<!-- Flappy Bird js 파일 -->
+		<script src="game/js/flappy_bird_scene.js" type="text/javascript"></script>
+	</c:when>
+	<c:when test="${game eq 'Doodle Jump' }">
+		<!-- Doodle Jump css 및 js 파일 -->
+		<script src="game/doodle/js/StartScene.js"></script>
+    <script src="game/doodle/js/SettingScene.js"></script>
+    <script src="game/doodle/js/GameScene.js"></script>
+    <script src="game/doodle/js/GameOver.js"></script>
+    <link rel="stylesheet" href="game/doodle/css/doodle.css">
+	</c:when>
+</c:choose>
+
+
 <style>
 * {
 	box-sizing: border-box;
