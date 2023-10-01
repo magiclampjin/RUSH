@@ -54,9 +54,9 @@ a {
 								<ul class="dropdown-menu p-0"
 									aria-labelledby="navbarDropdownMenuLink">
 									<li><a class="dropdown-item fontEnglish"
-										href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
+										href="/game/GamePage_Main.jsp">Main</a></li>
 									<li><a class="dropdown-item fontEnglish"
-										href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
+										href="/game/GamePage_BestGame.jsp">BestGame</a></li>
 								</ul></li>
 							<li class="nav-item dropdown col-3 text-end"><a
 								class="nav-link text-white fontEnglish"
@@ -78,40 +78,40 @@ a {
 								<c:when test="${loginID == null }">
 									<li class="nav-item dropdown col-3 text-end p8"><a
 										class="text-white fontEnglish"
-										href="http://localhost/member/login.jsp"> LOGIN </a></li>
+										href="/member/login.jsp"> LOGIN </a></li>
 								</c:when>
 								<c:otherwise>
 									<c:choose>
 										<c:when test="${loginID == 'admin' }">
 											<li class="nav-item dropdown col-3 text-end"><a
 												class="nav-link text-white fontEnglish"
-												href="http://localhost/load.member"
+												href="/load.member"
 												id="navbarDropdownMenuLink" role="button"
 												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
 											</a>
 												<ul class="dropdown-menu p-0"
 													aria-labelledby="navbarDropdownMenuLink">
 													<li><a class="dropdown-item fontEnglish"
-														href="http://localhost/load.member">MyPage</a></li>
+														href="/load.member">MyPage</a></li>
 														<li><a class="dropdown-item fontEnglish"
-														href="http://localhost/member/adminDashBoard.jsp">DashBoard</a></li>
+														href="/member/adminDashBoard.jsp">DashBoard</a></li>
 													<li><a class="dropdown-item fontEnglish"
-														href="http://localhost/logout.member">Log Out</a></li>
+														href="/logout.member">Log Out</a></li>
 												</ul></li>
 										</c:when>
 										<c:otherwise>
 											<li class="nav-item dropdown col-3 text-end"><a
 												class="nav-link text-white fontEnglish"
-												href="http://localhost/load.member"
+												href="/load.member"
 												id="navbarDropdownMenuLink" role="button"
 												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
 											</a>
 												<ul class="dropdown-menu p-0"
 													aria-labelledby="navbarDropdownMenuLink">
 													<li><a class="dropdown-item fontEnglish"
-														href="http://localhost/load.member">MyPage</a></li>
+														href="/load.member">MyPage</a></li>
 													<li><a class="dropdown-item fontEnglish"
-														href="http://localhost/logout.member">Log Out</a></li>
+														href="/logout.member">Log Out</a></li>
 												</ul></li>
 										</c:otherwise>
 									</c:choose>

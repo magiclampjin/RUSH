@@ -17,6 +17,11 @@ public class GameDTO {
 		this.playCount = playCount;
 	}
 	
+	public GameDTO(String gName, String gImageURL) {
+		this.gName = gName;
+		this.gImageURL = gImageURL;
+	}
+	
 	public GameDTO(String gName, String gImageURL, String id) {
 		super();
 		this.gName = gName;
@@ -72,6 +77,12 @@ public class GameDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
+
+	public int getPlayCount() {
+		return playCount;
+	}
+
+	public void setPlayCount(int playCount) {
+		this.playCount = playCount;
+	}
 }
