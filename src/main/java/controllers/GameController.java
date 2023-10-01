@@ -132,12 +132,15 @@ public class GameController extends HttpServlet {
 				pw.append(gson.toJson(result));
 			}else if(cmd.equals("/kordleGameStart.game")) {
 				KordleWordDTO dap = kwdao.randomWord();
-				System.out.println("정답: "+dap.getJamo_word());
 				pw.append(gson.toJson(dap));
 			} else if(cmd.equals("/bestPlayGame.game")) {
 				List<GameDTO> list = dao.selectIndexBestPlayGame();
 				pw.append(gson.toJson(list));
+			} else if(cmd.equals("/bestBookmarkGame.game")) {
+				List<GameDTO> list = dao.selectBestBookmarkGame();
+				pw.append(gson.toJson(list));
 			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/error.html");

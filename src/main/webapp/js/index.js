@@ -12,7 +12,7 @@ $(document).ready(function() {
 				
 			let right = $("<div>").attr("class", "d-none col-sm-6 d-md-block");
 			let gameDesc = $("<div>").attr("class", "colorWhite fw500 fs15 d-flex align-items-center justify-content-center text-center h80 gameDesc");
-			gameDesc.html("여기에 게임 설명 넣으면 됩니다 이 게임 재밌고 흥미롭고 안 하면 아쉽고 등등... 하면 아쉬워서 잠자기 전에 생각난다 어쩌구 이 게임은 영국에서부터 시작되어 저쩌구");
+			gameDesc.html(resp[i].gName+" ("+resp[i].gDeveloper+" 제작)<br><br>"+resp[i].gameDesc);
 			let moveBtnCover = $("<div>").attr("class", "d-flex align-items-center justify-content-center h20");
 			let moveBtn = $("<button>").html("PLAY GAME").attr("class", "gameBtns moveBestGame fontEnglish bColorPink colorWhite fw900");
 			
@@ -32,7 +32,7 @@ $(document).ready(function() {
 			
 			let miniBottom = $("<div>").attr("class","col-12 d-md-none");
 			let gameDescMini = $("<div>").attr("class","colorWhite fw500 fs3 d-flex align-items-center justify-content-center text-center h80 plr50 mb20");
-			gameDescMini.html("여기에 게임 설명 넣으면 됩니다 이 게임 재밌고 흥미롭고 안 하면 아쉽고 등등... 하면 아쉬워서 잠자기 전에 생각난다 어쩌구 이 게임은 영국에서부터 시작되어 저쩌구");
+			gameDescMini.html(resp[i].gName+" ("+resp[i].gDeveloper+" 제작)<br><br>"+resp[i].gameDesc);
 			let moveBtnCoverMini = $("<div>").attr("class","d-flex align-items-center justify-content-center h20");
 			let moveBtnMini=  $("<button>").html("PLAY GAME").attr("class", "gameBtnsmini moveBestGame fontEnglish bColorPink colorWhite fw900");
 			
@@ -43,16 +43,20 @@ $(document).ready(function() {
 		
 	});
 	
-	let bestBookmark = $("#bestBookmarkList"); //after
-
-	for(let i=3; i>0; i--){
-		let obj = $("<div>").attr("class","col-12 col-md-4 mb80");
+	$.ajax({
+		url: "/bestBookmarkGame.game",
+		dataType: "json"
+	}).done(function(resp) {
+		let bestBookmark = $("#bestBookmarkList"); //after
+		
+		for(let i=resp.length-1; i>=0; i--){
+			let obj = $("<div>").attr("class","col-12 col-md-4 mb80");
 		
 		let innerObj = $("<div>").attr("class","row g-0 mlr20");
-		let title = $("<div>").attr("class","col-12 colorWhite fw900 fs30px mb20").html("게임"+(i));
+		let title = $("<div>").attr("class","col-12 colorWhite fw900 fs30px mb20").html(resp[i].gName);
 		
 		let imgCover = $("<div>").attr("class","col-12 colorWhite mb20");
-		let img = $("<img>").attr("src","/img/img.jpg").attr("class","bookmarkImg");
+		let img = $("<img>").attr("src", resp[i].gImageURL).attr("class","bookmarkImg");
 		imgCover.append(img);
 		
 		let sexRatios = $("<div>").attr("class","row g-0 d-flex sexRatios");
@@ -65,20 +69,25 @@ $(document).ready(function() {
 		sexRatios.append(womenRatioCover).append(menRatioCover);
 		
 		let btnCover = $("<div>").attr("class","col-12 d-none d-md-block mb50");
-		let btn = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtns").html("PLAY GAME");
-		btnCover.append(btn);
+		let btn = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtns moveBestBookmarkGame").html("PLAY GAME");
+		btnCover.append(btn).append($("<input>").attr("type","hidden").val(resp[i].gName));
 		let btnCoverMini = $("<div>").attr("class","col-12 d-md-none mb50");
-		let btnMini = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtnsmini").html("PLAY GAME");
-		btnCoverMini.append(btnMini);
+		let btnMini = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtnsmini moveBestBookmarkGame").html("PLAY GAME");
+		btnCoverMini.append(btnMini).append($("<input>").attr("type","hidden").val(resp[i].gName));
 		
 		innerObj.append(title).append(imgCover).append(sexRatios).append(btnCover).append(btnCoverMini);
 		obj.append(innerObj);
 		bestBookmark.after(obj);
-	}
-
+		}
+	});
 	
 	
 	$(document).on("click",".moveBestGame", function(){
+		let gName = $(this).next().val();
+		location.href = "/moveToGamePage.game?game="+gName;
+	});
+	
+	$(document).on("click",".moveBestBookmarkGame", function(){
 		let gName = $(this).next().val();
 		location.href = "/moveToGamePage.game?game="+gName;
 	});

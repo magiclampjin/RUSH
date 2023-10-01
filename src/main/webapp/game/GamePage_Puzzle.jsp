@@ -260,14 +260,20 @@ a{
 .h80{
 	height : 80px;
 }
+
+.mb30{
+	margin-bottom: 30px !important;
+}
+
+.kordleDescImg{
+	width:500px !important;
+}
+
 </style>
 </head>
 <body>
 <script>
 	$(document).ready(function() {
-		console.log("아무거나 ${game}");
-		
-		
 		$.ajax({
 			url:"/checkFavorite.game",
 			data:{
@@ -497,7 +503,7 @@ a{
 												<hr class="colorBlue border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">여섯 개의 자음 모음으로 분리된 단어를 맞춰보세요.<br>실제로 존재하는 단어만 입력할 수 있습니다.<br>기회는 6번이며, 실제 키보드 자판 또는 게임 화면 속 키보드 자판을 이용해 입력이 가능합니다.</p>
 											</div>				
 										</div>
 										<div class="row g-0 w100p mt150">
@@ -506,26 +512,21 @@ a{
 												<hr class="colorGreen border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">
+													<div class="mb30">
+														<img src="/img/kordlekeyboard.png" class="kordleDescImg">
+														<div class="text-white fontKorean">키보드를 이용해 단어를 입력할 수 있습니다. 쌍자음 또는 이중모음은 단모음 또는 단자음으로 변환해 입력해주세요.<br>오입력 시 backspace 키를 입력해 지울 수 있으며, Enter 키 입력 시 입력이 완료됩니다.</div>
+													</div>
+													<div class="mb30">
+														<img src="/img/kordlekeyboard2.png" class="kordleDescImg">
+														<div class="text-white fontKorean">게임 화면 내 키보드를 눌러 단어를 입력할 수 있습니다. 쌍자음 또는 이중모음은 단모음 또는 단자음으로 변환해 입력해주세요.<br>오입력 시 지우기 버튼을 눌러 지울 수 있으며, 확인 버튼을 클릭하면 입력이 완료됩니다.</div>
+													</div>
+													<div class="mb30">
+														<img src="/img/kordleExp.PNG" class="kordleDescImg">
+														<div class="text-white fontKorean">Enter 키 혹은 확인 버튼을 눌러 단어 입력 시, 화면에 결과가 표시됩니다.<br>존재하지 않는 자모는 회색, 존재하지만 자리가 틀린 자모는 주황색, 자리까지 맞춘 단어는 초록색으로 표시됩니다.</div>			
+													</div>
+												</p>
 											</div>				
-										</div>
-										<div class="row g-0 w100p mt150">
-											<div class="col-12">
-												<p class="text-white fontKorean fs-2">제작자 정보</p>
-												<hr class="colorPink border-3 opacity-75">
-											</div>
-											<div class="col-12">
-												<table class="devTable">
-													<tr>
-														<th class="text-white fontKorean fw900">제작자</th>
-														<td class="text-white fontKorean">${dev}</td>
-													</tr>
-													<tr>
-														<th class="text-white fontKorean fw900">제작자 소속</th>
-														<td class="text-white fontKorean">공주대학교 SKY팀</td>
-													</tr>
-												</table>
-											</div>
 										</div>
 									</div>
 								</c:when>
@@ -550,36 +551,16 @@ a{
 											</div>
 											<div class="col-12">
 												<p class="text-white fontKorean">
-													<div style="margin-bottom:5px;">
+													<div class="mb30">
 														<img src="/game/images/Candy1.png">
 														<span class="text-white fontKorean">가로, 세로로 3개 이상 같은 캔디를 맞춰주세요.</span>
 													</div>
-													<div>
+													<div class="mb30">
 														<img src="/game/images/Candy2.png">
 														<span class="text-white fontKorean">캔디가 터질 때마다 30점씩 획득할 수 있습니다.</span>
 													</div>
-													
-													
 												</p>
 											</div>				
-										</div>
-										<div class="row g-0 w100p mt150">
-											<div class="col-12">
-												<p class="text-white fontKorean fs-2">제작자 정보</p>
-												<hr class="colorPink border-3 opacity-75">
-											</div>
-											<div class="col-12">
-												<table class="devTable">
-													<tr>
-														<th class="text-white fontKorean fw900">제작자</th>
-														<td class="text-white fontKorean">${dev}</td>
-													</tr>
-													<tr>
-														<th class="text-white fontKorean fw900">제작자 소속</th>
-														<td class="text-white fontKorean">공주대학교 SKY팀</td>
-													</tr>
-												</table>
-											</div>
 										</div>
 									</div>
 								</c:when>
@@ -587,7 +568,24 @@ a{
 							
 							
 							
-							
+							<div class="row g-0 w100p mt150">
+								<div class="col-12">
+									<p class="text-white fontKorean fs-2">제작자 정보</p>
+									<hr class="colorPink border-3 opacity-75">
+								</div>
+								<div class="col-12">
+									<table class="devTable">
+										<tr>
+											<th class="text-white fontKorean fw900">제작자</th>
+											<td class="text-white fontKorean">${dev}</td>
+										</tr>
+										<tr>
+											<th class="text-white fontKorean fw900">제작자 소속</th>
+											<td class="text-white fontKorean">공주대학교 SKY팀</td>
+										</tr>
+									</table>
+								</div>
+							</div>
 							
 						</div>
 					</div>

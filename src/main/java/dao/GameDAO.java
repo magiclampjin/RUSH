@@ -611,7 +611,21 @@ public class GameDAO {
 	}
 	
 	public List<GameDTO> selectIndexBestPlayGame() throws Exception{
+		//public GameDTO(String gName, String gDeveloper, String gImageURL, String gameDesc) {
 		String sql ="select * from bestPlayGame;";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			List<GameDTO> list = new ArrayList<>();
+			while (rs.next()) {
+				list.add(new GameDTO(rs.getString("gName"), rs.getString("gDeveloper"), rs.getString("gImageURL"), rs.getString("gDesc")));
+			}
+			return list;
+		}
+	}
+	
+	public List<GameDTO> selectBestBookmarkGame() throws Exception{
+		String sql ="select * from bestBookmark;";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				ResultSet rs = pstat.executeQuery();) {
