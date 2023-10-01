@@ -48,36 +48,54 @@ $(document).ready(function() {
 		dataType: "json"
 	}).done(function(resp) {
 		let bestBookmark = $("#bestBookmarkList"); //after
-		
 		for(let i=resp.length-1; i>=0; i--){
-			let obj = $("<div>").attr("class","col-12 col-md-4 mb80");
+			if(i==resp.length-1 || resp[i].gName != resp[i+1].gName){
+				let obj = $("<div>").attr("class","col-12 col-md-4 mb80");
 		
-		let innerObj = $("<div>").attr("class","row g-0 mlr20");
-		let title = $("<div>").attr("class","col-12 colorWhite fw900 fs30px mb20").html(resp[i].gName);
+				let innerObj = $("<div>").attr("class","row g-0 mlr20");
+				let title = $("<div>").attr("class","col-12 colorWhite fw900 fs30px mb20").html(resp[i].gName);
+				
+				let imgCover = $("<div>").attr("class","col-12 colorWhite mb20");
+				let img = $("<img>").attr("src", resp[i].gImageURL).attr("class","bookmarkImg");
+				imgCover.append(img);
+				
+				let sexRatios = $("<div>").attr("class","row g-0 d-flex sexRatios");
+				let womenRatioCover = $("<div>").attr("class","col-6 fontEnglish colorWhite text-center bcolorDarkgray30 sexRatio fw700 mb20 borderRight1");
+				let womenRatio = $("<i>").attr("class","fa-solid fa-venus fa-xl").css("color","#ffffff");
+				let menRatioCover = $("<div>").attr("class","col-6 fontEnglish colorWhite text-center bcolorDarkgray30 sexRatio fw700 mb20 borderLeft1");
+				let menRatio = $("<i>").attr("class","fa-solid fa-mars fa-xl").css("color","#ffffff").after("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%");
+				if(resp[i].gender =="W"){
+					womenRatioCover.append(womenRatio);
+					womenRatioCover.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+(resp[i].genderRatio*100)+"%");
+					
+					if(i-1>=0 && resp[i].gName == resp[i-1].gName){
+						menRatioCover.append(menRatio);
+						menRatioCover.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+(resp[i-1].genderRatio*100)+"%");
+					}
+					else{
+						menRatioCover.append(menRatio);
+						menRatioCover.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%");
+					}
+				}else if(resp[i].gender =="M"){
+					womenRatioCover.append(womenRatio);
+					womenRatioCover.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%");
+					menRatioCover.append(menRatio);
+					menRatioCover.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+(resp[i].genderRatio*100)+"%");
+				}
+				sexRatios.append(womenRatioCover).append(menRatioCover);
+
+				let btnCover = $("<div>").attr("class","col-12 d-none d-md-block mb50");
+				let btn = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtns moveBestBookmarkGame").html("PLAY GAME");
+				btnCover.append(btn).append($("<input>").attr("type","hidden").val(resp[i].gName));
+				let btnCoverMini = $("<div>").attr("class","col-12 d-md-none mb50");
+				let btnMini = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtnsmini moveBestBookmarkGame").html("PLAY GAME");
+				btnCoverMini.append(btnMini).append($("<input>").attr("type","hidden").val(resp[i].gName));
+				
+				innerObj.append(title).append(imgCover).append(sexRatios).append(btnCover).append(btnCoverMini);
+				obj.append(innerObj);
+				bestBookmark.after(obj);
+			}
 		
-		let imgCover = $("<div>").attr("class","col-12 colorWhite mb20");
-		let img = $("<img>").attr("src", resp[i].gImageURL).attr("class","bookmarkImg");
-		imgCover.append(img);
-		
-		let sexRatios = $("<div>").attr("class","row g-0 d-flex sexRatios");
-		let womenRatioCover = $("<div>").attr("class","col-6 fontEnglish colorWhite text-center bcolorDarkgray30 sexRatio fw700 mb20 borderRight1");
-		let womenRatio = $("<i>").attr("class","fa-solid fa-venus fa-xl").css("color","#ffffff");
-		womenRatioCover.append(womenRatio).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%");
-		let menRatioCover = $("<div>").attr("class","col-6 fontEnglish colorWhite text-center bcolorDarkgray30 sexRatio fw700 mb20 borderLeft1");
-		let menRatio = $("<i>").attr("class","fa-solid fa-mars fa-xl").css("color","#ffffff").after("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%");
-		menRatioCover.append(menRatio).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%");
-		sexRatios.append(womenRatioCover).append(menRatioCover);
-		
-		let btnCover = $("<div>").attr("class","col-12 d-none d-md-block mb50");
-		let btn = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtns moveBestBookmarkGame").html("PLAY GAME");
-		btnCover.append(btn).append($("<input>").attr("type","hidden").val(resp[i].gName));
-		let btnCoverMini = $("<div>").attr("class","col-12 d-md-none mb50");
-		let btnMini = $("<button>").attr("class","fontEnglish colorBlack bColorGreen w-100 fw900 mb20 bookmarkBtnsmini moveBestBookmarkGame").html("PLAY GAME");
-		btnCoverMini.append(btnMini).append($("<input>").attr("type","hidden").val(resp[i].gName));
-		
-		innerObj.append(title).append(imgCover).append(sexRatios).append(btnCover).append(btnCoverMini);
-		obj.append(innerObj);
-		bestBookmark.after(obj);
 		}
 	});
 	

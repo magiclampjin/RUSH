@@ -231,20 +231,20 @@ public class GameDAO {
 	// 명예의 전당 출력
 	public List<GameRecordDTO> selectUserByGame(String gName) throws Exception {
 		String sql;
-		if(gName.equals("Kordle")) {
+		if (gName.equals("Kordle")) {
 			sql = "select *, dense_rank() over(order by maxscore desc) ranker from hofkordle where mid not like 'admin' order by maxscore desc limit 5";
-		}else {
+		} else {
 			sql = "select *, dense_rank() over(order by maxscore desc) ranker from hof where mid not like 'admin' and gName = ? order by maxscore desc limit 5";
 		}
-		
+
 		List<GameRecordDTO> list = new ArrayList<>();
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			if(!gName.equals("Kordle"))
+			if (!gName.equals("Kordle"))
 				pstat.setString(1, gName);
-			
-			try(ResultSet rs = pstat.executeQuery();) {
-				while(rs.next()) {
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				while (rs.next()) {
 					String mNickname = rs.getString("mnickname");
 					int grScore = rs.getInt("maxscore");
 					int mLevel = rs.getInt("mlevel");
@@ -609,37 +609,38 @@ public class GameDAO {
 			return list;
 		}
 	}
-	
 
-	public List<GameDTO> selectGameRanking() throws Exception{
-		String sql ="select gName,count(*) playCount from game_record group by gName;";
+	public List<GameDTO> selectGameRanking() throws Exception {
+		String sql = "select gName,count(*) playCount from game_record group by gName;";
 		List<GameDTO> list = new ArrayList<>();
-		try(Connection con = this.getConnection();
+		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();){
-			while(rs.next()) {
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
 				String gName = rs.getString("gName");
 				int playCount = rs.getInt("playCount");
 				list.add(new GameDTO(gName, playCount));
 			}
 			return list;
 		}
-  }
-  
-	public List<GameDTO> selectIndexBestPlayGame() throws Exception{
-		//public GameDTO(String gName, String gDeveloper, String gImageURL, String gameDesc) {
-		String sql ="select * from bestPlayGame;";
+	}
+
+	public List<GameDTO> selectIndexBestPlayGame() throws Exception {
+		// public GameDTO(String gName, String gDeveloper, String gImageURL, String
+		// gameDesc) {
+		String sql = "select * from bestPlayGame;";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				ResultSet rs = pstat.executeQuery();) {
 			List<GameDTO> list = new ArrayList<>();
 			while (rs.next()) {
-				list.add(new GameDTO(rs.getString("gName"), rs.getString("gDeveloper"), rs.getString("gImageURL"), rs.getString("gDesc")));
+				list.add(new GameDTO(rs.getString("gName"), rs.getString("gDeveloper"), rs.getString("gImageURL"),
+						rs.getString("gDesc")));
 			}
 			return list;
 		}
 	}
-	
+
 	public List<GameDTO> selectBestBookmarkGame() throws Exception{
 		String sql ="select * from bestBookmark;";
 		try (Connection con = this.getConnection();
@@ -647,8 +648,7 @@ public class GameDAO {
 				ResultSet rs = pstat.executeQuery();) {
 			List<GameDTO> list = new ArrayList<>();
 			while (rs.next()) {
-				list.add(new GameDTO(rs.getString("gName"), rs.getString("gImageURL")));
-
+				list.add(new GameDTO(rs.getString("gName"), rs.getString("gImageURL"), rs.getString("gender"), (rs.getFloat("bookmarkCnt"))));
 			}
 			return list;
 		}

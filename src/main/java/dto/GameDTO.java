@@ -10,8 +10,8 @@ public class GameDTO {
 	private String gameDesc;
 	
 	// bestbookmark
-	private float womanRatio;
-	private float manRatio;
+	private String gender;
+	private float genderRatio;
 	
 	public GameDTO() {
 		// TODO Auto-generated constructor stub
@@ -22,11 +22,10 @@ public class GameDTO {
 		this.playCount = playCount;
 	}
 	
-	// bestbookmark
-	public GameDTO(String gName, String gImageURL) {
-		this.gName = gName;
-		this.gImageURL = gImageURL;
-	}
+	/*
+	 * // bestbookmark (구) public GameDTO(String gName, String gImageURL) {
+	 * this.gName = gName; this.gImageURL = gImageURL; }
+	 */
 	
 	// bestplay
 	public GameDTO(String gName, String gDeveloper, String gImageURL, String gameDesc) {
@@ -37,11 +36,12 @@ public class GameDTO {
 		this.gameDesc = gameDesc;
 	}
 	
-	public GameDTO(String gName, String gImageURL, float womanRatio, float manRatio) {
+	// bestbookmark
+	public GameDTO(String gName, String gImageURL, String gender, float genderRatio) {
 		this.gName = gName;
 		this.gImageURL = gImageURL;
-		this.womanRatio = womanRatio; //여자 북마크
-		this.manRatio = manRatio; //남자 북마크
+		this.gender = gender;
+		this.genderRatio = genderRatio; 
 	}
 
 	public GameDTO(String gName, String gImageURL, String id) {
@@ -116,22 +116,20 @@ public class GameDTO {
 		this.gameDesc = gameDesc;
 	}
 
-	public float getWomanRatio() {
-		return womanRatio;
+	public String getSex() {
+		return gender;
 	}
 
-	public void setWomanRatio(float womanRatio) {
-		this.womanRatio = womanRatio;
+	public void setSex(String gender) {
+		this.gender = gender;
 	}
 
-	public float getManRatio() {
-		return manRatio;
+	public float getSexRatio() {
+		return genderRatio;
 	}
 
-	public void setManRatio(float manRatio) {
-		this.manRatio = manRatio;
+	public void setSexRatio(float genderRatio) {
+		this.genderRatio = genderRatio;
 	}
-	
-	
 	
 }
