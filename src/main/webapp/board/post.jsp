@@ -40,10 +40,10 @@ a {
 }
 
 .body_guide {
-	max-width: 1300px;
-	width: 100%;
-	height: 100%;
-	margin: auto;
+	max-width: 1300px !important;
+	width: 100% !important;
+	height: 100% !important;
+	margin: auto !important;
 }
 
 .w15 {

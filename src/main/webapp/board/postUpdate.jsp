@@ -6,15 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>RUSH-게시글 수정</title>
-
-<%@ include file="/common/style.jsp" %>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
 <!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardWrite.css">
 
-<script type="text/javascript" src="/js/board/summernote_editor.js"></script>
+<!-- <script type="text/javascript" src="/js/board/summernote_editor.js"></script> -->
 
 <!-- 부트스트랩 -->
 <link
@@ -25,16 +23,7 @@
 
 
 <!-- summernote -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 
 <!-- Header Style -> 부트스트랩 속성 제거 -->
 <style>
@@ -60,7 +49,7 @@ a {
 <body>
 	<div class="container-fluid p-0">
 		
-		<%@ include file="/common/header.jsp" %>
+		<%@ include file="/common/writeHeader.jsp" %>
 		<div class="boardWrite">
 			<div class="boardWrite_guide">
 				<c:choose>
@@ -208,7 +197,7 @@ a {
 			</div>
 		</div>
 
-			<%@include file="/common/footer.jsp"%>
+			<%@include file="/common/writeFooter.jsp"%>
 		</div>
 	</div>
 </body>
