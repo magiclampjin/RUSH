@@ -609,4 +609,17 @@ public class GameDAO {
 			return list;
 		}
 	}
+	
+	public List<GameDTO> selectIndexBestPlayGame() throws Exception{
+		String sql ="select * from bestPlayGame;";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			List<GameDTO> list = new ArrayList<>();
+			while (rs.next()) {
+				list.add(new GameDTO(rs.getString("gName"), rs.getString("gImageURL")));
+			}
+			return list;
+		}
+	}
 }

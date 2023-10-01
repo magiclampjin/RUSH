@@ -134,6 +134,9 @@ public class GameController extends HttpServlet {
 				KordleWordDTO dap = kwdao.randomWord();
 				System.out.println("정답: "+dap.getJamo_word());
 				pw.append(gson.toJson(dap));
+			} else if(cmd.equals("/bestPlayGame.game")) {
+				List<GameDTO> list = dao.selectIndexBestPlayGame();
+				pw.append(gson.toJson(list));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
