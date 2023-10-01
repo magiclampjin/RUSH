@@ -610,6 +610,22 @@ public class GameDAO {
 		}
 	}
 	
+
+	public List<GameDTO> selectGameRanking() throws Exception{
+		String sql ="select gName,count(*) playCount from game_record group by gName;";
+		List<GameDTO> list = new ArrayList<>();
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();){
+			while(rs.next()) {
+				String gName = rs.getString("gName");
+				int playCount = rs.getInt("playCount");
+				list.add(new GameDTO(gName, playCount));
+			}
+			return list;
+		}
+  }
+  
 	public List<GameDTO> selectIndexBestPlayGame() throws Exception{
 		//public GameDTO(String gName, String gDeveloper, String gImageURL, String gameDesc) {
 		String sql ="select * from bestPlayGame;";
@@ -632,6 +648,7 @@ public class GameDAO {
 			List<GameDTO> list = new ArrayList<>();
 			while (rs.next()) {
 				list.add(new GameDTO(rs.getString("gName"), rs.getString("gImageURL")));
+
 			}
 			return list;
 		}

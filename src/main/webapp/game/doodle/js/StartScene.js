@@ -24,9 +24,11 @@ class StartScene extends Phaser.Scene {
     this.frame = 0;
     this.timeCount = 0;
     this.jumpSound;
+    this.gameRecordCheck = $("#gameOver");
   }
 
   create() {
+	this.gameRecordCheck.val("false");
     this.back = this.add.tileSprite(0, 0, 360, 650, "background");
     this.back.setOrigin(0, 0);
 

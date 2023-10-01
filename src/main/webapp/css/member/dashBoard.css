@@ -30,7 +30,7 @@
 	width: 100%;
 }
 
-.chartCon:last-child{
+.chartDiv:last-child{
 	margin-bottom: 200px;
 }
 .chartBox {
@@ -72,7 +72,7 @@
 	.chartCon {
 		flex-direction: column;
 	}
-	.chartBox {
+	.twoDiv>.chartBox {
 		width: 100%;
 	}
 }

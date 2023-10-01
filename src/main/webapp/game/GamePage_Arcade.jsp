@@ -31,11 +31,12 @@
 	</c:when>
 	<c:when test="${game eq 'Doodle Jump' }">
 		<!-- Doodle Jump css 및 js 파일 -->
-		<script src="game/doodle/js/StartScene.js"></script>
-    <script src="game/doodle/js/SettingScene.js"></script>
-    <script src="game/doodle/js/GameScene.js"></script>
-    <script src="game/doodle/js/GameOver.js"></script>
-    <link rel="stylesheet" href="game/doodle/css/doodle.css">
+		<script src="/game/doodle/js/StartScene.js"></script>
+		<script src="/game/doodle/js/SettingScene.js"></script>
+		<script src="/game/doodle/js/GameScene.js"></script>
+		<script src="/game/doodle/js/GameOver.js"></script>
+		<script src="/game/doodle/js/gameRecord.js"></script>
+		<link rel="stylesheet" href="game/doodle/css/doodle.css">
 	</c:when>
 </c:choose>
 
@@ -433,7 +434,8 @@ a {
 									<div id="container" class="col-12"
 										style="width: 360px; height: 650px;">
 										<input type="hidden" id="soundSetting" value="false">
-										<input type="hidden" id="score" value="0">
+										<input type="hidden" id="score" value="0"> <input
+											type="hidden" id="gameOver" value="false">
 										<script>
 										let option = {
 									            type: Phaser.AUTO,
@@ -455,7 +457,19 @@ a {
 									        };
 
 									        let game = new Phaser.Game(option);
-									        
+									        if ($("#gameOver").val()=="true") {
+									        	console.log("게임 기록 저장")
+									    		$.ajax({
+									    			url: "/setGameRecord.game",
+									    			data: {
+									    				game: 'Doodle Jump',
+									    				score: $("#score").val()
+									    			},
+									    			dataType: "json",
+									    			type: "post"
+									    		})
+
+									    	}
 									    </script>
 									</div>
 								</div>
@@ -766,6 +780,73 @@ a {
     	$("#arc").on("click",function(){
     		location.href = "/moveToCategory.game?category=Arcade";
     	});
+    	
+    	function setRecord(userScore){
+    		$.ajax({
+                url:"/setGameRecord.game",
+                data:{
+                  game:'${game}',
+                  score : userScore
+                },
+                type:"post"
+              }).done(function (res){
+           	  	let record = JSON.parse(res);
+                console.log(res);
+                $("#rankCon").text("");
+                for(let i=0; i<record.length; i++){
+    				let divRow = $("<div>");
+    				divRow.addClass("row g-0 p-2");
+    				let divColRank = $("<div>");
+    				if(i<3){
+        				divColRank.addClass("col-1 colorPink fw900 fontEnglish fs-3 align-self-center");
+        				divColRank.append(i+1);
+    				}else{
+        				divColRank.addClass("col-1 text-white fw900 fontEnglish fs-3 align-self-center");
+        				divColRank.append(i+1);	
+    				}
+
+    								
+    				let divColInfo = $("<div>");
+    				divColInfo.addClass("col-11");
+    				
+    				let divRowInfo = $("<div>");
+    				divRowInfo.addClass("row g-0 p-1 recordPost h80");
+    				if(i%2==0){
+    					divRowInfo.addClass("bcolorDarkgray30");
+    					divRowInfo.css({
+    						borderRadius : "10px"
+    					});	
+    				}
+    				
+    				let divInfoLeft = $("<div>");
+    				divInfoLeft.addClass("col-1 align-self-center");
+    				let divInfoRight = $("<div>");
+    				divInfoRight.addClass("col-8 text-white align-self-center");
+    								
+    				let divColScore = $("<div>");
+    				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
+    				divColScore.append(record[i]["score"]+" 점");
+    				
+    				
+    				
+    				divInfoRight.append(record[i]["nickName"]);
+    				divInfoRight.append(" Lv : "+record[i]["level"]);
+    				divRowInfo.append(divInfoLeft);
+    				divRowInfo.append(divInfoRight);
+    				divRowInfo.append(divColScore);
+    				divColInfo.append(divRowInfo);
+    				
+    				
+    				
+    				divRow.append(divColRank);
+    				divRow.append(divColInfo);
+    				//divRow.append(divColScore);
+    				
+    				
+    				$("#rankCon").append(divRow);
+    			}
+              });
+    	}
     	
     </script>
 </body>
