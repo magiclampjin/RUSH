@@ -31,9 +31,11 @@ class GameScene extends Phaser.Scene {
     this.currentMaxHeight = 650;
     this.pause = false;
     this.gameOverPlayCount = 0;
+    this.gameRecordCheck = $("#gameOver");
   }
 
   create() {
+	this.gameRecordCheck.val("false");
     this.cursors = this.input.keyboard.createCursorKeys();
     this.back = this.add.tileSprite(0, 0, 360, 650, "background");
     this.back.setOrigin(0, 0);
@@ -197,6 +199,7 @@ class GameScene extends Phaser.Scene {
           this.gameOverPlayCount++;
         }
         $("#score").val(this.scoreText.text);
+        this.gameRecordCheck.val("true");
         setTimeout(() => {
           this.scene.start("GameOver");
         }, 2000);
