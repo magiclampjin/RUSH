@@ -14,16 +14,16 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-			<link
-		href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-		rel="stylesheet">
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link
-		href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-		rel="stylesheet">
-	<script
-		src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <style>
 * {
@@ -42,19 +42,25 @@ a {
 	text-decoration: none !important;
 }
 
-.dropdown-menu[data-bs-popper] {
+.navbar-expand .navbar-nav .dropdown-menu {
 	right: 0;
 	left: auto;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	width: 158px;
 }
 
-.mb0{
+.dropdown-menu .dropdown-item {
+    height: 30.5px;
+}
+
+.mb0 {
 	margin-bottom: 0px !important;
 }
 
-#navbarNavDropdown{
-	-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0);
-	box-shadow: inset 0 1px 0 rgba(255,255,255,0);
-	
+#navbarNavDropdown {
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0);
 }
 </style>
 </head>
@@ -62,7 +68,7 @@ a {
 	<header class="header bColorBlack">
 		<div class="header_guide">
 			<a href="/index.jsp">
-				<div class="logo fontLogo colorWhite" >RUSH</div>
+				<div class="logo fontLogo colorWhite">RUSH</div>
 			</a>
 			<nav class="navbar navbar-expand navbar-light colorWhite mb0">
 				<div class="container-fluid p-0">
@@ -98,16 +104,16 @@ a {
 								</ul></li>
 							<c:choose>
 								<c:when test="${loginID == null }">
-									<li class="nav-item dropdown col-3 text-end p8"><a
-										class="text-white fontEnglish"
-										href="/member/login.jsp"> LOGIN </a></li>
+								<li class="nav-item dropdown col-3 text-end"><a
+								class="nav-link text-white fontEnglish"
+								href="/member/login.jsp"> LOGIN </a></li>
+									
 								</c:when>
 								<c:otherwise>
 									<c:choose>
 										<c:when test="${loginID == 'admin' }">
 											<li class="nav-item dropdown col-3 text-end"><a
-												class="nav-link text-white fontEnglish"
-												href="/load.member"
+												class="nav-link text-white fontEnglish" href="/load.member"
 												id="navbarDropdownMenuLink" role="button"
 												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
 											</a>
@@ -115,7 +121,7 @@ a {
 													aria-labelledby="navbarDropdownMenuLink">
 													<li><a class="dropdown-item fontEnglish"
 														href="/load.member">MyPage</a></li>
-														<li><a class="dropdown-item fontEnglish"
+													<li><a class="dropdown-item fontEnglish"
 														href="/member/adminDashBoard.jsp">DashBoard</a></li>
 													<li><a class="dropdown-item fontEnglish"
 														href="/logout.member">Log Out</a></li>
@@ -123,8 +129,7 @@ a {
 										</c:when>
 										<c:otherwise>
 											<li class="nav-item dropdown col-3 text-end"><a
-												class="nav-link text-white fontEnglish"
-												href="/load.member"
+												class="nav-link text-white fontEnglish" href="/load.member"
 												id="navbarDropdownMenuLink" role="button"
 												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
 											</a>
