@@ -37,42 +37,9 @@
 	width: 100%;
 }
 
-.twoDiv>.chartBox {
-	position: relative;
-	width: 50%;
-}
-
-.twoDiv>.chartBox:not(:first-child):before{
-	content: "";
-	position: absolute;
-	left: -2px;
-	top: 5%;
-	width: 4px;
-	height: 90%;
-	background: #7d7d7d30;
-}
-.recordPost .gameInfo:before {
-	content: "";
-	position: absolute;
-	left: 0- translateX(50%);
-	width: 5px;
-	height: 35px;
-	background: #ccf423;
-}
-
-
-.chartTitle {
-	padding: 20px;
-	font-size: 20px;
-	text-align: center;
-	font-weight: 700;
-}
 
 @media ( max-width : 786px) {
 	.chartCon {
 		flex-direction: column;
-	}
-	.twoDiv>.chartBox {
-		width: 100%;
 	}
 }

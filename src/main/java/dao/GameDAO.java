@@ -624,6 +624,36 @@ public class GameDAO {
 			return list;
 		}
 	}
+	
+	public List<GameDTO> selectWomanRanking() throws Exception{
+		String sql = "select g.gName, ifnull(a.count,0) playCount from game g left join (select r.gName, count(*) count from game_record r join members m on r.mID=m.mID where mod(substr(mIdNumber,7),2)=0 group by r.gName) a on g.gName=a.gName order by gName;";
+		List<GameDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
+				String gName = rs.getString("gName");
+				int playCount = rs.getInt("playCount");
+				list.add(new GameDTO(gName, playCount));
+			}
+			return list;
+		}
+	}
+	
+	public List<GameDTO> selectManRanking() throws Exception{
+		String sql = "select g.gName, ifnull(a.count,0) playCount from game g left join (select r.gName, count(*) count from game_record r join members m on r.mID=m.mID where mod(substr(mIdNumber,7),2)=1 group by r.gName) a on g.gName=a.gName order by gName;";
+		List<GameDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
+				String gName = rs.getString("gName");
+				int playCount = rs.getInt("playCount");
+				list.add(new GameDTO(gName, playCount));
+			}
+			return list;
+		}
+	}
 
 	public List<GameDTO> selectIndexBestPlayGame() throws Exception {
 		// public GameDTO(String gName, String gDeveloper, String gImageURL, String

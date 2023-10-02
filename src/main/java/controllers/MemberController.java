@@ -367,6 +367,13 @@ public class MemberController extends HttpServlet {
 				
 				printwriter.append(gson.toJson(gameRank));
 				//request.getRequestDispatcher("/member/adminDashBoard.jsp").forward(request, response);
+			} else if(cmd.equals("/genderByRank.member")) {
+				List<GameDTO> womanRank = gdao.selectWomanRanking();
+				List<GameDTO> manRank = gdao.selectManRanking();
+				List<Object> result = new ArrayList<>();
+				result.add(womanRank);
+				result.add(manRank);
+				printwriter.append(gsonTs.toJson(result));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
