@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/css/board/boardWrite.css">
 <script src="/js/board/isUserImmediately.js"></script>
 
-<script type="text/javascript" src="/js/board/summernote_editor.js"></script>
+<!-- <script type="text/javascript" src="/js/board/summernote_editor.js"></script> -->
 
 <!-- 부트스트랩 -->
 <link
@@ -24,16 +24,7 @@
 
 
 <!-- summernote -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 
 <!-- Header Style -> 부트스트랩 속성 제거 -->
 <style>
