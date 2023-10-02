@@ -14,7 +14,10 @@ $(document).ready(function() {
    })
 
    // 내가 쓴 글 눌렀을 때 -> 처음에 나와야하니까..
-   myWriteList();
+   if($("#userID").val()!="admin"){
+		myWriteList();
+	}
+   
 
    // 즐겨찾기 눌렀을 때
    $("#favorites").on("click", function() {
