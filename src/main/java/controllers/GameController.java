@@ -105,9 +105,18 @@ public class GameController extends HttpServlet {
 				String gName = request.getParameter("game");
 				String mNickname = (String) request.getSession().getAttribute("loginNickname");
 				int score = Integer.parseInt(request.getParameter("score"));
-				System.out.println(score);
-				int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
-				System.out.println("record result : "+result);
+				
+				// 로그인 하지 않았거나 관리자면 게임 기록이 안남도록 설정 -> mID가 널값이 될수 없어서 
+				System.out.println(mID!=null);
+				if(mID!=null) {
+					if(!mID.equals("admin")) {
+						int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
+						System.out.println("record result : "+result);
+						mdao.updatePointById(mID);
+						mdao.updateLevelById(mID);
+					}
+					
+				}
 
 				List<GameRecordDTO> list = new ArrayList<>();
 				if(gName.equals("Kordle")){
