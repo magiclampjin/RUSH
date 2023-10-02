@@ -163,6 +163,31 @@ a {
 	color: white;
 	background-color: #F393FF;
 }
+
+.doodleKeyImg {
+	display: flex;
+	align-items: center;
+}
+
+.doodleKeyImg>img {
+	width: 300px;
+}
+
+.mt30 {
+	margin-top: 30px;
+}
+
+@media ( max-width : 786px) {
+	.doodleKeyImg {
+		flex-direction: column;
+		align-items: start;
+	}
+	.doodleKeyImg>p {
+		margin-top: 10px;
+		width: 300px;
+		text-align: center;
+	}
+}
 </style>
 </head>
 <body>
@@ -515,7 +540,11 @@ a {
 												<hr class="colorBlue border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">
+													Doodle Jump는 한 플랫폼에서 다음 플랫폼으로 점프하는 모험 게임입니다.<br>Doodle이
+													바닥으로 낙하하지 않고 높이 올라갈 수 있도록 제어해주세요.<br>이 게임에는 정해진 끝이
+													없습니다. Doodle이 최대한 높이 날아오를 수 있도록 모험을 떠나보세요!
+												</p>
 											</div>
 										</div>
 										<div class="row g-0 w100p mt150">
@@ -524,7 +553,22 @@ a {
 												<hr class="colorGreen border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">
+												<div class="mb30">
+													<div class="doodleKeyImg">
+														<img src="/game/doodle/imgs/DoodleJumpKey1.png">
+														<p class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</p>
+														<img src="/game/doodle/imgs/DoodleJumpKey2.png">
+													</div>
+
+													<div class="text-white fontKorean mt30">
+														키보드에 있는 좌우 방향키 또는 A, D키를 이용하여 Doodle을 좌우로 움직일 수 있습니다.<br>Doodle의
+														방향을 한번 전환하면 계속해서 같은 방향으로 점프하니 주의하세요.
+
+													</div>
+												</div>
+												</p>
+
 											</div>
 										</div>
 							</c:when>
