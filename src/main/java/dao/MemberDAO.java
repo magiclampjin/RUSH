@@ -191,4 +191,22 @@ public class MemberDAO {
 			return pstat.executeUpdate();
 		}
 	}
+	
+	public int updatePointById(String id)throws Exception{
+		String sql ="update members set mPoint=mPoint+1 where mID=?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			return pstat.executeUpdate();
+		}
+	}
+	
+	public int updateLevelById(String id)throws Exception{
+		String sql = "update members m join levels l on m.mLevel = l.level set m.mLevel=m.mLevel+1 where m.mID=? and m.mPoint>l.lvMax;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			return pstat.executeUpdate();
+		}
+	}
 }
