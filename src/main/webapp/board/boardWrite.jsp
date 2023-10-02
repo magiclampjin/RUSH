@@ -11,6 +11,7 @@
 <!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardWrite.css">
+<script src="/js/board/isUserImmediately.js"></script>
 
 <script type="text/javascript" src="/js/board/summernote_editor.js"></script>
 
@@ -64,6 +65,7 @@ a {
 </style>
 </head>
 <body>
+<input id="userID" type="hidden" value="${loginID}">
 	<div class="container-fluid p-0">
 		<div class="header bColorBlack">
 			<div class="header_guide">

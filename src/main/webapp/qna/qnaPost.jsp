@@ -11,6 +11,7 @@
 <%@ include file="/common/style.jsp" %>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/post.css">
+<script src="/js/board/isUserImmediately.js"></script>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -21,7 +22,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="/js/board/qnaPost.js"></script>
-<script type="text/javascript" src="/js/board/isUserInPost.js"></script>
 
 <style>
 * {
@@ -274,11 +274,15 @@ a {
 }
 
 </style>
+<script>
+	window.history.forward(); function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
 
-
-<body>
-	<input id="userID" type="hidden" value="${loginId}">
+<body onload="noback();" onpageshow="if(event.persisted) noBack();" onunload="">
+	<input id="userID" type="hidden" value="${loginID}">
 	<div class="container-fluid p-0">
 		<%@ include file="/common/header.jsp" %>
 

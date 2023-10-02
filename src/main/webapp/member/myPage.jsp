@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/member/myPage.css">
 <link rel="stylesheet" href="/css/board/boardList.css">
+<script src="/js/board/isUserImmediately.js"></script>
+
 <script type="text/javascript" src="/js/member/infoModified.js"></script>
 <script type="text/javascript" src="/js/member/myPage.js"></script>
 <script type="text/javascript" src="/js/member/secession.js"></script>
@@ -104,8 +106,14 @@ ul.tabs li.current {
 }
 >>>>>>> c51216701a3a38dfd8dd7355c4979538cd34cd47*/
 </style>
+
 </head>
-<body>
+<script>
+	window.history.forward(); function noBack(){
+		window.history.forward();
+	}
+</script>
+<body onload="noback();" onpageshow="if(event.persisted) noBack();" onunload="">
    <div class="container-fluid p-0">
       <%@ include file="/common/header.jsp" %>
 

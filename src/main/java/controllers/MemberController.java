@@ -119,14 +119,19 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/load.member")) {
 				// 마이페이지 (회원 정보 출력)
 				String userID = (String) request.getSession().getAttribute("loginID");
-				if (!userID.equals("admin")) {
-					MemberDTO user = dao.selectUserInfo(userID);
-					request.setAttribute("user", user);
-				} else if (userID.equals("admin")) {
-					String userNick = dao.selectNicknameById("admin");
-					request.setAttribute("userNick", userNick);
+				if(userID == null) { // 로그인 안 된 경우 인덱스로 이동
+					response.sendRedirect("/index.jsp");
 				}
-				request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
+				else {
+					if (!userID.equals("admin")) {	
+						MemberDTO user = dao.selectUserInfo(userID);
+						request.setAttribute("user", user);
+					} else if (userID.equals("admin")) {
+						String userNick = dao.selectNicknameById("admin");
+						request.setAttribute("userNick", userNick);
+					} 
+					request.getRequestDispatcher("/member/myPage.jsp").forward(request, response);
+				}	
 
 			} else if (cmd.equals("/adminBoard.member")) {
 				String notiCpage = request.getParameter("notiCpage");
@@ -244,7 +249,9 @@ public class MemberController extends HttpServlet {
 
 			} else if (cmd.equals("/logout.member")) {
 				// 회원 로그아웃
+				String pageUrl = request.getHeader("Referer"); // 로그아웃 이전 페이지로 이동하기 위한 URL
 				request.getSession().invalidate();
+				response.sendRedirect(pageUrl);
 			}
 			/////////////////////////////////////////////////////////
 			else if(cmd.equals("/myFavoriteGame.member")) {

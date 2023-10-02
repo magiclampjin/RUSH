@@ -11,6 +11,7 @@
 <%@ include file="/common/style.jsp" %>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/post.css">
+<script src="/js/board/isUserImmediately.js"></script>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -264,11 +265,15 @@ a {
 }
 
 </style>
+<script>
+	window.history.forward(); function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
 
-
-<body>
-	<input id="userID" type="hidden" value="${loginId}">
+<body onload="noback();" onpageshow="if(event.persisted) noBack();" onunload="">
+	<input id="userID" type="hidden" value="${loginID}">
 	<div class="container-fluid p-0">
 		<%@ include file="/common/header.jsp" %>
 

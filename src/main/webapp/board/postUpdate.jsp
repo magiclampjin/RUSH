@@ -11,6 +11,7 @@
 <!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardWrite.css">
+<script src="/js/board/isUserImmediately.js"></script>
 
 <!-- <script type="text/javascript" src="/js/board/summernote_editor.js"></script> -->
 
@@ -45,10 +46,16 @@ a {
 }
 
 </style>
+<script>
+	window.history.forward(); function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
-<body>
+
+<body onload="noback();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<div class="container-fluid p-0">
-		
+		<input id="userID" type="hidden" value="${loginID}">
 		<%@ include file="/common/writeHeader.jsp" %>
 		<div class="boardWrite">
 			<div class="boardWrite_guide">
