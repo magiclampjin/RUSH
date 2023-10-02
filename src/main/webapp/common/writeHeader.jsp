@@ -50,6 +50,10 @@ a {
 	width: 158px;
 }
 
+.dropdown-menu .dropdown-item {
+    height: 30.5px;
+}
+
 .mb0 {
 	margin-bottom: 0px !important;
 }
@@ -100,9 +104,10 @@ a {
 								</ul></li>
 							<c:choose>
 								<c:when test="${loginID == null }">
-									<li class="nav-item dropdown col-3 text-end p8"><a
-										class="text-white fontEnglish" href="/member/login.jsp">
-											LOGIN </a></li>
+								<li class="nav-item dropdown col-3 text-end"><a
+								class="nav-link text-white fontEnglish"
+								href="/member/login.jsp"> LOGIN </a></li>
+									
 								</c:when>
 								<c:otherwise>
 									<c:choose>
