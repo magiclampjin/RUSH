@@ -75,7 +75,6 @@ public class ReplyDAO {
 	}
 	
 	public List<ReplyDTO> selectNestedReplys(int replySeq, String loginId) throws Exception{
-//		String sql = "select * from replyrecList where parentRSeq = ? and (isnull(recid) or recid = ?);";
 		String sql = "select * from replyRecommCnt where parentRSeq = ?;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, replySeq);
@@ -90,11 +89,13 @@ public class ReplyDAO {
 	}
 	
 	// post 내 댓글들의 좋아요 목록 가져오기
-	public List<ReplyDTO> selectReplyRecommCnt(int postSeq, String loginId) throws Exception {
-		String sql = "select * from replyreclist where cbSeq = ? and mid = ? order by rseq;";
+	public List<ReplyDTO> selectReplyRecommCnt(int postSeq, String loginId, int start, int end) throws Exception {
+		String sql = "select * from replyreclist where cbSeq = ? and mid = ? and rSeq between ? and ? order by rseq;";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, postSeq);
 			pstat.setString(2, loginId);
+			pstat.setInt(3, start);
+			pstat.setInt(4, end);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<ReplyDTO> replysRecList = new ArrayList<>();
 				while(rs.next()) {

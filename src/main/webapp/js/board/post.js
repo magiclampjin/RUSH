@@ -196,7 +196,7 @@ $(document).ready(function() {
 	let search = $("#search").val();
 	let keyword = $("#keyword").val();
 
-	// url 에서 myPage 값가져올때 사용
+	// url 에서 myPage 값 가져올 때 사용
 	const urlParams = new URL(location.href).searchParams;
 	const myPage = urlParams.get('myPage');
 

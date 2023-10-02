@@ -51,4 +51,21 @@ public class QnaAnswerDAO {
 			
 		}
 	}
+	
+	public void delete(int qaSeq) throws Exception{
+		String sql = "delete from qna_answer where qaSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, qaSeq);
+			pstat.executeUpdate();
+		}
+	}
+	
+	public void update(int qaSeq, String qaCcontents) throws Exception{
+		String sql = "update qna_answer set qaContents = ? where qaSeq =?;";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, qaCcontents);
+			pstat.setInt(2, qaSeq);
+			pstat.executeUpdate();
+		}
+	}
 }

@@ -52,7 +52,7 @@ a {
 </script>
 </head>
 
-<body onload="noback();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<div class="container-fluid p-0">
 		<input id="userID" type="hidden" value="${loginID}">
 		<%@ include file="/common/writeHeader.jsp" %>

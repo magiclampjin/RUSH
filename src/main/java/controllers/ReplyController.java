@@ -75,8 +75,15 @@ public class ReplyController extends HttpServlet {
 				String replyCurPage = request.getParameter("replyCurPage");
 				int replyCurrentPage = (replyCurPage == null || replyCurPage=="") ? 1 : Integer.parseInt(replyCurPage);
 				List<ReplyDTO> replys = dao.selectByPage(postSeq, replyCurrentPage * Constants.REPLY_COUNT_PER_PAGE - Constants.REPLY_COUNT_PER_PAGE, Constants.REPLY_COUNT_PER_PAGE);
-
-				List<ReplyDTO> replyRecList = dao.selectReplyRecommCnt(postSeq, loginId);
+				int start =0;
+				int end =0;
+				if(replys.size()>0) {
+					start = replys.get(0).getSeq();
+					end = replys.get(replys.size()-1).getSeq();
+				}
+				System.out.println(start+" 시작 / 끝 "+end);
+				
+				List<ReplyDTO> replyRecList = dao.selectReplyRecommCnt(postSeq, loginId, start, end);
 				
 				List<Object> result = new ArrayList<>();
 				result.add(replys);

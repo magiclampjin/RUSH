@@ -73,6 +73,18 @@ public class QnaAnswerController extends HttpServlet {
 
 					if(answers.size() >0)
 						pw.append(gsonTs.toJson(answers));
+				} else if(cmd.equals("/update.answer")) {
+					// 댓글 수정
+					int qaSeq = Integer.parseInt(request.getParameter("qaSeq"));
+					String qaContents = request.getParameter("qaContents");
+					
+					dao.update(qaSeq, qaContents);
+					
+				} else if(cmd.equals("/delete.answer")) {
+					// 댓글 삭제
+					int qaSeq = Integer.parseInt(request.getParameter("qaSeq"));
+					dao.delete(qaSeq);
+					
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
