@@ -107,4 +107,15 @@ window.onload = function() {
 			},
 		}
 	});
+	
+	window.history.forward();
+	noBack();
 };
+
+function noBack(){
+	window.history.forward();
+}
+	
+window.onpageshow = function(event) {
+	if(event.persisted) noBack();
+}

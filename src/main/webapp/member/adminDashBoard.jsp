@@ -24,6 +24,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 </head>
+
 <body>
 	<div class="container-fluid p-0">
 		<%@ include file="/common/header.jsp"%>
