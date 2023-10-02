@@ -126,7 +126,7 @@ $(document).ready(function() {
 	$(document).on("click", ".replyDelete", function() {
 
 		if (replyBackup != null) { // 수정중인 댓글이 있으면?
-			if (confirm("댓글 수정을 취소하시겠습니까?")) {
+			if (confirm("답글 수정을 취소하시겠습니까?")) {
 				replyObj.closest(".reply").find(".contents").html(replyBackup);
 				replyObj.closest(".reply").find(".contents").attr("contenteditable", false);
 				replyObj.parent().css("display", "flex");
@@ -143,22 +143,10 @@ $(document).ready(function() {
 			}
 		}
 
-		if (nestedReplyObj != null) { // 작성 중인 당급이 있으면?
-			let replyid = $(this).closest(".reply").find("#replyId").val();
-			if (confirm("답글 작성을 취소하시겠습니가?")) {
-				nestedReplyObj.remove();
-				nestedReplyParentSeq = null;
-				nestedReplyObj = null;
-			} else {
-				return false;
-			}
-		}
-
-
 		$.ajax({
 			url: "delete.answer",
 			data: {
-				replySeq: $(this).parent().parent().siblings("#replyId").val()
+				qaSeq: $(this).parent().parent().siblings("#replyId").val()
 			},
 			type: "post"
 		}).done(function() {
@@ -175,7 +163,7 @@ $(document).ready(function() {
 	$(document).on("click", ".replyUpdate", function() {
 
 		if (replyBackup != null) { // 수정중인 댓글이 있으면?
-			if (confirm("댓글 수정을 취소하시겠습니까?")) {
+			if (confirm("답글 수정을 취소하시겠습니까?")) {
 				replyObj.closest(".reply").find(".contents").html(replyBackup);
 				replyObj.closest(".reply").find(".contents").attr("contenteditable", false);
 				replyObj.parent().css("display", "flex");
@@ -184,17 +172,6 @@ $(document).ready(function() {
 				replyObj.parent().parent().siblings(".replyBtns").children(".defaultCover").css("display", "flex");
 				replyObj.parent().parent().siblings(".replyBtns").children(".updateCover").css("display", "none");
 
-			} else {
-				return false;
-			}
-		}
-
-		if (nestedReplyObj != null) { // 작성 중인 당급이 있으면?
-			let replyid = $(this).closest(".reply").find("#replyId").val();
-			if (confirm("답글 작성을 취소하시겠습니가?")) {
-				nestedReplyObj.remove();
-				nestedReplyParentSeq = null;
-				nestedReplyObj = null;
 			} else {
 				return false;
 			}
@@ -232,10 +209,10 @@ $(document).ready(function() {
 		let replyContents = $(this).closest(".reply").find(".contents").html();
 
 		$.ajax({
-			url: "/update.reply",
+			url: "/update.answer",
 			data: {
-				replySeq: replySeq,
-				replyContents: replyContents
+				qaSeq: replySeq,
+				qaContents: replyContents
 			},
 			type: "post"
 		}).done(function() {
