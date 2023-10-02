@@ -113,7 +113,7 @@ ul.tabs li.current {
 		window.history.forward();
 	}
 </script>
-<body onload="noback();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
    <div class="container-fluid p-0">
       <%@ include file="/common/header.jsp" %>
 
