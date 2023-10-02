@@ -686,8 +686,6 @@ public class GameDAO {
 	}
 
 	public List<GameDTO> selectIndexBestPlayGame() throws Exception {
-		// public GameDTO(String gName, String gDeveloper, String gImageURL, String
-		// gameDesc) {
 		String sql = "select * from bestPlayGame;";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);

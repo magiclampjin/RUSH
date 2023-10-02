@@ -249,9 +249,12 @@ public class MemberController extends HttpServlet {
 
 			} else if (cmd.equals("/logout.member")) {
 				// 회원 로그아웃
-				String pageUrl = request.getHeader("Referer"); // 로그아웃 이전 페이지로 이동하기 위한 URL
+				String pageURL = request.getHeader("Referer"); // 로그아웃 이전 페이지로 이동하기 위한 URL
 				request.getSession().invalidate();
-				response.sendRedirect(pageUrl);
+				if(pageURL.indexOf("adminDashBoard.jsp")!=-1 || pageURL.indexOf("load.board")!=-1 || pageURL.indexOf("updateLoad")!=-1)
+					response.sendRedirect("/index.jsp");
+				else
+					response.sendRedirect(pageURL);
 			}
 			/////////////////////////////////////////////////////////
 			else if(cmd.equals("/myFavoriteGame.member")) {
