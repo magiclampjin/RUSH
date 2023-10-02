@@ -81,7 +81,6 @@ public class ReplyController extends HttpServlet {
 					start = replys.get(0).getSeq();
 					end = replys.get(replys.size()-1).getSeq();
 				}
-				System.out.println(start+" 시작 / 끝 "+end);
 				
 				List<ReplyDTO> replyRecList = dao.selectReplyRecommCnt(postSeq, loginId, start, end);
 				
