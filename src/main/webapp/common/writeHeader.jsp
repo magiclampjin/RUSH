@@ -46,15 +46,25 @@ a {
 	right: 0;
 	left: auto;
 }
+
+.mb0{
+	margin-bottom: 0px !important;
+}
+
+#navbarNavDropdown{
+	-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0);
+	
+}
 </style>
 </head>
 <body>
 	<header class="header bColorBlack">
 		<div class="header_guide">
 			<a href="/index.jsp">
-				<div class="logo fontLogo colorWhite">RUSH</div>
+				<div class="logo fontLogo colorWhite" >RUSH</div>
 			</a>
-			<nav class="navbar navbar-expand navbar-light colorWhite">
+			<nav class="navbar navbar-expand navbar-light colorWhite mb0">
 				<div class="container-fluid p-0">
 					<div class="collapse navbar-collapse w-100 g-0 m-0"
 						id="navbarNavDropdown">

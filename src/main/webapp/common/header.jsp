@@ -34,6 +34,10 @@ a {
 	right: 0;
 	left: auto;
 }
+
+.mb0{
+	margin-bottom: 0px !important;
+}
 </style>
 </head>
 <body>
@@ -42,7 +46,7 @@ a {
 			<a href="/index.jsp">
 				<div class="logo fontLogo colorWhite">RUSH</div>
 			</a>
-			<nav class="navbar navbar-expand navbar-light colorWhite">
+			<nav class="navbar navbar-expand navbar-light colorWhite mb0">
 				<div class="container-fluid p-0">
 					<div class="collapse navbar-collapse w-100 g-0 m-0"
 						id="navbarNavDropdown">
