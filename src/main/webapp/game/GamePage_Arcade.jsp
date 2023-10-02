@@ -397,7 +397,7 @@ a {
 												<hr class="colorBlue border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">파이프 사이를 무사히 통과해야 하는 짹짹이의 모험</p>
 											</div>
 										</div>
 										<div class="row g-0 w100p mt150">
@@ -406,7 +406,9 @@ a {
 												<hr class="colorGreen border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<image src="/game/assets/upkey.png" style="width:5%"></image>
+												<image src="/game/assets/mouse.png" style="width:5%"></image>
+												<p class="text-white fontKorean">위쪽 화살표 키보드 또는 마우스 좌클릭으로 점프</p>
 											</div>
 										</div>
 							</c:when>
