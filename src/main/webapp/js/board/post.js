@@ -175,7 +175,7 @@ $(document).ready(function() {
 					row.append(replyBtns.append(recommendBtn));
 
 					if (replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt) {
-						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
+						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq) {
 							recommendBtn.addClass("btnClicked");
 							replyRecommCheckIdx++;
 						}
@@ -399,7 +399,6 @@ $(document).ready(function() {
 		}
 
 		if (nestedReplyObj != null) { // 작성 중인 당급이 있으면?
-			let replyid = $(this).closest(".reply").find("#replyId").val();
 			if (confirm("답글 작성을 취소하시겠습니가?")) {
 				nestedReplyObj.remove();
 				nestedReplyParentSeq = null;
@@ -445,7 +444,6 @@ $(document).ready(function() {
 		}
 
 		if (nestedReplyObj != null) { // 작성 중인 당급이 있으면?
-			let replyid = $(this).closest(".reply").find("#replyId").val();
 			if (confirm("답글 작성을 취소하시겠습니가?")) {
 				nestedReplyObj.remove();
 				nestedReplyParentSeq = null;
