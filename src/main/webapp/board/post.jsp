@@ -243,7 +243,7 @@ a {
 
 .recommendBtn {
 	border: 2px solid black;
-	width: 70px;
+	width: 70px !important;
 	height: 40px;
 	border-radius: 10px;
 	display: flex;
