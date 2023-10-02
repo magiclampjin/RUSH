@@ -14,14 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.GameDAO;
-import dto.BoardDTO;
+import dao.KordleWordDAO;
 import dao.MemberDAO;
 import dto.GameDTO;
 import dto.GameRecordDTO;
+import dto.KordleWordDTO;
 import dto.MemberDTO;
 import dto.ReplyDTO;
-import dao.KordleWordDAO;
-import dto.KordleWordDTO;
 
 @WebServlet("*.game")
 public class GameController extends HttpServlet {
@@ -106,16 +105,11 @@ public class GameController extends HttpServlet {
 				String mNickname = (String) request.getSession().getAttribute("loginNickname");
 				int score = Integer.parseInt(request.getParameter("score"));
 				
-				// 로그인 하지 않았거나 관리자면 게임 기록이 안남도록 설정 -> mID가 널값이 될수 없어서 
-				System.out.println(mID!=null);
-				if(mID!=null) {
-					if(!mID.equals("admin")) {
-						int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
-						System.out.println("record result : "+result);
-						mdao.updatePointById(mID);
-						mdao.updateLevelById(mID);
-					}
-					
+				// 로그인 하지 않았거나 관리자면 게임 기록이 안남도록 설정
+				if(mID!=null && !mID.equals("admin")) {
+					int result = dao.insertGameRecord(new GameRecordDTO(0,mID,gName,mNickname,null,score,0));
+					mdao.updatePointById(mID);
+					mdao.updateLevelById(mID);
 				}
 
 				List<GameRecordDTO> list = new ArrayList<>();
