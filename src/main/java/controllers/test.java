@@ -10,7 +10,7 @@ public class test {
 
 		String sql = "insert into common_board value(null, ?, ?, ?, ?, default, default,?,default);";
 
-		try (Connection con = DriverManager.getConnection("jdbc:mysql://10.2.16.236/rush", "rush", "rush");
+		try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/support", "support", "support");
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			for (int i = 110; i < 140; i++) {
 				pstat.setString(1, "admin");
