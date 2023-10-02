@@ -374,6 +374,9 @@ public class MemberController extends HttpServlet {
 				result.add(womanRank);
 				result.add(manRank);
 				printwriter.append(gsonTs.toJson(result));
+			} else if(cmd.equals("/ageByRank.member")) {
+				List<GameDTO> list = gdao.selectByAgeRanking();
+				printwriter.append(gsonTs.toJson(list));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

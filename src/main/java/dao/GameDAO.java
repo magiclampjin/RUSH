@@ -654,6 +654,36 @@ public class GameDAO {
 			return list;
 		}
 	}
+	
+	public List<GameDTO> selectByAgeRanking() throws Exception{
+		String sql = "select a.gName, \r\n"
+				+ "    coalesce(sum(case when age='1' then playCount end), 0)  as 10대, \r\n"
+				+ "    coalesce(sum(case when age='2' then playCount end), 0)  as 20대,\r\n"
+				+ "    coalesce(sum(case when age='3' then playCount end), 0)  as 30대,\r\n"
+				+ "    coalesce(sum(case when age='4' then playCount end), 0)  as 40대,\r\n"
+				+ "    coalesce(sum(case when age='5' then playCount end), 0)  as 50대,\r\n"
+				+ "    coalesce(sum(case when age not between 1 and 5 then playCount end), 0)  as 기타 \r\n"
+				+ "from (select g.gName, age, playCount from game g left join (select r.*, m.mIdNumber, if(substr(mIdNumber,1,2) between 05 and 23, 1, substr(TRUNCATE((TO_DAYS(NOW()) - TO_DAYS(substr(mIdNumber,1,6))) / 365, 0),1,1)) age, count(*) playCount from game_record r join members m on r.mID=m.mID group by age, r.gName) t on g.gName= t.gName) a \r\n"
+				+ "group by a.gName\r\n"
+				+ "order by a.gName;";
+		List<GameDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();) {
+			while (rs.next()) {
+				String gName = rs.getString("gName");
+				int playCount1 = rs.getInt("10대");
+				int playCount2 = rs.getInt("20대");
+				int playCount3 = rs.getInt("30대");
+				int playCount4 = rs.getInt("40대");
+				int playCount5 = rs.getInt("50대");
+				int playCount0 = rs.getInt("기타");
+				list.add(new GameDTO(gName, playCount1, playCount2, playCount3, playCount4, playCount5, playCount0));
+			}
+			return list;
+		}
+		
+	}
 
 	public List<GameDTO> selectIndexBestPlayGame() throws Exception {
 		// public GameDTO(String gName, String gDeveloper, String gImageURL, String

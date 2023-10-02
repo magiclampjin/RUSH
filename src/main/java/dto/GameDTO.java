@@ -8,6 +8,13 @@ public class GameDTO {
 	private String id;
 	private int playCount;
 	private String gameDesc;
+//	연령별 플레이 카운트
+	private int playCount1;
+	private int playCount2;
+	private int playCount3;
+	private int playCount4;
+	private int playCount5;
+	private int playCount0;
 	
 	// bestbookmark
 	private String gender;
@@ -20,6 +27,16 @@ public class GameDTO {
 	public GameDTO(String gName, int playCount) {
 		this.gName = gName;
 		this.playCount = playCount;
+	}
+	
+	public GameDTO(String gName, int playcount1,int playcount2,int playcount3,int playcount4,int playcount5,int playcount0) {
+		this.gName=gName;
+		this.playCount1=playcount1;
+		this.playCount2=playcount2;
+		this.playCount3=playcount3;
+		this.playCount4=playcount4;
+		this.playCount5=playcount5;
+		this.playCount0=playcount0;
 	}
 	
 	/*
