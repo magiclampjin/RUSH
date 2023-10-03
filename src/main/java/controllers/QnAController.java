@@ -38,7 +38,6 @@ public class QnAController extends HttpServlet {
 				int maxSize = 1024 * 1024 *10;
 				
 				String uploadPath = request.getServletContext().getRealPath("files");
-				System.out.println(uploadPath);
 				File filesPath = new File(uploadPath);
 				if(!filesPath.exists()) {
 					filesPath.mkdir();
@@ -174,7 +173,6 @@ public class QnAController extends HttpServlet {
 				String[] deleteFileSeqStr = multi.getParameter("deleteFiles").split(",");
 				for(int i=0; i<deleteFileSeqStr.length-1; i++) {
 					String sysname = fdao.selectSysName(Integer.parseInt(deleteFileSeqStr[i+1]));
-					System.out.println("삭제할 파일: "+sysname);
 					int result = fdao.deleteFile(sysname);
 					if(result == 1) {
 						File deleteFilePath = new File(uploadPath+"/"+sysname);
