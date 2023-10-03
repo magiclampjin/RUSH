@@ -481,10 +481,10 @@
 						userID : user
 					}
 				}).done(function(res){
-					if(res==0){
-						alert("게시글 삭제 실패");
-					}else{
+					if(res>0){
 						alert("게시글 삭제 성공");
+					}else{
+						alert("게시글 삭제 실패");
 					}
 				});
 			});			

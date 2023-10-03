@@ -67,6 +67,9 @@ public class BlackController extends HttpServlet {
 	            int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 	            String category = request.getParameter("category");
 	            List<String> filesName = fdao.inPostFilesNameList(postSeq);
+	            String user = request.getParameter("userID");
+				int warnCount = dao.selectWarningCount(user);
+				int result = dao.updateWarningCount(user, warnCount+1);
 	            
 	            String uploadPath = request.getServletContext().getRealPath("files");
 	            for(String file:filesName) {
@@ -74,6 +77,7 @@ public class BlackController extends HttpServlet {
 	               filepath.delete();
 	            }
 	            bdao.deletePost(postSeq);
+	            pw.println(result);
 	         }else if (cmd.equals("/deleteUser.black")) {
 					String id = request.getParameter("userID");
 					int result = mdao.deleteById(id);
