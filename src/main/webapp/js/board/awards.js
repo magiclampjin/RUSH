@@ -12,8 +12,6 @@ $(document).ready(function() {
     $(document).on("click", ".game", function(){
 		$(".scoreBox").remove();
 	
-		//let selectGame = "CandyCrush";
-	
 		game = $(this).attr("id");
 	
         $(this).removeClass("bColorBlack");
