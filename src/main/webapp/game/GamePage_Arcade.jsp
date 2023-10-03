@@ -68,7 +68,6 @@
 	margin: auto;
 	width: 288px;
 	height: 512px;
-	margin-top: 150px;
 }
 
 a {

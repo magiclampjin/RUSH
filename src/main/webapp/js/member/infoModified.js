@@ -58,7 +58,6 @@ $(document).ready(function() {
 	});
 
 	$("#pwUpdateBtn").on("click", function() {
-		console.log($(this).val())
 		if ($(this).val() === "비밀번호 수정하기") {
 			pwUpdateBoxUi();
 			$("#userPW").on("keyup", function() {
@@ -95,7 +94,6 @@ $(document).ready(function() {
 			})
 			$("#pwUpdateSubmit").on("click", function() {
 				if ($("#pwMatch").html() != "비밀번호가 일치합니다.") {
-					console.log("dhodksehla?")
 					$("#userPW").css("border", "1px solid red")
 				} else {
 					$("#userPW").css("border", "1px solid black")
@@ -219,66 +217,6 @@ $(document).ready(function() {
 			if (resp == "true") {
 				addInfoUpdateUI();
 
-				/*let regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
-				$("#newPw").on("keyup", function() {
-					let resultPw = regexPw.test($(this).val());
-					if (!resultPw) {
-						$(this).css("border", "1px solid red");
-						$("#phraseDiv").html("비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)");
-						$("#phraseDiv").css({
-							"color": "red"
-						});
-					} else {
-						$(this).css("border", "1px solid forestgreen");
-						$("#phraseDiv").html("");
-						if ($("#newPwCheck").val() != $(this).val()) {
-							$("#newPwCheck").css("border", "1px solid red");
-							$("#phraseDiv").html("비밀번호가 일치하지 않습니다.");
-							$("#phraseDiv").css({
-								"color": "red"
-							});
-						} else {
-							$("#newPwCheck").css("border", "1px solid forestgreen");
-						}
-					}
-	
-				})
-	
-				$("#newPwCheck").on("input", function() {
-					if ($("#newPw").val() != $(this).val()) {
-						$(this).css("border", "1px solid red");
-						$("#phraseDiv").html("비밀번호가 일치하지 않습니다.");
-						$("#phraseDiv").css({
-							"color": "red"
-						});
-					} else {
-						$(this).css("border", "1px solid forestgreen");
-						$("#phraseDiv").html("");
-						// 다시 한번 더 비밀번호랑 비교
-						let resultPw = regexPw.test($("#newPw").val());
-						if (!resultPw) {
-							$("#newPw").css("border", "1px solid red");
-							$("#phraseDiv").html("비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)");
-							$("#phraseDiv").css({
-								"color": "red"
-							});
-						} else {
-							$("#newPw").css("border", "1px solid forestgreen");
-							$("#phraseDiv").html("");
-							if ($(this).val() != $("#newPw").val()) {
-								$("#newPwCheck").css("border", "1px solid red");
-								$("#newPwCheck").focus();
-								$("#phraseDiv").html("비밀번호가 일치하지 않습니다.");
-								$("#phraseDiv").css({
-									"color": "red"
-								});
-							}
-						}
-					}
-	
-				})*/
-
-
 				$("#newNick").on("keyup", function() {
 					$("#newNick").css("backgroundColor", "white");
 					$.ajax({
@@ -380,17 +318,6 @@ $(document).ready(function() {
 		updateBox.children(".pwCheckBox").css("display", "none");
 		updateBox.children(".infoBox").css("display", "flex");
 
-		// 비밀번호 변경을 위한 div 추가
-		/*let infoBox = $("<div>").attr("class", "infoBox");
-		let infoCategory = $("<div>").attr("class", "infoCagetory").html("비밀번호 확인");
-		let infocon = $("<input>").attr("class", "infocon").attr("type", "password").css("border", "none");
-		infoBox.append(infoCategory).append(infocon);
-		updateBox.children(".infoBox:nth-child(2)").after(infoBox);
-	
-		let infocon2 = $("<input>").attr("class", "infocon").attr("type", "password").css("border", "none");
-		updateBox.children(".infoBox:nth-child(2)").children(".infoCagetory").html("새 비밀번호");
-		updateBox.children(".infoBox:nth-child(2)").children(".infocon").remove();
-		updateBox.children(".infoBox:nth-child(2)").append(infocon2);*/
 		updateBox.children(".infoBox:nth-child(3)").remove();
 
 		// 정보 수정 취소 버튼 추가 및 수정 완료로 버튼 변경

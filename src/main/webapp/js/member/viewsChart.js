@@ -109,7 +109,7 @@ window.onload = function() {
 			playCountEtc.push(resp[i].playCount0)
 		}
 
-		console.log(gameName)
+	
 		var ageByRankings = document.getElementById("ageByRankings").getContext("2d");
 		var ageByRankings = new Chart(ageByRankings, {
 			type: "line",

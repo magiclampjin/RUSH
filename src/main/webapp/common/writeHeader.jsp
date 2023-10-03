@@ -145,12 +145,6 @@ a {
 
 								</c:otherwise>
 							</c:choose>
-
-
-
-							<script type="text/javascript">
-								console.log("${loginID }")
-							</script>
 						</ul>
 					</div>
 				</div>

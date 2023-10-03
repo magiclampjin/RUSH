@@ -1,9 +1,7 @@
 $(document).ready(function() {
 	let category = $("#category").val();
 	let search = $("#search").val();
-	console.log(search)
 	let keyword = $("#keyword").val();
-	console.log(keyword)
 
 	let recordTotalCount = $("#recordTotalCount").val();
 	if (recordTotalCount != 0) {

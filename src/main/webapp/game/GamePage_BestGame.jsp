@@ -62,7 +62,6 @@ a{
 			url:"/getBestGame.game",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0 p-2");
@@ -227,11 +226,5 @@ a{
 			<div class="footer bColorBlack">
 		<%@include file="/common/footer.jsp"%>
 		</div>
-	<script>
-        $(".btn").on("click",function(){
-            // $(".categories").text();
-            console.log("");
-        });
-    </script>
 </body>
 </html>

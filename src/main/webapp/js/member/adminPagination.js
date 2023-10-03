@@ -99,7 +99,6 @@ $(document).ready(function() {
 			dataType: "json",
 			type: "post"
 		}).done(function(resp) {
-			console.log(resp[1])
 			let notiRecordTotalCount = resp[1]; // 총 공지 게시글 게수
 			let notiCurrentPage = resp[2];
 			let notiCountPerPage = resp[3];
@@ -230,7 +229,6 @@ $(document).ready(function() {
 		})
 	}
 	// 공지 게시글 창
-	console.log($("#userID").val())
 	if($("#userID").val()==="admin"){
 		notiReload(1)
 	}
