@@ -151,7 +151,7 @@
 	                  </div>
 	                  <div class="pwBox">
 	                     <p id="pw" class="fontEnglish">Password</p>
-	                     <input type="password" id="inputPw" class="fontEnglish" name="pw" value="1" placeholder="********">
+	                     <input type="password" id="inputPw" class="fontEnglish" name="pw" value="" placeholder="********">
 	                  </div>
 	                  <div class="rem_fg">
 	                     <div class="rememberId">

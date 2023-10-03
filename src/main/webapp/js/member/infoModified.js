@@ -94,17 +94,17 @@ $(document).ready(function() {
 
 			})
 			$("#pwUpdateSubmit").on("click", function() {
-				if($("#pwMatch").html()!="비밀번호가 일치합니다."){
+				if ($("#pwMatch").html() != "비밀번호가 일치합니다.") {
 					console.log("dhodksehla?")
 					$("#userPW").css("border", "1px solid red")
-				}else{
+				} else {
 					$("#userPW").css("border", "1px solid black")
 				}
-				
-				if ($("#newPw").val() == "" || $("#phraseDiv").html()==="비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)") {
+
+				if ($("#newPw").val() == "" || $("#phraseDiv").html() === "비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)") {
 					$("#newPw").css("border", "1px solid red")
 				}
-				if ($("#newPwCheck").val() == ""||$("#phraseDiv").html()==="비밀번호가 일치하지 않습니다.") {
+				if ($("#newPwCheck").val() == "" || $("#phraseDiv").html() === "비밀번호가 일치하지 않습니다.") {
 					$("#newPwCheck").css("border", "1px solid red")
 				}
 				if ($("#pwMatch").html() == "비밀번호가 일치합니다." && $("#phraseDiv").html() == "" && $("#newPw").val() != "" && $("#newPwCheck").val() != "") {
@@ -391,7 +391,7 @@ $(document).ready(function() {
 		updateBox.children(".infoBox:nth-child(2)").children(".infoCagetory").html("새 비밀번호");
 		updateBox.children(".infoBox:nth-child(2)").children(".infocon").remove();
 		updateBox.children(".infoBox:nth-child(2)").append(infocon2);*/
-		updateBox.children(".infoBox:nth-child(2)").remove();
+		updateBox.children(".infoBox:nth-child(3)").remove();
 
 		// 정보 수정 취소 버튼 추가 및 수정 완료로 버튼 변경
 		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
@@ -407,18 +407,20 @@ $(document).ready(function() {
 		$("#pwUpdateBtn").css("display", "none")
 
 		// 수정가능한 div로 속성 변경
-		updateBox.find(".infoBox:not(:first-child)").find(".infocon").attr("contenteditable", "true");
+		updateBox.find(".infoBox:not(:first-child):not(:nth-child(2))").find(".infocon").attr("contenteditable", "true");
 		// div에 아이디 붙여주기
-		updateBox.find(".infoBox:nth-child(2)").find(".infocon").attr("id", "newNick");
-		updateBox.find(".infoBox:nth-child(3)").find(".infocon").attr("id", "newPhone");
-		updateBox.find(".infoBox:nth-child(4)").find(".infocon").attr("id", "newEmail");
-		$(".updateBox>.infoBox:not(:first-child)>.infocon").css("border", "1px solid").css("border-radius", "5px")
+		updateBox.find(".infoBox:nth-child(3)").find(".infocon").attr("id", "newNick");
+		updateBox.find(".infoBox:nth-child(4)").find(".infocon").attr("id", "newPhone");
+		updateBox.find(".infoBox:nth-child(5)").find(".infocon").attr("id", "newEmail");
+		$(".updateBox>.infoBox:not(:first-child):not(:nth-child(2))>.infocon").css("border", "1px solid").css("border-radius", "5px")
 
 
 		// 아이디는 수정 못함 문구  출력
 		let idPhrase = $("<div>").attr("class", "phrase").css("padding-left", "10px").html("아이디는 변경할 수 없습니다.")
 		updateBox.children(".infoBox:first-child").append(idPhrase);
 
-
+		// 이름 수정 못함 문구  출력
+		let namePhrase = $("<div>").attr("class", "phrase").css("padding-left", "10px").html("이름은 변경할 수 없습니다.")
+		updateBox.children(".infoBox:nth-child(2)").append(namePhrase);
 	}
 });

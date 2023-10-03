@@ -61,8 +61,6 @@
             </div>
         </div>
         
-        <!-- <button style="visibility:hidden" id="defaultList"></button> -->
-        
         <a href="#">
             <div class="upArrow bColorPink colorWhite">
                 <i class="fa-solid fa-arrow-up-long"></i>

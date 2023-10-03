@@ -272,7 +272,6 @@ a {
 
                             	<c:when test="${loginID ne 'admin'}">
                             		<div class="write">
-		                              <!--   <a href="/write.qna?menu=qna"><input type="button" value="글쓰기" id="writeBtnLink" class="boardBtn bColorGreen"></a> -->
 		                              <a href="/write.qna?menu=qna" id="writeBtnLink"><input type="button" value="글쓰기" class="boardBtn bColorGreen"></a>
 		                            </div>
                             	</c:when>
@@ -290,9 +289,6 @@ a {
 			<input type="hidden" id="searchByKeyword" value="${keyword }">
 			
         </div>
-        
-        
-        
         
         <a href="#">
             <div class="upArrow bColorPink colorWhite">

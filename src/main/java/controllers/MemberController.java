@@ -101,7 +101,6 @@ public class MemberController extends HttpServlet {
 				String nickName = request.getParameter("nickname");
 				String userId = request.getParameter("userID");
 				boolean result = dao.selectByNickname(nickName);
-				System.out.println("result : " + result);
 				if (result) {
 					if (userId != null || userId == "") {
 						String userNick = dao.selectNicknameById(userId);
@@ -135,9 +134,8 @@ public class MemberController extends HttpServlet {
 
 			} else if (cmd.equals("/adminBoard.member")) {
 				String notiCpage = request.getParameter("notiCpage");
-				int notiCurrentPage = (notiCpage == null || notiCpage == "") ? 1 : Integer.parseInt(notiCpage);// 현재
-																												// 공지
-				System.out.println(notiCpage); // 게시글
+				int notiCurrentPage = (notiCpage == null || notiCpage == "") ? 1 : Integer.parseInt(notiCpage);// 현재 공지 게시글
+
 				// 페이지
 				List<BoardDTO> notiList = new ArrayList<>();
 				notiList = bdao.selectByCategory("notice",
@@ -156,8 +154,6 @@ public class MemberController extends HttpServlet {
 				// 회원 정보 수정 전 비밀번호 확인
 				String id = request.getParameter("userID");
 				String pw = EncryptionUtils.getSHA512(request.getParameter("userPW"));
-				System.out.println(id);
-				System.out.println(request.getParameter("userPW"));
 				boolean result = dao.selectByIdPw(id, pw);
 				if (result) {
 					printwriter.append("true");
@@ -170,7 +166,6 @@ public class MemberController extends HttpServlet {
 				String newNick = request.getParameter("newNick");
 				String newPhone = request.getParameter("newPhone");
 				String newEmail = request.getParameter("newEmail");
-				System.out.println(newEmail);
 
 				int result = dao.updateInfoById(id, newNick, newPhone, newEmail);
 				if (result != 0) {
@@ -192,7 +187,6 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/delete.member")) {
 				// 회원 탈퇴 (회원 정보 삭제)
 				String id = request.getParameter("userID");
-				System.out.println(id);
 				int result = dao.deleteById(id);
 				if (result != 0) {
 					printwriter.append("true");
@@ -256,31 +250,23 @@ public class MemberController extends HttpServlet {
 				else
 					response.sendRedirect(pageURL);
 			}
-			/////////////////////////////////////////////////////////
 			else if(cmd.equals("/myFavoriteGame.member")) {
-
-			    System.out.println("/myFavoriteGame.member");
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String category = request.getParameter("param");
-			    System.out.println("Favo category "+category);
 			    
 			    List<GameDTO> list = new ArrayList<>();
 			    
 			    if(category.equals("favoriteAll")) {
-			        list = GameDAO.getInstance().myFavoriateGame(id);
-			        
+			        list = GameDAO.getInstance().myFavoriateGame(id);		        
 			    }else {
 			        list = GameDAO.getInstance().myFavoriateGame(id,category);
-			    }
-			    
-			    
+			    }    
+
 			    printwriter.append(gson.toJson(list));
 			    
 			}else if(cmd.equals("/mycurrentOrder.member")) {
-			    System.out.println("/mycurrentOrder.member");
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String category = request.getParameter("param");
-			    System.out.println("Favo category "+category);
 			    
 			    List<GameDTO> list = new ArrayList<>();
 			    
@@ -293,8 +279,6 @@ public class MemberController extends HttpServlet {
 			    printwriter.append(gson.toJson(list));
 			    
 			}else if(cmd.equals("/mynameOrderGame.member")) {
-			    System.out.println("/mynameOrderGame.member");
-			    
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String category = request.getParameter("param");
 			    
@@ -309,7 +293,6 @@ public class MemberController extends HttpServlet {
 			    printwriter.append(gson.toJson(list));
 			    
 			}else if(cmd.equals("/myFavoriteOrderGame.member")) {
-			    System.out.println("/myFavoriteOrderGame.member");
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String category = request.getParameter("param");
 			    
@@ -323,7 +306,6 @@ public class MemberController extends HttpServlet {
 			    printwriter.append(gson.toJson(list));
 			    
 			}else if(cmd.equals("/myGameRecord.member")) {
-			    System.out.println("/myGameRecord.member");
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String gName = request.getParameter("param");
 			    
@@ -337,8 +319,6 @@ public class MemberController extends HttpServlet {
 			    
 			    printwriter.append(gsonTs.toJson(list));
 			}else if(cmd.equals("/myGameScoreOrder.member")) {
-				
-				System.out.println("/myGameScoreOrder.member");
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String gName = request.getParameter("param");
 				
@@ -351,8 +331,6 @@ public class MemberController extends HttpServlet {
 			    }
 			    printwriter.append(gsonTs.toJson(list));
 			}else if(cmd.equals("/myGameCurrentOrder.member")) {
-				
-				System.out.println("/myGameCurrentOrder.member");
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String gName = request.getParameter("param");
 				
@@ -369,7 +347,16 @@ public class MemberController extends HttpServlet {
 				List<GameDTO> gameRank = gdao.selectGameRanking();
 				
 				printwriter.append(gson.toJson(gameRank));
-				//request.getRequestDispatcher("/member/adminDashBoard.jsp").forward(request, response);
+			} else if(cmd.equals("/genderByRank.member")) {
+				List<GameDTO> womanRank = gdao.selectWomanRanking();
+				List<GameDTO> manRank = gdao.selectManRanking();
+				List<Object> result = new ArrayList<>();
+				result.add(womanRank);
+				result.add(manRank);
+				printwriter.append(gsonTs.toJson(result));
+			} else if(cmd.equals("/ageByRank.member")) {
+				List<GameDTO> list = gdao.selectByAgeRanking();
+				printwriter.append(gsonTs.toJson(list));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

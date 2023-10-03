@@ -38,7 +38,6 @@ public class QnaAnswerController extends HttpServlet {
 
 			QnaAnswerDAO dao = QnaAnswerDAO.getInstance();
 			PrintWriter pw = response.getWriter();
-			Gson gsonDefault = new Gson();
 			Gson gsonTs = new GsonBuilder().registerTypeAdapter(Timestamp.class, new JsonSerializer<Timestamp>() {
 				private final SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy.MM.dd");
 				private final SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm");

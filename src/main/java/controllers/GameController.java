@@ -53,9 +53,9 @@ public class GameController extends HttpServlet {
 				request.setAttribute("category", category);
 				request.getRequestDispatcher("/game/GamePage_Category.jsp").forward(request, response);
 			}else if(cmd.equals("/favorite.game")) {
-				String mID = request.getParameter("mID"); //넘어오는 파라미터 이름은 추후 수정 가능.
+				String mID = request.getParameter("mID");
 				String gameName = request.getParameter("gameName");
-				//ajax로 할듯?
+
 				int result = dao.insertFavorite(gameName, mID);
 				PrintWriter out = response.getWriter();
 				if(result>0) {
@@ -71,7 +71,7 @@ public class GameController extends HttpServlet {
 				int isFavorite = dao.selectFavorite(gameName, mID);
 				pw.println(isFavorite);
 			}else if(cmd.equals("/deletefavorite.game")) {
-				String mID = request.getParameter("mID"); //넘어오는 파라미터 이름은 추후 수정 가능.
+				String mID = request.getParameter("mID");
 				String gameName = request.getParameter("gameName");
 				int result = dao.deleteFavorite(gameName, mID);
 				if(result>0) {

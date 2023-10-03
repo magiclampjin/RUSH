@@ -104,130 +104,130 @@ a{
 	border-color: #F9F9F9;
 }
 
-		 #gameContainer {
-            margin: auto;
-            width: 500px;
-        }
+#gameContainer {
+    margin: auto;
+    width: 500px;
+}
 
-        .containerInputs {
-            width: 600px;
-            margin: 50px auto;
-        }
+.containerInputs {
+    width: 600px;
+    margin: 50px auto;
+}
 
-        #gameBoard {
-            margin-top: 10px;
-            position:relative;
-            margin:auto;
-        }
+#gameBoard {
+    margin-top: 10px;
+    position:relative;
+    margin:auto;
+}
 
-        .cell {
-            height: 78px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background-color: lightblue;
-            border: 3px solid white;
-            color: white;
-            font-size: xx-large;
-            font-weight: bold;
-        }
+.cell {
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: lightblue;
+    border: 3px solid white;
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+}
 
-        #inputBoard {
-            margin-top: 20px;
-            /* border:1px solid black; */
-            justify-content: center;
-        }
+#inputBoard {
+    margin-top: 20px;
+    /* border:1px solid black; */
+    justify-content: center;
+}
 
 
-        .inputLine {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.inputLine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .line1 .input {
-            width: 8.5%;
-            height: 70px;
-            border: 0px;
-            background-color: lightgray;
-            font-size: large;
-            font-weight: bold;
-            margin: 0px 3px 10px 3px;
-        }
+.line1 .input {
+    width: 8.5%;
+    height: 70px;
+    border: 0px;
+    background-color: lightgray;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 3px 10px 3px;
+}
 
-        .line2 .input {
-            width: 8.5%;
-            height: 70px;
-            border: 0px;
-            background-color: lightgray;
-            font-size: large;
-            font-weight: bold;
-            margin: 0px 3px 10px 3px;
-        }
+.line2 .input {
+    width: 8.5%;
+    height: 70px;
+    border: 0px;
+    background-color: lightgray;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 3px 10px 3px;
+}
 
-        .line3 .input {
-            width: 8.5%;
-            height: 70px;
-            border: 0px;
-            background-color: lightgray;
-            font-size: large;
-            font-weight: bold;
-            margin: 0px 3px 10px 3px;
-        }
+.line3 .input {
+    width: 8.5%;
+    height: 70px;
+    border: 0px;
+    background-color: lightgray;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 3px 10px 3px;
+}
 
-        .line3 .btns {
-            width: 14%;
-        }
+.line3 .btns {
+    width: 14%;
+}
 
-        .input:hover {
-            background-color: rgba(211, 211, 211, 0.473);
-        }
+.input:hover {
+    background-color: rgba(211, 211, 211, 0.473);
+}
 
-        .covers {
-        	background-color:#00000099;
-        	position:absolute;
-        	z-index:1;
-			width:100%;
-			height:100%;
-			border-radius:10px;
-			color:white;
-			display:flex;
-			align-items:center;
-			justify-content:center;
-			font-size:xx-large;
-			font-weight:bold;
-			text-align:center;
-        }
-        
-        #endCover{
-        	display:none;
-        }
-        
-        .gameStartBnts{
-        	padding:13px 25px;
-        	background-color: #00000000;
-        	color: lightblue;
-        	border:3px solid white;
-        	
-        	border-radius:15px;
-        }
-        
-        .gameStartBnts:hover{
-        	background-color: lightblue;
-        	color:white;
-        	border:3px solid lightblue;
-        	transition-duration: 1s;
-        }
-        
-        .fw900 {
-		    font-weight: 900;
-		}
-		
-		.ft30{
-			font-size:35pt;
-		}
-		.recordPost {
+.covers {
+	background-color:#00000099;
+	position:absolute;
+	z-index:1;
+	width:100%;
+	height:100%;
+	border-radius:10px;
+	color:white;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:xx-large;
+	font-weight:bold;
+	text-align:center;
+}
+     
+#endCover{
+	display:none;
+}
+
+.gameStartBnts{
+	padding:13px 25px;
+	background-color: #00000000;
+	color: lightblue;
+	border:3px solid white;
+	
+	border-radius:15px;
+}
+
+.gameStartBnts:hover{
+	background-color: lightblue;
+	color:white;
+	border:3px solid lightblue;
+	transition-duration: 1s;
+}
+
+.fw900 {
+	font-weight: 900;
+}
+
+.ft30{
+	font-size:35pt;
+}
+.recordPost {
 	position: relative;
 }
 
@@ -286,11 +286,9 @@ a{
 			type : "post"
 		}).done(function(res){
 			let isFavorite = res;
-			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
 				$(".fa-star").removeClass("colorWhite");
-				console.log("active");
 			}else{
 				
 			}
@@ -303,8 +301,6 @@ a{
 			type : "post"
 		}).done(function(res){
 			let record = JSON.parse(res);
-			console.log(record);
-			console.log(record[0]["nickName"]);
 			$("#rankCon").text("");
 			for(let i=0; i<record.length; i++){
 				let divRow = $("<div>");
@@ -352,10 +348,7 @@ a{
 				
 				
 				divRow.append(divColRank);
-				divRow.append(divColInfo);
-				//divRow.append(divColScore);
-				
-				
+				divRow.append(divColInfo);		
 				$("#rankCon").append(divRow);
 			}
 		});
@@ -417,10 +410,6 @@ a{
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
-									<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
-										<i class="fa-regular fa-star colorWhite"></i>
-										즐겨찾기
-									</button> -->
 								</div>
 							</div>
 							<hr class="colorPink border-3 opacity-100">
@@ -472,7 +461,6 @@ a{
 								</div>
 							</div>
 							
-							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 						</div>
 						<div class="row g-0 mt49">
 							<div class="col-12" id="rank">
@@ -605,10 +593,6 @@ a{
 		$("#rank").css("display","flex");
 		$("#rank").css("justify-content","center");
 		$("#info").css("display","none");
-        $(".btn").on("click",function(){
-            // $(".categories").text();
-            console.log("");
-        });
         
         $("#btnradio1").on("click",function(){
         	$("#rank").css("display","flex");
@@ -622,8 +606,6 @@ a{
     			type : "post"
     		}).done(function(res){
     			let record = JSON.parse(res);
-    			console.log(record);
-    			console.log(record[0]["nickName"]);
     			$("#rankCon").text("");
     			for(let i=0; i<record.length; i++){
     				let divRow = $("<div>");
@@ -672,8 +654,6 @@ a{
     				
     				divRow.append(divColRank);
     				divRow.append(divColInfo);
-    				//divRow.append(divColScore);
-    				
     				
     				$("#rankCon").append(divRow);
     			}
@@ -688,32 +668,27 @@ a{
         $("#favorite").on("click",function(){
         	let id = '${loginID}';
         	if(id != ""){
-        		console.log("로그인했음.");
         		if($(this).hasClass("active") == true){
-            		console.log("존재");
             		$.ajax({
               	      url:"/deletefavorite.game",
               	      data:{
-              	        mID:"${loginID}",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+              	        mID:"${loginID}",
               	        gameName:'${game}'
               	      },
               	      type:"post"
               	    }).done(function (res){
-              	      console.log(res);
               	      location.reload();
               	      $(".fa-star").addClass("colorWhite");
               	    });
             	}else{
-            		console.log("x");
             		$.ajax({
               	      url:"/favorite.game",
               	      data:{
-              	        mID:"${loginID}",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨.*/ 
+              	        mID:"${loginID}",
               	        gameName:'${game}'
               	      },
               	      type:"post"
               	    }).done(function (res){
-              	      console.log(res);
               	      location.reload();
               	    });
             	}
