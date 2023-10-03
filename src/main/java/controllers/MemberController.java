@@ -99,18 +99,9 @@ public class MemberController extends HttpServlet {
 			} else if (cmd.equals("/nicknameCheck.member")) {
 				// 닉네임 중복 체크
 				String nickName = request.getParameter("nickname");
-				String userId = request.getParameter("userID");
 				boolean result = dao.selectByNickname(nickName);
 				if (result) {
-					if (userId != null || userId == "") {
-						String userNick = dao.selectNicknameById(userId);
-						if (nickName.equals(userNick)) {
-							printwriter.append("myNick");
-						}
-					} else {
-						printwriter.append("used");
-					}
-
+					printwriter.append("used");
 				} else {
 					printwriter.append("usable");
 				}
