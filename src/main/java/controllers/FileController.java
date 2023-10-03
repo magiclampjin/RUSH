@@ -53,9 +53,7 @@ public class FileController extends HttpServlet {
 				Enumeration<String> fileNames = multi.getFileNames();
 				List<String> fileList = new ArrayList<>();
 				
-				// fileSeq라는 이름이 session에 존재한다면 불러와서 추가하고
-				// 없다면 새로 만들기
-				// 하나의 게시물에 이미지 첨부를 여러번 나눠서 할수도 있기 때문
+				// fileSeq라는 이름이 session에 존재한다면 불러와서 추가하고 없다면 새로 만들기 하나의 게시물에 이미지 첨부를 여러번 나눠서 할수도 있기 때문
 				List<Integer> fileSeq = null;
 				if(request.getSession().getAttribute("fileSeq")==null) {
 					fileSeq = new ArrayList<>();
@@ -73,9 +71,6 @@ public class FileController extends HttpServlet {
 						FileDTO fileDto = new FileDTO(0, 0, ori_name, sys_name, true, isqna);
 						fileList.add("/files/"+fileDto.getSystemName());
 						fileSeq.add(dao.insert(fileDto));
-						
-						//int fileResult = dao.insert(fileDto);
-						//pw.append("/files/"+sys_name);
 					}
 				}
 				// 이미지 첨부 파일을 모두 DB에 저장하고 나면 DB에 저장된 seq를 세션에 모두 등록
