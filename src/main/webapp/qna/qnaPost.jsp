@@ -300,7 +300,6 @@ a {
 									id="postWriter">${post.nickName}</div>
 									<div class="col-12 fw400 fs20 colorDarkgray pl15"
 									id="postDetailInfo">${post.stringFormat }</div>
-									<!--  &nbsp;&nbsp;&nbsp;조회--> 
 								<hr>
 								<div class="col-12 fw400 fs25" id="postContents">${post.contents}</div>
 							</div>
