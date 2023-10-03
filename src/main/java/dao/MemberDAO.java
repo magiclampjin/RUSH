@@ -225,4 +225,17 @@ public class MemberDAO {
 			return pstat.executeUpdate();
 		}
 	}
+	
+	public boolean selectByBlackId(String id) throws Exception {
+		String sql = "select * from blacklist where blID = ?";
+
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+
+			try(ResultSet rs = pstat.executeQuery();) {
+				return rs.next();
+			}
+		}
+	}
 }
