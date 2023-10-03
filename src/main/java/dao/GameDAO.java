@@ -626,7 +626,7 @@ public class GameDAO {
 	}
 	
 	public List<GameDTO> selectWomanRanking() throws Exception{
-		String sql = "select g.gName, ifnull(a.count,0) playCount from game g left join (select r.gName, count(*) count from game_record r join members m on r.mID=m.mID where mod(substr(mIdNumber,7),2)=0 group by r.gName) a on g.gName=a.gName order by gName;";
+		String sql = "select * from womanRanking;";
 		List<GameDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -641,7 +641,7 @@ public class GameDAO {
 	}
 	
 	public List<GameDTO> selectManRanking() throws Exception{
-		String sql = "select g.gName, ifnull(a.count,0) playCount from game g left join (select r.gName, count(*) count from game_record r join members m on r.mID=m.mID where mod(substr(mIdNumber,7),2)=1 group by r.gName) a on g.gName=a.gName order by gName;";
+		String sql = "select * from manRanking;";
 		List<GameDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -656,16 +656,7 @@ public class GameDAO {
 	}
 	
 	public List<GameDTO> selectByAgeRanking() throws Exception{
-		String sql = "select a.gName, \r\n"
-				+ "    coalesce(sum(case when age='1' then playCount end), 0)  as 10대, \r\n"
-				+ "    coalesce(sum(case when age='2' then playCount end), 0)  as 20대,\r\n"
-				+ "    coalesce(sum(case when age='3' then playCount end), 0)  as 30대,\r\n"
-				+ "    coalesce(sum(case when age='4' then playCount end), 0)  as 40대,\r\n"
-				+ "    coalesce(sum(case when age='5' then playCount end), 0)  as 50대,\r\n"
-				+ "    coalesce(sum(case when age not between 1 and 5 then playCount end), 0)  as 기타 \r\n"
-				+ "from (select g.gName, age, playCount from game g left join (select r.*, m.mIdNumber, if(substr(mIdNumber,1,2) between 05 and 23, 1, substr(TRUNCATE((TO_DAYS(NOW()) - TO_DAYS(substr(mIdNumber,1,6))) / 365, 0),1,1)) age, count(*) playCount from game_record r join members m on r.mID=m.mID group by age, r.gName) t on g.gName= t.gName) a \r\n"
-				+ "group by a.gName\r\n"
-				+ "order by a.gName;";
+		String sql = "select * from ageByRanking;";
 		List<GameDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
