@@ -46,7 +46,6 @@ public class GameController extends HttpServlet {
 				request.setAttribute("game",gameName);
 				request.setAttribute("category",gameCategory);
 				request.setAttribute("dev",developer);
-		
 				request.getRequestDispatcher("/game/GamePage_"+gameCategory+".jsp").forward(request, response);
 				
 			}else if(cmd.equals("/moveToCategory.game")) {
@@ -141,6 +140,15 @@ public class GameController extends HttpServlet {
 				pw.append(gson.toJson(list));
 			} else if(cmd.equals("/bestBookmarkGame.game")) {
 				List<GameDTO> list = dao.selectBestBookmarkGame();
+				pw.append(gson.toJson(list));
+			}else if(cmd.equals("/getGenders.game")) {
+				String gameName = request.getParameter("game");
+				int count = dao.selectRecordCount(gameName);
+				int male = (int) Math.round(dao.selectGameMaleCount(gameName)*100.0/count);
+				int female = (int) Math.round(dao.selectGameFemaleCount(gameName)*100.0/count);
+				List list = new ArrayList<>();
+				list.add(male);
+				list.add(female);
 				pw.append(gson.toJson(list));
 			}
 			

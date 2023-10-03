@@ -76,6 +76,9 @@ a {
 	max-width: 1300px;
 	margin: auto;
 }
+.mb50{
+	margin-bottom : 50px!important;
+}
 
 .rankCon {
 	max-width: 1030px;
@@ -202,7 +205,6 @@ a {
 			type : "post"
 		}).done(function(res){
 			let isFavorite = res;
-			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
 				$(".fa-star").removeClass("colorWhite");
@@ -353,7 +355,7 @@ a {
 									<hr class="colorPink border-3 opacity-100">
 								</div>
 								<div class="row g-0">
-									<div id="container" class="col-12">
+									<div id="container" class="col-12 mb50">
 										<script>
 									        let option = {
 									            type:Phaser.AUTO,
@@ -458,7 +460,7 @@ a {
 									<hr class="colorPink border-3 opacity-100">
 								</div>
 								<div class="row g-0">
-									<div id="container" class="col-12"
+									<div id="container" class="col-12 mb50"
 										style="width: 360px; height: 650px;">
 										<input type="hidden" id="soundSetting" value="false">
 										<input type="hidden" id="score" value="0"> <input
@@ -595,7 +597,7 @@ a {
 									<hr class="colorPink border-3 opacity-100">
 								</div>
 								<div class="row g-0">
-									<div class="col-12 game">play ground</div>
+									<div class="col-12 game mb50">play ground</div>
 								</div>
 								<div class="row g-0">
 									<div class="col-12 d-flex justify-content-center mt150">

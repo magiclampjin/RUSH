@@ -129,6 +129,9 @@ a{
 	color : white;
 	background-color : #F393FF;
 }
+.mb50{
+	margin-bottom : 50px;
+}
 
 </style>
 </head>
@@ -280,7 +283,7 @@ a{
 							<hr class="colorPink border-3 opacity-100">
 						</div>
 						<div class="row g-0">
-							<div class="col-12">
+							<div class="col-12 mb50">
 								<div id="game">
 									
 								</div>
@@ -303,7 +306,7 @@ a{
 							    </script>								
 							</div>
 						</div>
-						<div class="row g-0">
+						<div class="row g-0 mt49">
 							<div class="col-12 d-flex justify-content-center mt150">
 								<div class="btn-group w100p mxWidth1030" role="group"
 									aria-label="Basic radio toggle button group">
