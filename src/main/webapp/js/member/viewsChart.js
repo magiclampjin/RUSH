@@ -86,6 +86,7 @@ window.onload = function() {
 	});
 
 
+
 	//연령 별 선호 게임
 	$.ajax({
 		url: "/ageByRank.member",
@@ -156,9 +157,12 @@ window.onload = function() {
 			}
 		});
 	});
+
+
 	
 	window.history.forward();
 	noBack();
+
 };
 
 function noBack(){
