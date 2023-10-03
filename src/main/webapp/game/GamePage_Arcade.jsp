@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/common/style.jsp"%>
+
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>RUSH // ${game}</title>
+<%@ include file="/common/style.jsp"%>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -45,7 +46,9 @@
 * {
 	box-sizing: border-box;
 }
-
+.mt50{
+	margin-top : 50px!important;
+}
 .test {
 	background-color: white;
 	width: 300px;
@@ -170,7 +173,10 @@ a {
 	display: flex;
 	align-items: center;
 }
-
+.pd20{
+	padding-left : 20px!important;
+	padding-right : 20px!important;
+}
 .doodleKeyImg>img {
 	width: 300px;
 }
@@ -416,8 +422,8 @@ a {
 											<div id="rankCon"></div>
 										</div>
 									</div>
-									<div class="col-12" id="info">
-										<div class="row g-0 w100p">
+									<div class="col-12 pd20" id="info">
+										<div class="row g-0 w100p mt50">
 											<div class="col-12">
 												<p class="text-white fontKorean fs-2">게임 설명</p>
 												<hr class="colorBlue border-3 opacity-75">
@@ -536,7 +542,7 @@ a {
 											<div id="rankCon"></div>
 										</div>
 									</div>
-									<div class="col-12" id="info">
+									<div class="col-12 pd20" id="info">
 										<div class="row g-0 w100p">
 											<div class="col-12">
 												<p class="text-white fontKorean fs-2">게임 설명</p>
@@ -634,7 +640,7 @@ a {
 										</div>
 									</div>
 									<div class="col-12" id="info">
-										<div class="row g-0 w100p">
+										<div class="row g-0 w100p mt50">
 											<div class="col-12">
 												<p class="text-white fontKorean fs-2">게임 설명</p>
 												<hr class="colorBlue border-3 opacity-75">
