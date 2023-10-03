@@ -47,7 +47,7 @@ $(document).ready(function() {
 		url: "/bestBookmarkGame.game",
 		dataType: "json"
 	}).done(function(resp) {
-		let bestBookmark = $("#bestBookmarkList"); //after
+		let bestBookmark = $("#bestBookmarkList");
 		for(let i=resp.length-1; i>=0; i--){
 			if(i==resp.length-1 || resp[i].gName != resp[i+1].gName){
 				let obj = $("<div>").attr("class","col-12 col-md-4 mb80");

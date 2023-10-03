@@ -47,8 +47,15 @@ a {
 	display: none;
 }
 </style>
+<script>
+	window.history.forward(); 
+	function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
-<body>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 <input id="userID" type="hidden" value="${loginID}">
 	<div class="container-fluid p-0">
 	<%@ include file="/common/writeHeader.jsp" %>

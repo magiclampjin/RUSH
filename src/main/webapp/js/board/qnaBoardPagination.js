@@ -95,6 +95,4 @@ $(document).ready(function() {
 	$("option[value=\""+searchBy+"\"]").attr("selected", "true");
 	
 	
-})/**
- * 
- */
+})
