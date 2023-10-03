@@ -193,11 +193,16 @@ public class MemberController extends HttpServlet {
 				boolean isAuthenticated = dao.selectByIdPw(id, pw);
 
 				if (isAuthenticated) { // 로그인에 성공하는 순간
-					request.getSession().setAttribute("loginID", id); // 아이디 세션
+					boolean isBlackList = dao.selectByBlackId(id);
+					
+					if(isBlackList) {
+						response.getWriter().append("blacklist");
+					} else {
+						request.getSession().setAttribute("loginID", id); // 아이디 세션
 
-					String nickName = dao.selectNicknameById(id);
-					request.getSession().setAttribute("loginNickname", nickName); // 닉네임 세션
-
+						String nickName = dao.selectNicknameById(id);
+						request.getSession().setAttribute("loginNickname", nickName); // 닉네임 세션
+					}
 				} else {
 					response.getWriter().append("failed");
 				}

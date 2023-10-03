@@ -234,10 +234,11 @@
               pw: mPw
            },
         }).done(function(login){
-           if(login =="failed"){
+           if(login =="failed"){ // 계정이 존재하지 않는 경우
               alert("아이디 또는 비밀번호가 틀렸습니다.");
-           }
-           else{
+           } else if(login == "blacklist") { // 블랙리스트인 경우
+        	   alert("정지 당한 회원은 로그인할 수 없습니다.");
+           } else{
               location.href="/index.jsp";
            }
        });
