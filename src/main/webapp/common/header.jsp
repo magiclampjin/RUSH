@@ -97,8 +97,10 @@ a {
 													aria-labelledby="navbarDropdownMenuLink">
 													<li><a class="dropdown-item fontEnglish"
 														href="/load.member">MyPage</a></li>
-														<li><a class="dropdown-item fontEnglish"
+													<li><a class="dropdown-item fontEnglish"
 														href="/member/adminDashBoard.jsp">DashBoard</a></li>
+													<li><a class="dropdown-item fontEnglish"
+														href="/admin/filter.jsp">Membership Management</a></li>
 													<li><a class="dropdown-item fontEnglish"
 														href="/logout.member">Log Out</a></li>
 												</ul></li>
