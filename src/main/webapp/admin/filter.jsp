@@ -171,7 +171,7 @@
 				
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
-				deleteBtn.addClass("btn btn-outline-dark deleteUser");
+				deleteBtn.addClass("btn btn-outline-dark blackUser");
 				deleteBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
@@ -184,7 +184,7 @@
 				$("#replies").append(divRow);
 			}
 			
-			$(".deleteUser").on("click",function(){
+			$(".blackUser").on("click",function(){
 				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
 				$.ajax({
@@ -276,7 +276,7 @@
 				
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
-				deleteBtn.addClass("btn btn-outline-dark deleteUser");
+				deleteBtn.addClass("btn btn-outline-dark blackUser");
 				deleteBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
@@ -458,8 +458,10 @@
 				}).done(function(res){
 					if(res>0){
 						alert("게시글 삭제 성공");
+						location.reload();
 					}else{
 						alert("게시글 삭제 실패");
+						location.reload();
 					}
 				});
 			});			
