@@ -6,22 +6,31 @@ public class BlackListDTO {
 	private String blNickname;
 	private String blPhone;
 	private String blEmail;
+	private String blIdNumber;
 	
 	public BlackListDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
 
-	public BlackListDTO(int blSeq, String blID, String blNickname, String blPhone, String blEmail) {
+	public BlackListDTO(int blSeq, String blID, String blNickname, String blPhone, String blEmail, String blIdNumber) {
 		super();
 		this.blSeq = blSeq;
 		this.blID = blID;
 		this.blNickname = blNickname;
 		this.blPhone = blPhone;
 		this.blEmail = blEmail;
+		this.blIdNumber = blIdNumber;
+	}
+
+	public String getBlIdNumber() {
+		return blIdNumber;
 	}
 
 
+	public void setBlIdNumber(String blIdNumber) {
+		this.blIdNumber = blIdNumber;
+	}
 	public int getBlSeq() {
 		return blSeq;
 	}
