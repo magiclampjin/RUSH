@@ -174,6 +174,22 @@
 				deleteBtn.addClass("btn btn-outline-dark blackUser");
 				deleteBtn.text("블랙리스트");
 				
+				$.ajax({
+					url:"/getBlacklist.black",
+					data : {
+						userID : data[i]["id"]
+					}
+				}).done(function(res){
+					let data = JSON.parse(res);
+					console.log(data);
+					if(data>=1){
+						deleteBtn.addClass("active");
+					}
+				});
+				
+				
+				
+				
 				divBtn.append(deleteBtn);
 				
 				divRow.append(divColID);
@@ -273,6 +289,19 @@
 				
 				let divBtn = $("<div>");
 				divBtn.addClass("col-3 center");
+				
+				$.ajax({
+					url:"/getBlacklist.black",
+					data : {
+						userID : data[i]["id"]
+					}
+				}).done(function(res){
+					let data = JSON.parse(res);
+					console.log(data);
+					if(data>=1){
+						deleteBtn.addClass("active");
+					}
+				});
 				
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
