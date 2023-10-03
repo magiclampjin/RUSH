@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RUSH</title>
+<%@ include file="/common/style.jsp" %>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/game/game.css" />
 <link
@@ -60,6 +62,10 @@
 	}
 	.row button{
 		font-size : 12px;
+	}
+	.borders{
+		border : 1px solid black;
+		border-radius : 5px;
 	}
 </style>
 </head>
@@ -215,9 +221,11 @@
 		});
 	};
 </script>
+<%@ include file="/common/header.jsp" %>
 	<div class="container">
 		<div class="row g-0 p-2">
-			<div class="col-6">
+			<div class="col-6 p-2">
+				<div class="borders">
 					<div class="row g-0">
 						<div class="col-12 d-flex justify-content-center">
 							<div class="btn-group w100p mxWidth1030" role="group"
@@ -242,15 +250,19 @@
 							
 						</div>
 					</div>
+				</div>
 			</div>
 			
-			<div class="col-6">
-				<div>
-					<button type="button" class="btn btn-ouline-light" id="select">새로고침</button>
+			<div class="col-6 p-2">
+				<div class="borders">
+					<div>
+						<button type="button" class="btn btn-ouline-light" id="select">새로고침</button>
+					</div>
+					<div id="replies">
+					
+					</div>
 				</div>
-				<div id="replies">
 				
-				</div>
 			</div>
 		</div>
 	</div>
@@ -522,5 +534,6 @@
     });
 	
 	</script>
+	<%@include file="/common/footer.jsp"%>
 </body>
 </html>

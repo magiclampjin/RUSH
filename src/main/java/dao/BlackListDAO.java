@@ -58,7 +58,7 @@ public class BlackListDAO {
 	}
 	
 	public int insertBlackList(BlackListDTO dto) throws Exception {
-		String sql = "insert into blacklist values(0,?,?,?,?,?);";
+		String sql = "insert into blacklist values(0,?,?,?,?);";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -67,7 +67,6 @@ public class BlackListDAO {
 			pstat.setString(2, dto.getBlNickname());
 			pstat.setString(3, dto.getBlPhone());
 			pstat.setString(4, dto.getBlEmail());
-			pstat.setString(5, dto.getBlIdNumber());
 			return pstat.executeUpdate();
 		}
 	}

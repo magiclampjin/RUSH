@@ -58,8 +58,7 @@ public class BlackController extends HttpServlet {
 				String nickName = dto.getNickName();
 				String Phone = dto.getPhone();
 				String Email = dto.getEmail();
-				String IdNumber = dto.getIdNumber();
-				int result = dao.insertBlackList(new BlackListDTO(0,mID, nickName, Phone, Email, IdNumber));
+				int result = dao.insertBlackList(new BlackListDTO(0,mID, nickName, Phone, Email));
 				pw.println(result);
 			}else if (cmd.equals("/deletePost.black")) {
 
