@@ -159,10 +159,14 @@ ul.tabs li.current {
                   <c:otherwise>
                      <div class="memberInfoBox updateBox">
                         <div class="infoBox">
-                           <!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
                            <div class="infoCagetory">아이디</div>
                            <div class="infocon">${user.id }</div>
                            <input type="hidden" id="userID" value="${user.id }">
+                        </div>
+                        <div class="infoBox">
+                           <div class="infoCagetory">이름</div>
+                           <div class="infocon">${user.name }</div>
+                           <input type="hidden" id="userName" value="${user.name }">
                         </div>
                         <div class="infoBox">
                            <div class="infoCagetory">비밀번호</div>
