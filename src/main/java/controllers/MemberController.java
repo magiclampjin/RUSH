@@ -358,10 +358,9 @@ public class MemberController extends HttpServlet {
 				List<GameDTO> list = gdao.selectByAgeRanking();
 				printwriter.append(gsonTs.toJson(list));
 			}else if(cmd.equals("/isBlack.member")) {
-				String idNumber = request.getParameter("birth");
 				String email = request.getParameter("email");
 				String phone = request.getParameter("contact");
-				int result = dao.selectCheckBlackuser(phone, idNumber, email);
+				int result = dao.selectCheckBlackuser(phone, email);
 				printwriter.println(result);
 			}
 		} catch (Exception e) {

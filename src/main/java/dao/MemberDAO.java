@@ -86,13 +86,12 @@ public class MemberDAO {
 		return null;
 	}
 	
-	public int selectCheckBlackuser(String phone,String idNum, String email) throws Exception {
-		String sql = "select * from blacklist where blPhone = ? or blEmail = ? or blIdNumber = ?";
+	public int selectCheckBlackuser(String phone, String email) throws Exception {
+		String sql = "select * from blacklist where blPhone = ? or blEmail = ?";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, phone);
 			pstat.setString(2, email);
-			pstat.setString(3, idNum);
 			try(ResultSet rs = pstat.executeQuery();) {
 				if(rs.next()) {
 					return 1;
