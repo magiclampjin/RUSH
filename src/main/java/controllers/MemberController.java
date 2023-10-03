@@ -245,7 +245,7 @@ public class MemberController extends HttpServlet {
 				// 회원 로그아웃
 				String pageURL = request.getHeader("Referer"); // 로그아웃 이전 페이지로 이동하기 위한 URL
 				request.getSession().invalidate();
-				if(pageURL.indexOf("adminDashBoard.jsp")!=-1 || pageURL.indexOf("load.board")!=-1 || pageURL.indexOf("updateLoad")!=-1)
+				if(pageURL.indexOf("adminDashBoard.jsp")!=-1 || pageURL.indexOf("load.board")!=-1 || pageURL.indexOf("updateLoad")!=-1 || pageURL.indexOf("filter")!=-1)
 					response.sendRedirect("/index.jsp");
 				else
 					response.sendRedirect(pageURL);

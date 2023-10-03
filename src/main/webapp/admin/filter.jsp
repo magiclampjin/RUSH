@@ -68,16 +68,21 @@
 		border-radius : 5px;
 	}
 </style>
+<script>
+	window.history.forward(); 
+	function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
-<body>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 <script>
 	window.onload = function(){
 		$.ajax({
 			url:"/getAdReply.black",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
-			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
@@ -129,8 +134,6 @@
 			$(".deleteReply").on("click",function(){
 				let seq = $(this).parent().siblings(".replySeq").val();
 				let user = $(this).parent().siblings(".writer").text();
-				console.log(seq);
-				console.log(user);
 				$.ajax({
 					url:"/deleteReply.black",
 					data : {
@@ -142,29 +145,11 @@
 					location.reload();
 				});
 			});
-			$(".blackUser").on("click",function(){
-				let nick = $(this).parent().siblings(".nickName").text();
-				let user = $(this).parent().siblings(".writer").text();
-				console.log(nick+" "+user);
-				$.ajax({
-					url:"/setBlackList.black",
-					data : {
-						mID : user
-					}
-				}).done(function(res){
-					if(res==0){
-						alert("블랙리스트 실패");
-					}else{
-						alert("블랙리스트 성공");
-					}
-				});
-			});
 		});
 		$.ajax({
 			url:"/getSearchUser.black"
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
@@ -199,10 +184,9 @@
 				$("#replies").append(divRow);
 			}
 			
-			$(".blackUser").on("click",function(){
+			$(".deleteUser").on("click",function(){
 				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
-				console.log(nick+" "+user);
 				$.ajax({
 					url:"/setBlackList.black",
 					data : {
@@ -271,7 +255,6 @@
 			url:"/getSearchUser.black"
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
@@ -309,7 +292,6 @@
 			$(".blackUser").on("click",function(){
 				let nick = $(this).parent().siblings(".nickName").text();
 				let user = $(this).parent().siblings(".writer").text();
-				console.log(nick+" "+user);
 				$.ajax({
 					url:"/setBlackList.black",
 					data : {
@@ -334,8 +316,6 @@
 			url:"/getAdReply.black",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
-			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
@@ -387,8 +367,6 @@
 			$(".deleteReply").on("click",function(){
 				let seq = $(this).parent().siblings(".replySeq").val();
 				let user = $(this).parent().siblings(".writer").text();
-				console.log(seq);
-				console.log(user);
 				$.ajax({
 					url:"/deleteReply.black",
 					data : {
@@ -412,8 +390,6 @@
 			url:"/getAdBoard.black",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
-			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
@@ -472,7 +448,6 @@
 				let postSeq = $(this).parent().siblings(".postSeq").val();
 				let category = $(this).parent().siblings(".category").val();
 				let user = $(this).parent().siblings(".writer").text();
-				console.log(postSeq);
 				$.ajax({
 					url:"/deletePost.black",
 					data : {

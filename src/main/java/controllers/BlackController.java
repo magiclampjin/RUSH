@@ -68,8 +68,7 @@ public class BlackController extends HttpServlet {
 	            String category = request.getParameter("category");
 	            List<String> filesName = fdao.inPostFilesNameList(postSeq);
 	            String user = request.getParameter("userID");
-				int warnCount = dao.selectWarningCount(user);
-				int result = dao.updateWarningCount(user, warnCount+1);
+				int result = dao.updateWarningCount(user);
 	            
 	            String uploadPath = request.getServletContext().getRealPath("files");
 	            for(String file:filesName) {
@@ -91,8 +90,7 @@ public class BlackController extends HttpServlet {
 					int replySeq = Integer.parseInt(request.getParameter("replySeq"));
 					rdao.delete(replySeq);
 					String user = request.getParameter("userID");
-					int warnCount = dao.selectWarningCount(user);
-					dao.updateWarningCount(user, warnCount+1);
+					dao.updateWarningCount(user);
 					
 				}
 			
