@@ -344,6 +344,25 @@
 	    	$("#checkInfo").html("");
 	    	flag = true;
     	}
+    	
+    	$.ajax({
+	           type:"post",
+	           url:"/isBlack.member",
+	           data: {
+	              birth: $("#birth").val(),
+	              contact: $("#contact").val(),
+	              email: $("#email").val()
+	           },
+	        }).done(function(pw){
+	           if(pw==1){
+	        	   $("#checkInfo").html("블랙리스트에 등록된 사용자입니다.");
+		   	        $("#checkInfo").css({
+		               	"color" : "red",
+		               	"font-size" : "13px"
+		               });
+		   	        flag = false;
+	           }
+	       });
     });
     
     //전화번호 
@@ -363,6 +382,25 @@
 	    	$("#checkInfo").html("");
 	    	flag = true;
 		}
+		
+		$.ajax({
+	           type:"post",
+	           url:"/isBlack.member",
+	           data: {
+	              birth: $("#birth").val(),
+	              contact: $("#contact").val(),
+	              email: $("#email").val()
+	           },
+	        }).done(function(pw){
+	           if(pw==1){
+	        	   $("#checkInfo").html("블랙리스트에 등록된 사용자입니다.");
+		   	        $("#checkInfo").css({
+		               	"color" : "red",
+		               	"font-size" : "13px"
+		               });
+		   	        flag = false;
+	           }
+	       });
 	});
 	
 	// 이메일
@@ -382,6 +420,25 @@
 	    	$("#checkInfo").html("");
 	    	flag = true;
 		}
+		
+		$.ajax({
+	           type:"post",
+	           url:"/isBlack.member",
+	           data: {
+	              birth: $("#birth").val(),
+	              contact: $("#contact").val(),
+	              email: $("#email").val()
+	           },
+	        }).done(function(pw){
+	           if(pw==1){
+	        	   $("#checkInfo").html("블랙리스트에 등록된 사용자입니다.");
+		   	        $("#checkInfo").css({
+		               	"color" : "red",
+		               	"font-size" : "13px"
+		               });
+		   	        flag = false;
+	           }
+	       });
 	});
 	
 	// null값 체크
