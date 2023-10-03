@@ -17,6 +17,7 @@ import dao.BlackListDAO;
 import dao.BoardDAO;
 import dao.FileDAO;
 import dao.MemberDAO;
+import dao.ReplyDAO;
 import dto.BlackListDTO;
 import dto.BoardDTO;
 import dto.MemberDTO;
@@ -30,6 +31,7 @@ public class BlackController extends HttpServlet {
 		response.setContentType("text/html;charset=utf8"); // 한글깨짐방지
 		BlackListDAO dao = BlackListDAO.getInstance();
 		BoardDAO bdao = BoardDAO.getInstance();
+		ReplyDAO rdao = ReplyDAO.getInstance();
 		MemberDAO mdao = MemberDAO.getInstance();
 		FileDAO fdao = FileDAO.getInstance();
 		Gson gson = new Gson();
@@ -80,6 +82,14 @@ public class BlackController extends HttpServlet {
 					} else {
 						pw.println("false");
 					}
+	         }else if(cmd.equals("/deleteReply.black")) {
+					// 댓글 삭제
+					int replySeq = Integer.parseInt(request.getParameter("replySeq"));
+					rdao.delete(replySeq);
+					String user = request.getParameter("userID");
+					int warnCount = dao.selectWarningCount(user);
+					dao.updateWarningCount(user, warnCount+1);
+					
 				}
 			
 		}catch(Exception e) {
