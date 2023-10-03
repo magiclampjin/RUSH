@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.GameDTO;
 import dto.MemberDTO;
 
 public class MemberDAO {
@@ -184,6 +187,24 @@ public class MemberDAO {
 		String sql ="delete from members where mId = ?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, id);
+			return pstat.executeUpdate();
+		}
+	}
+	
+	public int updatePointById(String id)throws Exception{
+		String sql ="update members set mPoint=mPoint+1 where mID=?;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, id);
+			return pstat.executeUpdate();
+		}
+	}
+	
+	public int updateLevelById(String id)throws Exception{
+		String sql = "update members m join levels l on m.mLevel = l.level set m.mLevel=m.mLevel+1 where m.mID=? and m.mPoint>l.lvMax;";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, id);
 			return pstat.executeUpdate();
 		}

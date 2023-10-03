@@ -175,7 +175,7 @@ $(document).ready(function() {
 					row.append(replyBtns.append(recommendBtn));
 
 					if (replyRecommCnt > 0 && replyRecommCheckIdx < replyRecommCnt) {
-						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq && resp[1][replyRecommCheckIdx].recId == loginID) {
+						if (resp[0][i].seq == resp[1][replyRecommCheckIdx].seq) {
 							recommendBtn.addClass("btnClicked");
 							replyRecommCheckIdx++;
 						}
@@ -196,7 +196,7 @@ $(document).ready(function() {
 	let search = $("#search").val();
 	let keyword = $("#keyword").val();
 
-	// url 에서 myPage 값가져올때 사용
+	// url 에서 myPage 값 가져올 때 사용
 	const urlParams = new URL(location.href).searchParams;
 	const myPage = urlParams.get('myPage');
 
@@ -399,7 +399,6 @@ $(document).ready(function() {
 		}
 
 		if (nestedReplyObj != null) { // 작성 중인 당급이 있으면?
-			let replyid = $(this).closest(".reply").find("#replyId").val();
 			if (confirm("답글 작성을 취소하시겠습니가?")) {
 				nestedReplyObj.remove();
 				nestedReplyParentSeq = null;
@@ -445,7 +444,6 @@ $(document).ready(function() {
 		}
 
 		if (nestedReplyObj != null) { // 작성 중인 당급이 있으면?
-			let replyid = $(this).closest(".reply").find("#replyId").val();
 			if (confirm("답글 작성을 취소하시겠습니가?")) {
 				nestedReplyObj.remove();
 				nestedReplyParentSeq = null;

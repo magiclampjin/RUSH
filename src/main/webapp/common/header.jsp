@@ -27,12 +27,16 @@
 }
 
 a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 .dropdown-menu[data-bs-popper] {
 	right: 0;
 	left: auto;
+}
+
+.mb0{
+	margin-bottom: 0px !important;
 }
 </style>
 </head>
@@ -42,7 +46,7 @@ a {
 			<a href="/index.jsp">
 				<div class="logo fontLogo colorWhite">RUSH</div>
 			</a>
-			<nav class="navbar navbar-expand navbar-light colorWhite">
+			<nav class="navbar navbar-expand navbar-light colorWhite mb0">
 				<div class="container-fluid p-0">
 					<div class="collapse navbar-collapse w-100 g-0 m-0"
 						id="navbarNavDropdown">
@@ -54,9 +58,9 @@ a {
 								<ul class="dropdown-menu p-0"
 									aria-labelledby="navbarDropdownMenuLink">
 									<li><a class="dropdown-item fontEnglish"
-										href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
+										href="/game/GamePage_Main.jsp">Main</a></li>
 									<li><a class="dropdown-item fontEnglish"
-										href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
+										href="/game/GamePage_BestGame.jsp">BestGame</a></li>
 								</ul></li>
 							<li class="nav-item dropdown col-3 text-end"><a
 								class="nav-link text-white fontEnglish"
@@ -78,21 +82,44 @@ a {
 								<c:when test="${loginID == null }">
 									<li class="nav-item dropdown col-3 text-end p8"><a
 										class="text-white fontEnglish"
-										href="http://localhost/member/login.jsp"> LOGIN </a></li>
+										href="/member/login.jsp"> LOGIN </a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="nav-item dropdown col-3 text-end"><a
-										class="nav-link text-white fontEnglish"
-										href="http://localhost/load.member"
-										id="navbarDropdownMenuLink" role="button"
-										data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE </a>
-										<ul class="dropdown-menu p-0"
-											aria-labelledby="navbarDropdownMenuLink">
-											<li><a class="dropdown-item fontEnglish"
-												href="http://localhost/load.member">MyPage</a></li>
-											<li><a class="dropdown-item fontEnglish"
-												href="http://localhost/logout.member">Log Out</a></li>
-										</ul></li>
+									<c:choose>
+										<c:when test="${loginID == 'admin' }">
+											<li class="nav-item dropdown col-3 text-end"><a
+												class="nav-link text-white fontEnglish"
+												href="/load.member"
+												id="navbarDropdownMenuLink" role="button"
+												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+											</a>
+												<ul class="dropdown-menu p-0"
+													aria-labelledby="navbarDropdownMenuLink">
+													<li><a class="dropdown-item fontEnglish"
+														href="/load.member">MyPage</a></li>
+														<li><a class="dropdown-item fontEnglish"
+														href="/member/adminDashBoard.jsp">DashBoard</a></li>
+													<li><a class="dropdown-item fontEnglish"
+														href="/logout.member">Log Out</a></li>
+												</ul></li>
+										</c:when>
+										<c:otherwise>
+											<li class="nav-item dropdown col-3 text-end"><a
+												class="nav-link text-white fontEnglish"
+												href="/load.member"
+												id="navbarDropdownMenuLink" role="button"
+												data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
+											</a>
+												<ul class="dropdown-menu p-0"
+													aria-labelledby="navbarDropdownMenuLink">
+													<li><a class="dropdown-item fontEnglish"
+														href="/load.member">MyPage</a></li>
+													<li><a class="dropdown-item fontEnglish"
+														href="/logout.member">Log Out</a></li>
+												</ul></li>
+										</c:otherwise>
+									</c:choose>
+
 								</c:otherwise>
 							</c:choose>
 
@@ -107,6 +134,6 @@ a {
 			</nav>
 		</div>
 	</header>
-	
+
 </body>
 </html>

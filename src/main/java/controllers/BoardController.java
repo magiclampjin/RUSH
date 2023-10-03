@@ -138,9 +138,6 @@ public class BoardController extends HttpServlet {
             
             BoardDTO post = dao.selectPost(postSeq);
 
-            if(post == null) {
-               System.out.println("포스트 삭제됨.. alert창 띄우고 boardList로 이동하게 구현하기");
-            }
             boolean postRec = dao.checkPostRecommend(postSeq,
                   (String) request.getSession().getAttribute("loginID"));
             boolean bookmark = dao.checkPostBookmark(postSeq,
@@ -274,7 +271,6 @@ public class BoardController extends HttpServlet {
 
          } else if (cmd.equals("/delete.board")) {
             // 게시글 삭제
-            // 이미지 삭제해야대..
             int postSeq = Integer.parseInt(request.getParameter("postSeq"));
             String category = request.getParameter("category");
             List<String> filesName = fdao.inPostFilesNameList(postSeq);
@@ -282,8 +278,7 @@ public class BoardController extends HttpServlet {
             String uploadPath = request.getServletContext().getRealPath("files");
             for(String file:filesName) {
                File filepath = new File(uploadPath+"/"+file);
-               filepath.delete();
-               // 외래키 cascade로 설정하면 DB에서는 게시글 삭제할 때 연쇄적으로 삭제됨. 
+               filepath.delete();  // 외래키 cascade로 설정하면 DB에서는 게시글 삭제할 때 연쇄적으로 삭제됨. 
             }
             dao.deletePost(postSeq);
             response.sendRedirect("/listing.board?cpage=1&category=" + category);
@@ -403,7 +398,6 @@ public class BoardController extends HttpServlet {
             String id = (String) request.getSession().getAttribute("loginID");
             
             List<BoardDTO> list = dao.myBookMarkList(id);
-            System.out.println("test"+list.size());
             pw.append(gsonTs.toJson(list));
          }
 

@@ -5,33 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>SignUp</title>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <link href="/css/main.css" rel="stylesheet">
-    
-    <link
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link href="/css/main.css" rel="stylesheet">
+
+<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+	
+<%@ include file="/common/style.jsp" %> 
 
 <style>
-     * {
-        box-sizing: border-box;
-		margin: 0px;
-		padding: 0px;
-		text-decoration: none;
-		list-style: none;
-     }
-
      p {
-         margin-bottom: 0;
+         margin-bottom: 0 !important;
      }
-     
-     a {
-		text-decoration: none;
-	}
 
      #container {
          width: 522px;
@@ -69,6 +59,7 @@
          height: 200px;
          margin-bottom: 10px;
          outline: none;
+         resize: none;
      }
 
      .birth {
@@ -136,65 +127,7 @@
 </head>
 <body>
 	<div class="container-fluid p-0">
-        <div class="header bColorBlack">
-            <div class="header_guide">
-                <a href="#">
-                    <div class="logo fontLogo colorWhite">RUSH</div>
-                </a>
-                <nav class="navbar navbar-expand navbar-light colorWhite">
-                    <div class="container-fluid p-0">
-                        <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
-                            <ul class="navbar-nav row g-0 w-100">
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        GAME
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        AWARDS
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        BOARD
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown col-3 text-end">
-                                    <a class="nav-link text-white fontEnglish" href="#" id="navbarDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        LOGIN
-                                    </a>
-                                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item fontEnglish" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+    <%@ include file="/common/header.jsp" %>
 
     <div id="container">
         <div id="signupBox">
@@ -248,7 +181,7 @@
 	
 	            <div id="agreement">
 	                <p class="subTitle fontEnglish">Personal Information Agreement</p>
-	                <textarea class="agreeBox" readonly></textarea>
+	                <textarea class="agreeBox" readonly>개인정보보호법에 따라 러쉬에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.&#10;&#10;1. 수집하는 개인정보&#10;이용자는 회원가입을 하지 않아도 게임 이용 등 러쉬 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 게임 이용, 게시판 글 작성 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 러쉬는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.&#10;회원가입 시점에 러쉬가 이용자로부터 수집하는 개인정보는 아래와 같습니다.&#10;- 회원 가입 시 필수항목으로 아이디, 비밀번호, 이름, 생년월일, 성별, 휴대전화번호, 본인확인 이메일주소를 수집합니다.&#10;서비스 이용 과정에서 IP 주소, 쿠키, 서비스 이용 기록이 생성되어 수집될 수 있습니다. &#10;구체적으로 1) 서비스 이용 과정에서 이용자에 관한 정보를 자동화된 방법으로 생성하여 이를 저장(수집)하거나, 2) 이용자 기기의 고유한 정보를 원래의 값을 확인하지 못 하도록 안전하게 변환하여 수집합니다.&#10;이와 같이 수집된 정보는 개인정보와의 연계 여부 등에 따라 개인정보에 해당할 수 있고, 개인정보에 해당하지 않을 수도 있습니다.&#10;&#10;2. 수집한 개인정보의 이용&#10;러쉬 및 러쉬 관련 제반 서비스(모바일 웹/앱 포함)의 회원관리, 서비스 개발・제공 및 향상, 안전한 인터넷 이용환경 구축 등 아래의 목적으로만 개인정보를 이용합니다.&#10;- 회원 가입 의사의 확인, 이용자 식별, 회원탈퇴 의사의 확인 등 회원관리를 위하여 개인정보를 이용합니다.&#10;- 법령 및 러쉬 이용약관을 위반하는 회원에 대한 이용 제한 조치, 부정 이용 행위를 포함하여 서비스의 원활한 운영에 지장을 주는 행위에 대한 방지 및 제재, 계정도용 및 부정거래 방지, 약관 개정 등의 고지사항 전달, 분쟁조정을 위한 기록 보존, 민원처리 등 이용자 보호 및 서비스 운영을 위하여 개인정보를 이용합니다.&#10;- 보안, 프라이버시, 안전 측면에서 이용자가 안심하고 이용할 수 있는 서비스 이용환경 구축을 위해 개인정보를 이용합니다.&#10;&#10;3. 개인정보의 보관기간&#10;회사는 원칙적으로 이용자의 개인정보를 회원 탈퇴 시 지체없이 파기하고 있습니다.&#10;단, 이용자에게 개인정보 보관기간에 대해 별도의 동의를 얻은 경우, 또는 법령에서 일정 기간 정보보관 의무를 부과하는 경우에는 해당 기간 동안 개인정보를 안전하게 보관합니다.&#10;참고로 러쉬는 ‘개인정보 유효기간제’에 따라 1년간 서비스를 이용하지 않은 회원의 개인정보를 별도로 분리 보관하여 관리하고 있습니다.&#10;&#10;4. 개인정보 수집 및 이용 동의를 거부할 권리&#10;이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.</textarea>
 	                <div class="check">
 	                    <input type="checkbox" id="checkbox" name="agree">
 	                    <p id="agreeText">개인정보 수집 및 활용에 동의합니다.</p>
@@ -260,44 +193,7 @@
         </form>
     </div>
     
-    <div class="footer bColorBlack">
-            <div class="footer_guide">
-                <div class="footer_logo fontLogo colorWhite">RUSH</div>
-                <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL RIGHT RESERVED</div>
-                <div class="footer_contents">
-                    <div class="about conDiv fontEnglish">
-                        <div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-                        <div class="footer_con ">
-                            <div class="con colorWhite">팀명 :
-                            </div>
-                            <div class="encon colorWhite"> SKY</div>
-                        </div>
-                    </div>
-                    <div class="office conDiv fontEnglish">
-                        <div class="footer_title fontEnglish colorWhite">OFFICE</div>
-                        <div class="footer_con">
-                            <div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-                        </div>
-                    </div>
-                    <div class="contact conDiv fontEnglish">
-                        <div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-                        <div class="footer_con fontEnglish">
-                            <div class="con fontEnglish colorWhite">a@naver.com</div>
-                            <div class="con fontEnglish colorWhite">01012345678</div>
-                        </div>
-                    </div>
-                    <div class="provision conDiv fontEnglish">
-                        <div class="footer_title fontEnglish colorWhite">PROVISION</div>
-                        <div class="footer_con">
-                            <div class="con colorWhite">개인정보 처리방침</div>
-                            <div class="con colorWhite">서비스 이용약관</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    <%@include file="/common/footer.jsp"%>
 </body>
 
 <script>

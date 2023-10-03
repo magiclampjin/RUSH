@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/common/style.jsp" %>
+ 
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,130 +104,130 @@ a{
 	border-color: #F9F9F9;
 }
 
-		 #gameContainer {
-            margin: auto;
-            width: 500px;
-        }
+#gameContainer {
+    margin: auto;
+    width: 500px;
+}
 
-        .containerInputs {
-            width: 600px;
-            margin: 50px auto;
-        }
+.containerInputs {
+    width: 600px;
+    margin: 50px auto;
+}
 
-        #gameBoard {
-            margin-top: 10px;
-            position:relative;
-            margin:auto;
-        }
+#gameBoard {
+    margin-top: 10px;
+    position:relative;
+    margin:auto;
+}
 
-        .cell {
-            height: 78px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background-color: lightblue;
-            border: 3px solid white;
-            color: white;
-            font-size: xx-large;
-            font-weight: bold;
-        }
+.cell {
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: lightblue;
+    border: 3px solid white;
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+}
 
-        #inputBoard {
-            margin-top: 20px;
-            /* border:1px solid black; */
-            justify-content: center;
-        }
+#inputBoard {
+    margin-top: 20px;
+    /* border:1px solid black; */
+    justify-content: center;
+}
 
 
-        .inputLine {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.inputLine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .line1 .input {
-            width: 8.5%;
-            height: 70px;
-            border: 0px;
-            background-color: lightgray;
-            font-size: large;
-            font-weight: bold;
-            margin: 0px 3px 10px 3px;
-        }
+.line1 .input {
+    width: 8.5%;
+    height: 70px;
+    border: 0px;
+    background-color: lightgray;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 3px 10px 3px;
+}
 
-        .line2 .input {
-            width: 8.5%;
-            height: 70px;
-            border: 0px;
-            background-color: lightgray;
-            font-size: large;
-            font-weight: bold;
-            margin: 0px 3px 10px 3px;
-        }
+.line2 .input {
+    width: 8.5%;
+    height: 70px;
+    border: 0px;
+    background-color: lightgray;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 3px 10px 3px;
+}
 
-        .line3 .input {
-            width: 8.5%;
-            height: 70px;
-            border: 0px;
-            background-color: lightgray;
-            font-size: large;
-            font-weight: bold;
-            margin: 0px 3px 10px 3px;
-        }
+.line3 .input {
+    width: 8.5%;
+    height: 70px;
+    border: 0px;
+    background-color: lightgray;
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 3px 10px 3px;
+}
 
-        .line3 .btns {
-            width: 14%;
-        }
+.line3 .btns {
+    width: 14%;
+}
 
-        .input:hover {
-            background-color: rgba(211, 211, 211, 0.473);
-        }
+.input:hover {
+    background-color: rgba(211, 211, 211, 0.473);
+}
 
-        .covers {
-        	background-color:#00000099;
-        	position:absolute;
-        	z-index:1;
-			width:100%;
-			height:100%;
-			border-radius:10px;
-			color:white;
-			display:flex;
-			align-items:center;
-			justify-content:center;
-			font-size:xx-large;
-			font-weight:bold;
-			text-align:center;
-        }
-        
-        #endCover{
-        	display:none;
-        }
-        
-        .gameStartBnts{
-        	padding:13px 25px;
-        	background-color: #00000000;
-        	color: lightblue;
-        	border:3px solid white;
-        	
-        	border-radius:15px;
-        }
-        
-        .gameStartBnts:hover{
-        	background-color: lightblue;
-        	color:white;
-        	border:3px solid lightblue;
-        	transition-duration: 1s;
-        }
-        
-        .fw900 {
-		    font-weight: 900;
-		}
-		
-		.ft30{
-			font-size:35pt;
-		}
-		.recordPost {
+.covers {
+	background-color:#00000099;
+	position:absolute;
+	z-index:1;
+	width:100%;
+	height:100%;
+	border-radius:10px;
+	color:white;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:xx-large;
+	font-weight:bold;
+	text-align:center;
+}
+     
+#endCover{
+	display:none;
+}
+
+.gameStartBnts{
+	padding:13px 25px;
+	background-color: #00000000;
+	color: lightblue;
+	border:3px solid white;
+	
+	border-radius:15px;
+}
+
+.gameStartBnts:hover{
+	background-color: lightblue;
+	color:white;
+	border:3px solid lightblue;
+	transition-duration: 1s;
+}
+
+.fw900 {
+	font-weight: 900;
+}
+
+.ft30{
+	font-size:35pt;
+}
+.recordPost {
 	position: relative;
 }
 
@@ -254,14 +257,26 @@ a{
 	color : white;
 	background-color : #F393FF;
 }
+.h80{
+	height : 80px;
+}
+
+.mb30{
+	margin-bottom: 30px !important;
+}
+
+.kordleDescImg{
+	width:500px !important;
+}
+.mb50{
+	margin-bottom : 50px!important;
+}
+
 </style>
 </head>
 <body>
 <script>
 	$(document).ready(function() {
-		console.log("아무거나 ${game}");
-		
-		
 		$.ajax({
 			url:"/checkFavorite.game",
 			data:{
@@ -271,11 +286,9 @@ a{
 			type : "post"
 		}).done(function(res){
 			let isFavorite = res;
-			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
 				$(".fa-star").removeClass("colorWhite");
-				console.log("active");
 			}else{
 				
 			}
@@ -288,8 +301,6 @@ a{
 			type : "post"
 		}).done(function(res){
 			let record = JSON.parse(res);
-			console.log(record);
-			console.log(record[0]["nickName"]);
 			$("#rankCon").text("");
 			for(let i=0; i<record.length; i++){
 				let divRow = $("<div>");
@@ -308,45 +319,29 @@ a{
 				divColInfo.addClass("col-11");
 				
 				let divRowInfo = $("<div>");
-				divRowInfo.addClass("row g-0 p-1 recordPost");
+				divRowInfo.addClass("row g-0 p-1 recordPost h80");
 				if(i%2==0){
 					divRowInfo.addClass("bcolorDarkgray30");
 					divRowInfo.css({
-						borderRadius : "5px"
+						borderRadius : "10px"
 					});	
 				}
 				
 				let divInfoLeft = $("<div>");
-				divInfoLeft.addClass("col-2 align-self-center");
+				divInfoLeft.addClass("col-1 align-self-center");
 				let divInfoRight = $("<div>");
-				divInfoRight.addClass("col-7 text-white align-self-center");
-				let divUserImage = $("<div>");
-				divUserImage.css({
-					maxWidth : "70px",
-					maxHeight : "70px",
-					width : "100%",
-					backgroundColor : "white",
-					borderRadius : "50%",
-					marginLeft : "10px",
-					marginRight : "20px"
-				});
-				
-				let divImage = $("<img>");
-				divImage.attr("src","/img/user.png");
-				divImage.css({
-					width : "100%",
-					height : "100%"
-				});
-				
-				divUserImage.append(divImage);
-				
+				divInfoRight.addClass("col-8 text-white align-self-center");
+								
 				let divColScore = $("<div>");
 				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
-				divColScore.append(record[i]["score"]+" 점");
 				
 				
+				if("${game}" == "Kordle")
+					divColScore.append(record[i]["score"]+" 개");
+				else
+					divColScore.append(record[i]["score"]+" 점");
 				
-				divInfoLeft.append(divUserImage);
+				
 				divInfoRight.append(record[i]["nickName"]);
 				divInfoRight.append(" Lv : "+record[i]["level"]);
 				divRowInfo.append(divInfoLeft);
@@ -357,10 +352,7 @@ a{
 				
 				
 				divRow.append(divColRank);
-				divRow.append(divColInfo);
-				//divRow.append(divColScore);
-				
-				
+				divRow.append(divColInfo);		
 				$("#rankCon").append(divRow);
 			}
 		});
@@ -378,71 +370,7 @@ a{
 </script>
 	<div class="container-fluid g-0">
 		<div class="header bColorBlack">
-			<div class="header_guide">
-				<a href="/index.jsp">
-					<div class="logo fontLogo colorWhite">RUSH</div>
-				</a>
-				<nav class="navbar navbar-expand navbar-light colorWhite">
-					<div class="container-fluid p-0">
-						<div class="collapse navbar-collapse w-100 g-0 m-0"
-							id="navbarNavDropdown">
-							<ul class="navbar-nav row g-0 w-100">
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_Main.jsp">Main</a></li>
-										<li><a class="dropdown-item fontEnglish" href="http://localhost/game/GamePage_BestGame.jsp">BestGame</a></li>
-									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="http://localhost/board/awards.jsp"> AWARDS </a>
-									</li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish"
-									href="/listing.board?cpage=1" id="navbarDropdownMenuLink"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										BOARD </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item"
-											href="/listing.board?cpage=1">자유게시판</a></li>
-										<li><a class="dropdown-item fontEnglish"
-											href="/listing.qna?cpage=1">Q&A</a></li>
-										<li><a class="dropdown-item" href="http://localhost/board/awards.jsp">명예의 전당</a></li>
-									</ul></li>
-								<c:choose>
-									<c:when test="${loginID == null }">
-										<li class="nav-item dropdown col-3 text-end p8"><a
-											class="text-white fontEnglish"
-											href="http://localhost/member/login.jsp"> LOGIN </a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="nav-item dropdown col-3 text-end"><a
-											class="nav-link text-white fontEnglish"
-											href="http://localhost/member/login.jsp"
-											id="navbarDropdownMenuLink" role="button"
-											data-bs-toggle="dropdown" aria-expanded="false"> MYPAGE
-										</a>
-											<ul class="dropdown-menu p-0"
-												aria-labelledby="navbarDropdownMenuLink">
-												<li><a class="dropdown-item fontEnglish" href="#">MyPage</a></li>
-												<li><a class="dropdown-item fontEnglish" href="http://localhost/logout.member">Log Out</a></li>
-											</ul></li>
-									</c:otherwise>
-								</c:choose>
-
-
-
-								<script type="text/javascript">
-									console.log("${loginID }")
-								</script>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
+			<%@ include file="/common/header.jsp" %>
 		</div>
 		
 		<div class="container-fluid g-0 bColorBlack">
@@ -486,16 +414,12 @@ a{
 										<i class="fa-regular fa-star colorWhite"></i>
 										즐겨찾기
 									</button>
-									<!-- <button type="button" class="btn btn-outline-light active" style="display:none" id="delfavorite">
-										<i class="fa-regular fa-star colorWhite"></i>
-										즐겨찾기
-									</button> -->
 								</div>
 							</div>
 							<hr class="colorPink border-3 opacity-100">
 						</div>
 						<div class="row g-0">
-							<div class="col-12 game">
+							<div class="col-12 game mb50">
 							<c:choose>
 								<c:when test="${game eq 'Kordle'}">
 									<div id="gameContainer"></div>
@@ -541,7 +465,6 @@ a{
 								</div>
 							</div>
 							
-							<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 						</div>
 						<div class="row g-0 mt49">
 							<div class="col-12" id="rank">
@@ -555,7 +478,14 @@ a{
 											<span class="text-white fontKorean">유저 정보</span>
 										</div>
 										<div class="col-2">
-											<span class="text-white fontKorean">점수</span>
+											<c:choose>
+												<c:when test="${game eq 'Kordle'}">
+													<span class="text-white fontKorean">연속 정답 수</span>
+												</c:when>
+												<c:otherwise>
+													<span class="text-white fontKorean">점수</span>
+												</c:otherwise>
+											</c:choose>									
 										</div>
 									</div>
 								<div class="lineinfo col"></div>
@@ -575,7 +505,7 @@ a{
 												<hr class="colorBlue border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">여섯 개의 자음 모음으로 분리된 단어를 맞춰보세요.<br>실제로 존재하는 단어만 입력할 수 있습니다.<br>기회는 6번이며, 실제 키보드 자판 또는 게임 화면 속 키보드 자판을 이용해 입력이 가능합니다.</p>
 											</div>				
 										</div>
 										<div class="row g-0 w100p mt150">
@@ -584,26 +514,21 @@ a{
 												<hr class="colorGreen border-3 opacity-75">
 											</div>
 											<div class="col-12">
-												<p class="text-white fontKorean">게임 설명을 적어주세요</p>
+												<p class="text-white fontKorean">
+													<div class="mb30">
+														<img src="/img/kordlekeyboard.png" class="kordleDescImg">
+														<div class="text-white fontKorean">키보드를 이용해 단어를 입력할 수 있습니다. 쌍자음 또는 이중모음은 단모음 또는 단자음으로 변환해 입력해주세요.<br>오입력 시 backspace 키를 입력해 지울 수 있으며, Enter 키 입력 시 입력이 완료됩니다.</div>
+													</div>
+													<div class="mb30">
+														<img src="/img/kordlekeyboard2.png" class="kordleDescImg">
+														<div class="text-white fontKorean">게임 화면 내 키보드를 눌러 단어를 입력할 수 있습니다. 쌍자음 또는 이중모음은 단모음 또는 단자음으로 변환해 입력해주세요.<br>오입력 시 지우기 버튼을 눌러 지울 수 있으며, 확인 버튼을 클릭하면 입력이 완료됩니다.</div>
+													</div>
+													<div class="mb30">
+														<img src="/img/kordleExp.PNG" class="kordleDescImg">
+														<div class="text-white fontKorean">Enter 키 혹은 확인 버튼을 눌러 단어 입력 시, 화면에 결과가 표시됩니다.<br>존재하지 않는 자모는 회색, 존재하지만 자리가 틀린 자모는 주황색, 자리까지 맞춘 단어는 초록색으로 표시됩니다.</div>			
+													</div>
+												</p>
 											</div>				
-										</div>
-										<div class="row g-0 w100p mt150">
-											<div class="col-12">
-												<p class="text-white fontKorean fs-2">제작자 정보</p>
-												<hr class="colorPink border-3 opacity-75">
-											</div>
-											<div class="col-12">
-												<table class="devTable">
-													<tr>
-														<th class="text-white fontKorean fw900">제작자</th>
-														<td class="text-white fontKorean">${dev}</td>
-													</tr>
-													<tr>
-														<th class="text-white fontKorean fw900">제작자 소속</th>
-														<td class="text-white fontKorean">공주대학교 SKY팀</td>
-													</tr>
-												</table>
-											</div>
 										</div>
 									</div>
 								</c:when>
@@ -628,36 +553,16 @@ a{
 											</div>
 											<div class="col-12">
 												<p class="text-white fontKorean">
-													<div style="margin-bottom:5px;">
+													<div class="mb30">
 														<img src="/game/images/Candy1.png">
 														<span class="text-white fontKorean">가로, 세로로 3개 이상 같은 캔디를 맞춰주세요.</span>
 													</div>
-													<div>
+													<div class="mb30">
 														<img src="/game/images/Candy2.png">
 														<span class="text-white fontKorean">캔디가 터질 때마다 30점씩 획득할 수 있습니다.</span>
 													</div>
-													
-													
 												</p>
 											</div>				
-										</div>
-										<div class="row g-0 w100p mt150">
-											<div class="col-12">
-												<p class="text-white fontKorean fs-2">제작자 정보</p>
-												<hr class="colorPink border-3 opacity-75">
-											</div>
-											<div class="col-12">
-												<table class="devTable">
-													<tr>
-														<th class="text-white fontKorean fw900">제작자</th>
-														<td class="text-white fontKorean">${dev}</td>
-													</tr>
-													<tr>
-														<th class="text-white fontKorean fw900">제작자 소속</th>
-														<td class="text-white fontKorean">공주대학교 SKY팀</td>
-													</tr>
-												</table>
-											</div>
 										</div>
 									</div>
 								</c:when>
@@ -665,7 +570,24 @@ a{
 							
 							
 							
-							
+							<div class="row g-0 w100p mt150">
+								<div class="col-12">
+									<p class="text-white fontKorean fs-2">제작자 정보</p>
+									<hr class="colorPink border-3 opacity-75">
+								</div>
+								<div class="col-12">
+									<table class="devTable">
+										<tr>
+											<th class="text-white fontKorean fw900">제작자</th>
+											<td class="text-white fontKorean">${dev}</td>
+										</tr>
+										<tr>
+											<th class="text-white fontKorean fw900">제작자 소속</th>
+											<td class="text-white fontKorean">공주대학교 SKY팀</td>
+										</tr>
+									</table>
+								</div>
+							</div>
 							
 						</div>
 					</div>
@@ -676,49 +598,12 @@ a{
 		</div>
 		<div class="container-fluid g-0">
 			<div class="footer bColorBlack">
-		<div class="footer_guide">
-			<div class="footer_logo fontLogo colorWhite">RUSH</div>
-			<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-				RIGHT RESERVED</div>
-			<div class="footer_contents">
-				<div class="about conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-					<div class="footer_con ">
-						<div class="con colorWhite">팀명 :</div>
-						<div class="encon colorWhite">SKY</div>
-					</div>
-				</div>
-				<div class="office conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">OFFICE</div>
-					<div class="footer_con">
-						<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-					</div>
-				</div>
-				<div class="contact conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-					<div class="footer_con fontEnglish">
-						<div class="con fontEnglish colorWhite">a@naver.com</div>
-						<div class="con fontEnglish colorWhite">01012345678</div>
-					</div>
-				</div>
-				<div class="provision conDiv fontEnglish">
-					<div class="footer_title fontEnglish colorWhite">PROVISION</div>
-					<div class="footer_con">
-						<div class="con colorWhite">개인정보 처리방침</div>
-						<div class="con colorWhite">서비스 이용약관</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<%@include file="/common/footer.jsp"%>
 		</div>
 		<script>
 		$("#rank").css("display","flex");
 		$("#rank").css("justify-content","center");
 		$("#info").css("display","none");
-        $(".btn").on("click",function(){
-            // $(".categories").text();
-            console.log("");
-        });
         
         $("#btnradio1").on("click",function(){
         	$("#rank").css("display","flex");
@@ -732,8 +617,6 @@ a{
     			type : "post"
     		}).done(function(res){
     			let record = JSON.parse(res);
-    			console.log(record);
-    			console.log(record[0]["nickName"]);
     			$("#rankCon").text("");
     			for(let i=0; i<record.length; i++){
     				let divRow = $("<div>");
@@ -752,45 +635,27 @@ a{
     				divColInfo.addClass("col-11");
     				
     				let divRowInfo = $("<div>");
-    				divRowInfo.addClass("row g-0 p-1 recordPost");
+    				divRowInfo.addClass("row g-0 p-1 recordPost h80");
     				if(i%2==0){
     					divRowInfo.addClass("bcolorDarkgray30");
     					divRowInfo.css({
-    						borderRadius : "5px"
+    						borderRadius : "10px"
     					});	
     				}
     				
     				let divInfoLeft = $("<div>");
-    				divInfoLeft.addClass("col-2 align-self-center");
+    				divInfoLeft.addClass("col-1 align-self-center");
     				let divInfoRight = $("<div>");
-    				divInfoRight.addClass("col-7 text-white align-self-center");
-    				let divUserImage = $("<div>");
-    				divUserImage.css({
-    					maxWidth : "70px",
-    					maxHeight : "70px",
-    					width : "100%",
-    					backgroundColor : "white",
-    					borderRadius : "50%",
-    					marginLeft : "10px",
-    					marginRight : "20px"
-    				});
-    				
-    				let divImage = $("<img>");
-    				divImage.attr("src","/img/user.png");
-    				divImage.css({
-    					width : "100%",
-    					height : "100%"
-    				});
-    				
-    				divUserImage.append(divImage);
-    				
+    				divInfoRight.addClass("col-8 text-white align-self-center");
+    								
     				let divColScore = $("<div>");
     				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
-    				divColScore.append(record[i]["score"]+" 점");
+    
+    				if("${game}" == "Kordle")
+    					divColScore.append(record[i]["score"]+" 개");
+    				else
+    					divColScore.append(record[i]["score"]+" 점");
     				
-    				
-    				
-    				divInfoLeft.append(divUserImage);
     				divInfoRight.append(record[i]["nickName"]);
     				divInfoRight.append(" Lv : "+record[i]["level"]);
     				divRowInfo.append(divInfoLeft);
@@ -802,8 +667,6 @@ a{
     				
     				divRow.append(divColRank);
     				divRow.append(divColInfo);
-    				//divRow.append(divColScore);
-    				
     				
     				$("#rankCon").append(divRow);
     			}
@@ -818,32 +681,27 @@ a{
         $("#favorite").on("click",function(){
         	let id = '${loginID}';
         	if(id != ""){
-        		console.log("로그인했음.");
         		if($(this).hasClass("active") == true){
-            		console.log("존재");
             		$.ajax({
               	      url:"/deletefavorite.game",
               	      data:{
-              	        mID:"${loginID}",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨. */
+              	        mID:"${loginID}",
               	        gameName:'${game}'
               	      },
               	      type:"post"
               	    }).done(function (res){
-              	      console.log(res);
               	      location.reload();
               	      $(".fa-star").addClass("colorWhite");
               	    });
             	}else{
-            		console.log("x");
             		$.ajax({
               	      url:"/favorite.game",
               	      data:{
-              	        mID:"${loginID}",   /* 추후 이거 아이디 어디서 끌어오는지 확인하고 수정해야됨.*/ 
+              	        mID:"${loginID}",
               	        gameName:'${game}'
               	      },
               	      type:"post"
               	    }).done(function (res){
-              	      console.log(res);
               	      location.reload();
               	    });
             	}

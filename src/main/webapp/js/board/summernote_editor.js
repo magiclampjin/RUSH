@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	$(".note-icon-caret").remove();
-	console.log($(".dropdown-toggle::after"))
 	$(".dropdown-toggle::after").css("display", "none")
 	
 	$('#summernote').summernote({
@@ -11,7 +10,6 @@ $(document).ready(function() {
 		focus: true,
 		lang: 'ko-KR',
 		toolbar: [
-			// [groupName, [list of button]]
 			['fontname', ['fontname']],
 			['fontsize', ['fontsize']],
 			['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],

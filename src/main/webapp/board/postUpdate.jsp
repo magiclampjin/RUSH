@@ -11,8 +11,7 @@
 <!-- 스타일 시트 & js -->
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/board/boardWrite.css">
-
-<script type="text/javascript" src="/js/board/summernote_editor.js"></script>
+<script src="/js/board/isUserImmediately.js"></script>
 
 <!-- 부트스트랩 -->
 <link
@@ -21,18 +20,6 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- summernote -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <!-- Header Style -> 부트스트랩 속성 제거 -->
 <style>
@@ -45,90 +32,27 @@
 }
 
 .container {
-	width: 100%;
+	width: 100% !important;
 }
 
 a {
-	text-decoration: none;
-	color: #111111;
+	text-decoration: none !important;
+	color: #111111 !important;
 }
 
-.dropdown-menu[data-bs-popper] {
-	right: 0;
-	left: auto;
-}
-
-.dropdown-toggle::after {
-	display: none;
-}
 </style>
+<script>
+	window.history.forward(); 
+	function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
-<body>
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<div class="container-fluid p-0">
-		<div class="header bColorBlack">
-			<div class="header_guide">
-				<a href="#">
-					<div class="logo fontLogo colorWhite">RUSH</div>
-				</a>
-				<nav class="navbar navbar-expand navbar-light colorWhite">
-					<div class="container-fluid p-0">
-						<div class="collapse navbar-collapse w-100 g-0 m-0"
-							id="navbarNavDropdown">
-							<ul class="navbar-nav row g-0 w-100">
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> AWARDS </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
-								<li class="nav-item dropdown col-3 text-end"><a
-									class="nav-link text-white fontEnglish" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> LOGIN </a>
-									<ul class="dropdown-menu p-0"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Another
-												action</a></li>
-										<li><a class="dropdown-item fontEnglish" href="#">Something
-												else here</a></li>
-									</ul></li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
+		<input id="userID" type="hidden" value="${loginID}">
+		<%@ include file="/common/writeHeader.jsp" %>
 		<div class="boardWrite">
 			<div class="boardWrite_guide">
 				<c:choose>
@@ -141,14 +65,7 @@ a {
 							<input type="hidden" name="keyword" value="${keyword}">
 							<textarea id="deleteFiles" style="display:none;" name="deleteFiles"></textarea>
 	       					<textarea id="deleteImgs" style="display:none;" name="deleteImgs"></textarea>
-							<c:choose>
-								<c:when test="${loginID eq 'admin' }">
-									<div class="writeTitle">공지게시글 수정</div>
-								</c:when>
-								<c:otherwise>
-									<div class="writeTitle">Q&A 수정</div>
-								</c:otherwise>
-							</c:choose>
+							<div class="writeTitle">Q&A 수정</div>
 								
 							<input type="text" class="inputTitle" name="title"
 								placeholder="제목을 입력하세요" value="${post.title}">
@@ -174,13 +91,6 @@ a {
 					                        let fileSeq = $(this).next().val();
 					                        let prev = $("#deleteFiles").html();
 					                        $("#deleteFiles").html(prev+","+fileSeq);
-					                        /* $.ajax({
-					                            url:"/delete.file",
-					                            data:{
-					                                fileSeq : fileSeq
-					                            },
-					                            type:"post"
-					                        }); */
 					                    });
 					                    
 					                </script>
@@ -235,7 +145,7 @@ a {
 									<div class="writeTitle">공지게시글 수정</div>
 								</c:when>
 								<c:otherwise>
-									<div class="writeTitle">자유게시글 게시글 수정</div>
+									<div class="writeTitle">자유게시글 수정</div>
 								</c:otherwise>
 							</c:choose>
 							<input type="text" class="inputTitle" name="title"
@@ -263,13 +173,6 @@ a {
 											let fileSeq = $(this).next().val();
 											let prev = $("#deleteFiles").html();
 											$("#deleteFiles").html(prev+","+fileSeq);
-											/* $.ajax({
-												url:"/delete.file",
-												data:{
-													fileSeq : fileSeq
-												},
-												type:"post"
-											}); */
 										});
 										
 									</script>
@@ -292,61 +195,12 @@ a {
 								<input class="writebtn bColorGreen" type="submit" value="수정">
 							</div>
 						</form>
-<!-- 						<script>
-							$("#boardForm").submit(function(){
-								alert("왜 안떠");
-								if(!${loginID}){	
-									return false;
-									if(goLogin){
-										location.href = "/member/login.jsp";
-									}else{
-										location.href = "/index.jsp";
-									}
-									
-								}
-							});
-						</script> -->
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
 
-		<div class="footer bColorBlack">
-			<div class="footer_guide">
-				<div class="footer_logo fontLogo colorWhite">RUSH</div>
-				<div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-					RIGHT RESERVED</div>
-				<div class="footer_contents">
-					<div class="about conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-						<div class="footer_con ">
-							<div class="con colorWhite">팀명 :</div>
-							<div class="encon colorWhite">SKY</div>
-						</div>
-					</div>
-					<div class="office conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">OFFICE</div>
-						<div class="footer_con">
-							<div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-						</div>
-					</div>
-					<div class="contact conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-						<div class="footer_con fontEnglish">
-							<div class="con fontEnglish colorWhite">a@naver.com</div>
-							<div class="con fontEnglish colorWhite">01012345678</div>
-						</div>
-					</div>
-					<div class="provision conDiv fontEnglish">
-						<div class="footer_title fontEnglish colorWhite">PROVISION</div>
-						<div class="footer_con">
-							<div class="con colorWhite">개인정보 처리방침</div>
-							<div class="con colorWhite">서비스 이용약관</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
+			<%@include file="/common/writeFooter.jsp"%>
 		</div>
 	</div>
 </body>

@@ -36,7 +36,6 @@ $(window).on("load", function(){
               email: mEmail
            },
         }).done(function(id){
-			console.log(id);
            if(id == "null"){
               alert("아이디를 찾을 수 없습니다.");
            } else {

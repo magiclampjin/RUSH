@@ -37,7 +37,6 @@ public class TestController extends HttpServlet {
 		System.out.println("test cmd: "+cmd);
 		PrintWriter pw = response.getWriter();
 		
-		
 		try {
 			if(cmd.equals("/getAdReply.test")) {
 				List<ReplyDTO> data = dao.selectAll();
@@ -75,7 +74,6 @@ public class TestController extends HttpServlet {
 	            bdao.deletePost(postSeq);
 	         }else if (cmd.equals("/deleteUser.test")) {
 					String id = request.getParameter("userID");
-					System.out.println(id);
 					int result = mdao.deleteById(id);
 					if (result != 0) {
 						pw.println("true");

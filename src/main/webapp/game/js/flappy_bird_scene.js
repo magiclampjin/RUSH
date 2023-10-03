@@ -490,7 +490,7 @@ function setRecord(userScore){
 	  $.ajax({
 	      url:"/setGameRecord.game",
 	      data:{
-	          game:'Fluppy Bird',
+	          game:'Flappy Bird',
 	          score : userScore
 	      },
 	      dataType:"json",

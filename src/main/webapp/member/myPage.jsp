@@ -6,10 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>RUSH-마이페이지</title>
+
+<%@ include file="/common/style.jsp" %>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/member/myPage.css">
 <link rel="stylesheet" href="/css/board/boardList.css">
+<script src="/js/board/isUserImmediately.js"></script>
+
 <script type="text/javascript" src="/js/member/infoModified.js"></script>
 <script type="text/javascript" src="/js/member/myPage.js"></script>
 <script type="text/javascript" src="/js/member/secession.js"></script>
@@ -46,129 +50,17 @@ a {
    right: 0;
    left: auto;
 }
-
-/*.num, .writer, .date, .file {
-   width: 15%;
-}*/
-
-/*<<<<<<< HEAD
-=======
-.mainTitle {
-   padding-left: 5px;
-}
-
-.tabBox {
-   border: 1px solid black;
-   border-radius: 5px;
-}
-
-ul.tabs {
-   margin: 0px;
-   padding: 0px;
-   list-style: none;
-   border-bottom: 1px solid black;
-   display: flex;
-}
-
-ul.tabs li {
-   background: none;
-   color: #222;
-   display: inline-block;
-   padding: 10px 0px;
-   cursor: pointer;
-   width: 25%;
-   text-align: center;
-}
-
-ul.tabs li.current {
-   background: #ededed;
-   background-color: #131217;
-   color: #ffffff;
-}
-
-.tab-content {
-   display: none;
-   padding: 15px;
-   height: 600px;
-   margin: 0px;
-}
-
-.tab-content.current {
-   display: inherit;
-}
-
-#tab-1,#tab-2,#tab-3,#tab-4 {
-   overflow: auto;
-}
->>>>>>> c51216701a3a38dfd8dd7355c4979538cd34cd47*/
 </style>
+
 </head>
-<body>
+<script>
+	window.history.forward(); function noBack(){
+		window.history.forward();
+	}
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
    <div class="container-fluid p-0">
-      <div class="header bColorBlack">
-         <div class="header_guide">
-            <a href="#">
-               <div class="logo fontLogo colorWhite">RUSH</div>
-            </a>
-            <nav class="navbar navbar-expand navbar-light colorWhite">
-               <div class="container-fluid p-0">
-                  <div class="collapse navbar-collapse w-100 g-0 m-0"
-                     id="navbarNavDropdown">
-                     <ul class="navbar-nav row g-0 w-100">
-                        <li class="nav-item dropdown col-3 text-end"><a
-                           class="nav-link text-white fontEnglish" href="#"
-                           id="navbarDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false"> GAME </a>
-                           <ul class="dropdown-menu p-0"
-                              aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Another
-                                    action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Something
-                                    else here</a></li>
-                           </ul></li>
-                        <li class="nav-item dropdown col-3 text-end"><a
-                           class="nav-link text-white fontEnglish" href="#"
-                           id="navbarDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false"> AWARDS </a>
-                           <ul class="dropdown-menu p-0"
-                              aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Another
-                                    action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Something
-                                    else here</a></li>
-                           </ul></li>
-                        <li class="nav-item dropdown col-3 text-end"><a
-                           class="nav-link text-white fontEnglish" href="#"
-                           id="navbarDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false"> BOARD </a>
-                           <ul class="dropdown-menu p-0"
-                              aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Another
-                                    action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Something
-                                    else here</a></li>
-                           </ul></li>
-                        <li class="nav-item dropdown col-3 text-end"><a
-                           class="nav-link text-white fontEnglish" href="#"
-                           id="navbarDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false"> LOGIN </a>
-                           <ul class="dropdown-menu p-0"
-                              aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item fontEnglish" href="#">Action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Another
-                                    action</a></li>
-                              <li><a class="dropdown-item fontEnglish" href="#">Something
-                                    else here</a></li>
-                           </ul></li>
-                     </ul>
-                  </div>
-               </div>
-            </nav>
-         </div>
-      </div>
+      <%@ include file="/common/header.jsp" %>
 
       <div class="myPage">
          <div class="nickNameBox bColorBlack">
@@ -212,10 +104,14 @@ ul.tabs li.current {
                   <c:otherwise>
                      <div class="memberInfoBox updateBox">
                         <div class="infoBox">
-                           <!-- div였다가 수정하기 버튼 누르면 input 나오게 -->
                            <div class="infoCagetory">아이디</div>
                            <div class="infocon">${user.id }</div>
                            <input type="hidden" id="userID" value="${user.id }">
+                        </div>
+                        <div class="infoBox">
+                           <div class="infoCagetory">이름</div>
+                           <div class="infocon">${user.name }</div>
+                           <input type="hidden" id="userName" value="${user.name }">
                         </div>
                         <div class="infoBox">
                            <div class="infoCagetory">비밀번호</div>
@@ -384,12 +280,9 @@ ul.tabs li.current {
                               <ul class="recordTabs">
                                  <li class="tab-link current" id="gameAll"
                                     data-tab="recordTab-1">전체</li>
-                                 <li class="tab-link" id="Candy" data-tab="recordTab-2">Candy
-                                    Crush</li>
-                                 <li class="tab-link" id="Doodle" data-tab="recordTab-3">Doodle
-                                    Jump</li>
-                                 <li class="tab-link" id="Flappy" data-tab="recordTab-4">Fluppy
-                                    Bird</li>
+                                 <li class="tab-link" id="Candy" data-tab="recordTab-2">Candy Crush</li>
+                                 <li class="tab-link" id="Doodle" data-tab="recordTab-3">Doodle Jump</li>
+                                 <li class="tab-link" id="Flappy" data-tab="recordTab-4">Fluppy Bird</li>
                                  <li class="tab-link" id="Kjmax" data-tab="recordTab-5">KJMAX</li>
                                  <li class="tab-link" id="Kordle" data-tab="recordTab-6">Kordle</li>
                               </ul>
@@ -473,44 +366,8 @@ ul.tabs li.current {
             <i class="fa-solid fa-arrow-up-long"></i>
          </div>
       </a>
-
-      <div class="footer bColorBlack">
-         <div class="footer_guide">
-            <div class="footer_logo fontLogo colorWhite">RUSH</div>
-            <div class="copy fontEnglish colorWhite">COPYRIGHT © SKY. ALL
-               RIGHT RESERVED</div>
-            <div class="footer_contents">
-               <div class="about conDiv fontEnglish">
-                  <div class="footer_title fontEnglish colorWhite">ABOUT US</div>
-                  <div class="footer_con ">
-                     <div class="con colorWhite">팀명 :</div>
-                     <div class="encon colorWhite">SKY</div>
-                  </div>
-               </div>
-               <div class="office conDiv fontEnglish">
-                  <div class="footer_title fontEnglish colorWhite">OFFICE</div>
-                  <div class="footer_con">
-                     <div class="con colorWhite">충청남도 천안시 서북구 천안대로 1223-24</div>
-                  </div>
-               </div>
-               <div class="contact conDiv fontEnglish">
-                  <div class="footer_title fontEnglish colorWhite">CONTACT US</div>
-                  <div class="footer_con fontEnglish">
-                     <div class="con fontEnglish colorWhite">a@naver.com</div>
-                     <div class="con fontEnglish colorWhite">01012345678</div>
-                  </div>
-               </div>
-               <div class="provision conDiv fontEnglish">
-                  <div class="footer_title fontEnglish colorWhite">PROVISION</div>
-                  <div class="footer_con">
-                     <div class="con colorWhite">개인정보 처리방침</div>
-                     <div class="con colorWhite">서비스 이용약관</div>
-                  </div>
-               </div>
-            </div>
-
-         </div>
-      </div>
+	<%@include file="/common/footer.jsp"%>
+      
    </div>
 </body>
 </html>

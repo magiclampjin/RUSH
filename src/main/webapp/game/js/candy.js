@@ -101,7 +101,6 @@ function endGame(){
     $("#btnRestart").css("display","block");
     $("#timeover").css("display","block");  
     
-    console.log(score);
     clearInterval(innerTimer);
     setRecord(score);
 }
@@ -140,12 +139,10 @@ function dragEnd() {
     let currCoords = currTile.id.split("-"); // id="0-0" -> ["0", "0"]
     let r = parseInt(currCoords[0]);
     let c = parseInt(currCoords[1]);
-    console.log("curr " + r + " " + c);
 
     let otherCoords = otherTile.id.split("-");
     let r2 = parseInt(otherCoords[0]);
     let c2 = parseInt(otherCoords[1]);
-    console.log("other " + r2 + " " + c2);
 
     // 왼쪽 이동
     let moveLeft = c2 == c - 1 && r == r2;

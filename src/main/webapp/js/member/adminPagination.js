@@ -229,5 +229,8 @@ $(document).ready(function() {
 		})
 	}
 	// 공지 게시글 창
-	notiReload(1)
+	if($("#userID").val()==="admin"){
+		notiReload(1)
+	}
+	
 })

@@ -14,7 +14,10 @@ $(document).ready(function() {
    })
 
    // 내가 쓴 글 눌렀을 때 -> 처음에 나와야하니까..
-   myWriteList();
+   if($("#userID").val()!="admin"){
+		myWriteList();
+	}
+   
 
    // 즐겨찾기 눌렀을 때
    $("#favorites").on("click", function() {
@@ -81,7 +84,6 @@ $(document).ready(function() {
          url: "/myBookMarkList.board?myPage=true",
          dataType: "json"
       }).done(function(resp) {
-         console.log(resp);
          $(".post").remove();
          
          let div = $(".post2");
@@ -228,7 +230,7 @@ $(document).ready(function() {
 
                   let divGameImag = $("<div>").attr("class", "gameImg");
                   let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-                  console.log(resp[i].gImageURL);
+     
                   divGameImag.append(imgGame);
 
                   let divGameInfo = $("<div>").attr("class", "gameInfo");
@@ -280,7 +282,7 @@ $(document).ready(function() {
 
                   let divGameImag = $("<div>").attr("class", "gameImg");
                   let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-                  console.log(resp[i].gImageURL);
+             
                   divGameImag.append(imgGame);
 
                   let divGameInfo = $("<div>").attr("class", "gameInfo");
@@ -330,7 +332,7 @@ $(document).ready(function() {
 
                   let divGameImag = $("<div>").attr("class", "gameImg");
                   let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-                  console.log(resp[i].gImageURL);
+           
                   divGameImag.append(imgGame);
 
                   let divGameInfo = $("<div>").attr("class", "gameInfo");
@@ -466,7 +468,7 @@ $(document).ready(function() {
 
    
 function myGameRecod(gameName){
-   console.log("myGameRecod "+gameName);
+
       $.ajax({
          url:"/myGameRecord.member",
          dataType:"json",
@@ -508,6 +510,7 @@ function myGameRecod(gameName){
 
 // 전체 눌렀을 때
 function myFavorite(category) {
+	
    $.ajax({
       url: "/myFavoriteGame.member",
       dataType: "json",
@@ -527,7 +530,7 @@ function myFavorite(category) {
 
          let divGameImag = $("<div>").attr("class", "gameImg");
          let imgGame = $("<img>").attr("src", resp[i].gImageURL).css("width", "200").css("height", "150");
-         console.log(resp[i].gImageURL);
+   
          divGameImag.append(imgGame);
 
          let divGameInfo = $("<div>").attr("class", "gameInfo");
@@ -685,34 +688,3 @@ function myWriteList() {
 
 
 }
-
-
-
-/*
-function timeCal(date){
-   const start = new Date(date);
-  const end = new Date();
-
-  const diff = (end - start) / 1000;
-  
-  const times = [
-   { name: ' 년', milliSeconds: 60 * 60 * 24 * 365 },
-   { name: ' 개월', milliSeconds: 60 * 60 * 24 * 30 },
-   { name: ' 일', milliSeconds: 60 * 60 * 24 },
-   { name: ' 시간', milliSeconds: 60 * 60 },
-   { name: ' 분', milliSeconds: 60 },
-  ];
-
-  for (const value of times) {
-   const betweenTime = Math.floor(diff / value.milliSeconds);
-   console.log("betweenTime "+betweenTime);
-
-   if (betweenTime > 0) {
-     return `${betweenTime}${value.name} 전`;
-   }
-  }
-  return '방금 전';
-}
-
-
-*/
