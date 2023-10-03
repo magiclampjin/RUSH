@@ -30,7 +30,7 @@ public class QNABoardDAO {
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 	// DB에 삽입
 	public int insert(QNABoardDTO dto) throws Exception{
-		String sql = "insert into qna_board values(0,?,?,?,?,default,?,?);";
+		String sql = "insert into qna_board values(0,?,?,?,?,default,?);";
 		
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);){
@@ -38,8 +38,7 @@ public class QNABoardDAO {
 			pstat.setString(2, dto.getNickName());
 			pstat.setString(3, dto.getTitle());
 			pstat.setString(4, dto.getContents());
-			pstat.setString(5, dto.getCategory());
-			pstat.setBoolean(6, dto.isSecret());
+			pstat.setBoolean(5, dto.isSecret());
 			pstat.executeUpdate();
 			
 			try(ResultSet rs = pstat.getGeneratedKeys()){
@@ -61,7 +60,7 @@ public class QNABoardDAO {
 				list.add(new QNABoardDTO(rs.getInt("qbSeq"),rs.getString("mID"),
 						rs.getString("mNickname"),rs.getString("qbTitle"),
 						rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-						rs.getString("qbCategory"),rs.getBoolean("secret")));
+						rs.getBoolean("secret")));
 			}
 			return list;
 		}
@@ -84,7 +83,7 @@ public class QNABoardDAO {
 					list.add(new QNABoardDTO(rs.getInt("qbSeq"),rs.getString("mID"),
 							rs.getString("mNickname"),rs.getString("qbTitle"),
 							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-							rs.getString("qbCategory"),rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn")));
+							rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn")));
 				}
 				return list;
 			}
@@ -111,7 +110,7 @@ public class QNABoardDAO {
 					list.add(new QNABoardDTO(rs.getInt("qbseq"),rs.getString("mID"),
 							rs.getString("mNickname"),rs.getString("qbTitle"),
 							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-							rs.getString("qbCategory"),rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn")));
+							rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn")));
 				}
 				return list;
 			}
@@ -159,7 +158,7 @@ public class QNABoardDAO {
 					return new QNABoardDTO(rs.getInt("qbseq"),rs.getString("mID"),
 							rs.getString("mNickname"),rs.getString("qbTitle"),
 							rs.getString("qbContents"),rs.getTimestamp("qbWriteDate"),
-							rs.getString("qbCategory"),rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn"));
+							rs.getBoolean("secret"),rs.getInt("answeryn"),rs.getInt("fileyn"));
 				}
 			}
 	}

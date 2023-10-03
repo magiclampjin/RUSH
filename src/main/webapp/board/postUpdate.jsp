@@ -58,7 +58,6 @@ a {
 				<c:choose>
 					<c:when test="${menu == 'qna'}">
 						<form action="/update.qna" method="post" enctype="multipart/form-data">
-							<input type="hidden" value="${category }" name="category">
 							<input type="hidden" value="${post.seq}" name="postSeq">
 							<input type="hidden" value="${requestScope.cpage}" name="cpage">
 							<input type="hidden" name="searchBy" value="${searchBy}">
@@ -116,11 +115,11 @@ a {
 							<div class="writeBox">
 					            <c:choose>
 					                <c:when test="${not empty searchBy}">
-					                    <a href="/listing.qna?category=${category }&cpage=${requestScope.cpage}&searchBy=${searchBy}&keyword=${keyword}">
+					                    <a href="/listing.qna?cpage=${requestScope.cpage}&searchBy=${searchBy}&keyword=${keyword}">
 					                    <input class="writebtn bColorGreen" type="button" value="목록으로"></a>
 					                </c:when>
 					                <c:otherwise>
-					                    <a href="/listing.qna?category=${category }&cpage=${requestScope.cpage}">
+					                    <a href="/listing.qna?cpage=${requestScope.cpage}">
 					                    <input class="writebtn bColorGreen" type="button" value="목록으로"></a>
 					                </c:otherwise>
 					            </c:choose>

@@ -10,26 +10,22 @@ public class QNABoardDTO {
 	private String title;
 	private String contents;
 	private Timestamp writeDate;
-	private String category;
 	private boolean secret;
 	private int answeryn;
 	private int fileyn;
 	public QNABoardDTO() {}
 	
-	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, String category,
-			boolean secret) {
+	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, boolean secret) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
 		this.nickName = nickName;
 		this.title = title;
 		this.contents = contents;
-		this.category = category;
 		this.secret = secret;
 	}
 
-	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate,
-			String category, boolean secret) {
+	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate, boolean secret) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -37,13 +33,11 @@ public class QNABoardDTO {
 		this.title = title;
 		this.contents = contents;
 		this.writeDate = writeDate;
-		this.category = category;
 		this.secret = secret;
 	}
 	
 
-	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate,
-			String category, boolean secret, int answeryn, int fileyn) {
+	public QNABoardDTO(int seq, String writer, String nickName, String title, String contents, Timestamp writeDate, boolean secret, int answeryn, int fileyn) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -51,7 +45,6 @@ public class QNABoardDTO {
 		this.title = title;
 		this.contents = contents;
 		this.writeDate = writeDate;
-		this.category = category;
 		this.secret = secret;
 		this.answeryn = answeryn;
 		this.fileyn = fileyn;
@@ -111,14 +104,6 @@ public class QNABoardDTO {
 
 	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 
 	public boolean isSecret() {

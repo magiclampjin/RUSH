@@ -46,7 +46,6 @@ public class QnAController extends HttpServlet {
 				
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf8",new DefaultFileRenamePolicy());
 
-				String category = "일단 아무거나";
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
 				
@@ -54,7 +53,7 @@ public class QnAController extends HttpServlet {
 				String mNickname = (String )request.getSession().getAttribute("loginNickname");
 
 				boolean secret = Boolean.valueOf(multi.getParameter("secret"));
-				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,secret));
+				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,secret));
 	
 				Enumeration<String> fileNames = multi.getFileNames();
 
@@ -113,7 +112,6 @@ public class QnAController extends HttpServlet {
 				int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 				String cpage = request.getParameter("cpage");
 				int currentPage = (cpage == null || cpage=="") ? 1 : Integer.parseInt(cpage);
-				String category = request.getParameter("category");
 				String menu = request.getParameter("menu");
 				String searchBy = request.getParameter("searchBy");
 				String keyword = request.getParameter("keyword");
@@ -121,7 +119,6 @@ public class QnAController extends HttpServlet {
 				List<FileDTO> files = fdao.inQnaFilesList(postSeq);
 				QNABoardDTO post = dao.selectPost(postSeq);
 				
-				request.setAttribute("category", category);
 				request.setAttribute("files", files);
 				request.setAttribute("post", post);
 				request.setAttribute("cpage", currentPage);
