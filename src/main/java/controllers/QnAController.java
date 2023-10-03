@@ -45,8 +45,7 @@ public class QnAController extends HttpServlet {
 				
 				
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf8",new DefaultFileRenamePolicy());
-				
-				//String category = multi.getParameter("category");
+
 				String category = "일단 아무거나";
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
@@ -55,11 +54,8 @@ public class QnAController extends HttpServlet {
 				String mNickname = (String )request.getSession().getAttribute("loginNickname");
 
 				boolean secret = Boolean.valueOf(multi.getParameter("secret"));
-
-				// auto_increment로 seq값 생성됨
 				int parent_seq = QNABoardDAO.getInstance().insert(new QNABoardDTO(0,mID,mNickname,title,contents,category,secret));
-				
-				
+	
 				Enumeration<String> fileNames = multi.getFileNames();
 
 				while (fileNames.hasMoreElements()) { // 파일이 존재하는 동안
@@ -88,20 +84,6 @@ public class QnAController extends HttpServlet {
 					response.sendRedirect("/listing.qna");
 				}		
 			} 
-			
-//			else if(cmd.equals("/load.qna")) {
-//				// 게시글 출력
-//				int cpage = Integer.parseInt(request.getParameter("cpage"));
-//				int qnaSeq = Integer.parseInt(request.getParameter("seq"));
-//				
-//				
-//				QNABoardDTO list = QNABoardDAO.getInstance().selectPost(qnaSeq);
-//				
-//				request.setAttribute("qnalist", list);
-//				request.setAttribute("cpage", cpage);
-//				request.getRequestDispatcher("/qna/qnaWatch.jsp").forward(request, response);
-//				
-//			} 
 			
 			else if(cmd.equals("/load.qna")) {
 				// 게시글 출력
@@ -163,7 +145,6 @@ public class QnAController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "utf8",
 						new DefaultFileRenamePolicy());
 				String cpage = multi.getParameter("cpage");
-//				String category = multi.getParameter("category");
 				int postSeq = Integer.parseInt(multi.getParameter("postSeq"));
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("contents");
@@ -225,8 +206,6 @@ public class QnAController extends HttpServlet {
 					request.getSession().removeAttribute("fileSeq");
 				}
 				
-//				dao.update(new BoardDTO(postSeq, id, category, userNick, title, content, null, 0));
-
 				if(searchBy != null) {
 					response.sendRedirect("/load.qna?seq="+postSeq+"&cpage="+cpage+"&searchBy="+searchBy+"&keyword="+keyword);
 				} else {
@@ -241,8 +220,7 @@ public class QnAController extends HttpServlet {
 				String uploadPath = request.getServletContext().getRealPath("files");
 				for(String file:filesName) {
 					File filepath = new File(uploadPath+"/"+file);
-					filepath.delete();
-					// 외래키 cascade로 설정하면 DB에서는 게시글 삭제할 때 연쇄적으로 삭제됨. 
+					filepath.delete(); // 외래키 cascade로 설정하면 DB에서는 게시글 삭제할 때 연쇄적으로 삭제됨. 
 				}
 				dao.delete(qnaSeq);
 				response.sendRedirect("/listing.qna");
@@ -286,9 +264,7 @@ public class QnAController extends HttpServlet {
 				
 			}
 			else if(cmd.equals("/write.qna")) {
-				// q&a에서 글쓰기 누를때
-				// q&a 매개변수
-				String menu = request.getParameter("menu");
+				String menu = request.getParameter("menu"); // q&a에서 글쓰기 누를때  q&a 매개변수
 				request.setAttribute("menu", menu);
 				request.getRequestDispatcher("/board/boardWrite.jsp").forward(request, response);
 			}

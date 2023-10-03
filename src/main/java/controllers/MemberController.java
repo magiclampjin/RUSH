@@ -250,7 +250,6 @@ public class MemberController extends HttpServlet {
 				else
 					response.sendRedirect(pageURL);
 			}
-			/////////////////////////////////////////////////////////
 			else if(cmd.equals("/myFavoriteGame.member")) {
 			    String id = (String) request.getSession().getAttribute("loginID");
 			    String category = request.getParameter("param");
@@ -348,7 +347,6 @@ public class MemberController extends HttpServlet {
 				List<GameDTO> gameRank = gdao.selectGameRanking();
 				
 				printwriter.append(gson.toJson(gameRank));
-				//request.getRequestDispatcher("/member/adminDashBoard.jsp").forward(request, response);
 			} else if(cmd.equals("/genderByRank.member")) {
 				List<GameDTO> womanRank = gdao.selectWomanRanking();
 				List<GameDTO> manRank = gdao.selectManRanking();

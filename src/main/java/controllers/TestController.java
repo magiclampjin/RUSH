@@ -37,7 +37,6 @@ public class TestController extends HttpServlet {
 		System.out.println("test cmd: "+cmd);
 		PrintWriter pw = response.getWriter();
 		
-		
 		try {
 			if(cmd.equals("/getAdReply.test")) {
 				List<ReplyDTO> data = dao.selectAll();
