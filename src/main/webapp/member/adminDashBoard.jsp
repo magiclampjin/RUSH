@@ -31,14 +31,7 @@
 
 		<div class="body">
 			<div class="body_guide">
-				<div class="chartDiv">
-					<div class="chartDivTitle">사이트 방문자수</div>
-					<div class="chartCon">
-						<div class="chartBox">
-							<canvas id="visitors" width="100%"></canvas>
-						</div>
-					</div>
-				</div>
+				
 				<div class="chartDiv">
 					<div class="chartDivTitle">게임 이용 순위</div>
 					<div class="chartCon">
@@ -49,19 +42,20 @@
 					<input type="hidden" id="gameRankData" value="${gameRank }">
 				</div>
 				<div class="chartDiv">
-					<div class="chartDivTitle">게임별 조회수</div>
-					<div class="chartCon twoDiv">
+					<div class="chartDivTitle">성별별 선호 게임</div>
+					<div class="chartCon">
 						<div class="chartBox">
-							<div class="chartTitle">게임별 누적 조회수</div>
-							<canvas id="cumulativeViews"></canvas>
-						</div>
-						<div class="chartBox">
-							<div class="chartTitle">게임별 일일 조회수</div>
-							<canvas id="dailyViews"></canvas>
+							<canvas id="genderByRankings" width="100%"></canvas>
 						</div>
 					</div>
-
-
+				</div>
+				<div class="chartDiv">
+					<div class="chartDivTitle">연령별 선호 게임</div>
+					<div class="chartCon">
+						<div class="chartBox">
+							<canvas id="ageByRankings" width="100%"></canvas>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
