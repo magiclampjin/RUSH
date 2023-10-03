@@ -27,7 +27,6 @@
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	/* border: 1px solid; */
 }
 
 .boardNav_body a:first-child>.boardNav_li {
@@ -342,7 +341,6 @@ ul.tabs a.current {
 	}
 	.search form {
 		justify-content: start;
-		/* width: 100%; */
 	}
 	.search form>.keyword {
 		width: 70%;

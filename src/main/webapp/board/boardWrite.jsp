@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="/css/board/boardWrite.css">
 <script src="/js/board/isUserImmediately.js"></script>
 
-<!-- <script type="text/javascript" src="/js/board/summernote_editor.js"></script> -->
-
 <!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -22,11 +20,6 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- summernote -->
-
-
-<!-- Header Style -> 부트스트랩 속성 제거 -->
 <style>
 * {
 	box-sizing: border-box;
