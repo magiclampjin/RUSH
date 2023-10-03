@@ -50,61 +50,6 @@ a {
    right: 0;
    left: auto;
 }
-
-/*.num, .writer, .date, .file {
-   width: 15%;
-}*/
-
-/*<<<<<<< HEAD
-=======
-.mainTitle {
-   padding-left: 5px;
-}
-
-.tabBox {
-   border: 1px solid black;
-   border-radius: 5px;
-}
-
-ul.tabs {
-   margin: 0px;
-   padding: 0px;
-   list-style: none;
-   border-bottom: 1px solid black;
-   display: flex;
-}
-
-ul.tabs li {
-   background: none;
-   color: #222;
-   display: inline-block;
-   padding: 10px 0px;
-   cursor: pointer;
-   width: 25%;
-   text-align: center;
-}
-
-ul.tabs li.current {
-   background: #ededed;
-   background-color: #131217;
-   color: #ffffff;
-}
-
-.tab-content {
-   display: none;
-   padding: 15px;
-   height: 600px;
-   margin: 0px;
-}
-
-.tab-content.current {
-   display: inherit;
-}
-
-#tab-1,#tab-2,#tab-3,#tab-4 {
-   overflow: auto;
-}
->>>>>>> c51216701a3a38dfd8dd7355c4979538cd34cd47*/
 </style>
 
 </head>

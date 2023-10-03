@@ -20,7 +20,6 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Header Style -> 부트스트랩 속성 제거 -->
 <style>
 * {
 	box-sizing: border-box;

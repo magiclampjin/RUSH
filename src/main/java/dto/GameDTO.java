@@ -39,11 +39,6 @@ public class GameDTO {
 		this.playCount0=playcount0;
 	}
 	
-	/*
-	 * // bestbookmark (구) public GameDTO(String gName, String gImageURL) {
-	 * this.gName = gName; this.gImageURL = gImageURL; }
-	 */
-	
 	// bestplay
 	public GameDTO(String gName, String gDeveloper, String gImageURL, String gameDesc) {
 		super();
