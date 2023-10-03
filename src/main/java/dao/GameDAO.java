@@ -651,4 +651,36 @@ public class GameDAO {
 			return list;
 		}
 	}
+	
+	public int selectGameMaleCount(String gName) throws Exception {
+		String sql = "select count(*) as man from (select m.mID, gr.gName, m.mIdNumber from game_record gr, members m where m.mID = gr.mID and m.mIdNumber like '______3' or m.mID = gr.mID and m.mIdNumber like '______1') a where a.gName = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, gName);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			int count = rs.getInt("man");
+			return count;
+		}
+	}
+	public int selectGameFemaleCount(String gName) throws Exception {
+		String sql = "select count(*) as woman from (select m.mID, gr.gName, m.mIdNumber from game_record gr, members m where m.mID = gr.mID and m.mIdNumber like '______4' or m.mID = gr.mID and m.mIdNumber like '______2') a where a.gName = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, gName);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			int count = rs.getInt("woman");
+			return count;
+		}
+	}
+	public int selectRecordCount(String gName) throws Exception {
+		String sql = "select count(*) as count from game_record where gName = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, gName);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			int count = rs.getInt("count");
+			return count;
+		}
+	}
+	 
 }

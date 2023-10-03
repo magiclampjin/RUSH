@@ -268,6 +268,9 @@ a{
 .kordleDescImg{
 	width:500px !important;
 }
+.mb50{
+	margin-bottom : 50px!important;
+}
 
 </style>
 </head>
@@ -423,7 +426,7 @@ a{
 							<hr class="colorPink border-3 opacity-100">
 						</div>
 						<div class="row g-0">
-							<div class="col-12 game">
+							<div class="col-12 game mb50">
 							<c:choose>
 								<c:when test="${game eq 'Kordle'}">
 									<div id="gameContainer"></div>

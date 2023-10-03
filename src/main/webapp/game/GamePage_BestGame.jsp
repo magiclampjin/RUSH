@@ -102,47 +102,57 @@ a{
 				divDevName.addClass("text-white fontEnglish");
 				divDevName.append(data[i]["gDeveloper"]);
 				
-				let divPlayInfo =  $("<div>");
-				divPlayInfo.addClass("col-12 d-md-none d-xs-flex text-white fontEnglish fw500");
-				divPlayInfo.append("W 50% M 50%");
-				
-				divInfoLeft.append(imgDiv);
-				divInfoRight.append(divGameName);
-				divInfoRight.append(divDevName);
-				divInfoRight.append(divPlayInfo);
-				
-				
-				divColInfo.append(divInfoLeft);
-				divColInfo.append(divInfoRight);
-				
-				let divColPlayInfo = $("<div>");
-				divColPlayInfo.addClass("col-3 d-none d-md-flex");
-				
-				let letter1 = $("<span>");
-				letter1.addClass("text-white fontEnglish fs-3 fw900 align-self-center");
-				letter1.html("W &nbsp;");
-				let letter2 = $("<span>");
-				letter2.addClass("text-white fontEnglish fs-5 fw500 align-self-center");
-				letter2.html("50%&nbsp;&nbsp;");
-				let letter3 = $("<span>");
-				letter3.addClass("text-white fontEnglish fs-3 fw900 align-self-center");
-				letter3.html("M &nbsp;");
-				let letter4 = $("<span>");
-				letter4.addClass("text-white fontEnglish fs-5 fw500 align-self-center");
-				letter4.html("50% ");
-				divColPlayInfo.append(letter1);
-				divColPlayInfo.append(letter2);
-				divColPlayInfo.append(letter3);
-				divColPlayInfo.append(letter4);
-				
-				let divColBtn = $("<div>");
-				divColBtn.addClass("col-2 align-self-center d-flex justify-content-center");
-				divColBtn.html("<a href='/moveToGamePage.game?game="+data[i]["gName"]+"'><button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button></a>");
-				
-				divRow.append(divColRank);
-				divRow.append(divColInfo);
-				divRow.append(divColPlayInfo);
-				divRow.append(divColBtn);
+				$.ajax({
+					url:"/getGenders.game",
+					data:{
+						game:data[i]["gName"]
+					},
+					type : "post"
+				}).done(function(res){
+					let gender = JSON.parse(res);
+					console.log(data);
+					let divPlayInfo =  $("<div>");
+					divPlayInfo.addClass("col-12 d-md-none d-xs-flex text-white fontEnglish fw500");
+					divPlayInfo.append("W "+gender[1]+"% M "+gender[0]+"%");
+					
+					divInfoLeft.append(imgDiv);
+					divInfoRight.append(divGameName);
+					divInfoRight.append(divDevName);
+					divInfoRight.append(divPlayInfo);
+					
+					
+					divColInfo.append(divInfoLeft);
+					divColInfo.append(divInfoRight);
+					
+					let divColPlayInfo = $("<div>");
+					divColPlayInfo.addClass("col-3 d-none d-md-flex");
+					
+					let letter1 = $("<span>");
+					letter1.addClass("text-white fontEnglish fs-3 fw900 align-self-center");
+					letter1.html("W &nbsp;");
+					let letter2 = $("<span>");
+					letter2.addClass("text-white fontEnglish fs-5 fw500 align-self-center");
+					letter2.html(gender[1]+"%&nbsp;&nbsp;");
+					let letter3 = $("<span>");
+					letter3.addClass("text-white fontEnglish fs-3 fw900 align-self-center");
+					letter3.html("M &nbsp;");
+					let letter4 = $("<span>");
+					letter4.addClass("text-white fontEnglish fs-5 fw500 align-self-center");
+					letter4.html(gender[0]+"% ");
+					divColPlayInfo.append(letter1);
+					divColPlayInfo.append(letter2);
+					divColPlayInfo.append(letter3);
+					divColPlayInfo.append(letter4);
+					
+					let divColBtn = $("<div>");
+					divColBtn.addClass("col-2 align-self-center d-flex justify-content-center");
+					divColBtn.html("<a href='/moveToGamePage.game?game="+data[i]["gName"]+"'><button type='button' class='btn btn-success fontEnglish fw900'>PLAY GAME</button></a>");
+					
+					divRow.append(divColRank);
+					divRow.append(divColInfo);
+					divRow.append(divColPlayInfo);
+					divRow.append(divColBtn);
+				});
 				
 				$(".bestCon").append(divRow);
 			}
