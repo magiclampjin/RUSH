@@ -205,7 +205,6 @@ a {
 			type : "post"
 		}).done(function(res){
 			let isFavorite = res;
-			console.log(isFavorite);
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
 				$(".fa-star").removeClass("colorWhite");

@@ -146,8 +146,6 @@ public class GameController extends HttpServlet {
 				int count = dao.selectRecordCount(gameName);
 				int male = (int) Math.round(dao.selectGameMaleCount(gameName)*100.0/count);
 				int female = (int) Math.round(dao.selectGameFemaleCount(gameName)*100.0/count);
-				System.out.println(dao.selectGameFemaleCount(gameName));
-				System.out.println(male+" "+female);
 				List list = new ArrayList<>();
 				list.add(male);
 				list.add(female);

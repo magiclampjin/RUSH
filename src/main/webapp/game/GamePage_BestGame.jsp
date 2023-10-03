@@ -62,7 +62,6 @@ a{
 			url:"/getBestGame.game",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
 			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
@@ -110,7 +109,6 @@ a{
 					type : "post"
 				}).done(function(res){
 					let gender = JSON.parse(res);
-					console.log(data);
 					let divPlayInfo =  $("<div>");
 					divPlayInfo.addClass("col-12 d-md-none d-xs-flex text-white fontEnglish fw500");
 					divPlayInfo.append("W "+gender[1]+"% M "+gender[0]+"%");
