@@ -15,7 +15,6 @@ $(document).ready(function() {
 		//let selectGame = "CandyCrush";
 	
 		game = $(this).attr("id");
-		console.log(game);
 	
         $(this).removeClass("bColorBlack");
         $(this).removeClass("colorWhite");
@@ -49,7 +48,6 @@ $(document).ready(function() {
            },
         }).done(function(rankerList){
 	
-			console.log(rankerList);
            // 상위 5개 추출
            let listNum = 5
           	if(rankerList.length < listNum) {
