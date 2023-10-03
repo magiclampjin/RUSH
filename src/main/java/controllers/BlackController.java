@@ -22,8 +22,8 @@ import dto.BoardDTO;
 import dto.MemberDTO;
 import dto.ReplyDTO;
 
-@WebServlet("*.test")
-public class TestController extends HttpServlet {
+@WebServlet("*.black")
+public class BlackController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8"); // 한글깨짐방지
@@ -38,20 +38,20 @@ public class TestController extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		
 		try {
-			if(cmd.equals("/getAdReply.test")) {
-				List<ReplyDTO> data = dao.selectAll();
+			if(cmd.equals("/getAdReply.black")) {
+				List<ReplyDTO> data = dao.selectAdReplies();
 				
 				pw.print(gson.toJson(data));
-			}else if(cmd.equals("/getSearchUser.test")) {
+			}else if(cmd.equals("/getSearchUser.black")) {
 				String id = request.getParameter("id");
-				MemberDTO data = mdao.selectUserInfo(id);
+				List<MemberDTO> data = dao.selectWarnUser(id);
 				
 				pw.print(gson.toJson(data));
-			}else if(cmd.equals("/getAdBoard.test")) {
+			}else if(cmd.equals("/getAdBoard.black")) {
 				List<BoardDTO> data = dao.selectAdBoard();
 				
 				pw.println(gson.toJson(data));
-			}else if(cmd.equals("/setBlackList.test")) {
+			}else if(cmd.equals("/setBlackList.black")) {
 				//MemberDAO에 블랙리스트 추가 구현
 				String mID = request.getParameter("mID");
 				MemberDTO dto = mdao.selectUserInfo(mID);
@@ -60,7 +60,7 @@ public class TestController extends HttpServlet {
 				String Email = dto.getEmail();
 				int result = dao.insertBlackList(new BlackListDTO(0,mID, nickName, Phone, Email));
 				pw.println(result);
-			}else if (cmd.equals("/deletePost.test")) {
+			}else if (cmd.equals("/deletePost.black")) {
 
 	            int postSeq = Integer.parseInt(request.getParameter("postSeq"));
 	            String category = request.getParameter("category");
@@ -72,7 +72,7 @@ public class TestController extends HttpServlet {
 	               filepath.delete();
 	            }
 	            bdao.deletePost(postSeq);
-	         }else if (cmd.equals("/deleteUser.test")) {
+	         }else if (cmd.equals("/deleteUser.black")) {
 					String id = request.getParameter("userID");
 					int result = mdao.deleteById(id);
 					if (result != 0) {

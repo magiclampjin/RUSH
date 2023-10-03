@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/common/style.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>RUSH // ${game}</title>
+<%@ include file="/common/style.jsp" %>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -31,7 +32,9 @@
 	width: 300px;
 	height: 200px;
 }
-
+.mt50{
+	margin-top : 50px!important;
+}
 #game {
 	min-width : 579px;
 	max-width: 1030px;
@@ -132,7 +135,10 @@ a{
 .mb50{
 	margin-bottom : 50px;
 }
-
+.pd20{
+	padding-left : 20px!important;
+	padding-right : 20px!important;
+}
 </style>
 </head>
 <body>
@@ -342,8 +348,8 @@ a{
 									</div>
 								</div>
 							</div>
-							<div class="col-12" id="info">
-								<div class="row g-0 w100p">
+							<div class="col-12 pd20" id="info">
+								<div class="row g-0 w100p mt50">
 									<div class="col-12">
 										<p class="text-white fontKorean fs-2">게임 설명</p>
 										<hr class="colorBlue border-3 opacity-75">

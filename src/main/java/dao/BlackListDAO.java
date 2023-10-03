@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import dto.BlackListDTO;
 import dto.BoardDTO;
+import dto.MemberDTO;
 import dto.ReplyDTO;
 
 public class BlackListDAO {
@@ -69,6 +70,29 @@ public class BlackListDAO {
 			return pstat.executeUpdate();
 		}
 	}
+	
+	public List<MemberDTO> selectWarnUser(String id) throws Exception {
+		String sql = "select * from members where mWarningCount >= 3";
+		List<MemberDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			try(ResultSet rs = pstat.executeQuery();) {
+				while(rs.next()) {
+					String userid = rs.getString("mID");
+					String idNumber = rs.getString("mIdNumber");
+					String name = rs.getString("mName");
+					String email = rs.getString("mEmail");
+					String nickName = rs.getString("mNickname");
+					String phone = rs.getString("mPhone");
+					int point = rs.getInt("mPoint");
+					int level = rs.getInt("mLevel");
+					Timestamp signupDate = rs.getTimestamp("mSignupDate");
+					list.add(new MemberDTO(userid, idNumber, name, email, nickName, phone, point, level, signupDate));
+				}
+				return list;
+			}
+		}
+	}
 		
 	//ReplyDAO 에 들어갈 비속어 및 광고성 문구 필터링 기능 임시 구현
 	public List<ReplyDTO> selectAll() throws Exception{
@@ -83,23 +107,54 @@ public class BlackListDAO {
 			}
 		}
 	}
-	
+	public String selectFilterData() throws Exception{
+		String sql = "select * from filter;";
+		List<String> list = new ArrayList<>();
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				while(rs.next()) {
+					list.add(rs.getString("fdata"));
+				}
+				String str = String.join("|", list);
+				return str;
+			}
+		}
+	}
+	public List<ReplyDTO> selectAdReplies() throws Exception{
+		String sql = "select * from reply where rContents regexp ?;";
+		String filter = selectFilterData();
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, filter);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<ReplyDTO> replies = new ArrayList<>();
+				while(rs.next()) {
+					replies.add(new ReplyDTO(rs.getInt("rSeq"), rs.getInt("cbSeq"), rs.getString("mID"), rs.getString("mNickname"), rs.getString("rContents"), rs.getTimestamp("rWriteDate"), rs.getInt("parentRSeq")));
+				}
+				return replies;
+			}
+		}
+	}
 	public List<BoardDTO> selectAdBoard() throws Exception {
-		String sql = "select * from common_board where cbTitle regexp '광고|무료|증정|http|ㅎ|ㄱ' or cbContent regexp '광고|무료|증정|http|ㅎ|ㄱ';";
+		String sql = "select * from common_board where cbTitle regexp ? or cbContent regexp ?;";
 		List<BoardDTO> list = new ArrayList<>();
+		String filter = selectFilterData();
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();) {
-			while (rs.next()) {
-				int cbSeq = rs.getInt("cbSeq");
-				String cbID = rs.getString("cbID");
-				String cbNickname = rs.getString("cbNickname");
-				String cbTitle = rs.getString("cbTitle");
-				String cbContent = rs.getString("cbContent");
-				Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
-				int cbView = rs.getInt("cbView");
-				String cbCategory = rs.getString("cbCategory");
-				list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView));
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, filter);
+			pstat.setString(2, filter);
+			try(ResultSet rs = pstat.executeQuery();){
+				while (rs.next()) {
+					int cbSeq = rs.getInt("cbSeq");
+					String cbID = rs.getString("cbID");
+					String cbNickname = rs.getString("cbNickname");
+					String cbTitle = rs.getString("cbTitle");
+					String cbContent = rs.getString("cbContent");
+					Timestamp cbWriteDate = rs.getTimestamp("cbWriteDate");
+					int cbView = rs.getInt("cbView");
+					String cbCategory = rs.getString("cbCategory");
+					list.add(new BoardDTO(cbSeq, cbID, cbCategory, cbNickname, cbTitle, cbContent, cbWriteDate, cbView));
+				}
 			}
 			return list;
 		}

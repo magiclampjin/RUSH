@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/common/style.jsp" %>
- 
  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RUSH</title>
+<title>RUSH // ${game}</title>
+<%@ include file="/common/style.jsp" %>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -271,7 +270,13 @@ a{
 .mb50{
 	margin-bottom : 50px!important;
 }
-
+.mt50{
+	margin-top : 50px!important;
+}
+.pd20{
+	padding-left : 20px!important;
+	padding-right : 20px!important;
+}
 </style>
 </head>
 <body>
@@ -487,8 +492,8 @@ a{
 							<c:choose>
 								<c:when test="${game eq 'Kordle' }">
 									<!--  kordle 게임 설명 -->
-									<div class="col-12" id="info">
-										<div class="row g-0 w100p">
+									<div class="col-12 pd20" id="info">
+										<div class="row g-0 w100p mt50">
 											<div class="col-12">
 												<p class="text-white fontKorean fs-2">게임 설명</p>
 												<hr class="colorBlue border-3 opacity-75">
@@ -519,12 +524,30 @@ a{
 												</p>
 											</div>				
 										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">제작자 정보</p>
+												<hr class="colorPink border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<table class="devTable">
+													<tr>
+														<th class="text-white fontKorean fw900">제작자</th>
+														<td class="text-white fontKorean">${dev}</td>
+													</tr>
+													<tr>
+														<th class="text-white fontKorean fw900">제작자 소속</th>
+														<td class="text-white fontKorean">공주대학교 SKY팀</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 									</div>
 								</c:when>
 								<c:when test="${game eq 'Candy Crush' }">
 									<!-- Candy Crush 게임 설명 -->
-									<div class="col-12" id="info">
-										<div class="row g-0 w100p">
+									<div class="col-12 pd20" id="info">
+										<div class="row g-0 w100p mt50">
 											<div class="col-12">
 												<p class="text-white fontKorean fs-2">게임 설명</p>
 												<hr class="colorBlue border-3 opacity-75">
@@ -553,30 +576,31 @@ a{
 												</p>
 											</div>				
 										</div>
+										<div class="row g-0 w100p mt150">
+											<div class="col-12">
+												<p class="text-white fontKorean fs-2">제작자 정보</p>
+												<hr class="colorPink border-3 opacity-75">
+											</div>
+											<div class="col-12">
+												<table class="devTable">
+													<tr>
+														<th class="text-white fontKorean fw900">제작자</th>
+														<td class="text-white fontKorean">${dev}</td>
+													</tr>
+													<tr>
+														<th class="text-white fontKorean fw900">제작자 소속</th>
+														<td class="text-white fontKorean">공주대학교 SKY팀</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 									</div>
 								</c:when>
 							</c:choose>
 							
 							
 							
-							<div class="row g-0 w100p mt150">
-								<div class="col-12">
-									<p class="text-white fontKorean fs-2">제작자 정보</p>
-									<hr class="colorPink border-3 opacity-75">
-								</div>
-								<div class="col-12">
-									<table class="devTable">
-										<tr>
-											<th class="text-white fontKorean fw900">제작자</th>
-											<td class="text-white fontKorean">${dev}</td>
-										</tr>
-										<tr>
-											<th class="text-white fontKorean fw900">제작자 소속</th>
-											<td class="text-white fontKorean">공주대학교 SKY팀</td>
-										</tr>
-									</table>
-								</div>
-							</div>
+							
 							
 						</div>
 					</div>

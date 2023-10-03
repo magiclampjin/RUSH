@@ -19,9 +19,6 @@
 	*{
 	box-sizing : border-box;
 	}
-	div{
-		border : 1px solid black;
-	}
 	#ids{
 		width : 100%;
 		height:600px;
@@ -58,13 +55,19 @@
 		justify-content : center;
 		align-items : center;
 	}
+	.row{
+		font-size : 12px;
+	}
+	.row button{
+		font-size : 12px;
+	}
 </style>
 </head>
 <body>
 <script>
 	window.onload = function(){
 		$.ajax({
-			url:"/getAdReply.test",
+			url:"/getAdReply.black",
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
@@ -72,6 +75,7 @@
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
+				divRow.css("border","1px solid black");
 				
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
@@ -141,7 +145,7 @@
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(nick+" "+user);
 				$.ajax({
-					url:"/setBlackList.test",
+					url:"/setBlackList.black",
 					data : {
 						mID : user
 					}
@@ -153,7 +157,62 @@
 					}
 				});
 			});
-		})
+		});
+		$.ajax({
+			url:"/getSearchUser.black"
+		}).done(function(res){
+			let data = JSON.parse(res);
+			console.log(data);
+			for(let i=0; i<data.length; i++){
+				let divRow = $("<div>");
+				divRow.addClass("row g-0");
+				divRow.css("border","1px solid black");
+				
+				let divColID = $("<div>");
+				divColID.addClass("col-3 writer center");
+				divColID.text(data[i]["id"]);
+				
+				let divColNickname = $("<div>");
+				divColNickname.addClass("col-2 nickName center");
+				divColNickname.text(data[i]["name"]);
+
+				let divColEmail = $("<div>");
+				divColEmail.addClass("col-4 email center");
+				divColEmail.text(data[i]["email"]);
+				
+				let divBtn = $("<div>");
+				divBtn.addClass("col-3 center");
+				
+				let deleteBtn = $("<button>");
+				deleteBtn.attr("type","button");
+				deleteBtn.addClass("btn btn-outline-dark deleteUser");
+				deleteBtn.text("회원 삭제");
+				
+				divBtn.append(deleteBtn);
+				
+				divRow.append(divColID);
+				divRow.append(divColNickname);
+				divRow.append(divColEmail);
+				divRow.append(divBtn);
+				
+				$("#replies").append(divRow);
+			}
+			
+			
+			$(".deleteUser").on("click",function(){
+				let mID = $(this).parent().siblings(".writer").text();
+				console.log(mID);
+				$.ajax({
+					url:"/deleteUser.black",
+					data : {
+						userID : mID
+					},
+					type : "post"
+				}).done(function(res){
+					location.reload();
+				});
+			});
+		});
 	};
 </script>
 	<div class="container">
@@ -176,10 +235,10 @@
 						<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 					</div>
 					<div class="row g-0">
-						<div class="col-12 mh600" id="ids">
+						<div class="col-12 mh600 p-2" id="ids">
 							
 						</div>
-						<div class="col-12 mh600" id="boards">
+						<div class="col-12 mh600 p-2" id="boards">
 							
 						</div>
 					</div>
@@ -187,8 +246,7 @@
 			
 			<div class="col-6">
 				<div>
-					<input type="text" name="id" id="inputID">
-					<button type="button" class="btn btn-ouline-dark" id="select">search</button>
+					<button type="button" class="btn btn-ouline-light" id="select">새로고침</button>
 				</div>
 				<div id="replies">
 				
@@ -198,53 +256,52 @@
 	</div>
 	<script>
 	$("#select").on("click",function(){
-		let inputid = $("#inputID").val();
 		$("#replies").text("");
 		$.ajax({
-			url:"/getSearchUser.test",
-			data :{
-				id : inputid
-			},
+			url:"/getSearchUser.black"
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
-			let divRow = $("<div>");
-			divRow.addClass("row g-0");
-			
-			let divColID = $("<div>");
-			divColID.addClass("col-3 writer center");
-			divColID.text(data["id"]);
-			
-			let divColNickname = $("<div>");
-			divColNickname.addClass("col-2 nickName center");
-			divColNickname.text(data["name"]);
+			for(let i=0; i<data.length; i++){
+				let divRow = $("<div>");
+				divRow.addClass("row g-0");
+				
+				let divColID = $("<div>");
+				divColID.addClass("col-3 writer center");
+				divColID.text(data[i]["id"]);
+				
+				let divColNickname = $("<div>");
+				divColNickname.addClass("col-2 nickName center");
+				divColNickname.text(data[i]["name"]);
 
-			let divColEmail = $("<div>");
-			divColEmail.addClass("col-4 email center");
-			divColEmail.text(data["email"]);
+				let divColEmail = $("<div>");
+				divColEmail.addClass("col-4 email center");
+				divColEmail.text(data[i]["email"]);
+				
+				let divBtn = $("<div>");
+				divBtn.addClass("col-3 center");
+				
+				let deleteBtn = $("<button>");
+				deleteBtn.attr("type","button");
+				deleteBtn.addClass("btn btn-outline-dark deleteUser");
+				deleteBtn.text("회원 삭제");
+				
+				divBtn.append(deleteBtn);
+				
+				divRow.append(divColID);
+				divRow.append(divColNickname);
+				divRow.append(divColEmail);
+				divRow.append(divBtn);
+				
+				$("#replies").append(divRow);
+			}
 			
-			let divBtn = $("<div>");
-			divBtn.addClass("col-3 center");
-			
-			let deleteBtn = $("<button>");
-			deleteBtn.attr("type","button");
-			deleteBtn.addClass("btn btn-outline-dark deleteUser");
-			deleteBtn.text("회원 삭제");
-			
-			divBtn.append(deleteBtn);
-			
-			divRow.append(divColID);
-			divRow.append(divColNickname);
-			divRow.append(divColEmail);
-			divRow.append(divBtn);
-			
-			$("#replies").append(divRow);
 			
 			$(".deleteUser").on("click",function(){
 				let mID = $(this).parent().siblings(".writer").text();
 				console.log(mID);
 				$.ajax({
-					url:"/deleteUser.test",
+					url:"/deleteUser.black",
 					data : {
 						userID : mID
 					},
@@ -261,7 +318,7 @@
     	$("#boards").css("display","none");
     	$("#ids").text("");
     	$.ajax({
-			url:"/getAdReply.test",
+			url:"/getAdReply.black",
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
@@ -269,6 +326,7 @@
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
+				divRow.css("border","1px solid black");
 				
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
@@ -338,7 +396,7 @@
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(nick+" "+user);
 				$.ajax({
-					url:"/setBlackList.test",
+					url:"/setBlackList.black",
 					data : {
 						mID : user
 					}
@@ -358,7 +416,7 @@
     	$("#ids").css("display","none");
     	$("#boards").text("");
     	$.ajax({
-			url:"/getAdBoard.test",
+			url:"/getAdBoard.black",
 		}).done(function(res){
 			let data = JSON.parse(res);
 			console.log(data);
@@ -366,6 +424,7 @@
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
+				divRow.css("border","1px solid black");
 				
 				let divSeq = $("<input>");
 				divSeq.attr("type","hidden");
@@ -428,7 +487,7 @@
 				let category = $(this).parent().siblings(".category").val();
 				console.log(postSeq);
 				$.ajax({
-					url:"/deletePost.test",
+					url:"/deletePost.black",
 					data : {
 						postSeq : postSeq,
 						category : category
@@ -446,7 +505,7 @@
 				let user = $(this).parent().siblings(".writer").text();
 				console.log(nick+" "+user);
 				$.ajax({
-					url:"/setBlackList.test",
+					url:"/setBlackList.black",
 					data : {
 						mID : user
 					}
