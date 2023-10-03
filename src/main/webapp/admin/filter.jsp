@@ -175,11 +175,11 @@
 						
 						<!-- jstl 버튼 checked 확인해서 순위나 조작방법으로 바꿔야됨. -->
 					</div>
-					<div class="row g-0 mh600">
-						<div class="col-12" id="ids">
+					<div class="row g-0">
+						<div class="col-12 mh600" id="ids">
 							
 						</div>
-						<div class="col-12" id="boards">
+						<div class="col-12 mh600" id="boards">
 							
 						</div>
 					</div>
@@ -199,6 +199,7 @@
 	<script>
 	$("#select").on("click",function(){
 		let inputid = $("#inputID").val();
+		$("#replies").text("");
 		$.ajax({
 			url:"/getSearchUser.test",
 			data :{

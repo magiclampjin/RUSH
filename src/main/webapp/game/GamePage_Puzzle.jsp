@@ -268,6 +268,9 @@ a{
 .kordleDescImg{
 	width:500px !important;
 }
+.mb50{
+	margin-bottom : 50px!important;
+}
 
 </style>
 </head>
@@ -331,8 +334,12 @@ a{
 								
 				let divColScore = $("<div>");
 				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
-				divColScore.append(record[i]["score"]+" 점");
 				
+				
+				if("${game}" == "Kordle")
+					divColScore.append(record[i]["score"]+" 개");
+				else
+					divColScore.append(record[i]["score"]+" 점");
 				
 				
 				divInfoRight.append(record[i]["nickName"]);
@@ -412,7 +419,7 @@ a{
 							<hr class="colorPink border-3 opacity-100">
 						</div>
 						<div class="row g-0">
-							<div class="col-12 game">
+							<div class="col-12 game mb50">
 							<c:choose>
 								<c:when test="${game eq 'Kordle'}">
 									<div id="gameContainer"></div>
@@ -471,7 +478,14 @@ a{
 											<span class="text-white fontKorean">유저 정보</span>
 										</div>
 										<div class="col-2">
-											<span class="text-white fontKorean">점수</span>
+											<c:choose>
+												<c:when test="${game eq 'Kordle'}">
+													<span class="text-white fontKorean">연속 정답 수</span>
+												</c:when>
+												<c:otherwise>
+													<span class="text-white fontKorean">점수</span>
+												</c:otherwise>
+											</c:choose>									
 										</div>
 									</div>
 								<div class="lineinfo col"></div>
@@ -636,9 +650,11 @@ a{
     								
     				let divColScore = $("<div>");
     				divColScore.addClass("col-3 text-white fontEnglish fw500 fs-4 align-self-center pl20");
-    				divColScore.append(record[i]["score"]+" 점");
-    				
-    				
+    
+    				if("${game}" == "Kordle")
+    					divColScore.append(record[i]["score"]+" 개");
+    				else
+    					divColScore.append(record[i]["score"]+" 점");
     				
     				divInfoRight.append(record[i]["nickName"]);
     				divInfoRight.append(" Lv : "+record[i]["level"]);
