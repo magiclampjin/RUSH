@@ -70,6 +70,30 @@ public class BlackListDAO {
 			return pstat.executeUpdate();
 		}
 	}
+	public int selectWarningCount(String mid) throws Exception{
+		String sql = "select mWarningCount from members where mID = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, mid);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				int count = rs.getInt("mWarningCount");
+				return count;
+			}
+			
+		}
+	}
+	
+	public int updateWarningCount(String mid, int newCount) throws Exception{
+		String sql = "update members set mWarningCount = ? where mID = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, newCount);
+			pstat.setString(2, mid);
+			return pstat.executeUpdate();
+		}
+	}
 
 	/*
 	 * public int updateBlackMember(String mid) throws Exception { String sql =

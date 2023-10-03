@@ -115,14 +115,7 @@
 				deleteBtn.addClass("btn btn-outline-dark");
 				deleteBtn.text("삭제");
 				
-				let blackBtn = $("<button>");
-				blackBtn.attr("type","button");
-				blackBtn.addClass("blackUser");
-				blackBtn.addClass("btn btn-outline-dark");
-				blackBtn.text("블랙리스트");
-				
 				divBtn.append(deleteBtn);
-				divBtn.append(blackBtn);
 				
 				divRow.append(divSeq);
 				divRow.append(divParSeq);
@@ -135,11 +128,14 @@
 			}
 			$(".deleteReply").on("click",function(){
 				let seq = $(this).parent().siblings(".replySeq").val();
+				let user = $(this).parent().siblings(".writer").text();
 				console.log(seq);
+				console.log(user);
 				$.ajax({
-					url:"/delete.reply",
+					url:"/deleteReply.black",
 					data : {
-						replySeq : seq
+						replySeq : seq,
+						userID : user
 					},
 					type : "post"
 				}).done(function(res){
@@ -172,7 +168,6 @@
 			for(let i=0; i<data.length; i++){
 				let divRow = $("<div>");
 				divRow.addClass("row g-0");
-				divRow.css("border","1px solid black");
 				
 				let divColID = $("<div>");
 				divColID.addClass("col-3 writer center");
@@ -192,7 +187,7 @@
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
 				deleteBtn.addClass("btn btn-outline-dark deleteUser");
-				deleteBtn.text("회원 삭제");
+				deleteBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
 				
@@ -204,18 +199,21 @@
 				$("#replies").append(divRow);
 			}
 			
-			
-			$(".deleteUser").on("click",function(){
-				let mID = $(this).parent().siblings(".writer").text();
-				console.log(mID);
+			$(".blackUser").on("click",function(){
+				let nick = $(this).parent().siblings(".nickName").text();
+				let user = $(this).parent().siblings(".writer").text();
+				console.log(nick+" "+user);
 				$.ajax({
-					url:"/deleteUser.black",
+					url:"/setBlackList.black",
 					data : {
-						userID : mID
-					},
-					type : "post"
+						mID : user
+					}
 				}).done(function(res){
-					location.reload();
+					if(res==0){
+						alert("블랙리스트 실패");
+					}else{
+						alert("블랙리스트 성공");
+					}
 				});
 			});
 		});
@@ -296,7 +294,7 @@
 				let deleteBtn = $("<button>");
 				deleteBtn.attr("type","button");
 				deleteBtn.addClass("btn btn-outline-dark deleteUser");
-				deleteBtn.text("회원 삭제");
+				deleteBtn.text("블랙리스트");
 				
 				divBtn.append(deleteBtn);
 				
@@ -308,18 +306,21 @@
 				$("#replies").append(divRow);
 			}
 			
-			
-			$(".deleteUser").on("click",function(){
-				let mID = $(this).parent().siblings(".writer").text();
-				console.log(mID);
+			$(".blackUser").on("click",function(){
+				let nick = $(this).parent().siblings(".nickName").text();
+				let user = $(this).parent().siblings(".writer").text();
+				console.log(nick+" "+user);
 				$.ajax({
-					url:"/deleteUser.black",
+					url:"/setBlackList.black",
 					data : {
-						userID : mID
-					},
-					type : "post"
+						mID : user
+					}
 				}).done(function(res){
-					location.reload();
+					if(res==0){
+						alert("블랙리스트 실패");
+					}else{
+						alert("블랙리스트 성공");
+					}
 				});
 			});
 		});
@@ -372,14 +373,7 @@
 				deleteBtn.addClass("btn btn-outline-dark");
 				deleteBtn.text("삭제");
 				
-				let blackBtn = $("<button>");
-				blackBtn.attr("type","button");
-				blackBtn.addClass("blackUser");
-				blackBtn.addClass("btn btn-outline-dark");
-				blackBtn.text("블랙리스트");
-				
 				divBtn.append(deleteBtn);
-				divBtn.append(blackBtn);
 				
 				divRow.append(divSeq);
 				divRow.append(divParSeq);
@@ -392,34 +386,21 @@
 			}
 			$(".deleteReply").on("click",function(){
 				let seq = $(this).parent().siblings(".replySeq").val();
+				let user = $(this).parent().siblings(".writer").text();
 				console.log(seq);
+				console.log(user);
 				$.ajax({
-					url:"/delete.reply",
+					url:"/deleteReply.black",
 					data : {
-						replySeq : seq
+						replySeq : seq,
+						userID : user
 					},
 					type : "post"
 				}).done(function(res){
 					location.reload();
 				});
 			});
-			$(".blackUser").on("click",function(){
-				let nick = $(this).parent().siblings(".nickName").text();
-				let user = $(this).parent().siblings(".writer").text();
-				console.log(nick+" "+user);
-				$.ajax({
-					url:"/setBlackList.black",
-					data : {
-						mID : user
-					}
-				}).done(function(res){
-					if(res==0){
-						alert("블랙리스트 실패");
-					}else{
-						alert("블랙리스트 성공");
-					}
-				});
-			});
+			
 		});
     });
     
@@ -476,14 +457,7 @@
 				deleteBtn.addClass("btn btn-outline-dark");
 				deleteBtn.text("삭제");
 				
-				let blackBtn = $("<button>");
-				blackBtn.attr("type","button");
-				blackBtn.addClass("blackUser");
-				blackBtn.addClass("btn btn-outline-dark");
-				blackBtn.text("블랙리스트");
-				
 				divBtn.append(deleteBtn);
-				divBtn.append(blackBtn);
 				
 				divRow.append(divSeq);
 				divRow.append(divCategory);
@@ -497,39 +471,23 @@
 			$(".deletePost").on("click",function(){
 				let postSeq = $(this).parent().siblings(".postSeq").val();
 				let category = $(this).parent().siblings(".category").val();
+				let user = $(this).parent().siblings(".writer").text();
 				console.log(postSeq);
 				$.ajax({
 					url:"/deletePost.black",
 					data : {
 						postSeq : postSeq,
-						category : category
+						category : category,
+						userID : user
 					}
 				}).done(function(res){
-					if(res==0){
-						alert("게시글 삭제 실패");
-					}else{
+					if(res>0){
 						alert("게시글 삭제 성공");
-					}
-				});
-			});
-			$(".blackUser").on("click",function(){
-				let nick = $(this).parent().siblings(".nickName").text();
-				let user = $(this).parent().siblings(".writer").text();
-				console.log(nick+" "+user);
-				$.ajax({
-					url:"/setBlackList.black",
-					data : {
-						mID : user
-					}
-				}).done(function(res){
-					if(res==0){
-						alert("블랙리스트 실패");
 					}else{
-						alert("블랙리스트 성공");
+						alert("게시글 삭제 실패");
 					}
 				});
-			});
-			
+			});			
 		});
     });
 	
