@@ -181,7 +181,6 @@
 					}
 				}).done(function(res){
 					let data = JSON.parse(res);
-					 data);
 					if(data>=1){
 						deleteBtn.addClass("active");
 					}
