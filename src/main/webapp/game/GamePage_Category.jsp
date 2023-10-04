@@ -63,8 +63,6 @@
 	        	      type:"post"
 			}).done(function(res){
 				let data = JSON.parse(res);
-				console.log(data);
-				console.log(data.length);
 				for(let i=0; i<data.length; i++){
 					let divCol = $("<div>");
 					divCol.addClass("col-xs-12 col-md-6 col-xl-4");
@@ -92,8 +90,6 @@
 				url:"/getGameList.game",
 			}).done(function(res){
 				let data = JSON.parse(res);
-				console.log(data);
-				console.log(data.length);
 				for(let i=0; i<data.length; i++){
 					let divCol = $("<div>");
 					divCol.addClass("col-xs-12 col-md-6 col-xl-4");
@@ -185,12 +181,6 @@
 											</ul></li>
 									</c:otherwise>
 								</c:choose>
-
-
-
-								<script type="text/javascript">
-									console.log("${loginID }")
-								</script>
 							</ul>
 						</div>
 					</div>

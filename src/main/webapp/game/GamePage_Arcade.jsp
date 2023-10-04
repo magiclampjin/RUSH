@@ -213,7 +213,6 @@ a {
 			if(isFavorite == 1){
 				$("#favorite").addClass("active");
 				$(".fa-star").removeClass("colorWhite");
-				console.log("active");
 			}else{
 				
 			}
@@ -226,8 +225,6 @@ a {
 			type : "post"
 		}).done(function(res){
 			let record = JSON.parse(res);
-			console.log(record);
-			console.log(record[0]["nickName"]);
 			$("#rankCon").text("");
 			for(let i=0; i<record.length; i++){
 				let divRow = $("<div>");
@@ -492,7 +489,6 @@ a {
 
 									        let game = new Phaser.Game(option);
 									        if ($("#gameOver").val()=="true") {
-									        	console.log("게임 기록 저장")
 									    		$.ajax({
 									    			url: "/setGameRecord.game",
 									    			data: {
@@ -697,7 +693,6 @@ a {
 		$("#info").css("display","none");
         $(".btn").on("click",function(){
             // $(".categories").text();
-            console.log("");
         });
         
         $("#btnradio1").on("click",function(){
@@ -712,8 +707,6 @@ a {
     			type : "post"
     		}).done(function(res){
     			let record = JSON.parse(res);
-    			console.log(record);
-    			console.log(record[0]["nickName"]);
     			$("#rankCon").text("");
     			for(let i=0; i<record.length; i++){
     				let divRow = $("<div>");
@@ -778,9 +771,7 @@ a {
         $("#favorite").on("click",function(){
         	let id = '${loginID}';
         	if(id != ""){
-        		console.log("로그인했음.");
         		if($(this).hasClass("active") == true){
-            		console.log("존재");
             		$.ajax({
               	      url:"/deletefavorite.game",
               	      data:{
@@ -789,12 +780,10 @@ a {
               	      },
               	      type:"post"
               	    }).done(function (res){
-              	      console.log(res);
               	      location.reload();
               	      $(".fa-star").addClass("colorWhite");
               	    });
             	}else{
-            		console.log("x");
             		$.ajax({
               	      url:"/favorite.game",
               	      data:{
@@ -803,7 +792,6 @@ a {
               	      },
               	      type:"post"
               	    }).done(function (res){
-              	      console.log(res);
               	      location.reload();
               	    });
             	}
@@ -844,7 +832,6 @@ a {
                 type:"post"
               }).done(function (res){
            	  	let record = JSON.parse(res);
-                console.log(res);
                 $("#rankCon").text("");
                 for(let i=0; i<record.length; i++){
     				let divRow = $("<div>");

@@ -181,7 +181,6 @@
 					}
 				}).done(function(res){
 					let data = JSON.parse(res);
-					console.log(data);
 					if(data>=1){
 						deleteBtn.addClass("active");
 					}
@@ -297,7 +296,7 @@
 					}
 				}).done(function(res){
 					let data = JSON.parse(res);
-					console.log(data);
+					 
 					if(data>=1){
 						deleteBtn.addClass("active");
 					}

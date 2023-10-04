@@ -93,7 +93,6 @@ public class BlackController extends HttpServlet {
 					dao.updateWarningCount(user);
 	         }else if(cmd.equals("/getBlacklist.black")) {
 	        	 String blackUser = request.getParameter("userID");
-	        	 System.out.println(blackUser);
 	        	 int result = dao.selectBlackListCheck(blackUser);
 	        	 pw.print(result);
 	         }
