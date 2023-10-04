@@ -91,8 +91,12 @@ public class BlackController extends HttpServlet {
 					rdao.delete(replySeq);
 					String user = request.getParameter("userID");
 					dao.updateWarningCount(user);
-					
-				}
+	         }else if(cmd.equals("/getBlacklist.black")) {
+	        	 String blackUser = request.getParameter("userID");
+	        	 System.out.println(blackUser);
+	        	 int result = dao.selectBlackListCheck(blackUser);
+	        	 pw.print(result);
+	         }
 			
 		}catch(Exception e) {
 			e.printStackTrace();

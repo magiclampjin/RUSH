@@ -79,6 +79,21 @@ public class BlackListDAO {
 			return pstat.executeUpdate();
 		}
 	}
+	
+	public int selectBlackListCheck(String mid) throws Exception{
+		String sql = "select count(*) as count from blacklist where blID = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, mid);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				int result = rs.getInt("count");
+				return result;
+			}
+		}
+	}
 
 	public List<MemberDTO> selectWarnUser(String id) throws Exception {
 		String sql = "select * from members where mWarningCount >= 3";
