@@ -84,7 +84,6 @@ class rhythm extends Phaser.Scene{
         this.physics.add.overlap(JudgeLine1, this.boxes, function(line,box){
             let hit_effect =  this.physics.add.sprite(160,this.cameras.main.height-220, 'hit');
             hit_effect.setVisible(false);
-            console.log(this.jg_point);
             
             if(this.aKey.isDown){
                 this.jg_point++;
@@ -123,7 +122,6 @@ class rhythm extends Phaser.Scene{
         this.physics.add.overlap(JudgeLine3, this.boxes, function(line,box){
             let hit_effect =  this.physics.add.sprite(370,this.cameras.main.height-220, 'hit');
             hit_effect.setVisible(false);
-            console.log(this.jg_point);
             if(this.kKey.isDown){
                 this.jg_point++;
                 temb.play();
@@ -141,7 +139,6 @@ class rhythm extends Phaser.Scene{
         }, null, this);
 
         this.physics.add.overlap(JudgeLine4, this.boxes, function(line,box){
-            console.log(this.jg_point);
             let hit_effect =  this.physics.add.sprite(475,this.cameras.main.height-220, 'hit');
             hit_effect.setVisible(false);
             if(this.lKey.isDown){
