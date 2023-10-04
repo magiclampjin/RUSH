@@ -402,9 +402,6 @@ a{
 		$("#rank").css("display","flex");
 		$("#rank").css("justify-content","center");
 		$("#info").css("display","none");
-        $(".btn").on("click",function(){
-            // $(".categories").text();
-        });
         
         $("#btnradio1").on("click",function(){
         	$("#rank").css("display","flex");
