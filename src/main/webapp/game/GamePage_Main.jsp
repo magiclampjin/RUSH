@@ -60,8 +60,6 @@ div {
 			url:"/getGameList.game",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
-			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divCol = $("<div>");
 				divCol.addClass("col-xs-12 col-md-6 col-xl-4");
@@ -88,8 +86,6 @@ div {
 			url:"/getGameList.game",
 		}).done(function(res){
 			let data = JSON.parse(res);
-			console.log(data);
-			console.log(data.length);
 			for(let i=0; i<data.length; i++){
 				let divCol = $("<div>");
 				divCol.addClass("col-xs-12 col-md-6 col-xl-4");
@@ -212,7 +208,6 @@ div {
 	
 	$("#new").on("click",function(){
 		let category = $("#new").children("span").text();
-		console.log(category);
 	});
 	$("#rhy").on("click",function(){
 		location.href = "/moveToCategory.game?category=Rhythm";
