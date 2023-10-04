@@ -181,11 +181,6 @@
 											</ul></li>
 									</c:otherwise>
 								</c:choose>
-
-
-
-								<script type="text/javascript">
-								</script>
 							</ul>
 						</div>
 					</div>
