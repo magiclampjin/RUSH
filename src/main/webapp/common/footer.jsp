@@ -33,8 +33,8 @@
 				<div class="contact conDiv fontEnglish">
 					<div class="footer_title fontEnglish colorWhite">CONTACT US</div>
 					<div class="footer_con fontEnglish">
-						<div class="con fontEnglish colorWhite">a@naver.com</div>
-						<div class="con fontEnglish colorWhite">01012345678</div>
+						<div class="con fontEnglish colorWhite">eyungeniu@gmail.com</div>
+						<div class="con fontEnglish colorWhite">https://github.com/magiclampjin</div>
 					</div>
 				</div>
 				<div class="provision conDiv fontEnglish">
