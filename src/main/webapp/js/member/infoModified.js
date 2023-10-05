@@ -64,7 +64,7 @@ $(document).ready(function() {
 				pwCheck();
 
 			})
-			let regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#])[A-Za-z\d$@$!%*?&#]{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
+			let regexPw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[/W_]).{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
 			let resultPw;
 			$("#newPw").on("keyup", function() {
 				resultPw = regexPw.test($(this).val());
