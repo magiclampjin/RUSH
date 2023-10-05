@@ -30,20 +30,43 @@ public class FileDAO {
 	// insert, selectBy~, selectAll, update, delete 로 함수명 통일 (최대한 sql 구문을 활용한 작명)
 
 	public int insert(FileDTO dto) throws Exception{
-		String sql = "insert into file values(null,null,?,?,?,?);";
-		try(Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
-			pstat.setString(1, dto.getOriginName());
-			pstat.setString(2, dto.getSystemName());
-			pstat.setBoolean(3, dto.isImg());
-			pstat.setBoolean(4, dto.isQna());
-			pstat.executeUpdate();
+		String sql;
+		
+		if(dto.isImg()) {
+			sql = "insert into file values(0,null,?,?,?,?);";
 			
-			try(ResultSet rs = pstat.getGeneratedKeys()){
-				rs.next();
-				return rs.getInt(1);
+			try(Connection con = this.getConnection();
+					PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
+				pstat.setString(1, dto.getOriginName());
+				pstat.setString(2, dto.getSystemName());
+				pstat.setBoolean(3, dto.isImg());
+				pstat.setBoolean(4, dto.isQna());
+				pstat.executeUpdate();
+				
+				try(ResultSet rs = pstat.getGeneratedKeys()){
+					rs.next();
+					return rs.getInt(1);
+				}
+			}
+		}else {
+			sql = "insert into file values(0,?,?,?,?,?);";
+			
+			try(Connection con = this.getConnection();
+					PreparedStatement pstat = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);){
+				pstat.setInt(1, dto.getParentSeq());
+				pstat.setString(2, dto.getOriginName());
+				pstat.setString(3, dto.getSystemName());
+				pstat.setBoolean(4, dto.isImg());
+				pstat.setBoolean(5, dto.isQna());
+				pstat.executeUpdate();
+				
+				try(ResultSet rs = pstat.getGeneratedKeys()){
+					rs.next();
+					return rs.getInt(1);
+				}
 			}
 		}
+		
 	}
 	
 	public List<FileDTO> selectForPost(int postSeq) throws Exception{
