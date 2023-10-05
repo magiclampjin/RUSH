@@ -64,9 +64,10 @@ $(document).ready(function() {
 				pwCheck();
 
 			})
-			let regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
+			let regexPw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[/W_]).{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
+			let resultPw;
 			$("#newPw").on("keyup", function() {
-				let resultPw = regexPw.test($(this).val());
+				resultPw = regexPw.test($(this).val());
 				if (!resultPw) {
 					$("#newPw").css("border", "1px solid red");
 					$("#phraseDiv").html("비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)");
@@ -77,7 +78,9 @@ $(document).ready(function() {
 					$(this).css("border", "1px solid forestgreen");
 					$("#phraseDiv").html("");
 				}
-
+				if ($("#newPw").val() != $("#newPwCheck").val()) {
+					$("#newPwCheck").css("border", "1px solid red");
+				}
 			})
 			$("#newPwCheck").on("input", function() {
 				if ($("#newPw").val() != $(this).val()) {
@@ -99,13 +102,18 @@ $(document).ready(function() {
 					$("#userPW").css("border", "1px solid black")
 				}
 
-				if ($("#newPw").val() == "" || $("#phraseDiv").html() === "비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)") {
+				if ($("#newPw").val() == "" || !resultPw) {
+					alert("비밀번호 형식이 올바르지 않습니다.")
 					$("#newPw").css("border", "1px solid red")
+					$("#phraseDiv").html("비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)");
+					$("#phraseDiv").css({
+						"color": "red"
+					});
 				}
 				if ($("#newPwCheck").val() == "" || $("#phraseDiv").html() === "비밀번호가 일치하지 않습니다.") {
 					$("#newPwCheck").css("border", "1px solid red")
 				}
-				if ($("#pwMatch").html() == "비밀번호가 일치합니다." && $("#phraseDiv").html() == "" && $("#newPw").val() != "" && $("#newPwCheck").val() != "") {
+				if (resultPw && $("#newPw").val() == $("#newPwCheck").val()) {
 					$.ajax({
 						url: "/pwUpdate.member",
 						data: {
@@ -138,7 +146,7 @@ $(document).ready(function() {
 		let pwDiv = $("<div>").attr("method", "post").css("display", "flex").css("flex-direction", "column");
 		let explainDiv = $("<div>").attr("class", "colorDarkgray").css("margin-bottom", "5px").html("회원 정보를 변경하려면 비밀번호를 인증하셔야합니다.")
 		let pwInput = $("<input>").attr("type", "password").attr("id", "userPW");
-		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
+		let cancleLink = $("<a>").attr("href", "/load.member");
 		let cancleBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite");
 		cancleBtn.attr("value", "수정취소").css("margin-top", "20px").css("width", "100%").attr("id", "cancleBtn");
 		let submitBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite").attr("id", "pwUpdateSubmit").attr("value", "비밀번호 변경");
@@ -175,7 +183,7 @@ $(document).ready(function() {
 		let explainDiv = $("<div>").attr("class", "colorDarkgray").css("margin-bottom", "5px").html("회원 정보를 변경하려면 비밀번호를 인증하셔야합니다.")
 		let pwInput = $("<input>").attr("type", "password").attr("id", "userPW");
 
-		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
+		let cancleLink = $("<a>").attr("href", "/load.member");
 		let cancleBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite");
 		cancleBtn.attr("value", "수정취소").css("margin-top", "20px").css("width", "100%").attr("id", "cancleBtn");
 		let submitBtn = $("<input>").attr("type", "button").attr("class", "bColorBlue colorWhite").attr("id", "pwCheckBtn").attr("value", "비밀번호 확인");
@@ -321,7 +329,7 @@ $(document).ready(function() {
 		updateBox.children(".infoBox:nth-child(3)").remove();
 
 		// 정보 수정 취소 버튼 추가 및 수정 완료로 버튼 변경
-		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
+		let cancleLink = $("<a>").attr("href", "/load.member");
 		let cancleBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite");
 		cancleBtn.attr("value", "수정취소").css("margin-right", "20px").attr("id", "cancleBtn");
 		$("#updateBtn").val("수정완료");
