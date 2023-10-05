@@ -2,6 +2,7 @@ $(document).ready(function() {
 	
 	let gameArr = ["Candy Crush", "Doodle Jump", "Flappy Bird", "KJMAX", "Kordle"];
 	for(let i = 0; i < 5; i++) {
+		$("#game"+i).html(gameArr[i]);
 		$("#game"+i).attr("id", gameArr[i]);
 	}
 	

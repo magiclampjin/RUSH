@@ -30,13 +30,13 @@
             <div id="category" class="row g-0 m-0">
             	<c:forEach var="gName" items="${gNameList }" varStatus="status">
             		<c:if test="${status.index == 0 }">
-            			<div id="game${status.index}" class="game leftCategory col fontEnglish bColorGreen">${gName}</div>
+            			<div id="game${status.index}" class="game leftCategory col fontEnglish bColorGreen"></div>
             		</c:if>
             		<c:if test="${status.index != 0 && status.index != gNameList.size()-1 }">
-            			<div id="game${status.index}" class="game col fontEnglish colorWhite">${gName}</div>
+            			<div id="game${status.index}" class="game col fontEnglish colorWhite"></div>
             		</c:if>
             		<c:if test="${status.index == gNameList.size()-1 }">
-            			<div id="game${status.index}" class="game rightCategory col fontEnglish colorWhite">${gName}</div>
+            			<div id="game${status.index}" class="game rightCategory col fontEnglish colorWhite"></div>
             		</c:if>
             	</c:forEach>
             </div>
