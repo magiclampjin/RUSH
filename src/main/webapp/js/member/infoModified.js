@@ -65,8 +65,9 @@ $(document).ready(function() {
 
 			})
 			let regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#])[A-Za-z\d$@$!%*?&#]{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
+			let resultPw;
 			$("#newPw").on("keyup", function() {
-				let resultPw = regexPw.test($(this).val());
+				resultPw = regexPw.test($(this).val());
 				if (!resultPw) {
 					$("#newPw").css("border", "1px solid red");
 					$("#phraseDiv").html("비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)");
@@ -77,7 +78,9 @@ $(document).ready(function() {
 					$(this).css("border", "1px solid forestgreen");
 					$("#phraseDiv").html("");
 				}
-
+				if ($("#newPw").val() != $("#newPwCheck").val()) {
+					$("#newPwCheck").css("border", "1px solid red");
+				}
 			})
 			$("#newPwCheck").on("input", function() {
 				if ($("#newPw").val() != $(this).val()) {
@@ -99,13 +102,18 @@ $(document).ready(function() {
 					$("#userPW").css("border", "1px solid black")
 				}
 
-				if ($("#newPw").val() == "" || $("#phraseDiv").html() === "비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)") {
+				if ($("#newPw").val() == "" || !resultPw) {
+					alert("비밀번호 형식이 올바르지 않습니다.")
 					$("#newPw").css("border", "1px solid red")
+					$("#phraseDiv").html("비밀번호 형식이 맞지 않습니다.<br>(영어 대문자, 소문자, 숫자, 특수문자 포함한 8자 이상)");
+					$("#phraseDiv").css({
+						"color": "red"
+					});
 				}
 				if ($("#newPwCheck").val() == "" || $("#phraseDiv").html() === "비밀번호가 일치하지 않습니다.") {
 					$("#newPwCheck").css("border", "1px solid red")
 				}
-				if ($("#pwMatch").html() == "비밀번호가 일치합니다." && $("#phraseDiv").html() == "" && $("#newPw").val() != "" && $("#newPwCheck").val() != "") {
+				if (resultPw && $("#newPw").val() == $("#newPwCheck").val()) {
 					$.ajax({
 						url: "/pwUpdate.member",
 						data: {
