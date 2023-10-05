@@ -138,7 +138,7 @@ $(document).ready(function() {
 		let pwDiv = $("<div>").attr("method", "post").css("display", "flex").css("flex-direction", "column");
 		let explainDiv = $("<div>").attr("class", "colorDarkgray").css("margin-bottom", "5px").html("회원 정보를 변경하려면 비밀번호를 인증하셔야합니다.")
 		let pwInput = $("<input>").attr("type", "password").attr("id", "userPW");
-		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
+		let cancleLink = $("<a>").attr("href", "/load.member");
 		let cancleBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite");
 		cancleBtn.attr("value", "수정취소").css("margin-top", "20px").css("width", "100%").attr("id", "cancleBtn");
 		let submitBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite").attr("id", "pwUpdateSubmit").attr("value", "비밀번호 변경");
@@ -175,7 +175,7 @@ $(document).ready(function() {
 		let explainDiv = $("<div>").attr("class", "colorDarkgray").css("margin-bottom", "5px").html("회원 정보를 변경하려면 비밀번호를 인증하셔야합니다.")
 		let pwInput = $("<input>").attr("type", "password").attr("id", "userPW");
 
-		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
+		let cancleLink = $("<a>").attr("href", "/load.member");
 		let cancleBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite");
 		cancleBtn.attr("value", "수정취소").css("margin-top", "20px").css("width", "100%").attr("id", "cancleBtn");
 		let submitBtn = $("<input>").attr("type", "button").attr("class", "bColorBlue colorWhite").attr("id", "pwCheckBtn").attr("value", "비밀번호 확인");
@@ -321,7 +321,7 @@ $(document).ready(function() {
 		updateBox.children(".infoBox:nth-child(3)").remove();
 
 		// 정보 수정 취소 버튼 추가 및 수정 완료로 버튼 변경
-		let cancleLink = $("<a>").attr("href", "http://localhost/load.member");
+		let cancleLink = $("<a>").attr("href", "/load.member");
 		let cancleBtn = $("<input>").attr("type", "button").attr("class", "myPagebtn bColorBlue colorWhite");
 		cancleBtn.attr("value", "수정취소").css("margin-right", "20px").attr("id", "cancleBtn");
 		$("#updateBtn").val("수정완료");
