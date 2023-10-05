@@ -2,7 +2,7 @@ var flag = false;
 
 $(window).on("load", function(){
 	
-	let regexPw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[/W_])(?=.*[0-9]).{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
+	let regexPw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[/W_]).{8,}$/; // 알파벳 대소문자, 숫자, 특수문자를 한 글자 이상 포함
 	$("#newPw").on("keyup", function(){
 		let resultPw = regexPw.test($("#newPw").val());
 	    if (!resultPw) {
